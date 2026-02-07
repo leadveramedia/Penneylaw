@@ -1,0 +1,211 @@
+{
+  "pages": {
+    "personal-injury": {
+      "type": "practice-area",
+      "title": "Personal Injury",
+      "modalHeading": "Injured and Need Help?",
+      "modalSubtitle": "Get a free consultation about your personal injury case.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured? Get Help Today.",
+      "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "car-accidents": {
+      "type": "practice-area",
+      "title": "Car Accidents",
+      "modalHeading": "Injured in a Car Accident?",
+      "modalSubtitle": "Get a free consultation about your car accident case.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in a Car Accident? Get Help Today.",
+      "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "truck-accidents": {
+      "type": "practice-area",
+      "title": "Truck Accidents",
+      "modalHeading": "Injured in a Truck Accident?",
+      "modalSubtitle": "Get a free consultation about your truck accident case.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in a Truck Accident? Get Help Today.",
+      "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "motorcycle-accidents": {
+      "type": "practice-area",
+      "title": "Motorcycle Accidents",
+      "modalHeading": "Injured in a Motorcycle Accident?",
+      "modalSubtitle": "Get a free consultation about your motorcycle accident case.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in a Motorcycle Accident? Get Help Today.",
+      "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "wrongful-death": {
+      "type": "practice-area",
+      "title": "Wrongful Death",
+      "modalHeading": "Lost a Loved One?",
+      "modalSubtitle": "Get compassionate legal help for your wrongful death case.",
+      "ctaTagline": "",
+      "ctaTitle": "Lost a Loved One? Get Compassionate Legal Help.",
+      "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "dog-bite": {
+      "type": "practice-area",
+      "title": "Dog Bite",
+      "modalHeading": "Injured by a Dog Bite?",
+      "modalSubtitle": "Get a free consultation about your dog bite case.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured by a Dog Bite? Get Help Today.",
+      "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "bicycle-accidents": {
+      "type": "practice-area",
+      "title": "Bicycle Accidents",
+      "modalHeading": "Injured in a Bicycle Accident?",
+      "modalSubtitle": "Get a free consultation about your bicycle accident case.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in a Bicycle Accident? Get Help Today.",
+      "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "bus-accidents": {
+      "type": "practice-area",
+      "title": "Bus Accidents",
+      "modalHeading": "Injured in a Bus Accident?",
+      "modalSubtitle": "Get a free consultation about your bus accident case.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in a Bus Accident? Get Help Today.",
+      "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "slip-and-fall": {
+      "type": "practice-area",
+      "title": "Slip and Fall",
+      "modalHeading": "Injured in a Slip and Fall?",
+      "modalSubtitle": "Get a free consultation about your slip and fall case.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in a Slip and Fall? Get Help Today.",
+      "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "traumatic-brain-injuries": {
+      "type": "practice-area",
+      "title": "Traumatic Brain Injuries",
+      "modalHeading": "Suffered a Brain Injury?",
+      "modalSubtitle": "Get a free consultation about your traumatic brain injury case.",
+      "ctaTagline": "",
+      "ctaTitle": "Suffered a Brain Injury? Get Help Today.",
+      "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "roseville": {
+      "type": "location",
+      "title": "Roseville",
+      "modalHeading": "Roseville Personal Injury Help",
+      "modalSubtitle": "Connect with our Roseville office for a free consultation.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in Roseville? Get Help Today.",
+      "ctaDescription": "Contact our Roseville office for a free, no-obligation consultation. We don't get paid unless you win."
+    },
+    "sacramento": {
+      "type": "location",
+      "title": "Sacramento",
+      "modalHeading": "Sacramento Personal Injury Help",
+      "modalSubtitle": "Connect with our Sacramento office for a free consultation.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in Sacramento? Get Help Today.",
+      "ctaDescription": "Contact our Sacramento office for a free, no-obligation consultation. We don't get paid unless you win."
+    },
+    "fairfield": {
+      "type": "location",
+      "title": "Fairfield",
+      "modalHeading": "Fairfield Personal Injury Help",
+      "modalSubtitle": "Connect with our Fairfield office for a free consultation.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in Fairfield? Get Help Today.",
+      "ctaDescription": "Contact our Fairfield office for a free, no-obligation consultation. We don't get paid unless you win."
+    },
+    "stockton": {
+      "type": "location",
+      "title": "Stockton",
+      "modalHeading": "Stockton Personal Injury Help",
+      "modalSubtitle": "Connect with our Stockton office for a free consultation.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in Stockton? Get Help Today.",
+      "ctaDescription": "Contact our Stockton office for a free, no-obligation consultation. We don't get paid unless you win."
+    },
+    "modesto": {
+      "type": "location",
+      "title": "Modesto",
+      "modalHeading": "Modesto Personal Injury Help",
+      "modalSubtitle": "Connect with our Modesto office for a free consultation.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in Modesto? Get Help Today.",
+      "ctaDescription": "Contact our Modesto office for a free, no-obligation consultation. We don't get paid unless you win."
+    },
+    "chico": {
+      "type": "location",
+      "title": "Chico",
+      "modalHeading": "Chico Personal Injury Help",
+      "modalSubtitle": "Connect with our Chico office for a free consultation.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in Chico? Get Help Today.",
+      "ctaDescription": "Contact our Chico office for a free, no-obligation consultation. We don't get paid unless you win."
+    },
+    "index": {
+      "type": "home",
+      "title": "Home",
+      "modalHeading": "Get Your Free Consultation",
+      "modalSubtitle": "Tell us about your case and we'll contact you within 24 hours.",
+      "ctaTagline": "BANK ON FRANK!",
+      "ctaTitle": "Ready to Get the Compensation You Deserve?",
+      "ctaDescription": "Don't wait to get the help you need. Our team is standing by to provide a free, no-obligation consultation about your case."
+    },
+    "about-us": {
+      "type": "about",
+      "title": "About Us",
+      "modalHeading": "Get Your Free Consultation",
+      "modalSubtitle": "Tell us about your case and we'll contact you within 24 hours.",
+      "ctaTagline": "BANK ON FRANK!",
+      "ctaTitle": "Ready to Work with Our Team?",
+      "ctaDescription": "Don't wait to get the help you need. Our team is standing by to provide a free, no-obligation consultation about your case."
+    },
+    "practice-areas": {
+      "type": "practice-areas",
+      "title": "Practice Areas",
+      "modalHeading": "Need Legal Help?",
+      "modalSubtitle": "Tell us about your case and we'll match you with the right attorney.",
+      "ctaTagline": "BANK ON FRANK!",
+      "ctaTitle": "Injured? Get the Compensation You Deserve.",
+      "ctaDescription": "No matter what type of injury case you have, our experienced attorneys are ready to fight for you. Contact us today for a free consultation."
+    },
+    "locations": {
+      "type": "locations",
+      "title": "Locations",
+      "modalHeading": "Find an Office Near You",
+      "modalSubtitle": "Contact us for a free consultation at any of our 6 locations.",
+      "ctaTagline": "BANK ON FRANK!",
+      "ctaTitle": "Visit One of Our 6 Convenient Locations",
+      "ctaDescription": "No matter where you are in Northern California, there's a Frank Penney Injury Law office near you. Contact us today for a free consultation."
+    },
+    "contact": {
+      "type": "contact",
+      "title": "Contact",
+      "modalHeading": "Get Your Free Consultation",
+      "modalSubtitle": "We're here to help you get the compensation you deserve.",
+      "ctaTagline": "",
+      "ctaTitle": "",
+      "ctaDescription": ""
+    },
+    "resources": {
+      "type": "resources",
+      "title": "Resources",
+      "modalHeading": "Have Questions?",
+      "modalSubtitle": "Get a free consultation with one of our experienced attorneys.",
+      "ctaTagline": "BANK ON FRANK!",
+      "ctaTitle": "Have Questions? We Have Answers.",
+      "ctaDescription": "Contact us today for a free, no-obligation consultation. Our experienced attorneys are ready to help you understand your legal options."
+    }
+  },
+  "defaults": {
+    "type": "general",
+    "title": "Page",
+    "modalHeading": "Get Your Free Consultation",
+    "modalSubtitle": "Tell us about your case and we'll contact you within 24 hours.",
+    "ctaTagline": "BANK ON FRANK!",
+    "ctaTitle": "Ready to Get the Compensation You Deserve?",
+    "ctaDescription": "Don't wait to get the help you need. Our team is standing by to provide a free, no-obligation consultation about your case."
+  }
+}

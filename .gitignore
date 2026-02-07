@@ -1,0 +1,28 @@
+# Environment variables (contains sensitive API keys)
+.env
+
+# Node modules
+node_modules/
+
+# Build output
+*.min.css
+*.min.js
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Netlify
+.netlify/

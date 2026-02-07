@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Style Guide | Frank Penney Injury Law | Brand Reference</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/Frank-Penny-Favicon-Logo-32x32-1.png">
+    <style>
+        .style-guide-section {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        .color-swatch {
+            width: 100%;
+            height: 120px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .color-info {
+            background: rgba(255,255,255,0.95);
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+        }
+        .color-info strong {
+            display: block;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+        .typography-sample {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        .typography-sample:last-child {
+            border-bottom: none;
+        }
+        .typography-meta {
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+            margin-top: 0.5rem;
+            font-family: var(--font-secondary);
+        }
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .component-demo {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+        }
+        .usage-note {
+            background: #FEF3C7;
+            border-left: 4px solid var(--gold);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.875rem;
+        }
+        .do-dont {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .do-box, .dont-box {
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+        }
+        .do-box {
+            background: #D1FAE5;
+            border: 2px solid var(--success);
+        }
+        .dont-box {
+            background: #FEE2E2;
+            border: 2px solid var(--error);
+        }
+        .do-box h4, .dont-box h4 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .do-box h4 { color: #059669; }
+        .dont-box h4 { color: #DC2626; }
+        @media (max-width: 768px) {
+            .do-dont { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header style="background: var(--dark-azure); padding: 2rem 0;">
+    <div class="container">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                <h1 style="color: var(--white); font-size: 1.5rem; margin-bottom: 0.25rem;">Brand Style Guide</h1>
+                <p style="color: rgba(255,255,255,0.7); font-size: 0.875rem;">Frank Penney Injury Law - Reference: Brand Bible 2026</p>
+            </div>
+            <a href="index.html" class="btn btn-outline-white btn-sm">Back to Site</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Color Palette Section -->
+    <section class="style-guide-section">
+        <div class="container">
+            <h2 style="margin-bottom: 0.5rem;">Color Palette</h2>
+            <p class="lead" style="margin-bottom: 2rem;">Brand Bible 2026, Page 6 - Use these colors in the specified ratios.</p>
+
+            <div class="usage-note">
+                <strong>Color Usage Ratios:</strong> Dark Azure (40%) | Charcoal (30%) | Pastel Azure + Gold (20%) | Hot Pink (10% - CTAs only!)
+            </div>
+
+            <div class="grid grid-4" style="gap: 1.5rem; margin-top: 2rem;">
+                <div>
+                    <div class="color-swatch" style="background: var(--dark-azure);">
+                        <div class="color-info">
+                            <strong>Dark Azure</strong>
+                            #033563 | 40%
+                        </div>
+                    </div>
+                    <p style="font-size: 0.875rem; color: var(--medium-gray);">Headlines, navigation, links, primary brand color</p>
+                </div>
+                <div>
+                    <div class="color-swatch" style="background: var(--charcoal);">
+                        <div class="color-info">
+                            <strong>Charcoal</strong>
+                            #2C2C2C | 30%
+                        </div>
+                    </div>
+                    <p style="font-size: 0.875rem; color: var(--medium-gray);">Body text, footer, sophistication</p>
+                </div>
+                <div>
+                    <div class="color-swatch" style="background: var(--pastel-azure);">
+                        <div class="color-info" style="background: rgba(0,0,0,0.8); color: white;">
+                            <strong style="color: white;">Pastel Azure</strong>
+                            #A2DCF5 | 20%
+                        </div>
+                    </div>
+                    <p style="font-size: 0.875rem; color: var(--medium-gray);">Backgrounds, card icons, approachability</p>
+                </div>
+                <div>
+                    <div class="color-swatch" style="background: var(--gold);">
+                        <div class="color-info" style="background: rgba(0,0,0,0.8); color: white;">
+                            <strong style="color: white;">Gold</strong>
+                            #FFD700 | 20%
+                        </div>
+                    </div>
+                    <p style="font-size: 0.875rem; color: var(--medium-gray);">Stats, achievements, phone numbers</p>
+                </div>
+                <div>
+                    <div class="color-swatch" style="background: var(--hot-pink);">
+                        <div class="color-info">
+                            <strong>Hot Pink</strong>
+                            #E00D93 | 10%
+                        </div>
+                    </div>
+                    <p style="font-size: 0.875rem; color: var(--medium-gray);">CTAs, taglines, accents ONLY</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography Section -->
+    <section class="style-guide-section">
+        <div class="container">
+            <h2 style="margin-bottom: 0.5rem;">Typography</h2>
+            <p class="lead" style="margin-bottom: 2rem;">Brand Bible 2026, Pages 7-10 - Montserrat for display, Arial for body.</p>
+
+            <div class="grid grid-2" style="gap: 3rem;">
+                <div>
+                    <h3 style="margin-bottom: 1.5rem;">Heading Hierarchy</h3>
+
+                    <div class="typography-sample">
+                        <h1>H1 Headline Text</h1>
+                        <p class="typography-meta">Montserrat Bold (700) | clamp(2.5rem, 5vw, 3.5rem) | Dark Azure</p>
+                    </div>
+
+                    <div class="typography-sample">
+                        <h2>H2 Section Heading</h2>
+                        <p class="typography-meta">Montserrat Semi-Bold (600) | clamp(2rem, 4vw, 2.5rem) | Dark Azure</p>
+                    </div>
+
+                    <div class="typography-sample">
+                        <h3>H3 Subsection Heading</h3>
+                        <p class="typography-meta">Montserrat Semi-Bold (600) | clamp(1.5rem, 3vw, 1.75rem) | Dark Azure</p>
+                    </div>
+
+                    <div class="typography-sample">
+                        <h4>H4 Card Title</h4>
+                        <p class="typography-meta">Montserrat Semi-Bold (600) | 1.25rem | Dark Azure</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="margin-bottom: 1.5rem;">Special Typography</h3>
+
+                    <div class="typography-sample">
+                        <p class="brand-tagline">BANK ON FRANK!</p>
+                        <p class="typography-meta">Montserrat Extra-Bold (800) | Hot Pink | Uppercase | .brand-tagline</p>
+                    </div>
+
+                    <div class="typography-sample">
+                        <p class="brand-stat">$1 BILLION+</p>
+                        <p class="typography-meta">Montserrat Bold (700) | Gold | .brand-stat</p>
+                    </div>
+
+                    <div class="typography-sample">
+                        <span class="section-subtitle">Section Label</span>
+                        <p class="typography-meta">Montserrat Bold (700) | Hot Pink | Uppercase | .section-subtitle</p>
+                    </div>
+
+                    <div class="typography-sample">
+                        <p class="lead">Lead paragraph text introduces sections with slightly larger, emphasized body copy in Dark Azure.</p>
+                        <p class="typography-meta">Arial Regular (400) | 1.25rem | Dark Azure | .lead</p>
+                    </div>
+
+                    <div class="typography-sample">
+                        <p>Body text uses Arial/Helvetica for maximum readability. This is the standard paragraph style used throughout the site for content.</p>
+                        <p class="typography-meta">Arial Regular (400) | 1rem | Charcoal | Default body</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buttons Section -->
+    <section class="style-guide-section">
+        <div class="container">
+            <h2 style="margin-bottom: 0.5rem;">Buttons</h2>
+            <p class="lead" style="margin-bottom: 2rem;">Primary buttons use Hot Pink. Secondary buttons use Dark Azure.</p>
+
+            <h3 style="margin-bottom: 1rem;">Primary Buttons (Hot Pink CTAs)</h3>
+            <div class="button-row">
+                <a href="#" class="btn btn-primary btn-lg">Large Primary</a>
+                <a href="#" class="btn btn-primary">Default Primary</a>
+                <a href="#" class="btn btn-primary btn-sm">Small Primary</a>
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Secondary Buttons (Dark Azure)</h3>
+            <div class="button-row">
+                <a href="#" class="btn btn-secondary btn-lg">Large Secondary</a>
+                <a href="#" class="btn btn-secondary">Default Secondary</a>
+                <a href="#" class="btn btn-secondary btn-sm">Small Secondary</a>
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Outline Buttons</h3>
+            <div class="button-row">
+                <a href="#" class="btn btn-outline">Outline Default</a>
+                <a href="#" class="btn btn-outline btn-sm">Outline Small</a>
+            </div>
+
+            <div class="component-demo" style="background: var(--dark-azure);">
+                <h4 style="color: white; margin-bottom: 1rem;">On Dark Backgrounds</h4>
+                <div class="button-row">
+                    <a href="#" class="btn btn-primary">Primary CTA</a>
+                    <a href="#" class="btn btn-outline-white">Outline White</a>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Gold Buttons (Special Use)</h3>
+            <div class="button-row">
+                <a href="#" class="btn btn-gold">Gold Button</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="style-guide-section">
+        <div class="container">
+            <h2 style="margin-bottom: 0.5rem;">Cards</h2>
+            <p class="lead" style="margin-bottom: 2rem;">Card components for practice areas, locations, and content.</p>
+
+            <div class="grid grid-3" style="gap: 2rem;">
+                <div class="practice-card card">
+                    <div class="practice-card-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="practice-card-title">Practice Card</h3>
+                    <p class="practice-card-text">Hover to see the animation effect.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-image" style="height: 150px; background: var(--pastel-azure);"></div>
+                    <div class="card-content">
+                        <h4 class="card-title">Content Card</h4>
+                        <p class="card-text">Standard card with image and content area.</p>
+                        <a href="#" class="btn btn-outline btn-sm">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="location-card">
+                    <div class="location-card-header">
+                        <div class="location-card-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                        </div>
+                        <span class="location-card-city">Location Card</span>
+                    </div>
+                    <p class="location-card-address">123 Example Street<br>City, CA 95678</p>
+                    <a href="#" class="location-card-link">Get Directions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Do's and Don'ts Section -->
+    <section class="style-guide-section">
+        <div class="container">
+            <h2 style="margin-bottom: 0.5rem;">Brand Usage Guidelines</h2>
+            <p class="lead" style="margin-bottom: 2rem;">Follow these rules to maintain brand consistency.</p>
+
+            <h3 style="margin-bottom: 1rem;">Hot Pink Usage</h3>
+            <div class="do-dont">
+                <div class="do-box">
+                    <h4>DO</h4>
+                    <ul style="list-style: disc; padding-left: 1.25rem; color: var(--charcoal);">
+                        <li>Use for primary CTA buttons</li>
+                        <li>Use for "BANK ON FRANK!" tagline</li>
+                        <li>Use for section subtitle labels</li>
+                        <li>Keep usage to 10% of page</li>
+                    </ul>
+                </div>
+                <div class="dont-box">
+                    <h4>DON'T</h4>
+                    <ul style="list-style: disc; padding-left: 1.25rem; color: var(--charcoal);">
+                        <li>Use for body text or paragraphs</li>
+                        <li>Use for headlines (use Dark Azure)</li>
+                        <li>Overuse throughout the page</li>
+                        <li>Use for backgrounds</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Gold Usage</h3>
+            <div class="do-dont">
+                <div class="do-box">
+                    <h4>DO</h4>
+                    <ul style="list-style: disc; padding-left: 1.25rem; color: var(--charcoal);">
+                        <li>Use for stats and numbers ($1B+, 30 Years)</li>
+                        <li>Use for phone numbers in CTAs</li>
+                        <li>Use for achievement highlights</li>
+                        <li>Use for icons on dark backgrounds</li>
+                    </ul>
+                </div>
+                <div class="dont-box">
+                    <h4>DON'T</h4>
+                    <ul style="list-style: disc; padding-left: 1.25rem; color: var(--charcoal);">
+                        <li>Use for body text</li>
+                        <li>Use for primary buttons</li>
+                        <li>Use on light backgrounds without contrast</li>
+                        <li>Overuse outside stats/achievements</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Typography</h3>
+            <div class="do-dont">
+                <div class="do-box">
+                    <h4>DO</h4>
+                    <ul style="list-style: disc; padding-left: 1.25rem; color: var(--charcoal);">
+                        <li>Use Montserrat for all headings</li>
+                        <li>Use Arial for body text</li>
+                        <li>Use Extra-Bold (800) for taglines</li>
+                        <li>Maintain consistent heading hierarchy</li>
+                    </ul>
+                </div>
+                <div class="dont-box">
+                    <h4>DON'T</h4>
+                    <ul style="list-style: disc; padding-left: 1.25rem; color: var(--charcoal);">
+                        <li>Mix other fonts into the design</li>
+                        <li>Use Montserrat for long paragraphs</li>
+                        <li>Skip heading levels (H1 to H3)</li>
+                        <li>Use light font weights for headlines</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CSS Variables Reference -->
+    <section class="style-guide-section" style="border-bottom: none;">
+        <div class="container">
+            <h2 style="margin-bottom: 0.5rem;">CSS Variables Reference</h2>
+            <p class="lead" style="margin-bottom: 2rem;">Use these CSS custom properties in your stylesheets.</p>
+
+            <div style="background: var(--charcoal); border-radius: var(--radius-lg); padding: 2rem; overflow-x: auto;">
+                <pre style="color: #A2DCF5; font-family: monospace; font-size: 0.875rem; line-height: 1.8; margin: 0;"><code>/* Brand Colors */
+--charcoal: #2C2C2C;       /* Body text, footer */
+--dark-azure: #033563;     /* Headlines, nav, links */
+--pastel-azure: #A2DCF5;   /* Backgrounds, icons */
+--gold: #FFD700;           /* Stats, achievements */
+--hot-pink: #E00D93;       /* CTAs, taglines ONLY */
+
+/* Typography */
+--font-primary: 'Montserrat', sans-serif;   /* Headlines, buttons */
+--font-secondary: Arial, Helvetica, sans-serif;  /* Body text */
+
+/* Spacing */
+--spacing-sm: 0.5rem;
+--spacing-md: 1rem;
+--spacing-lg: 1.5rem;
+--spacing-xl: 2rem;
+--spacing-2xl: 3rem;
+--spacing-3xl: 4rem;
+
+/* Border Radius */
+--radius-sm: 4px;
+--radius-md: 8px;
+--radius-lg: 12px;
+--radius-xl: 16px;
+
+/* Transitions */
+--transition-fast: 150ms ease;
+--transition-base: 300ms ease;</code></pre>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer style="background: var(--charcoal); padding: 2rem 0; text-align: center;">
+    <div class="container">
+        <p style="color: rgba(255,255,255,0.5); font-size: 0.875rem;">
+            Frank Penney Injury Law - Brand Style Guide | Reference: Brand Bible 2026
+        </p>
+    </div>
+</footer>
+
+<script src="js/bundle.min.js" defer></script>
+</body>
+</html>

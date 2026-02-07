@@ -1,0 +1,27 @@
+# Robots.txt for Frank Penney Injury Law
+# https://www.penneylaw.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.penneylaw.com/sitemap.xml
+
+# Disallow internal/utility pages
+Disallow: /components/
+Disallow: /netlify-form-template.html
+Disallow: /style-guide.html
+Disallow: /thank-you.html
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /

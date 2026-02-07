@@ -1,0 +1,74 @@
+<!-- Floating Contact Button -->
+<div class="contact-modal-trigger" id="contact-modal-trigger">
+    <button class="floating-contact-btn" aria-label="Get Free Consultation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+        </svg>
+        <span class="btn-label">Free Consultation</span>
+    </button>
+</div>
+
+<!-- Contact Modal Overlay -->
+<div class="contact-modal-overlay" id="contact-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-subtitle">
+    <div class="contact-modal">
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+
+        <!-- Dynamic heading - populated by JS based on page context -->
+        <h3 class="modal-title" id="modal-title">Get Your Free Consultation</h3>
+        <p style="font-weight: 700; color: var(--hot-pink); margin: 0 0 0.5rem 0; text-align: center; font-size: 1.5rem;">No Fees Unless You Win</p>
+        <p class="modal-subtitle" id="modal-subtitle">Tell us about your case and we'll contact you within 24 hours.</p>
+
+        <form id="modal-contact-form" class="contact-form" name="modal-contact" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <input type="hidden" name="form-name" value="modal-contact">
+            <input type="hidden" name="page-context" id="page-context" value="">
+            <p class="hidden" style="display: none;">
+                <label>Don't fill this out: <input name="bot-field"></label>
+            </p>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="modal_first_name" class="form-label">First Name <span class="required" aria-hidden="true">*</span></label>
+                    <input type="text" id="modal_first_name" name="first_name" class="form-input" required placeholder="John" aria-describedby="modal_first_name_error" aria-required="true">
+                    <span class="form-error" id="modal_first_name_error" role="alert" aria-live="polite">Please enter your first name</span>
+                </div>
+                <div class="form-group">
+                    <label for="modal_last_name" class="form-label">Last Name <span class="required" aria-hidden="true">*</span></label>
+                    <input type="text" id="modal_last_name" name="last_name" class="form-input" required placeholder="Doe" aria-describedby="modal_last_name_error" aria-required="true">
+                    <span class="form-error" id="modal_last_name_error" role="alert" aria-live="polite">Please enter your last name</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="modal_email" class="form-label">Email <span class="required" aria-hidden="true">*</span></label>
+                <input type="email" id="modal_email" name="email" class="form-input" required placeholder="john@example.com" aria-describedby="modal_email_error" aria-required="true">
+                <span class="form-error" id="modal_email_error" role="alert" aria-live="polite">Please enter a valid email address</span>
+            </div>
+
+            <div class="form-group">
+                <label for="modal_phone" class="form-label">Phone <span class="required" aria-hidden="true">*</span></label>
+                <input type="tel" id="modal_phone" name="phone" class="form-input" required placeholder="(555) 123-4567" aria-describedby="modal_phone_error" aria-required="true">
+                <span class="form-error" id="modal_phone_error" role="alert" aria-live="polite">Please enter a valid phone number</span>
+            </div>
+
+            <div class="form-group">
+                <label for="modal_message" class="form-label">How Can We Help? <span class="required" aria-hidden="true">*</span></label>
+                <textarea id="modal_message" name="message" class="form-textarea" required rows="4" placeholder="Tell us about your case..." aria-describedby="modal_message_error" aria-required="true"></textarea>
+                <span class="form-error" id="modal_message_error" role="alert" aria-live="polite">Please tell us how we can help</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full btn-lg">
+                <span class="btn-text">Get Free Consultation</span>
+                <span class="btn-loading" style="display: none;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;">
+                        <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+                        <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/>
+                    </svg>
+                </span>
+            </button>
+
+            <p class="form-disclaimer" style="font-size: 0.75rem; color: var(--medium-gray); text-align: center; margin-top: 1rem;">
+                No fee unless we win. Your information is confidential.
+            </p>
+        </form>
+    </div>
+</div>
