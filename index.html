@@ -128,7 +128,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Hero Content -->
             <div class="hero-content" data-reveal>
                 <span class="hero-subtitle">Northern California's Premier Injury Law Firm</span>
-                <h1>Fighting for <span class="highlight">Maximum Compensation</span> for Injury Victims</h1>
+                <h1>Fighting for<br><span class="highlight">Maximum<br>Compensation</span><br>for Injury Victims</h1>
             
                 <!-- Hero Stats -->
                 <div class="hero-stats">
@@ -152,7 +152,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                 <!-- Hero Buttons -->
                 <div class="hero-buttons">
-                    <a href="contact.html" class="btn btn-primary btn-lg">Get Free Consultation</a>
+                    <a href="contact.html" class="btn btn-primary btn-lg">Bank on Frank</a>
                     <a href="tel:8888880566" class="btn btn-outline-white btn-lg">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;" aria-hidden="true">
                             <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
@@ -176,37 +176,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="first_name" class="form-label">First Name <span class="required">*</span></label>
-                            <input type="text" id="first_name" name="first_name" class="form-input" required placeholder="John">
-                            <span class="form-error">Please enter your first name</span>
+                            <label for="first_name" class="form-label">First Name <span class="required" aria-hidden="true">*</span></label>
+                            <input type="text" id="first_name" name="first_name" class="form-input" required placeholder="John" aria-describedby="first_name_error" aria-required="true">
+                            <span class="form-error" id="first_name_error" role="alert" aria-live="polite">Please enter your first name</span>
                         </div>
                         <div class="form-group">
-                            <label for="last_name" class="form-label">Last Name <span class="required">*</span></label>
-                            <input type="text" id="last_name" name="last_name" class="form-input" required placeholder="Doe">
-                            <span class="form-error">Please enter your last name</span>
+                            <label for="last_name" class="form-label">Last Name <span class="required" aria-hidden="true">*</span></label>
+                            <input type="text" id="last_name" name="last_name" class="form-input" required placeholder="Doe" aria-describedby="last_name_error" aria-required="true">
+                            <span class="form-error" id="last_name_error" role="alert" aria-live="polite">Please enter your last name</span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="email" class="form-label">Email <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" class="form-input" required placeholder="john@example.com">
-                        <span class="form-error">Please enter a valid email address</span>
+                        <label for="email" class="form-label">Email <span class="required" aria-hidden="true">*</span></label>
+                        <input type="email" id="email" name="email" class="form-input" required placeholder="john@example.com" aria-describedby="email_error" aria-required="true">
+                        <span class="form-error" id="email_error" role="alert" aria-live="polite">Please enter a valid email address</span>
                     </div>
 
                     <div class="form-group">
-                        <label for="phone" class="form-label">Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="phone" name="phone" class="form-input" required placeholder="(555) 123-4567">
-                        <span class="form-error">Please enter a valid phone number</span>
+                        <label for="phone" class="form-label">Phone Number <span class="required" aria-hidden="true">*</span></label>
+                        <input type="tel" id="phone" name="phone" class="form-input" required placeholder="(555) 123-4567" aria-describedby="phone_error" aria-required="true">
+                        <span class="form-error" id="phone_error" role="alert" aria-live="polite">Please enter a valid phone number</span>
                     </div>
 
                     <div class="form-group">
-                        <label for="message" class="form-label">How Can We Help? <span class="required">*</span></label>
-                        <textarea id="message" name="message" class="form-textarea" required placeholder="Tell us about your case..."></textarea>
-                        <span class="form-error">Please tell us how we can help</span>
+                        <label for="message" class="form-label">How Can We Help? <span class="required" aria-hidden="true">*</span></label>
+                        <textarea id="message" name="message" class="form-textarea" required placeholder="Tell us about your case..." aria-describedby="message_error" aria-required="true"></textarea>
+                        <span class="form-error" id="message_error" role="alert" aria-live="polite">Please tell us how we can help</span>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-full btn-lg">
-                        <span class="btn-text">Get Free Consultation</span>
+                        <span class="btn-text">Bank on Frank</span>
                         <span class="btn-loading" style="display: none;">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;">
                                 <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
@@ -513,10 +513,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Roseville -->
             <a href="roseville.html" class="location-card" data-reveal style="overflow: hidden; text-decoration: none; display: block;">
                 <div style="height: 160px; overflow: hidden;">
-                    <picture>
-                        <source srcset="images/locations/Roseville-Personal-Injury-Lawyer-Frank-Penney-Injury-Law-400w.webp 400w, images/locations/Roseville-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.webp 654w" sizes="(max-width: 768px) 100vw, 350px" type="image/webp">
-                        <img src="images/locations/Roseville-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.jpg" alt="Roseville Office" width="654" height="366" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-                    </picture>
+                    <img src="images/locations/roseville.webp" alt="Roseville Office" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div style="padding: 1.25rem;">
                     <h3 class="location-card-city" style="margin-bottom: 8px;">Roseville</h3>
@@ -533,10 +530,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Fairfield -->
             <a href="fairfield.html" class="location-card" data-reveal style="overflow: hidden; text-decoration: none; display: block;">
                 <div style="height: 160px; overflow: hidden;">
-                    <picture>
-                        <source srcset="images/locations/Fairfield-Personal-Injury-Lawyer-Frank-Penney-Injury-Law-400w.webp 400w, images/locations/Fairfield-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.webp 654w" sizes="(max-width: 768px) 100vw, 350px" type="image/webp">
-                        <img src="images/locations/Fairfield-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.jpg" alt="Fairfield Office" width="654" height="366" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-                    </picture>
+                    <img src="images/locations/fairfield.webp" alt="Fairfield Office" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div style="padding: 1.25rem;">
                     <h3 class="location-card-city" style="margin-bottom: 8px;">Fairfield</h3>
@@ -553,10 +547,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Modesto -->
             <a href="modesto.html" class="location-card" data-reveal style="overflow: hidden; text-decoration: none; display: block;">
                 <div style="height: 160px; overflow: hidden;">
-                    <picture>
-                        <source srcset="images/locations/Modesto-Personal-Injury-Lawyer-Frank-Penney-Injury-Law-1-400w.webp 400w, images/locations/Modesto-Personal-Injury-Lawyer-Frank-Penney-Injury-Law-1.webp 654w" sizes="(max-width: 768px) 100vw, 350px" type="image/webp">
-                        <img src="images/locations/Modesto-Personal-Injury-Lawyer-Frank-Penney-Injury-Law-1.jpg" alt="Modesto Office" width="654" height="366" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-                    </picture>
+                    <img src="images/locations/modesto.webp" alt="Modesto Office" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div style="padding: 1.25rem;">
                     <h3 class="location-card-city" style="margin-bottom: 8px;">Modesto</h3>
@@ -573,10 +564,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Chico -->
             <a href="chico.html" class="location-card" data-reveal style="overflow: hidden; text-decoration: none; display: block;">
                 <div style="height: 160px; overflow: hidden;">
-                    <picture>
-                        <source srcset="images/locations/Chico-Personal-Injury-Lawyer-Frank-Penney-Injury-Law-400w.webp 400w, images/locations/Chico-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.webp 654w" sizes="(max-width: 768px) 100vw, 350px" type="image/webp">
-                        <img src="images/locations/Chico-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.jpg" alt="Chico Office" width="654" height="366" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-                    </picture>
+                    <img src="images/locations/chico.webp" alt="Chico Office" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div style="padding: 1.25rem;">
                     <h3 class="location-card-city" style="margin-bottom: 8px;">Chico</h3>
@@ -593,10 +581,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Sacramento -->
             <a href="sacramento.html" class="location-card" data-reveal style="overflow: hidden; text-decoration: none; display: block;">
                 <div style="height: 160px; overflow: hidden;">
-                    <picture>
-                        <source srcset="images/locations/Sacramento-Personal-Injury-Lawyer-Frank-Penney-Injury-Law-400w.webp 400w, images/locations/Sacramento-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.webp 654w" sizes="(max-width: 768px) 100vw, 350px" type="image/webp">
-                        <img src="images/locations/Sacramento-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.jpg" alt="Sacramento Office" width="654" height="366" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-                    </picture>
+                    <img src="images/locations/sacramento.webp" alt="Sacramento Office" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div style="padding: 1.25rem;">
                     <h3 class="location-card-city" style="margin-bottom: 8px;">Sacramento</h3>
@@ -613,10 +598,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Stockton -->
             <a href="stockton.html" class="location-card" data-reveal style="overflow: hidden; text-decoration: none; display: block;">
                 <div style="height: 160px; overflow: hidden;">
-                    <picture>
-                        <source srcset="images/locations/Stockton-Personal-Injury-Lawyer-Frank-Penney-Injury-Law-400w.webp 400w, images/locations/Stockton-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.webp 654w" sizes="(max-width: 768px) 100vw, 350px" type="image/webp">
-                        <img src="images/locations/Stockton-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.jpg" alt="Stockton Office" width="654" height="366" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-                    </picture>
+                    <img src="images/locations/stockton.webp" alt="Stockton Office" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div style="padding: 1.25rem;">
                     <h3 class="location-card-city" style="margin-bottom: 8px;">Stockton</h3>

@@ -50,6 +50,11 @@
             form.addEventListener('submit', function (e) {
                 if (!validateForm(form)) {
                     e.preventDefault();
+                    var firstInvalid = form.querySelector('.error');
+                    if (firstInvalid) {
+                        firstInvalid.focus();
+                        firstInvalid.scrollIntoView({ block: 'center' });
+                    }
                 }
                 // If valid, form submits normally to Netlify
             });

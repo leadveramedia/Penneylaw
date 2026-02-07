@@ -227,8 +227,11 @@
         // Initialize auto-hide behavior
         initFloatingCTAAutoHide();
 
+        var modalTriggerElement = null;
+
         // Open modal
         trigger.addEventListener('click', function() {
+            modalTriggerElement = document.activeElement;
             overlay.classList.add('active');
             overlay.setAttribute('aria-hidden', 'false');
             document.body.classList.add('modal-open');
@@ -241,6 +244,9 @@
             overlay.classList.remove('active');
             overlay.setAttribute('aria-hidden', 'true');
             document.body.classList.remove('modal-open');
+            if (modalTriggerElement && modalTriggerElement.focus) {
+                modalTriggerElement.focus();
+            }
         };
 
         // Close on X button
@@ -352,9 +358,10 @@
 
         // Scroll to top when clicked
         backToTop.addEventListener('click', function() {
+            var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             window.scrollTo({
                 top: 0,
-                behavior: 'smooth'
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
             });
         });
 

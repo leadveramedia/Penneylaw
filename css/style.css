@@ -32,7 +32,8 @@
     --charcoal: #2C2C2C;       /* 30% - Body text, footer, sophistication */
     --dark-azure: #033563;     /* 40% PRIMARY - Headlines, nav, links, trust */
     --pastel-azure: #A2DCF5;   /* 20% - Backgrounds, approachability */
-    --gold: #FFD700;           /* 20% - Stats, achievements, results */
+    --gold: #FFD700;           /* 20% - Stats, achievements, results (use on dark backgrounds) */
+    --gold-accessible: #B8960C; /* Darker gold for light backgrounds - WCAG AA 4.56:1 on white */
     --hot-pink: #E00D93;       /* 10% ACCENT - CTAs, taglines ONLY */
 
     /* Extended Palette */
@@ -354,7 +355,7 @@ p {
 
 .top-message-secondary {
     color: #fff;
-    font-size: 0.8125rem;
+    font-size: 1.125rem;
     margin-right: 1rem;
 }
 
@@ -404,7 +405,7 @@ p {
     border: none;
     color: var(--white);
     font-family: var(--font-primary);
-    font-size: 0.875rem;
+    font-size: 1.125rem;
     font-weight: 500;
     cursor: pointer;
     padding: 4px 8px;
@@ -489,19 +490,26 @@ p {
 
 .language-option-mobile {
     padding: 8px 16px;
-    background: var(--pastel-azure);
+    background: transparent;
+    border: 1px solid var(--medium-gray);
     border-radius: var(--radius-sm);
-    color: var(--dark-azure);
+    color: var(--medium-gray);
     font-size: 0.875rem;
     font-weight: 500;
     text-decoration: none;
     transition: all var(--transition-fast);
 }
 
-.language-option-mobile:hover,
+.language-option-mobile:hover {
+    border-color: var(--dark-azure);
+    color: var(--dark-azure);
+}
+
 .language-option-mobile.active {
-    background: var(--dark-azure);
-    color: var(--white);
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--charcoal);
+    font-weight: 700;
 }
 
 /* Hide Google Translate banner/frame but keep functional */
@@ -1127,8 +1135,21 @@ body {
 .hero-wrapper {
     display: grid;
     grid-template-columns: 1fr 450px;
-    gap: 4rem;
+    gap: 3rem;
     align-items: center;
+}
+
+@media (max-width: 1280px) {
+    .hero-wrapper {
+        grid-template-columns: 1fr 400px;
+    }
+}
+
+@media (max-width: 1150px) {
+    .hero-wrapper {
+        grid-template-columns: 1fr 380px;
+        gap: 2.5rem;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -1147,7 +1168,6 @@ body {
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 850px;
     color: var(--white);
 }
 
@@ -1210,11 +1230,6 @@ body {
     gap: var(--spacing-2xl);
     margin-bottom: var(--spacing-xl);
     padding: var(--spacing-lg) 0;
-    border-top: 1px solid rgba(255, 215, 0, 0.3);
-    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
-    box-shadow:
-        0 -1px 20px rgba(255, 215, 0, 0.1),
-        0 1px 20px rgba(255, 215, 0, 0.1);
 }
 
 .hero-stat {
@@ -2368,7 +2383,7 @@ body {
 }
 
 .text-gold {
-    color: var(--gold);
+    color: var(--gold-accessible);
 }
 
 .bg-white {
@@ -2646,6 +2661,10 @@ body.translating::after {
 /* ========================================
    COMPONENT LOADING STATES (FOUC Prevention)
 ======================================== */
+#header-placeholder {
+    min-height: 120px;
+}
+
 .components-loading #header-placeholder,
 .components-loading #footer-placeholder {
     min-height: 100px;
@@ -2853,12 +2872,13 @@ body.modal-open {
 }
 
 /* Brand Stat Numbers - Gold achievement numbers
-   Usage: "$1B+", "30 Years", stats and achievements */
+   Usage: "$1B+", "30 Years", stats and achievements
+   Uses accessible gold for WCAG AA compliance on light backgrounds */
 .brand-stat {
     font-family: var(--font-primary);
     font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 700;
-    color: var(--gold);
+    color: var(--gold-accessible);
 }
 
 .brand-stat-label {
@@ -2891,12 +2911,13 @@ body.modal-open {
 }
 
 /* Brand Phone Number - Gold phone styling
-   Usage: Phone numbers in headers/CTAs */
+   Usage: Phone numbers in headers/CTAs
+   Uses accessible gold for WCAG AA compliance on light backgrounds */
 .brand-phone {
     font-family: var(--font-primary);
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--gold);
+    color: var(--gold-accessible);
 }
 
 /* Brand Legal Disclaimer text */
@@ -3619,7 +3640,7 @@ body.modal-open {
 }
 
 .breadcrumbs-current {
-    color: var(--medium-gray);
+    color: var(--dark-gray);
 }
 
 @media (max-width: 576px) {

@@ -66,7 +66,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="contact-grid">
             <!-- Contact Info Sidebar -->
             <div class="contact-info" data-reveal>
-                <h3>Get In Touch</h3>
+                <h2 style="font-size: 1.5rem;">Get In Touch</h2>
                 <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem;">
                     Ready to discuss your case? Contact us today for a free, no-obligation consultation. We're available 24/7 to help.
                 </p>
@@ -78,7 +78,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </svg>
                     </div>
                     <div class="contact-info-text">
-                        <strong>Phone</strong> <span style="font-size: 0.75rem; color: var(--hot-pink); font-weight: 600;">Available 24/7</span><br>
+                        <strong>Phone</strong> <span style="font-size: 0.75rem; color: var(--gold); font-weight: 600;">Available 24/7</span><br>
                         <a href="tel:8888880566">(888) 888-0566</a>
                     </div>
                 </div>
@@ -98,19 +98,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="contact-info-item">
                     <div class="contact-info-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                    </div>
-                    <div class="contact-info-text">
-                        <strong>Main Office</strong><br>
-                        1508 Eureka Rd<br>
-                        Roseville, CA 95661
-                    </div>
-                </div>
-
-                <div class="contact-info-item">
-                    <div class="contact-info-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
                             <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
                         </svg>
@@ -122,7 +109,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
 
                 <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                    <p style="font-family: var(--font-primary); font-size: 1.25rem; font-weight: 800; color: var(--hot-pink); margin-bottom: 8px;">
+                    <p style="font-family: var(--font-primary); font-size: 1.25rem; font-weight: 800; color: var(--gold); margin-bottom: 8px;">
                         BANK ON FRANK!
                     </p>
                     <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9375rem;">
@@ -133,7 +120,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <!-- Contact Form -->
             <div class="contact-form-wrapper" data-reveal>
-                <h3 style="color: var(--dark-azure); margin-bottom: 8px;">Send Us a Message</h3>
+                <h2 style="color: var(--dark-azure); margin-bottom: 8px; font-size: 1.5rem;">Send Us a Message</h2>
                 <p style="color: var(--medium-gray); margin-bottom: 2rem;">
                     Fill out the form below and we'll get back to you within 24 hours.
                 </p>
@@ -146,34 +133,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="contact_first_name" class="form-label">First Name <span class="required">*</span></label>
-                            <input type="text" id="contact_first_name" name="first_name" class="form-input" required placeholder="John">
-                            <span class="form-error">Please enter your first name</span>
+                            <label for="contact_first_name" class="form-label">First Name <span class="required" aria-hidden="true">*</span></label>
+                            <input type="text" id="contact_first_name" name="first_name" class="form-input" required placeholder="John" aria-describedby="contact_first_name_error" aria-required="true">
+                            <span class="form-error" id="contact_first_name_error" role="alert" aria-live="polite">Please enter your first name</span>
                         </div>
                         <div class="form-group">
-                            <label for="contact_last_name" class="form-label">Last Name <span class="required">*</span></label>
-                            <input type="text" id="contact_last_name" name="last_name" class="form-input" required placeholder="Doe">
-                            <span class="form-error">Please enter your last name</span>
+                            <label for="contact_last_name" class="form-label">Last Name <span class="required" aria-hidden="true">*</span></label>
+                            <input type="text" id="contact_last_name" name="last_name" class="form-input" required placeholder="Doe" aria-describedby="contact_last_name_error" aria-required="true">
+                            <span class="form-error" id="contact_last_name_error" role="alert" aria-live="polite">Please enter your last name</span>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="contact_email" class="form-label">Email <span class="required">*</span></label>
-                            <input type="email" id="contact_email" name="email" class="form-input" required placeholder="john@example.com">
-                            <span class="form-error">Please enter a valid email address</span>
+                            <label for="contact_email" class="form-label">Email <span class="required" aria-hidden="true">*</span></label>
+                            <input type="email" id="contact_email" name="email" class="form-input" required placeholder="john@example.com" aria-describedby="contact_email_error" aria-required="true">
+                            <span class="form-error" id="contact_email_error" role="alert" aria-live="polite">Please enter a valid email address</span>
                         </div>
                         <div class="form-group">
-                            <label for="contact_phone" class="form-label">Phone Number <span class="required">*</span></label>
-                            <input type="tel" id="contact_phone" name="phone" class="form-input" required placeholder="(555) 123-4567">
-                            <span class="form-error">Please enter a valid phone number</span>
+                            <label for="contact_phone" class="form-label">Phone Number <span class="required" aria-hidden="true">*</span></label>
+                            <input type="tel" id="contact_phone" name="phone" class="form-input" required placeholder="(555) 123-4567" aria-describedby="contact_phone_error" aria-required="true">
+                            <span class="form-error" id="contact_phone_error" role="alert" aria-live="polite">Please enter a valid phone number</span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="contact_message" class="form-label">How Can We Help? <span class="required">*</span></label>
-                        <textarea id="contact_message" name="message" class="form-textarea" required placeholder="Please describe your situation and how we can assist you..." rows="6"></textarea>
-                        <span class="form-error">Please tell us how we can help</span>
+                        <label for="contact_message" class="form-label">How Can We Help? <span class="required" aria-hidden="true">*</span></label>
+                        <textarea id="contact_message" name="message" class="form-textarea" required placeholder="Please describe your situation and how we can assist you..." rows="6" aria-describedby="contact_message_error" aria-required="true"></textarea>
+                        <span class="form-error" id="contact_message_error" role="alert" aria-live="polite">Please tell us how we can help</span>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-full btn-lg">
@@ -206,117 +193,105 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="grid grid-3" style="gap: 1.5rem;">
             <!-- Roseville -->
-            <div class="location-card" data-reveal>
-                <div class="location-card-header">
-                    <div class="location-card-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                    </div>
-                    <h3 class="location-card-city">Roseville</h3>
+            <div class="location-card" data-reveal style="overflow: hidden;">
+                <div style="height: 160px; overflow: hidden;">
+                    <img src="images/locations/roseville.webp" alt="Roseville Office" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <p class="location-card-address">1508 Eureka Rd<br>Roseville, CA 95661</p>
-                <a href="https://maps.google.com/?q=1508+Eureka+Rd+Roseville+CA+95661" target="_blank" rel="noopener noreferrer" class="location-card-link">
-                    Get Directions
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-                    </svg>
-                </a>
+                <div style="padding: 1.25rem;">
+                    <h3 class="location-card-city" style="margin-bottom: 8px;">Roseville</h3>
+                    <p class="location-card-address">1508 Eureka Rd<br>Roseville, CA 95661</p>
+                    <a href="https://maps.google.com/?q=1508+Eureka+Rd+Roseville+CA+95661" target="_blank" rel="noopener noreferrer" class="location-card-link">
+                        Get Directions
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
 
             <!-- Fairfield -->
-            <div class="location-card" data-reveal>
-                <div class="location-card-header">
-                    <div class="location-card-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                    </div>
-                    <h3 class="location-card-city">Fairfield</h3>
+            <div class="location-card" data-reveal style="overflow: hidden;">
+                <div style="height: 160px; overflow: hidden;">
+                    <img src="images/locations/fairfield.webp" alt="Fairfield Office" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <p class="location-card-address">1652 West Texas Street, Suite 248<br>Fairfield, CA 94533</p>
-                <a href="https://maps.google.com/?q=1652+West+Texas+Street+Suite+248+Fairfield+CA+94533" target="_blank" rel="noopener noreferrer" class="location-card-link">
-                    Get Directions
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-                    </svg>
-                </a>
+                <div style="padding: 1.25rem;">
+                    <h3 class="location-card-city" style="margin-bottom: 8px;">Fairfield</h3>
+                    <p class="location-card-address">1652 West Texas Street, Suite 248<br>Fairfield, CA 94533</p>
+                    <a href="https://maps.google.com/?q=1652+West+Texas+Street+Suite+248+Fairfield+CA+94533" target="_blank" rel="noopener noreferrer" class="location-card-link">
+                        Get Directions
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
 
             <!-- Modesto -->
-            <div class="location-card" data-reveal>
-                <div class="location-card-header">
-                    <div class="location-card-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                    </div>
-                    <h3 class="location-card-city">Modesto</h3>
+            <div class="location-card" data-reveal style="overflow: hidden;">
+                <div style="height: 160px; overflow: hidden;">
+                    <img src="images/locations/modesto.webp" alt="Modesto Office" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <p class="location-card-address">1111 J Street<br>Modesto, CA 95354</p>
-                <a href="https://maps.google.com/?q=1111+J+Street+Modesto+CA+95354" target="_blank" rel="noopener noreferrer" class="location-card-link">
-                    Get Directions
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-                    </svg>
-                </a>
+                <div style="padding: 1.25rem;">
+                    <h3 class="location-card-city" style="margin-bottom: 8px;">Modesto</h3>
+                    <p class="location-card-address">1111 J Street<br>Modesto, CA 95354</p>
+                    <a href="https://maps.google.com/?q=1111+J+Street+Modesto+CA+95354" target="_blank" rel="noopener noreferrer" class="location-card-link">
+                        Get Directions
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
 
             <!-- Chico -->
-            <div class="location-card" data-reveal>
-                <div class="location-card-header">
-                    <div class="location-card-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                    </div>
-                    <h3 class="location-card-city">Chico</h3>
+            <div class="location-card" data-reveal style="overflow: hidden;">
+                <div style="height: 160px; overflow: hidden;">
+                    <img src="images/locations/chico.webp" alt="Chico Office" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <p class="location-card-address">1108 Sherman Ave<br>Chico, CA 95926</p>
-                <a href="https://maps.google.com/?q=1108+Sherman+Ave+Chico+CA+95926" target="_blank" rel="noopener noreferrer" class="location-card-link">
-                    Get Directions
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-                    </svg>
-                </a>
+                <div style="padding: 1.25rem;">
+                    <h3 class="location-card-city" style="margin-bottom: 8px;">Chico</h3>
+                    <p class="location-card-address">1108 Sherman Ave<br>Chico, CA 95926</p>
+                    <a href="https://maps.google.com/?q=1108+Sherman+Ave+Chico+CA+95926" target="_blank" rel="noopener noreferrer" class="location-card-link">
+                        Get Directions
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
 
             <!-- Sacramento -->
-            <div class="location-card" data-reveal>
-                <div class="location-card-header">
-                    <div class="location-card-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                    </div>
-                    <h3 class="location-card-city">Sacramento</h3>
+            <div class="location-card" data-reveal style="overflow: hidden;">
+                <div style="height: 160px; overflow: hidden;">
+                    <img src="images/locations/sacramento.webp" alt="Sacramento Office" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <p class="location-card-address">333 University Avenue, Suite 200<br>Sacramento, CA</p>
-                <a href="https://maps.google.com/?q=333+University+Avenue+Suite+200+Sacramento+CA" target="_blank" rel="noopener noreferrer" class="location-card-link">
-                    Get Directions
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-                    </svg>
-                </a>
+                <div style="padding: 1.25rem;">
+                    <h3 class="location-card-city" style="margin-bottom: 8px;">Sacramento</h3>
+                    <p class="location-card-address">333 University Avenue, Suite 200<br>Sacramento, CA</p>
+                    <a href="https://maps.google.com/?q=333+University+Avenue+Suite+200+Sacramento+CA" target="_blank" rel="noopener noreferrer" class="location-card-link">
+                        Get Directions
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
 
             <!-- Stockton -->
-            <div class="location-card" data-reveal>
-                <div class="location-card-header">
-                    <div class="location-card-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                    </div>
-                    <h3 class="location-card-city">Stockton</h3>
+            <div class="location-card" data-reveal style="overflow: hidden;">
+                <div style="height: 160px; overflow: hidden;">
+                    <img src="images/locations/stockton.webp" alt="Stockton Office" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <p class="location-card-address">5250 Claremont Avenue<br>Stockton, CA 95207</p>
-                <a href="https://maps.google.com/?q=5250+Claremont+Avenue+Stockton+CA+95207" target="_blank" rel="noopener noreferrer" class="location-card-link">
-                    Get Directions
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-                    </svg>
-                </a>
+                <div style="padding: 1.25rem;">
+                    <h3 class="location-card-city" style="margin-bottom: 8px;">Stockton</h3>
+                    <p class="location-card-address">5250 Claremont Avenue<br>Stockton, CA 95207</p>
+                    <a href="https://maps.google.com/?q=5250+Claremont+Avenue+Stockton+CA+95207" target="_blank" rel="noopener noreferrer" class="location-card-link">
+                        Get Directions
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

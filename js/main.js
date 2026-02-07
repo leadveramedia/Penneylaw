@@ -52,6 +52,9 @@
             if (mobileNav) {
                 mobileNav.classList.toggle('active');
                 mobileNav.setAttribute('aria-hidden', isExpanded);
+                if (isExpanded) {
+                    toggle.focus();
+                }
             }
 
             // Toggle regular nav menu on tablet
@@ -96,6 +99,7 @@
                 toggle.classList.remove('active');
                 toggle.setAttribute('aria-expanded', 'false');
                 document.body.classList.remove('menu-open');
+                toggle.focus();
             }
         });
     }
@@ -201,9 +205,10 @@
 
                     const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
 
+                    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                     window.scrollTo({
                         top: targetPosition,
-                        behavior: 'smooth'
+                        behavior: prefersReducedMotion ? 'auto' : 'smooth'
                     });
                 }
             });
@@ -360,6 +365,8 @@
                 const parent = this.closest('.mobile-dropdown');
                 if (parent) {
                     parent.classList.toggle('open');
+                    const isOpen = parent.classList.contains('open');
+                    this.setAttribute('aria-expanded', isOpen);
                 }
             });
         });
@@ -706,10 +713,17 @@
 
     /**
      * Store original text before first translation
+     * For elements with styled spans, store innerHTML to preserve structure
      */
     function storeOriginalText(element) {
         if (!originalTexts.has(element)) {
-            originalTexts.set(element, element.textContent);
+            // Check if element has styled child spans that need preservation
+            const hasStyledSpans = element.querySelector('span.highlight, span[class], span[style]');
+            if (hasStyledSpans) {
+                originalTexts.set(element, { innerHTML: element.innerHTML, isHTML: true });
+            } else {
+                originalTexts.set(element, { text: element.textContent, isHTML: false });
+            }
         }
     }
 
@@ -773,9 +787,13 @@
     async function translatePage(targetLang) {
         if (targetLang === 'en') {
             // Restore original English text
-            originalTexts.forEach(function(originalText, element) {
+            originalTexts.forEach(function(originalData, element) {
                 if (document.contains(element)) {
-                    element.textContent = originalText;
+                    if (originalData.isHTML) {
+                        element.innerHTML = originalData.innerHTML;
+                    } else {
+                        element.textContent = originalData.text;
+                    }
                 }
             });
             document.body.classList.remove('translating');
@@ -788,29 +806,23 @@
         isTranslating = true;
         document.body.classList.add('translating');
 
-        // Batch translate to reduce API calls (translate unique texts only)
-        const uniqueTexts = new Map();
-        elements.forEach(function(el) {
-            storeOriginalText(el);
-            const original = originalTexts.get(el);
-            if (original && !uniqueTexts.has(original)) {
-                uniqueTexts.set(original, []);
-            }
-            if (original) {
-                uniqueTexts.get(original).push(el);
-            }
-        });
-
-        // Translate each unique text with small delay to avoid rate limiting
+        // Translate elements individually to preserve HTML structure
         let count = 0;
-        for (const [originalText, targetElements] of uniqueTexts) {
+        for (const el of elements) {
             try {
-                const translated = await translateText(originalText, targetLang);
-                targetElements.forEach(function(el) {
+                storeOriginalText(el);
+                const originalData = originalTexts.get(el);
+
+                if (originalData.isHTML) {
+                    // Element has styled spans - translate while preserving HTML
+                    await translateElementWithHTML(el, targetLang);
+                } else {
+                    // Simple text element - translate normally
+                    const translated = await translateText(originalData.text, targetLang);
                     if (document.contains(el)) {
                         el.textContent = translated;
                     }
-                });
+                }
 
                 // Small delay every 5 translations to be nice to the API
                 count++;
@@ -818,12 +830,52 @@
                     await new Promise(function(resolve) { setTimeout(resolve, 100); });
                 }
             } catch (error) {
-                console.warn('Failed to translate:', originalText, error);
+                console.warn('Failed to translate element:', error);
             }
         }
 
         isTranslating = false;
         document.body.classList.remove('translating');
+    }
+
+    /**
+     * Translate element while preserving inner HTML structure (spans, styling)
+     */
+    async function translateElementWithHTML(element, targetLang) {
+        // Get all text nodes and styled spans
+        const walker = document.createTreeWalker(
+            element,
+            NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT,
+            {
+                acceptNode: function(node) {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        return node.textContent.trim().length > 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+                    }
+                    if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SPAN') {
+                        return NodeFilter.FILTER_SKIP; // Skip spans, we'll handle their text nodes
+                    }
+                    return NodeFilter.FILTER_SKIP;
+                }
+            }
+        );
+
+        // Collect all text nodes
+        const textNodes = [];
+        let node;
+        while (node = walker.nextNode()) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                textNodes.push(node);
+            }
+        }
+
+        // Translate each text node
+        for (const textNode of textNodes) {
+            const originalText = textNode.textContent.trim();
+            if (originalText.length > 1) {
+                const translated = await translateText(originalText, targetLang);
+                textNode.textContent = textNode.textContent.replace(originalText, translated);
+            }
+        }
     }
 
     /**

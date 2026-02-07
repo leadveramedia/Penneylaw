@@ -4,11 +4,10 @@
   # Build command to minify CSS
   command = "npm run minify:css"
   publish = "."
-  # Configure environment variables in Netlify Dashboard
-  environment = ["DEEPL_API_KEY", "DEEPL_API_TYPE"]
 
 # Secrets scanning configuration
 # DEEPL_API_TYPE is not a secret (just "free" or "paid"), so exclude it from scanning
+# Note: Set DEEPL_API_KEY and DEEPL_API_TYPE in Netlify Dashboard under Site Settings > Environment Variables
 [build.environment]
   SECRETS_SCAN_OMIT_KEYS = "DEEPL_API_TYPE"
 

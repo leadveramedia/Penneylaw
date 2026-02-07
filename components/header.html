@@ -50,8 +50,8 @@
                 <ul class="nav-menu">
                     <li data-page="index"><a href="index.html">Home</a></li>
                     <li class="nav-dropdown" data-page="practice-areas,personal-injury,car-accidents,truck-accidents,motorcycle-accidents,wrongful-death,dog-bite,bicycle-accidents,bus-accidents,slip-and-fall,traumatic-brain-injuries">
-                        <a href="practice-areas.html" class="dropdown-trigger">Practice Areas <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
-                        <div class="dropdown-menu practice-area-dropdown">
+                        <a href="practice-areas.html" class="dropdown-trigger" aria-haspopup="true" aria-expanded="false">Practice Areas <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+                        <div class="dropdown-menu practice-area-dropdown" role="menu">
                             <div class="dropdown-list">
                                 <a href="car-accidents.html" class="dropdown-item" data-practice="car-accidents">Car Accidents</a>
                                 <a href="truck-accidents.html" class="dropdown-item" data-practice="truck-accidents">Truck Accidents</a>
@@ -71,8 +71,8 @@
                         </div>
                     </li>
                     <li class="nav-dropdown" data-page="about-us">
-                        <a href="about-us.html" class="dropdown-trigger">About Us <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
-                        <div class="dropdown-menu attorney-dropdown">
+                        <a href="about-us.html" class="dropdown-trigger" aria-haspopup="true" aria-expanded="false">About Us <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+                        <div class="dropdown-menu attorney-dropdown" role="menu">
                             <div class="dropdown-list">
                                 <a href="about-us.html" class="dropdown-item" data-attorney="frank-penney">Frank Penney</a>
                                 <a href="about-us.html" class="dropdown-item" data-attorney="jacob-stoeltzing">Jacob Stoeltzing</a>
@@ -88,8 +88,8 @@
                         </div>
                     </li>
                     <li class="nav-dropdown" data-page="locations,roseville,sacramento,fairfield,stockton,modesto,chico">
-                        <a href="locations.html" class="dropdown-trigger">Locations <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
-                        <div class="dropdown-menu location-dropdown">
+                        <a href="locations.html" class="dropdown-trigger" aria-haspopup="true" aria-expanded="false">Locations <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+                        <div class="dropdown-menu location-dropdown" role="menu">
                             <div class="dropdown-list">
                                 <a href="roseville.html" class="dropdown-item" data-location="roseville">Roseville</a>
                                 <a href="sacramento.html" class="dropdown-item" data-location="sacramento">Sacramento</a>
@@ -99,30 +99,12 @@
                                 <a href="chico.html" class="dropdown-item" data-location="chico">Chico</a>
                             </div>
                             <div class="dropdown-image-panel">
-                                <picture class="location-preview" data-location="roseville">
-                                    <source srcset="images/locations/Roseville-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.webp" type="image/webp">
-                                    <img src="images/locations/Roseville-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.jpg" alt="Roseville" width="654" height="366">
-                                </picture>
-                                <picture class="location-preview" data-location="sacramento">
-                                    <source srcset="images/locations/Sacramento-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.webp" type="image/webp">
-                                    <img src="images/locations/Sacramento-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.jpg" alt="Sacramento" width="654" height="366">
-                                </picture>
-                                <picture class="location-preview" data-location="fairfield">
-                                    <source srcset="images/locations/Fairfield-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.webp" type="image/webp">
-                                    <img src="images/locations/Fairfield-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.jpg" alt="Fairfield" width="654" height="366">
-                                </picture>
-                                <picture class="location-preview" data-location="stockton">
-                                    <source srcset="images/locations/Stockton-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.webp" type="image/webp">
-                                    <img src="images/locations/Stockton-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.jpg" alt="Stockton" width="654" height="366">
-                                </picture>
-                                <picture class="location-preview" data-location="modesto">
-                                    <source srcset="images/locations/Modesto-Personal-Injury-Lawyer-Frank-Penney-Injury-Law-1.webp" type="image/webp">
-                                    <img src="images/locations/Modesto-Personal-Injury-Lawyer-Frank-Penney-Injury-Law-1.jpg" alt="Modesto" width="654" height="366">
-                                </picture>
-                                <picture class="location-preview" data-location="chico">
-                                    <source srcset="images/locations/Chico-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.webp" type="image/webp">
-                                    <img src="images/locations/Chico-Personal-Injury-Lawyer-Frank-Penney-Injury-Law.jpg" alt="Chico" width="654" height="366">
-                                </picture>
+                                <img class="location-preview" data-location="roseville" src="images/locations/roseville.webp" alt="Roseville" width="654" height="368">
+                                <img class="location-preview" data-location="sacramento" src="images/locations/sacramento.webp" alt="Sacramento" width="654" height="368">
+                                <img class="location-preview" data-location="fairfield" src="images/locations/fairfield.webp" alt="Fairfield" width="654" height="368">
+                                <img class="location-preview" data-location="stockton" src="images/locations/stockton.webp" alt="Stockton" width="654" height="368">
+                                <img class="location-preview" data-location="modesto" src="images/locations/modesto.webp" alt="Modesto" width="654" height="368">
+                                <img class="location-preview" data-location="chico" src="images/locations/chico.webp" alt="Chico" width="654" height="368">
                             </div>
                         </div>
                     </li>
@@ -141,7 +123,7 @@
                             (888) 888-0566
                         </a>
                     </div>
-                    <a href="contact.html" class="btn btn-primary">Free Consultation</a>
+                    <a href="contact.html" class="btn btn-primary">Bank on Frank</a>
                 </div>
 
                 <!-- Mobile Menu Toggle -->
@@ -160,7 +142,7 @@
             <ul class="mobile-menu">
                 <li data-page="index"><a href="index.html">Home</a></li>
                 <li class="mobile-dropdown" data-page="practice-areas,personal-injury,car-accidents,truck-accidents,motorcycle-accidents,wrongful-death,dog-bite,bicycle-accidents,bus-accidents,slip-and-fall,traumatic-brain-injuries">
-                    <a href="#" class="mobile-dropdown-trigger">Practice Areas <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+                    <button class="mobile-dropdown-trigger" aria-expanded="false" aria-haspopup="true">Practice Areas <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
                     <ul class="mobile-dropdown-menu">
                         <li><a href="car-accidents.html">Car Accidents</a></li>
                         <li><a href="truck-accidents.html">Truck Accidents</a></li>
@@ -172,7 +154,7 @@
                     </ul>
                 </li>
                 <li class="mobile-dropdown" data-page="about-us">
-                    <a href="#" class="mobile-dropdown-trigger">About Us <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+                    <button class="mobile-dropdown-trigger" aria-expanded="false" aria-haspopup="true">About Us <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
                     <ul class="mobile-dropdown-menu">
                         <li><a href="about-us.html">Frank Penney</a></li>
                         <li><a href="about-us.html">Jacob Stoeltzing</a></li>
@@ -181,7 +163,7 @@
                     </ul>
                 </li>
                 <li class="mobile-dropdown" data-page="locations,roseville,sacramento,fairfield,stockton,modesto,chico">
-                    <a href="#" class="mobile-dropdown-trigger">Locations <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+                    <button class="mobile-dropdown-trigger" aria-expanded="false" aria-haspopup="true">Locations <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
                     <ul class="mobile-dropdown-menu">
                         <li><a href="roseville.html">Roseville</a></li>
                         <li><a href="sacramento.html">Sacramento</a></li>
@@ -209,7 +191,7 @@
                     </svg>
                     Call (888) 888-0566
                 </a>
-                <a href="contact.html" class="btn btn-primary btn-full">Free Consultation</a>
+                <a href="contact.html" class="btn btn-primary btn-full">Bank on Frank</a>
             </div>
         </div>
     </div>
