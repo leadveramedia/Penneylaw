@@ -96,24 +96,31 @@
             return;
         }
 
-        // Check if fields already exist (avoid duplicates)
-        var existingFields = form.querySelectorAll('input[data-ad-tracking]');
-        if (existingFields.length > 0) {
-            console.log('[Ad Tracking] Hidden fields already exist in form:', form.name || form.id);
-            return;
-        }
+        var fieldsUpdated = 0;
+        var fieldsCreated = 0;
 
-        // Inject hidden fields for each tracking parameter
+        // Populate tracking fields (update existing or create new)
         Object.keys(trackingData).forEach(function(key) {
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = key;
-            input.value = trackingData[key];
-            input.setAttribute('data-ad-tracking', 'true'); // Mark for duplicate detection
-            form.appendChild(input);
+            // Check if field already exists in the form
+            var existingInput = form.querySelector('input[name="' + key + '"]');
+
+            if (existingInput) {
+                // Update existing field value
+                existingInput.value = trackingData[key];
+                fieldsUpdated++;
+            } else {
+                // Create new hidden field if it doesn't exist
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = trackingData[key];
+                input.setAttribute('data-ad-tracking', 'true');
+                form.appendChild(input);
+                fieldsCreated++;
+            }
         });
 
-        console.log('[Ad Tracking] Injected tracking fields into form:', form.name || form.id);
+        console.log('[Ad Tracking] Form "' + (form.name || form.id) + '": Updated ' + fieldsUpdated + ' fields, Created ' + fieldsCreated + ' fields');
     }
 
     /**
