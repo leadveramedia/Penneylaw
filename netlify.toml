@@ -3,6 +3,13 @@
 [build]
   # No build command needed for static site
   publish = "."
+  # Configure environment variables in Netlify Dashboard
+  environment = ["DEEPL_API_KEY", "DEEPL_API_TYPE"]
+
+# Secrets scanning configuration
+# DEEPL_API_TYPE is not a secret (just "free" or "paid"), so exclude it from scanning
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "DEEPL_API_TYPE"
 
 # 404 handling - Netlify automatically serves 404.html for missing pages
 # No catch-all redirect needed for static HTML sites
