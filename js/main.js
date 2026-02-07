@@ -956,6 +956,20 @@
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            background: none;
+            border: none;
+            width: 100%;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+
+        .mobile-dropdown-trigger:hover {
+            color: #E00D93;
         }
 
         .mobile-dropdown-trigger .dropdown-arrow {
