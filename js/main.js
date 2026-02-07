@@ -378,28 +378,156 @@
     const TRANSLATION_ENDPOINT = '/.netlify/functions/translate';
 
 
+    const TRANSLATION_CACHE_VERSION = '2.0'; // Increment when selectors change significantly
+
     let currentLanguage = 'en';
     let originalTexts = new Map(); // Store original English text
     let translationCache = {}; // Cache translations to reduce API calls
     let isTranslating = false;
 
-    // Load cache from localStorage
+    // Load cache from localStorage with versioning
     try {
         const cached = localStorage.getItem('translationCache');
-        if (cached) translationCache = JSON.parse(cached);
+        const version = localStorage.getItem('translationCacheVersion');
+
+        if (cached && version === TRANSLATION_CACHE_VERSION) {
+            translationCache = JSON.parse(cached);
+        } else {
+            // Clear old cache if version mismatch
+            localStorage.removeItem('translationCache');
+            localStorage.setItem('translationCacheVersion', TRANSLATION_CACHE_VERSION);
+            translationCache = {};
+        }
     } catch (e) {
         translationCache = {};
     }
 
-    // Elements to translate (CSS selectors) - reduced for performance
+    // Elements to translate (CSS selectors) - comprehensive coverage
     const TRANSLATABLE_SELECTORS = [
-        '.hero-subtitle', '.hero-stat-label', '.hero-form-title', '.hero-form-subtitle',
-        '.section-subtitle', '.section-title', '.section-description',
-        '.page-title', '.page-subtitle',
-        '.practice-card-title', '.practice-card-text',
-        '.form-label', '.form-disclaimer',
-        '.footer-tagline', '.footer-description', '.footer-title',
-        '.btn-text', '.top-message', '.lead'
+        // ============================================
+        // HEADER & NAVIGATION
+        // ============================================
+        // Top bar messages
+        '.top-message',
+        '.top-message-secondary',
+        '.available-247',
+
+        // Desktop navigation
+        '.nav-menu a',                    // Main menu links (Home, Practice Areas, etc.)
+        '.dropdown-item',                 // Dropdown menu items
+
+        // Mobile navigation
+        '.mobile-menu a',                 // Mobile menu links
+        '.mobile-dropdown-trigger',       // Mobile dropdown triggers
+        '.mobile-language-label',         // "Language" label
+
+        // Language selector (desktop)
+        '.language-option',               // "English", "Español", "Русский"
+
+        // ============================================
+        // HERO SECTION
+        // ============================================
+        '.hero h1',
+        '.hero-subtitle',
+        '.hero-tagline',
+        '.hero-description',
+        '.hero-stat-label',               // Stats like "Recovered", "Years Experience"
+        '.hero-form-title',
+        '.hero-form-subtitle',
+
+        // ============================================
+        // HEADINGS & TEXT BLOCKS
+        // ============================================
+        'h1:not(.logo):not(.site-logo)',  // All h1 except logo
+        'h2', 'h3', 'h4', 'h5',           // All other headings
+        'p',                               // All paragraphs (with exclusions handled in getTranslatableElements)
+        '.lead',                           // Lead paragraphs
+        'li',                              // List items (practice area lists, feature lists)
+        'strong',                          // Bold text
+
+        // ============================================
+        // SECTIONS
+        // ============================================
+        '.section-subtitle',
+        '.section-title',
+        '.section-description',
+        '.page-title',
+        '.page-subtitle',
+
+        // ============================================
+        // CARDS & COMPONENTS
+        // ============================================
+        // Practice area cards
+        '.practice-card-title',
+        '.practice-card-text',
+        '.card-title',
+        '.card-text',
+        '.card-description',
+
+        // Attorney cards
+        '.attorney-card-name',
+        '.attorney-card-title',
+
+        // Location cards
+        '.location-card-city',
+        '.location-card-address',
+        '.location-card-link',
+
+        // Why choose us
+        '.why-item-title',
+        '.why-item-text',
+
+        // ============================================
+        // CTA SECTIONS
+        // ============================================
+        '#cta-tagline',                   // ID-based CTA content (populated by JS)
+        '#cta-title',
+        '#cta-description',
+        '.cta-tagline',                   // Class-based fallback
+        '.cta-title',
+        '.cta-subtitle',
+        '.cta-description',
+
+        // ============================================
+        // FORMS
+        // ============================================
+        '.form-label',
+        '.form-disclaimer',
+        '.form-error',
+
+        // ============================================
+        // BUTTONS
+        // ============================================
+        '.btn:not(.language-toggle):not(.mobile-menu-toggle)', // All buttons except language/menu toggles
+        '.btn-text',
+
+        // ============================================
+        // FOOTER
+        // ============================================
+        '.footer-tagline',                // "BANK ON FRANK!"
+        '.footer-description',
+        '.footer-title',                  // "Quick Links", "Practice Areas", "Contact Us"
+        '.footer-links a',                // All footer link text
+        '.footer-copyright',              // Copyright text
+        '.footer-legal-links a',          // Privacy Policy, Terms, Disclaimer links
+
+        // ============================================
+        // BREADCRUMBS
+        // ============================================
+        '.breadcrumbs-link',
+        '.breadcrumbs-current',
+
+        // ============================================
+        // CONTACT INFO
+        // ============================================
+        '.contact-info-item h3',          // Contact info headings
+        '.contact-info-text',             // Contact info descriptions
+
+        // ============================================
+        // OTHER COMMON ELEMENTS
+        // ============================================
+        '.tagline',
+        '.description'
     ];
 
     /**
@@ -598,17 +726,39 @@
                 if (seen.has(el)) return;
                 seen.add(el);
 
+                // Skip hidden elements
+                if (el.offsetParent === null && el.tagName !== 'OPTION') return;
+
                 // Skip elements with no meaningful text
                 const text = el.textContent;
                 if (!text || text.trim().length < 2) return;
 
-                // Skip if element has child elements with text (avoid double translation)
+                // Skip form inputs and technical elements
+                if (el.matches('input, select, textarea, script, style, noscript')) return;
+
+                // Skip elements inside forms (except labels and disclaimers)
+                if (el.closest('form') && !el.matches('.form-label, .form-disclaimer, .form-error')) return;
+
+                // Skip if element has text children that will be translated separately
+                // (avoid translating both parent and child)
                 const hasTextChildren = Array.from(el.children).some(function(child) {
                     return child.textContent && child.textContent.trim().length > 0 &&
-                           !child.tagName.match(/^(SVG|PATH|SPAN)$/i);
+                           !child.tagName.match(/^(SVG|PATH|SPAN|I|EM|STRONG|B)$/i);
                 });
 
-                if (!hasTextChildren || el.children.length === 0) {
+                // For broad selectors (p, li, h1-h5, strong), skip if has text children
+                if (selector.match(/^(p|li|h[1-5]|strong)$/i) && hasTextChildren) {
+                    return;
+                }
+
+                // Skip logo text
+                if (el.closest('.logo, .site-logo')) return;
+
+                // Skip language selector current lang display (will be updated by language change)
+                if (el.matches('.current-lang, .language-option-mobile.active')) return;
+
+                // Add to translation list
+                if (!hasTextChildren || el.children.length === 0 || selector.match(/^(\.nav-menu a|\.dropdown-item|\.mobile-menu a|\.footer-links a)$/)) {
                     elements.push(el);
                 }
             });
