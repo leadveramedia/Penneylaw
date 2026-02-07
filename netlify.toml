@@ -1,8 +1,8 @@
 # Netlify Configuration for Frank Penney Injury Law Static Site
 
 [build]
-  # Build command to minify CSS
-  command = "npm run minify:css"
+  # Build command to minify CSS and JS
+  command = "npm run build"
   publish = "."
 
 # Secrets scanning configuration
