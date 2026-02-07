@@ -1,7 +1,8 @@
 # Netlify Configuration for Frank Penney Injury Law Static Site
 
 [build]
-  # No build command needed for static site
+  # Build command to minify CSS
+  command = "npm run minify:css"
   publish = "."
   # Configure environment variables in Netlify Dashboard
   environment = ["DEEPL_API_KEY", "DEEPL_API_TYPE"]
