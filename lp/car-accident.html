@@ -1851,8 +1851,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 })();
 </script>
 
-<!-- Ad Tracking for Paid Campaigns -->
-<script src="../js/ad-tracking.js" defer></script>
+<!-- Ad Tracking: Populate hidden fields from URL params (inline to avoid cache issues) -->
+<script>
+(function() {
+    var params = new URLSearchParams(window.location.search);
+    var fields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'];
+    var landingPage = window.location.pathname;
+    var referrer = document.referrer || 'direct';
+
+    document.querySelectorAll('form[data-netlify="true"]').forEach(function(form) {
+        fields.forEach(function(name) {
+            var val = params.get(name);
+            var input = form.querySelector('input[name="' + name + '"]');
+            if (input && val) input.value = val;
+        });
+        var lpInput = form.querySelector('input[name="landing_page"]');
+        if (lpInput) lpInput.value = landingPage;
+        var refInput = form.querySelector('input[name="referrer"]');
+        if (refInput) refInput.value = referrer;
+    });
+})();
+</script>
+
+<!-- Ad Tracking for Paid Campaigns (GTM events, phone tracking) -->
+<script src="../js/ad-tracking.js?v=2" defer></script>
 
 </body>
 </html>
