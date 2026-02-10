@@ -54,5 +54,12 @@
     Content-Type = "application/xml; charset=utf-8"
     Cache-Control = "public, max-age=86400"
 
+# Redirects
+[[redirects]]
+  from = "/car-accident-lawyer/*"
+  to = "/lp/car-accident.html"
+  status = 301
+  force = true
+
 # Form notifications - Netlify will automatically detect forms with data-netlify="true"
 # Configure email notifications in Netlify Dashboard under Forms > Form Notifications
