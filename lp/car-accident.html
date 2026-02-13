@@ -1340,6 +1340,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <input type="hidden" name="utm_content" value="">
                 <input type="hidden" name="utm_term" value="">
                 <input type="hidden" name="gclid" value="">
+                <input type="hidden" name="gbraid" value="">
+                <input type="hidden" name="wbraid" value="">
                 <input type="hidden" name="fbclid" value="">
                 <input type="hidden" name="landing_page" value="">
                 <input type="hidden" name="referrer" value="">
@@ -1412,6 +1414,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <input type="hidden" name="utm_content" value="">
                 <input type="hidden" name="utm_term" value="">
                 <input type="hidden" name="gclid" value="">
+                <input type="hidden" name="gbraid" value="">
+                <input type="hidden" name="wbraid" value="">
                 <input type="hidden" name="fbclid" value="">
                 <input type="hidden" name="landing_page" value="">
                 <input type="hidden" name="referrer" value="">
@@ -1645,6 +1649,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <input type="hidden" name="utm_content" value="">
                 <input type="hidden" name="utm_term" value="">
                 <input type="hidden" name="gclid" value="">
+                <input type="hidden" name="gbraid" value="">
+                <input type="hidden" name="wbraid" value="">
                 <input type="hidden" name="fbclid" value="">
                 <input type="hidden" name="landing_page" value="">
                 <input type="hidden" name="referrer" value="">
@@ -1900,30 +1906,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 })();
 </script>
 
-<!-- Ad Tracking: Populate hidden fields from URL params (inline to avoid cache issues) -->
+<!-- Ad Tracking: Populate hidden fields from URL params + submit-time failsafe -->
 <script>
 (function() {
     var params = new URLSearchParams(window.location.search);
-    var fields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'];
-    var landingPage = window.location.pathname;
+    var fields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'gbraid', 'wbraid', 'fbclid'];
+    var landingPage = window.location.pathname + window.location.search;
     var referrer = document.referrer || 'direct';
 
-    document.querySelectorAll('form[data-netlify="true"]').forEach(function(form) {
+    function populateForm(form) {
         fields.forEach(function(name) {
             var val = params.get(name);
             var input = form.querySelector('input[name="' + name + '"]');
             if (input && val) input.value = val;
         });
         var lpInput = form.querySelector('input[name="landing_page"]');
-        if (lpInput) lpInput.value = landingPage;
+        if (lpInput && !lpInput.value) lpInput.value = landingPage;
         var refInput = form.querySelector('input[name="referrer"]');
-        if (refInput) refInput.value = referrer;
+        if (refInput && !refInput.value) refInput.value = referrer;
+    }
+
+    // Populate immediately
+    document.querySelectorAll('form[data-netlify="true"]').forEach(function(form) {
+        populateForm(form);
+        // Failsafe: re-populate on submit in case fields were cleared
+        form.addEventListener('submit', function() {
+            populateForm(form);
+        });
     });
 })();
 </script>
 
 <!-- Ad Tracking for Paid Campaigns (GTM events, phone tracking) -->
-<script src="../js/ad-tracking.js?v=2" defer></script>
+<script src="../js/ad-tracking.js?v=3" defer></script>
 
 </body>
 </html>

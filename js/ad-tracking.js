@@ -26,6 +26,8 @@
         'utm_content',
         'utm_term',
         'gclid',      // Google Ads Click ID
+        'gbraid',     // Google Ads Broad Match (iOS/cross-domain)
+        'wbraid',     // Google Ads Web-to-App
         'fbclid'      // Facebook Ads Click ID
     ];
 
