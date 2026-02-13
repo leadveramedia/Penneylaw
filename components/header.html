@@ -109,7 +109,15 @@
                         </div>
                     </li>
                     <li data-page="contact"><a href="contact.html">Contact</a></li>
-                    <li data-page="resources"><a href="resources.html">Resources</a></li>
+                    <li class="nav-dropdown" data-page="resources,blog,blog-post">
+                        <a href="resources.html" class="dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+                        <div class="dropdown-menu resources-dropdown" role="menu">
+                            <div class="dropdown-list">
+                                <a href="blog.html" class="dropdown-item">Blog</a>
+                                <a href="resources.html" class="dropdown-item">Helpful Resources</a>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
 
                 <!-- Header CTA -->
@@ -174,7 +182,13 @@
                     </ul>
                 </li>
                 <li data-page="contact"><a href="contact.html">Contact</a></li>
-                <li data-page="resources"><a href="resources.html">Resources</a></li>
+                <li class="mobile-dropdown" data-page="resources,blog,blog-post">
+                    <button class="mobile-dropdown-trigger" aria-expanded="false" aria-haspopup="true">Resources <svg class="dropdown-arrow" width="10" height="6" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
+                    <ul class="mobile-dropdown-menu">
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="resources.html">Helpful Resources</a></li>
+                    </ul>
+                </li>
             </ul>
             <div class="mobile-language-selector">
                 <p class="mobile-language-label">Language</p>

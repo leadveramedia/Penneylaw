@@ -789,6 +789,15 @@ body {
     height: 320px;
 }
 
+/* Resources Dropdown - simple list, no image panel */
+.resources-dropdown {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    min-width: 200px;
+}
+
 /* Mobile Dropdown */
 .mobile-dropdown {
     position: relative;

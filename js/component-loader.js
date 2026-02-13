@@ -23,7 +23,7 @@
      * Load page configuration from JSON file
      */
     function loadPageConfig() {
-        return fetch('config/page-config.json')
+        return fetch('/config/page-config.json')
             .then(function(response) {
                 if (!response.ok) {
                     throw new Error('Failed to load page config');
@@ -50,6 +50,10 @@
      */
     function getCurrentPageSlug() {
         var path = window.location.pathname;
+        // Handle blog post rewrites: /blog/slug -> blog-post config
+        if (path.match(/^\/blog\/[^/]+/)) {
+            return 'blog-post';
+        }
         var filename = path.split('/').pop() || 'index.html';
         return filename.replace('.html', '') || 'index';
     }
@@ -392,16 +396,16 @@
         loadPageConfig().then(function() {
             // Build list of components to load
             var componentPromises = [
-                loadComponent('components/header.html', '#header-placeholder', 'replace'),
-                loadComponent('components/footer.html', '#footer-placeholder', 'replace'),
-                loadComponent('components/contact-modal.html', 'body', 'append')
+                loadComponent('/components/header.html', '#header-placeholder', 'replace'),
+                loadComponent('/components/footer.html', '#footer-placeholder', 'replace'),
+                loadComponent('/components/contact-modal.html', 'body', 'append')
             ];
 
             // Only load CTA component if placeholder exists on the page
             var ctaPlaceholder = document.getElementById('cta-placeholder');
             if (ctaPlaceholder) {
                 componentPromises.push(
-                    loadComponent('components/cta-section.html', '#cta-placeholder', 'replace')
+                    loadComponent('/components/cta-section.html', '#cta-placeholder', 'replace')
                 );
             }
 

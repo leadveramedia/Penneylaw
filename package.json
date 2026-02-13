@@ -5,8 +5,10 @@
   "scripts": {
     "optimize-images": "node scripts/optimize-images.js",
     "minify:css": "cleancss -o css/style.min.css css/style.css",
+    "minify:blog-css": "cleancss -o css/blog.min.css css/blog.css",
     "minify:js": "uglifyjs js/main.js js/component-loader.js js/form-validation.js -o js/bundle.min.js -c -m",
-    "build": "npm run minify:css && npm run minify:js",
+    "minify:blog-js": "uglifyjs js/blog.js -o js/blog.min.js -c -m",
+    "build": "npm run minify:css && npm run minify:blog-css && npm run minify:js && npm run minify:blog-js",
     "convert-locations": "node scripts/convert-location-images.js"
   },
   "dependencies": {

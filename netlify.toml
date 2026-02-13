@@ -24,7 +24,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
     Cross-Origin-Opener-Policy = "same-origin-allow-popups"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com; frame-src https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://a.storyblok.com; frame-src https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://api.storyblok.com;"
 
 [[headers]]
   for = "/css/*"
@@ -60,6 +60,18 @@
   to = "/lp/car-accident.html"
   status = 301
   force = true
+
+# Blog post URL rewrite: /blog/post-slug -> /blog-post.html
+[[redirects]]
+  from = "/blog/*"
+  to = "/blog-post.html"
+  status = 200
+  force = false
+
+# Edge function for blog post meta tag injection
+[[edge_functions]]
+  function = "blog-meta"
+  path = "/blog/*"
 
 # Form notifications - Netlify will automatically detect forms with data-netlify="true"
 # Configure email notifications in Netlify Dashboard under Forms > Form Notifications

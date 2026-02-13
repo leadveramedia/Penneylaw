@@ -197,6 +197,24 @@
       "ctaTagline": "BANK ON FRANK!",
       "ctaTitle": "Have Questions? We Have Answers.",
       "ctaDescription": "Contact us today for a free, no-obligation consultation. Our experienced attorneys are ready to help you understand your legal options."
+    },
+    "blog": {
+      "type": "blog",
+      "title": "Blog",
+      "modalHeading": "Have Questions About Your Case?",
+      "modalSubtitle": "Get a free consultation with one of our experienced attorneys.",
+      "ctaTagline": "BANK ON FRANK!",
+      "ctaTitle": "Injured? Get Expert Legal Help Today.",
+      "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "blog-post": {
+      "type": "blog-post",
+      "title": "Blog Post",
+      "modalHeading": "Have Questions About Your Case?",
+      "modalSubtitle": "Get a free consultation with one of our experienced attorneys.",
+      "ctaTagline": "BANK ON FRANK!",
+      "ctaTitle": "Injured? Get Expert Legal Help Today.",
+      "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
     }
   },
   "defaults": {

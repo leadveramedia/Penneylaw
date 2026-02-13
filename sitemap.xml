@@ -138,6 +138,14 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog -->
+    <url>
+        <loc>https://www.penneylaw.com/blog.html</loc>
+        <lastmod>2026-02-12</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
     <!-- Legal Pages -->
     <url>
         <loc>https://www.penneylaw.com/privacy-policy.html</loc>
