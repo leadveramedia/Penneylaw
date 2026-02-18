@@ -55,8 +55,17 @@
                         firstInvalid.focus();
                         firstInvalid.scrollIntoView({ block: 'center' });
                     }
+                    return;
                 }
-                // If valid, form submits normally to Netlify
+                // Build subject line for Netlify email notification
+                var firstName = (form.querySelector('[name="first_name"]') || {}).value || '';
+                var lastName = (form.querySelector('[name="last_name"]') || {}).value || '';
+                var phone = (form.querySelector('[name="phone"]') || {}).value || '';
+                var subjectField = form.querySelector('[name="subject"]');
+                if (subjectField) {
+                    subjectField.value = 'New Lead: ' + firstName.trim() + ' ' + lastName.trim() + ' - ' + phone.trim();
+                }
+                // Form submits normally to Netlify
             });
         });
     }

@@ -1332,6 +1332,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <form class="lp-form" id="hero-form" name="lp-car-accident" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
                 <input type="hidden" name="form-name" value="lp-car-accident">
+                <input type="hidden" name="subject" value="">
                 <input type="hidden" name="source" value="Google Ads - Car Accident LP">
                 <!-- Ad Tracking Fields (populated by ad-tracking.js) -->
                 <input type="hidden" name="utm_source" value="">
@@ -1406,6 +1407,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="lp-mobile-form-card">
             <form class="lp-mobile-form" id="mobile-hero-form" name="lp-car-accident-mobile" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
                 <input type="hidden" name="form-name" value="lp-car-accident-mobile">
+                <input type="hidden" name="subject" value="">
                 <input type="hidden" name="source" value="Google Ads - Car Accident LP (Mobile)">
                 <!-- Ad Tracking Fields (populated by ad-tracking.js) -->
                 <input type="hidden" name="utm_source" value="">
@@ -1641,6 +1643,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <form class="lp-form" id="bottom-form" name="lp-car-accident-bottom" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
                 <input type="hidden" name="form-name" value="lp-car-accident-bottom">
+                <input type="hidden" name="subject" value="">
                 <input type="hidden" name="source" value="Google Ads - Car Accident LP (Bottom)">
                 <!-- Ad Tracking Fields (populated by ad-tracking.js) -->
                 <input type="hidden" name="utm_source" value="">
@@ -1884,6 +1887,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (!validateForm(form)) {
                 e.preventDefault();
                 return false;
+            }
+
+            // Build subject line for Netlify email notification
+            var firstNameEl = form.querySelector('[name="first_name"]');
+            var fullName = firstNameEl
+                ? (firstNameEl.value.trim() + ' ' + ((form.querySelector('[name="last_name"]') || {}).value || '').trim()).trim()
+                : ((form.querySelector('[name="name"]') || {}).value || '').trim();
+            var phone = ((form.querySelector('[name="phone"]') || {}).value || '').trim();
+            var subjectField = form.querySelector('[name="subject"]');
+            if (subjectField) {
+                subjectField.value = 'New Lead: ' + fullName + ' - ' + phone;
             }
 
             // Show loading state
