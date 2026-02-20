@@ -58,12 +58,11 @@
                     return;
                 }
                 // Build subject line for Netlify email notification
-                var firstName = (form.querySelector('[name="first_name"]') || {}).value || '';
-                var lastName = (form.querySelector('[name="last_name"]') || {}).value || '';
+                var fullName = (form.querySelector('[name="name"]') || {}).value || '';
                 var phone = (form.querySelector('[name="phone"]') || {}).value || '';
                 var subjectField = form.querySelector('[name="subject"]');
                 if (subjectField) {
-                    subjectField.value = 'New Lead: ' + firstName.trim() + ' ' + lastName.trim() + ' - ' + phone.trim();
+                    subjectField.value = 'New Lead: ' + fullName.trim() + ' - ' + phone.trim();
                 }
                 // Form submits normally to Netlify
             });
@@ -131,8 +130,7 @@
      */
     function getRequiredMessage(fieldName) {
         const messages = {
-            'first_name': 'Please enter your first name',
-            'last_name': 'Please enter your last name',
+            'name': 'Please enter your full name',
             'email': 'Please enter your email address',
             'phone': 'Please enter your phone number',
             'message': 'Please tell us how we can help'

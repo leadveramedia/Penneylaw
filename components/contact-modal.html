@@ -26,35 +26,28 @@
                 <label>Don't fill this out: <input name="bot-field"></label>
             </p>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="modal_first_name" class="form-label">First Name <span class="required" aria-hidden="true">*</span></label>
-                    <input type="text" id="modal_first_name" name="first_name" class="form-input" required placeholder="John" aria-describedby="modal_first_name_error" aria-required="true">
-                    <span class="form-error" id="modal_first_name_error" role="alert" aria-live="polite">Please enter your first name</span>
-                </div>
-                <div class="form-group">
-                    <label for="modal_last_name" class="form-label">Last Name <span class="required" aria-hidden="true">*</span></label>
-                    <input type="text" id="modal_last_name" name="last_name" class="form-input" required placeholder="Doe" aria-describedby="modal_last_name_error" aria-required="true">
-                    <span class="form-error" id="modal_last_name_error" role="alert" aria-live="polite">Please enter your last name</span>
-                </div>
+            <div class="form-group">
+                <label for="modal-contact_name" class="form-label">Full Name <span class="required" aria-hidden="true">*</span></label>
+                <input type="text" id="modal-contact_name" name="name" class="form-input" required placeholder="Your full name" aria-describedby="modal-contact_name_error" aria-required="true">
+                <span class="form-error" id="modal-contact_name_error" role="alert" aria-live="polite">Please enter your full name</span>
             </div>
 
             <div class="form-group">
-                <label for="modal_email" class="form-label">Email <span class="required" aria-hidden="true">*</span></label>
-                <input type="email" id="modal_email" name="email" class="form-input" required placeholder="john@example.com" aria-describedby="modal_email_error" aria-required="true">
-                <span class="form-error" id="modal_email_error" role="alert" aria-live="polite">Please enter a valid email address</span>
+                <label for="modal-contact_email" class="form-label">Email Address <span class="required" aria-hidden="true">*</span></label>
+                <input type="email" id="modal-contact_email" name="email" class="form-input" required placeholder="your@email.com" aria-describedby="modal-contact_email_error" aria-required="true">
+                <span class="form-error" id="modal-contact_email_error" role="alert" aria-live="polite">Please enter a valid email address</span>
             </div>
 
             <div class="form-group">
-                <label for="modal_phone" class="form-label">Phone <span class="required" aria-hidden="true">*</span></label>
-                <input type="tel" id="modal_phone" name="phone" class="form-input" required placeholder="(555) 123-4567" aria-describedby="modal_phone_error" aria-required="true">
-                <span class="form-error" id="modal_phone_error" role="alert" aria-live="polite">Please enter a valid phone number</span>
+                <label for="modal-contact_phone" class="form-label">Phone Number <span class="required" aria-hidden="true">*</span></label>
+                <input type="tel" id="modal-contact_phone" name="phone" class="form-input" required placeholder="(555) 123-4567" aria-describedby="modal-contact_phone_error" aria-required="true">
+                <span class="form-error" id="modal-contact_phone_error" role="alert" aria-live="polite">Please enter a valid phone number</span>
             </div>
 
             <div class="form-group">
-                <label for="modal_message" class="form-label">How Can We Help? <span class="required" aria-hidden="true">*</span></label>
-                <textarea id="modal_message" name="message" class="form-textarea" required rows="4" placeholder="Tell us about your case..." aria-describedby="modal_message_error" aria-required="true"></textarea>
-                <span class="form-error" id="modal_message_error" role="alert" aria-live="polite">Please tell us how we can help</span>
+                <label for="modal-contact_message" class="form-label">How Can We Help? <span class="required" aria-hidden="true">*</span></label>
+                <textarea id="modal-contact_message" name="message" class="form-textarea" required rows="4" placeholder="Describe your situation..." aria-describedby="modal-contact_message_error" aria-required="true"></textarea>
+                <span class="form-error" id="modal-contact_message_error" role="alert" aria-live="polite">Please tell us how we can help</span>
             </div>
 
             <button type="submit" class="btn btn-primary btn-full btn-lg">

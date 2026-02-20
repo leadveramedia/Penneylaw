@@ -9,12 +9,15 @@
     <meta name="description" content="Injured in a car accident? Northern California's top-rated car accident lawyers. No fee unless we win. Free consultation available 24/7.">
     <title>Car Accident Lawyer | Free Consultation | Frank Penney Injury Law</title>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <!-- Google Tag Manager (consent-gated) -->
+    <script>window.dataLayer=window.dataLayer||[];
+    function loadGTM(){if(window._gtmLoaded)return;window._gtmLoaded=true;
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PC9XN9DP');</script>
+    })(window,document,'script','dataLayer','GTM-PC9XN9DP');}
+    if(localStorage.getItem('cookie-consent')==='accepted'){loadGTM();}</script>
     <!-- End Google Tag Manager -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1332,10 +1335,6 @@
     </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PC9XN9DP"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
 <!-- Mobile Sticky Click-to-Call Bar -->
 <div class="mobile-cta-bar" id="mobile-cta-bar">
@@ -1492,36 +1491,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p style="display: none;"><label>Don't fill this out: <input name="bot-field"></label></p>
 
                 <div class="form-group">
-                    <label class="form-label">Name <span class="required-star" aria-hidden="true">*</span></label>
-                    <div class="form-row">
-                        <div class="form-field">
-                            <input type="text" id="first_name" name="first_name" class="form-input" required aria-required="true" aria-describedby="first_name_error" autocomplete="given-name">
-                            <span class="form-label-sub">First</span>
-                            <span class="form-error" id="first_name_error" role="alert"></span>
-                        </div>
-                        <div class="form-field">
-                            <input type="text" id="last_name" name="last_name" class="form-input" required aria-required="true" aria-describedby="last_name_error" autocomplete="family-name">
-                            <span class="form-label-sub">Last</span>
-                            <span class="form-error" id="last_name_error" role="alert"></span>
-                        </div>
-                    </div>
+                    <label for="lp-car-accident_name" class="form-label">Full Name <span class="required-star" aria-hidden="true">*</span></label>
+                    <input type="text" id="lp-car-accident_name" name="name" class="form-input" required aria-required="true" aria-describedby="lp-car-accident_name_error" autocomplete="name" placeholder="Your full name">
+                    <span class="form-error" id="lp-car-accident_name_error" role="alert"></span>
                 </div>
 
                 <div class="form-group">
-                    <label for="email" class="form-label">Email <span class="required-star" aria-hidden="true">*</span></label>
-                    <input type="email" id="email" name="email" class="form-input" required aria-required="true" aria-describedby="email_error" autocomplete="email">
-                    <span class="form-error" id="email_error" role="alert"></span>
+                    <label for="lp-car-accident_email" class="form-label">Email Address <span class="required-star" aria-hidden="true">*</span></label>
+                    <input type="email" id="lp-car-accident_email" name="email" class="form-input" required aria-required="true" aria-describedby="lp-car-accident_email_error" autocomplete="email" placeholder="your@email.com">
+                    <span class="form-error" id="lp-car-accident_email_error" role="alert"></span>
                 </div>
 
                 <div class="form-group">
-                    <label for="phone" class="form-label">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" class="form-input" aria-describedby="phone_error" autocomplete="tel" placeholder="(555) 123-4567">
-                    <span class="form-error" id="phone_error" role="alert"></span>
+                    <label for="lp-car-accident_phone" class="form-label">Phone Number</label>
+                    <input type="tel" id="lp-car-accident_phone" name="phone" class="form-input" aria-describedby="lp-car-accident_phone_error" autocomplete="tel" placeholder="(555) 123-4567">
+                    <span class="form-error" id="lp-car-accident_phone_error" role="alert"></span>
                 </div>
 
                 <div class="form-group">
-                    <label for="message" class="form-label">How Can We Help?</label>
-                    <textarea id="message" name="message" class="form-textarea" rows="4"></textarea>
+                    <label for="lp-car-accident_message" class="form-label">How Can We Help?</label>
+                    <textarea id="lp-car-accident_message" name="message" class="form-textarea" rows="4" placeholder="Describe your situation..."></textarea>
                 </div>
 
                 <button type="submit" class="btn-submit">
@@ -1567,26 +1556,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p style="display: none;"><label>Don't fill this out: <input name="bot-field"></label></p>
 
                 <div class="form-group">
-                    <label for="mobile_name" class="form-label">Your Name <span class="required-star" aria-hidden="true">*</span></label>
-                    <input type="text" id="mobile_name" name="name" class="form-input" required aria-required="true" aria-describedby="mobile_name_error" autocomplete="name">
-                    <span class="form-error" id="mobile_name_error" role="alert"></span>
+                    <label for="lp-car-accident-mobile_name" class="form-label">Full Name <span class="required-star" aria-hidden="true">*</span></label>
+                    <input type="text" id="lp-car-accident-mobile_name" name="name" class="form-input" required aria-required="true" aria-describedby="lp-car-accident-mobile_name_error" autocomplete="name" placeholder="Your full name">
+                    <span class="form-error" id="lp-car-accident-mobile_name_error" role="alert"></span>
                 </div>
 
                 <div class="form-group">
-                    <label for="mobile_phone" class="form-label">Phone <span class="required-star" aria-hidden="true">*</span></label>
-                    <input type="tel" id="mobile_phone" name="phone" class="form-input" required aria-required="true" aria-describedby="mobile_phone_error" autocomplete="tel">
-                    <span class="form-error" id="mobile_phone_error" role="alert"></span>
+                    <label for="lp-car-accident-mobile_email" class="form-label">Email Address <span class="required-star" aria-hidden="true">*</span></label>
+                    <input type="email" id="lp-car-accident-mobile_email" name="email" class="form-input" required aria-required="true" aria-describedby="lp-car-accident-mobile_email_error" autocomplete="email" placeholder="your@email.com">
+                    <span class="form-error" id="lp-car-accident-mobile_email_error" role="alert"></span>
                 </div>
 
                 <div class="form-group">
-                    <label for="mobile_email" class="form-label">Email <span class="required-star" aria-hidden="true">*</span></label>
-                    <input type="email" id="mobile_email" name="email" class="form-input" required aria-required="true" aria-describedby="mobile_email_error" autocomplete="email">
-                    <span class="form-error" id="mobile_email_error" role="alert"></span>
+                    <label for="lp-car-accident-mobile_phone" class="form-label">Phone Number <span class="required-star" aria-hidden="true">*</span></label>
+                    <input type="tel" id="lp-car-accident-mobile_phone" name="phone" class="form-input" required aria-required="true" aria-describedby="lp-car-accident-mobile_phone_error" autocomplete="tel" placeholder="(555) 123-4567">
+                    <span class="form-error" id="lp-car-accident-mobile_phone_error" role="alert"></span>
                 </div>
 
                 <div class="form-group">
-                    <label for="mobile_message" class="form-label">Explain Your Case</label>
-                    <textarea id="mobile_message" name="message" class="form-textarea" rows="3"></textarea>
+                    <label for="lp-car-accident-mobile_message" class="form-label">How Can We Help?</label>
+                    <textarea id="lp-car-accident-mobile_message" name="message" class="form-textarea" rows="3" placeholder="Describe your situation..."></textarea>
                 </div>
 
                 <button type="submit" class="btn-submit">Get a Free Case Review</button>
@@ -1818,7 +1807,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     // Validation patterns
     var patterns = {
-        name: /^[a-zA-Z\s\-']{2,50}$/,
+        name: /^[a-zA-Z\s\-']{2,100}$/,
         email: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
         phone: /^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
     };
@@ -1907,7 +1896,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 showError(input, errorMessages.phone);
                 return false;
             }
-        } else if (input.name === 'first_name' || input.name === 'last_name') {
+        } else if (input.name === 'name') {
             if (!patterns.name.test(value)) {
                 showError(input, errorMessages.name);
                 return false;
@@ -1970,10 +1959,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
 
             // Build subject line for Netlify email notification
-            var firstNameEl = form.querySelector('[name="first_name"]');
-            var fullName = firstNameEl
-                ? (firstNameEl.value.trim() + ' ' + ((form.querySelector('[name="last_name"]') || {}).value || '').trim()).trim()
-                : ((form.querySelector('[name="name"]') || {}).value || '').trim();
+            var fullName = ((form.querySelector('[name="name"]') || {}).value || '').trim();
             var phone = ((form.querySelector('[name="phone"]') || {}).value || '').trim();
             var subjectField = form.querySelector('[name="subject"]');
             if (subjectField) {

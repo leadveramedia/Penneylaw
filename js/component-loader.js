@@ -7,6 +7,23 @@
 (function() {
     'use strict';
 
+    // Initialize dataLayer for GTM
+    window.dataLayer = window.dataLayer || [];
+
+    /**
+     * Load Google Tag Manager (consent-gated)
+     * Only called when user has accepted cookie consent
+     */
+    function loadGTM() {
+        if (window._gtmLoaded) return;
+        window._gtmLoaded = true;
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-PC9XN9DP');
+    }
+
     // Page configuration - loaded from JSON or uses embedded fallback
     var PAGE_CONFIG = null;
     var DEFAULT_CONFIG = {
@@ -297,6 +314,7 @@
 
     /**
      * Initialize Cookie Consent Banner
+     * Controls GTM loading based on user consent
      */
     function initCookieConsent() {
         var banner = document.getElementById('cookie-consent');
@@ -305,40 +323,35 @@
 
         if (!banner || !acceptBtn || !declineBtn) return;
 
-        // Check if user has already made a choice
         var consentStatus = localStorage.getItem('cookie-consent');
 
-        if (!consentStatus) {
-            // Show banner after a short delay for better UX
-            setTimeout(function() {
-                banner.removeAttribute('hidden');
-            }, 1000);
+        // If already accepted, load GTM immediately
+        if (consentStatus === 'accepted') {
+            loadGTM();
+            return;
         }
+
+        // If already declined, don't show banner, don't load GTM
+        if (consentStatus === 'declined') {
+            return;
+        }
+
+        // First visit — show banner after delay
+        setTimeout(function() {
+            banner.removeAttribute('hidden');
+        }, 1000);
 
         // Handle Accept button
         acceptBtn.addEventListener('click', function() {
             localStorage.setItem('cookie-consent', 'accepted');
             banner.classList.add('cookie-accepted');
-            // Enable analytics/tracking if needed
-            if (window.dataLayer) {
-                window.dataLayer.push({
-                    'event': 'cookie_consent',
-                    'consent_status': 'accepted'
-                });
-            }
+            loadGTM();
         });
 
         // Handle Decline button
         declineBtn.addEventListener('click', function() {
             localStorage.setItem('cookie-consent', 'declined');
             banner.classList.add('cookie-accepted');
-            // Signal declined consent
-            if (window.dataLayer) {
-                window.dataLayer.push({
-                    'event': 'cookie_consent',
-                    'consent_status': 'declined'
-                });
-            }
         });
     }
 
