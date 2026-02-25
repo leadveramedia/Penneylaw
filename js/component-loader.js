@@ -24,6 +24,11 @@
         })(window,document,'script','dataLayer','GTM-PC9XN9DP');
     }
 
+    // Load GTM immediately if consent was already granted (don't wait for components)
+    if (localStorage.getItem('cookie-consent') === 'accepted') {
+        loadGTM();
+    }
+
     // Page configuration - loaded from JSON or uses embedded fallback
     var PAGE_CONFIG = null;
     var DEFAULT_CONFIG = {
