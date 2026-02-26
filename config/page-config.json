@@ -215,6 +215,15 @@
       "ctaTagline": "BANK ON FRANK!",
       "ctaTitle": "Injured? Get Expert Legal Help Today.",
       "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "case-value-calculator": {
+      "type": "resources",
+      "title": "Case Value Calculator",
+      "modalHeading": "Need Help With Your Case?",
+      "modalSubtitle": "Get a free consultation with one of our experienced attorneys.",
+      "ctaTagline": "BANK ON FRANK!",
+      "ctaTitle": "Ready to Discuss Your Case?",
+      "ctaDescription": "Our experienced attorneys can help you understand the full value of your claim. Contact us today for a free, no-obligation consultation."
     }
   },
   "defaults": {

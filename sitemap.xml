@@ -31,6 +31,12 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://www.penneylaw.com/case-value-calculator.html</loc>
+        <lastmod>2026-02-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://www.penneylaw.com/chico.html</loc>
         <lastmod>2026-02-20</lastmod>
         <changefreq>monthly</changefreq>
@@ -155,5 +161,41 @@
         <lastmod>2026-02-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/are-license-plate-frames-illegal</loc>
+        <lastmod>2026-02-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/new-no-touch-law-for-cell-phones-in-california</loc>
+        <lastmod>2026-02-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/do-uber-and-lyft-drivers-have-to-disclose-that-they-are-recording-you-in-california</loc>
+        <lastmod>2026-02-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/who-pays-when-a-borrowed-car-is-involved-in-an-accident</loc>
+        <lastmod>2026-02-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/accidents-caused-by-malfunctioning-traffic-signals</loc>
+        <lastmod>2026-02-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/underride-truck-accidents-and-why-they-are-so-deadly-2</loc>
+        <lastmod>2026-02-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
     </url>
 </urlset>
