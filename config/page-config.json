@@ -3,6 +3,7 @@
     "personal-injury": {
       "type": "practice-area",
       "title": "Personal Injury",
+      "serviceType": "Personal Injury",
       "modalHeading": "Injured and Need Help?",
       "modalSubtitle": "Get a free consultation about your personal injury case.",
       "ctaTagline": "",
@@ -12,6 +13,7 @@
     "car-accidents": {
       "type": "practice-area",
       "title": "Car Accidents",
+      "serviceType": "Car Accident",
       "modalHeading": "Injured in a Car Accident?",
       "modalSubtitle": "Get a free consultation about your car accident case.",
       "ctaTagline": "",
@@ -21,6 +23,7 @@
     "truck-accidents": {
       "type": "practice-area",
       "title": "Truck Accidents",
+      "serviceType": "Truck Accident",
       "modalHeading": "Injured in a Truck Accident?",
       "modalSubtitle": "Get a free consultation about your truck accident case.",
       "ctaTagline": "",
@@ -30,6 +33,7 @@
     "motorcycle-accidents": {
       "type": "practice-area",
       "title": "Motorcycle Accidents",
+      "serviceType": "Motorcycle Accident",
       "modalHeading": "Injured in a Motorcycle Accident?",
       "modalSubtitle": "Get a free consultation about your motorcycle accident case.",
       "ctaTagline": "",
@@ -39,6 +43,7 @@
     "wrongful-death": {
       "type": "practice-area",
       "title": "Wrongful Death",
+      "serviceType": "Wrongful Death",
       "modalHeading": "Lost a Loved One?",
       "modalSubtitle": "Get compassionate legal help for your wrongful death case.",
       "ctaTagline": "",
@@ -48,6 +53,7 @@
     "dog-bite": {
       "type": "practice-area",
       "title": "Dog Bite",
+      "serviceType": "Dog Bite",
       "modalHeading": "Injured by a Dog Bite?",
       "modalSubtitle": "Get a free consultation about your dog bite case.",
       "ctaTagline": "",
@@ -57,6 +63,7 @@
     "bicycle-accidents": {
       "type": "practice-area",
       "title": "Bicycle Accidents",
+      "serviceType": "Bicycle Accident",
       "modalHeading": "Injured in a Bicycle Accident?",
       "modalSubtitle": "Get a free consultation about your bicycle accident case.",
       "ctaTagline": "",
@@ -66,6 +73,7 @@
     "bus-accidents": {
       "type": "practice-area",
       "title": "Bus Accidents",
+      "serviceType": "Bus Accident",
       "modalHeading": "Injured in a Bus Accident?",
       "modalSubtitle": "Get a free consultation about your bus accident case.",
       "ctaTagline": "",
@@ -75,6 +83,7 @@
     "slip-and-fall": {
       "type": "practice-area",
       "title": "Slip and Fall",
+      "serviceType": "Slip and Fall",
       "modalHeading": "Injured in a Slip and Fall?",
       "modalSubtitle": "Get a free consultation about your slip and fall case.",
       "ctaTagline": "",
@@ -84,6 +93,7 @@
     "traumatic-brain-injuries": {
       "type": "practice-area",
       "title": "Traumatic Brain Injuries",
+      "serviceType": "Traumatic Brain Injury",
       "modalHeading": "Suffered a Brain Injury?",
       "modalSubtitle": "Get a free consultation about your traumatic brain injury case.",
       "ctaTagline": "",

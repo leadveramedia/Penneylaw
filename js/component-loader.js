@@ -181,6 +181,50 @@
     }
 
     /**
+     * Inject JSON-LD structured data for practice-area pages.
+     * Uses serviceType from page-config.json and the page's meta description.
+     * Skips injection if a JSON-LD script already exists in the head.
+     */
+    function injectJsonLd() {
+        var config = getPageConfig();
+        if (config.type !== 'practice-area' || !config.serviceType) return;
+
+        // Don't inject if page already has JSON-LD
+        if (document.querySelector('head script[type="application/ld+json"]')) return;
+
+        var metaDesc = document.querySelector('meta[name="description"]');
+        var canonical = document.querySelector('link[rel="canonical"]');
+
+        var jsonLd = {
+            '@context': 'https://schema.org',
+            '@type': 'LegalService',
+            'name': 'Frank Penney Injury Law',
+            'description': metaDesc ? metaDesc.content : '',
+            'url': canonical ? canonical.href : window.location.href,
+            'telephone': '+1-888-888-0566',
+            'priceRange': 'Free Consultation',
+            'address': {
+                '@type': 'PostalAddress',
+                'streetAddress': '1508 Eureka Rd',
+                'addressLocality': 'Roseville',
+                'addressRegion': 'CA',
+                'postalCode': '95661',
+                'addressCountry': 'US'
+            },
+            'areaServed': {
+                '@type': 'State',
+                'name': 'California'
+            },
+            'serviceType': config.serviceType
+        };
+
+        var script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(jsonLd);
+        document.head.appendChild(script);
+    }
+
+    /**
      * Initialize auto-hide for floating CTA when other CTAs are visible
      */
     function initFloatingCTAAutoHide() {
@@ -439,6 +483,7 @@
                 setCurrentPageIndicator();
                 configureModal();
                 configureCTA();
+                injectJsonLd();
 
                 // Re-initialize JavaScript functionality
                 reinitializeMainJS();
