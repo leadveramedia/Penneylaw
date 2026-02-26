@@ -181,42 +181,76 @@
     }
 
     /**
-     * Inject JSON-LD structured data for practice-area pages.
-     * Uses serviceType from page-config.json and the page's meta description.
+     * Inject JSON-LD structured data for practice-area and location pages.
+     * Uses config from page-config.json and the page's meta description.
      * Skips injection if a JSON-LD script already exists in the head.
      */
     function injectJsonLd() {
         var config = getPageConfig();
-        if (config.type !== 'practice-area' || !config.serviceType) return;
 
         // Don't inject if page already has JSON-LD
         if (document.querySelector('head script[type="application/ld+json"]')) return;
 
-        var metaDesc = document.querySelector('meta[name="description"]');
-        var canonical = document.querySelector('link[rel="canonical"]');
+        var jsonLd;
 
-        var jsonLd = {
-            '@context': 'https://schema.org',
-            '@type': 'LegalService',
-            'name': 'Frank Penney Injury Law',
-            'description': metaDesc ? metaDesc.content : '',
-            'url': canonical ? canonical.href : window.location.href,
-            'telephone': '+1-888-888-0566',
-            'priceRange': 'Free Consultation',
-            'address': {
-                '@type': 'PostalAddress',
-                'streetAddress': '1508 Eureka Rd',
-                'addressLocality': 'Roseville',
-                'addressRegion': 'CA',
-                'postalCode': '95661',
-                'addressCountry': 'US'
-            },
-            'areaServed': {
-                '@type': 'State',
-                'name': 'California'
-            },
-            'serviceType': config.serviceType
-        };
+        if (config.type === 'practice-area' && config.serviceType) {
+            var metaDesc = document.querySelector('meta[name="description"]');
+            var canonical = document.querySelector('link[rel="canonical"]');
+
+            jsonLd = {
+                '@context': 'https://schema.org',
+                '@type': 'LegalService',
+                'name': 'Frank Penney Injury Law',
+                'description': metaDesc ? metaDesc.content : '',
+                'url': canonical ? canonical.href : window.location.href,
+                'telephone': '+1-888-888-0566',
+                'priceRange': 'Free Consultation',
+                'address': {
+                    '@type': 'PostalAddress',
+                    'streetAddress': '1508 Eureka Rd',
+                    'addressLocality': 'Roseville',
+                    'addressRegion': 'CA',
+                    'postalCode': '95661',
+                    'addressCountry': 'US'
+                },
+                'areaServed': {
+                    '@type': 'State',
+                    'name': 'California'
+                },
+                'serviceType': config.serviceType
+            };
+        } else if (config.type === 'location' && config.streetAddress) {
+            jsonLd = {
+                '@context': 'https://schema.org',
+                '@type': 'LegalService',
+                'name': 'Frank Penney Injury Law - ' + config.title,
+                'description': config.locationDescription || '',
+                'url': 'https://www.penneylaw.com/' + getCurrentPageSlug() + '.html',
+                'telephone': '+1-888-888-0566',
+                'priceRange': 'Free Consultation',
+                'address': {
+                    '@type': 'PostalAddress',
+                    'streetAddress': config.streetAddress,
+                    'addressLocality': config.title,
+                    'addressRegion': 'CA',
+                    'postalCode': config.postalCode,
+                    'addressCountry': 'US'
+                },
+                'openingHoursSpecification': {
+                    '@type': 'OpeningHoursSpecification',
+                    'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                    'opens': '00:00',
+                    'closes': '23:59'
+                },
+                'parentOrganization': {
+                    '@type': 'LegalService',
+                    'name': 'Frank Penney Injury Law',
+                    'url': 'https://www.penneylaw.com/'
+                }
+            };
+        } else {
+            return;
+        }
 
         var script = document.createElement('script');
         script.type = 'application/ld+json';

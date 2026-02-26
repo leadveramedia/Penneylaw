@@ -107,7 +107,10 @@
       "modalSubtitle": "Connect with our Roseville office for a free consultation.",
       "ctaTagline": "",
       "ctaTitle": "Injured in Roseville? Get Help Today.",
-      "ctaDescription": "Contact our Roseville office for a free, no-obligation consultation. We don't get paid unless you win."
+      "ctaDescription": "Contact our Roseville office for a free, no-obligation consultation. We don't get paid unless you win.",
+      "locationDescription": "Main Office - Personal injury attorneys serving Roseville and Placer County.",
+      "streetAddress": "1508 Eureka Rd",
+      "postalCode": "95661"
     },
     "sacramento": {
       "type": "location",
@@ -116,7 +119,10 @@
       "modalSubtitle": "Connect with our Sacramento office for a free consultation.",
       "ctaTagline": "",
       "ctaTitle": "Injured in Sacramento? Get Help Today.",
-      "ctaDescription": "Contact our Sacramento office for a free, no-obligation consultation. We don't get paid unless you win."
+      "ctaDescription": "Contact our Sacramento office for a free, no-obligation consultation. We don't get paid unless you win.",
+      "locationDescription": "Personal injury attorneys serving Sacramento and the State Capital.",
+      "streetAddress": "333 University Avenue, Suite 200",
+      "postalCode": "95825"
     },
     "fairfield": {
       "type": "location",
@@ -125,7 +131,10 @@
       "modalSubtitle": "Connect with our Fairfield office for a free consultation.",
       "ctaTagline": "",
       "ctaTitle": "Injured in Fairfield? Get Help Today.",
-      "ctaDescription": "Contact our Fairfield office for a free, no-obligation consultation. We don't get paid unless you win."
+      "ctaDescription": "Contact our Fairfield office for a free, no-obligation consultation. We don't get paid unless you win.",
+      "locationDescription": "Personal injury attorneys serving Fairfield and Solano County.",
+      "streetAddress": "1652 West Texas Street, Suite 248",
+      "postalCode": "94533"
     },
     "stockton": {
       "type": "location",
@@ -134,7 +143,10 @@
       "modalSubtitle": "Connect with our Stockton office for a free consultation.",
       "ctaTagline": "",
       "ctaTitle": "Injured in Stockton? Get Help Today.",
-      "ctaDescription": "Contact our Stockton office for a free, no-obligation consultation. We don't get paid unless you win."
+      "ctaDescription": "Contact our Stockton office for a free, no-obligation consultation. We don't get paid unless you win.",
+      "locationDescription": "Personal injury attorneys serving Stockton and San Joaquin County.",
+      "streetAddress": "5250 Claremont Avenue",
+      "postalCode": "95207"
     },
     "modesto": {
       "type": "location",
@@ -143,7 +155,10 @@
       "modalSubtitle": "Connect with our Modesto office for a free consultation.",
       "ctaTagline": "",
       "ctaTitle": "Injured in Modesto? Get Help Today.",
-      "ctaDescription": "Contact our Modesto office for a free, no-obligation consultation. We don't get paid unless you win."
+      "ctaDescription": "Contact our Modesto office for a free, no-obligation consultation. We don't get paid unless you win.",
+      "locationDescription": "Personal injury attorneys serving Modesto and Stanislaus County.",
+      "streetAddress": "1111 J Street",
+      "postalCode": "95354"
     },
     "chico": {
       "type": "location",
@@ -152,7 +167,10 @@
       "modalSubtitle": "Connect with our Chico office for a free consultation.",
       "ctaTagline": "",
       "ctaTitle": "Injured in Chico? Get Help Today.",
-      "ctaDescription": "Contact our Chico office for a free, no-obligation consultation. We don't get paid unless you win."
+      "ctaDescription": "Contact our Chico office for a free, no-obligation consultation. We don't get paid unless you win.",
+      "locationDescription": "Personal injury attorneys serving Chico and Butte County.",
+      "streetAddress": "1108 Sherman Ave",
+      "postalCode": "95926"
     },
     "index": {
       "type": "home",

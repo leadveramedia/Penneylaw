@@ -111,20 +111,21 @@
         const header = document.getElementById('site-header');
         if (!header) return;
 
-        let lastScroll = 0;
         const scrollThreshold = 100;
+        let ticking = false;
 
         window.addEventListener('scroll', function () {
-            const currentScroll = window.pageYOffset;
-
-            // Add scrolled class when past threshold
-            if (currentScroll > scrollThreshold) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    if (window.pageYOffset > scrollThreshold) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
-
-            lastScroll = currentScroll;
         });
     }
 
@@ -216,141 +217,48 @@
     }
 
     /**
-     * Attorney Dropdown Hover
+     * Generic Dropdown Preview Hover
+     * Factory for attorney, location, and practice-area dropdowns
      */
+    function initPreviewDropdown(config) {
+        const dropdownItems = document.querySelectorAll('.dropdown-item[data-' + config.attr + ']');
+        const previewImages = document.querySelectorAll('.' + config.previewClass);
+
+        if (!dropdownItems.length) return;
+
+        const defaultImage = document.querySelector('.' + config.previewClass + '[data-' + config.attr + '="' + config.defaultValue + '"]');
+        if (defaultImage) {
+            defaultImage.classList.add('active');
+        }
+
+        dropdownItems.forEach(function (item) {
+            item.addEventListener('mouseenter', function () {
+                const value = this.getAttribute('data-' + config.attr);
+                previewImages.forEach(function (img) { img.classList.remove('active'); });
+                const target = document.querySelector('.' + config.previewClass + '[data-' + config.attr + '="' + value + '"]');
+                if (target) target.classList.add('active');
+            });
+        });
+
+        const dropdown = document.querySelector('.' + config.dropdownClass);
+        if (dropdown) {
+            dropdown.addEventListener('mouseleave', function () {
+                previewImages.forEach(function (img) { img.classList.remove('active'); });
+                if (defaultImage) defaultImage.classList.add('active');
+            });
+        }
+    }
+
     function initAttorneyDropdown() {
-        const dropdownItems = document.querySelectorAll('.dropdown-item[data-attorney]');
-        const previewImages = document.querySelectorAll('.attorney-preview');
-
-        if (!dropdownItems.length) return;
-
-        // Set default active image (Frank Penney)
-        const defaultImage = document.querySelector('.attorney-preview[data-attorney="frank-penney"]');
-        if (defaultImage) {
-            defaultImage.classList.add('active');
-        }
-
-        dropdownItems.forEach(function (item) {
-            item.addEventListener('mouseenter', function () {
-                const attorney = this.getAttribute('data-attorney');
-
-                // Hide all images
-                previewImages.forEach(function (img) {
-                    img.classList.remove('active');
-                });
-
-                // Show the hovered attorney's image
-                const targetImage = document.querySelector('.attorney-preview[data-attorney="' + attorney + '"]');
-                if (targetImage) {
-                    targetImage.classList.add('active');
-                }
-            });
-        });
-
-        // Reset to default when leaving dropdown
-        const dropdown = document.querySelector('.attorney-dropdown');
-        if (dropdown) {
-            dropdown.addEventListener('mouseleave', function () {
-                previewImages.forEach(function (img) {
-                    img.classList.remove('active');
-                });
-                if (defaultImage) {
-                    defaultImage.classList.add('active');
-                }
-            });
-        }
+        initPreviewDropdown({ attr: 'attorney', previewClass: 'attorney-preview', dropdownClass: 'attorney-dropdown', defaultValue: 'frank-penney' });
     }
 
-    /**
-     * Location Dropdown Hover
-     */
     function initLocationDropdown() {
-        const dropdownItems = document.querySelectorAll('.dropdown-item[data-location]');
-        const previewImages = document.querySelectorAll('.location-preview');
-
-        if (!dropdownItems.length) return;
-
-        // Set default active image (Roseville)
-        const defaultImage = document.querySelector('.location-preview[data-location="roseville"]');
-        if (defaultImage) {
-            defaultImage.classList.add('active');
-        }
-
-        dropdownItems.forEach(function (item) {
-            item.addEventListener('mouseenter', function () {
-                const location = this.getAttribute('data-location');
-
-                // Hide all images
-                previewImages.forEach(function (img) {
-                    img.classList.remove('active');
-                });
-
-                // Show the hovered location's image
-                const targetImage = document.querySelector('.location-preview[data-location="' + location + '"]');
-                if (targetImage) {
-                    targetImage.classList.add('active');
-                }
-            });
-        });
-
-        // Reset to default when leaving dropdown
-        const dropdown = document.querySelector('.location-dropdown');
-        if (dropdown) {
-            dropdown.addEventListener('mouseleave', function () {
-                previewImages.forEach(function (img) {
-                    img.classList.remove('active');
-                });
-                if (defaultImage) {
-                    defaultImage.classList.add('active');
-                }
-            });
-        }
+        initPreviewDropdown({ attr: 'location', previewClass: 'location-preview', dropdownClass: 'location-dropdown', defaultValue: 'roseville' });
     }
 
-    /**
-     * Practice Area Dropdown Hover
-     */
     function initPracticeAreaDropdown() {
-        const dropdownItems = document.querySelectorAll('.dropdown-item[data-practice]');
-        const previewImages = document.querySelectorAll('.practice-preview');
-
-        if (!dropdownItems.length) return;
-
-        // Set default active image (Car Accidents)
-        const defaultImage = document.querySelector('.practice-preview[data-practice="car-accidents"]');
-        if (defaultImage) {
-            defaultImage.classList.add('active');
-        }
-
-        dropdownItems.forEach(function (item) {
-            item.addEventListener('mouseenter', function () {
-                const practice = this.getAttribute('data-practice');
-
-                // Hide all images
-                previewImages.forEach(function (img) {
-                    img.classList.remove('active');
-                });
-
-                // Show the hovered practice area's image
-                const targetImage = document.querySelector('.practice-preview[data-practice="' + practice + '"]');
-                if (targetImage) {
-                    targetImage.classList.add('active');
-                }
-            });
-        });
-
-        // Reset to default when leaving dropdown
-        const dropdown = document.querySelector('.practice-area-dropdown');
-        if (dropdown) {
-            dropdown.addEventListener('mouseleave', function () {
-                previewImages.forEach(function (img) {
-                    img.classList.remove('active');
-                });
-                if (defaultImage) {
-                    defaultImage.classList.add('active');
-                }
-            });
-        }
+        initPreviewDropdown({ attr: 'practice', previewClass: 'practice-preview', dropdownClass: 'practice-area-dropdown', defaultValue: 'car-accidents' });
     }
 
     /**
@@ -878,165 +786,4 @@
         }
     }
 
-    /**
-     * Format Phone Number Input
-     */
-    window.formatPhoneNumber = function (input) {
-        // Remove all non-digits
-        let value = input.value.replace(/\D/g, '');
-
-        // Format as (XXX) XXX-XXXX
-        if (value.length > 0) {
-            if (value.length <= 3) {
-                value = '(' + value;
-            } else if (value.length <= 6) {
-                value = '(' + value.substring(0, 3) + ') ' + value.substring(3);
-            } else {
-                value = '(' + value.substring(0, 3) + ') ' + value.substring(3, 6) + '-' + value.substring(6, 10);
-            }
-        }
-
-        input.value = value;
-    };
-
-})();
-
-/**
- * Add CSS for mobile nav
- */
-(function () {
-    const style = document.createElement('style');
-    style.textContent = `
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(3, 53, 99, 0.98);
-            z-index: 999;
-            padding: 100px 24px 24px;
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-nav.active {
-            display: block;
-            transform: translateX(0);
-        }
-
-        .mobile-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .mobile-menu li {
-            margin-bottom: 8px;
-        }
-
-        .mobile-menu a {
-            display: block;
-            padding: 16px 0;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #fff;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: color 0.3s;
-        }
-
-        .mobile-menu a:hover {
-            color: #E00D93;
-        }
-
-        .mobile-dropdown-trigger {
-            display: flex !important;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #fff;
-            background: none;
-            border: none;
-            width: 100%;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: left;
-        }
-
-        .mobile-dropdown-trigger:hover {
-            color: #E00D93;
-        }
-
-        .mobile-dropdown-trigger .dropdown-arrow {
-            transition: transform 0.3s ease;
-            margin-left: 8px;
-        }
-
-        .mobile-dropdown.open > .mobile-dropdown-trigger .dropdown-arrow {
-            transform: rotate(180deg);
-        }
-
-        .mobile-dropdown-menu {
-            display: none;
-            list-style: none;
-            padding: 0 0 0 20px;
-            margin: 0;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-        }
-
-        .mobile-dropdown.open > .mobile-dropdown-menu {
-            display: block;
-        }
-
-        .mobile-dropdown-menu li {
-            margin-bottom: 0;
-        }
-
-        .mobile-dropdown-menu a {
-            font-size: 1rem;
-            font-weight: 500;
-            padding: 12px 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .mobile-dropdown-menu a:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-nav-cta {
-            margin-top: 32px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .mobile-menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-
-        body.menu-open {
-            overflow: hidden;
-        }
-
-        @media (min-width: 1025px) {
-            .mobile-nav {
-                display: none !important;
-            }
-        }
-    `;
-    document.head.appendChild(style);
 })();
