@@ -11,7 +11,6 @@ Sitemap: https://www.penneylaw.com/sitemap.xml
 Disallow: /components/
 Disallow: /netlify-form-template.html
 Disallow: /style-guide.html
-Disallow: /thank-you.html
 
 # Allow all major search engines
 User-agent: Googlebot

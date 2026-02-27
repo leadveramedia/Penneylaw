@@ -15,7 +15,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/Frank-Penny-Favicon-Logo-32x32-1.png">
     <link rel="icon" type="image/png" sizes="512x512" href="images/favicon/Frank-Penny-Favicon-Logo-512-x-512.png">
     <link rel="apple-touch-icon" sizes="512x512" href="images/favicon/Frank-Penny-Favicon-Logo-512-x-512.png">
-    <meta property="og:image" content="images/favicon/Frank-Penny-Favicon-Logo-600x315-1.png">
+    <meta property="og:image" content="images/favicon/Frank-Penny-Social-Preview-1200x630.png">
     <link rel="preload" href="components/header.html" as="fetch" crossorigin>
 </head>
 <body class="components-loading">
@@ -146,5 +146,9 @@
 
 
 <script src="js/bundle.min.js" defer></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'form_conversion', page_path: window.location.pathname });
+</script>
 </body>
 </html>

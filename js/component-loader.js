@@ -326,7 +326,7 @@
         var closeBtn = document.querySelector('.modal-close');
         var modal = document.querySelector('.contact-modal');
 
-        if (!trigger || !overlay) return;
+        if (!overlay) return;
 
         // Initialize auto-hide behavior
         initFloatingCTAAutoHide();
@@ -334,13 +334,27 @@
         var modalTriggerElement = null;
 
         // Open modal
-        trigger.addEventListener('click', function() {
+        var openModal = function() {
             modalTriggerElement = document.activeElement;
             overlay.classList.add('active');
             overlay.setAttribute('aria-hidden', 'false');
             document.body.classList.add('modal-open');
             var firstInput = modal.querySelector('input:not([type="hidden"])');
             if (firstInput) firstInput.focus();
+        };
+
+        // Floating button trigger
+        if (trigger) {
+            trigger.addEventListener('click', openModal);
+        }
+
+        // Event delegation for any .open-contact-modal element
+        document.addEventListener('click', function(e) {
+            var btn = e.target.closest('.open-contact-modal');
+            if (btn) {
+                e.preventDefault();
+                openModal();
+            }
         });
 
         // Close modal function

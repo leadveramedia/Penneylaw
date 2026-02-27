@@ -135,9 +135,9 @@
             return;
         }
 
-        // Find all Netlify forms
-        var forms = document.querySelectorAll('form[data-netlify="true"]');
-        console.log('[Ad Tracking] Found ' + forms.length + ' Netlify forms');
+        // Find all forms (Netlify strips data-netlify attr at build time, so use name+method)
+        var forms = document.querySelectorAll('form[name][method="POST"]');
+        console.log('[Ad Tracking] Found ' + forms.length + ' forms');
 
         forms.forEach(function(form) {
             injectHiddenFields(form, trackingData);
@@ -278,7 +278,7 @@
      * Initialize form submission tracking
      */
     function initializeFormTracking() {
-        var forms = document.querySelectorAll('form[data-netlify="true"]');
+        var forms = document.querySelectorAll('form[name][method="POST"]');
 
         forms.forEach(function(form) {
             form.addEventListener('submit', trackFormSubmit);
@@ -337,8 +337,8 @@
                 mutation.addedNodes.forEach(function(node) {
                     if (node.nodeType === 1) { // Element node
                         // Check if added node contains forms
-                        var forms = node.querySelectorAll ? node.querySelectorAll('form[data-netlify="true"]') : [];
-                        if (forms.length > 0 || (node.tagName === 'FORM' && node.hasAttribute('data-netlify'))) {
+                        var forms = node.querySelectorAll ? node.querySelectorAll('form[name][method="POST"]') : [];
+                        if (forms.length > 0 || (node.tagName === 'FORM' && node.getAttribute('method') === 'POST' && node.hasAttribute('name'))) {
                             console.log('[Ad Tracking] New forms detected, re-initializing...');
                             setTimeout(function() {
                                 initializeForms();

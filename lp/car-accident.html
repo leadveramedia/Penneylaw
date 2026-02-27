@@ -1506,8 +1506,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="lp-car-accident_phone" class="form-label">Phone Number</label>
-                    <input type="tel" id="lp-car-accident_phone" name="phone" class="form-input" aria-describedby="lp-car-accident_phone_error" autocomplete="tel" placeholder="(555) 123-4567">
+                    <label for="lp-car-accident_phone" class="form-label">Phone Number <span class="required-star" aria-hidden="true">*</span></label>
+                    <input type="tel" id="lp-car-accident_phone" name="phone" class="form-input" required aria-required="true" aria-describedby="lp-car-accident_phone_error" autocomplete="tel" placeholder="(555) 123-4567">
                     <span class="form-error" id="lp-car-accident_phone_error" role="alert"></span>
                 </div>
 
@@ -1969,6 +1969,18 @@
                 subjectField.value = 'New Lead: ' + fullName + ' - ' + phone;
             }
 
+            // Populate UTM/tracking hidden fields from URL params (submit-time safeguard)
+            var urlParams = new URLSearchParams(window.location.search);
+            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'gbraid', 'wbraid', 'fbclid'].forEach(function(param) {
+                var val = urlParams.get(param);
+                var input = form.querySelector('input[name="' + param + '"]');
+                if (input && val) input.value = val;
+            });
+            var lpField = form.querySelector('input[name="landing_page"]');
+            if (lpField && !lpField.value) lpField.value = window.location.pathname + window.location.search;
+            var refField = form.querySelector('input[name="referrer"]');
+            if (refField && !refField.value) refField.value = document.referrer || 'direct';
+
             // Show loading state
             if (submitBtn && btnText && btnLoading) {
                 submitBtn.disabled = true;
@@ -2008,8 +2020,8 @@
         if (refInput && !refInput.value) refInput.value = referrer;
     }
 
-    // Populate immediately
-    document.querySelectorAll('form[data-netlify="true"]').forEach(function(form) {
+    // Populate immediately (Netlify strips data-netlify attr at build time, use IDs)
+    document.querySelectorAll('#hero-form, #mobile-hero-form').forEach(function(form) {
         populateForm(form);
         // Failsafe: re-populate on submit in case fields were cleared
         form.addEventListener('submit', function() {
@@ -2020,7 +2032,7 @@
 </script>
 
 <!-- Ad Tracking for Paid Campaigns (GTM events, phone tracking) -->
-<script src="../js/ad-tracking.js?v=3" defer></script>
+<script src="../js/ad-tracking.js?v=4" defer></script>
 
 </body>
 </html>
