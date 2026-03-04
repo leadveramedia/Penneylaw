@@ -7,27 +7,12 @@
 (function() {
     'use strict';
 
-    // Initialize dataLayer for GTM
-    window.dataLayer = window.dataLayer || [];
-
-    /**
-     * Load Google Tag Manager (consent-gated)
-     * Only called when user has accepted cookie consent
-     */
-    function loadGTM() {
-        if (window._gtmLoaded) return;
-        window._gtmLoaded = true;
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-PC9XN9DP');
-    }
-
-    // Load GTM immediately if consent was already granted (don't wait for components)
-    if (localStorage.getItem('cookie-consent') === 'accepted') {
-        loadGTM();
-    }
+    // Load Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PC9XN9DP');
 
     // Page configuration - loaded from JSON or uses embedded fallback
     var PAGE_CONFIG = null;
@@ -410,49 +395,6 @@
     }
 
     /**
-     * Initialize Cookie Consent Banner
-     * Controls GTM loading based on user consent
-     */
-    function initCookieConsent() {
-        var banner = document.getElementById('cookie-consent');
-        var acceptBtn = document.getElementById('cookie-accept');
-        var declineBtn = document.getElementById('cookie-decline');
-
-        if (!banner || !acceptBtn || !declineBtn) return;
-
-        var consentStatus = localStorage.getItem('cookie-consent');
-
-        // If already accepted, load GTM immediately
-        if (consentStatus === 'accepted') {
-            loadGTM();
-            return;
-        }
-
-        // If already declined, don't show banner, don't load GTM
-        if (consentStatus === 'declined') {
-            return;
-        }
-
-        // First visit — show banner after delay
-        setTimeout(function() {
-            banner.removeAttribute('hidden');
-        }, 1000);
-
-        // Handle Accept button
-        acceptBtn.addEventListener('click', function() {
-            localStorage.setItem('cookie-consent', 'accepted');
-            banner.classList.add('cookie-accepted');
-            loadGTM();
-        });
-
-        // Handle Decline button
-        declineBtn.addEventListener('click', function() {
-            localStorage.setItem('cookie-consent', 'declined');
-            banner.classList.add('cookie-accepted');
-        });
-    }
-
-    /**
      * Initialize Back to Top Button
      */
     function initBackToTop() {
@@ -537,7 +479,6 @@
                 reinitializeMainJS();
                 reinitializeFormValidation();
                 initModal();
-                initCookieConsent();
                 initBackToTop();
 
                 // Remove loading state (batched with other DOM operations)
