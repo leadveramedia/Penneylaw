@@ -1065,6 +1065,10 @@
         }
 
         @media (max-width: 768px) {
+            /* Hide header-top on mobile — mobile CTA bar covers phone + trust signals */
+            .header-top {
+                display: none;
+            }
             .lp-hero {
                 display: none !important;
             }
@@ -1072,7 +1076,7 @@
                 display: block;
                 position: relative;
                 min-height: 100vh;
-                padding: 130px 0 2rem;
+                padding: 110px 0 2rem;
                 background: #033563;
             }
             .lp-mobile-hero::before {
