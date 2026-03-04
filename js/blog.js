@@ -15,18 +15,19 @@
 
     var STORYBLOK_TOKEN = 'yDLol9DLwFeUUgsyYx3rcQtt'; // Public access token (read-only)
     var STORYBLOK_API = 'https://api.storyblok.com/v2/cdn';
-    var STORYBLOK_VERSION = 'published';
+    // Use 'draft' when Storyblok preview editor is active (passes _storyblok param)
+    var STORYBLOK_VERSION = window.location.search.indexOf('_storyblok') !== -1 ? 'draft' : 'published';
     var POSTS_PER_PAGE = 9;
     var RELATED_POSTS_COUNT = 3;
     var CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
     // Author mapping (reuses existing attorney images)
     var AUTHOR_MAP = {
-        'Frank Penney': { image: 'images/attorneys/frank-penney.webp', title: 'Founding Attorney' },
-        'Jacob Stoeltzing': { image: 'images/attorneys/jacob-stoeltzing.webp', title: 'Attorney' },
-        'Joshua Boyce': { image: 'images/attorneys/joshua-boyce.webp', title: 'Attorney' },
-        'Mark McCauley': { image: 'images/attorneys/mark-mccauley.webp', title: 'Attorney' },
-        'Guest Author': { image: 'images/logos/frank-penney-logo.webp', title: '' }
+        'Frank Penney': { image: '/images/attorneys/frank-penney.webp', title: 'Founding Attorney' },
+        'Jacob Stoeltzing': { image: '/images/attorneys/jacob-stoeltzing.webp', title: 'Attorney' },
+        'Joshua Boyce': { image: '/images/attorneys/joshua-boyce.webp', title: 'Attorney' },
+        'Mark McCauley': { image: '/images/attorneys/mark-mccauley.webp', title: 'Attorney' },
+        'Guest Author': { image: '/images/logos/frank-penney-logo.webp', title: '' }
     };
 
     // Category list (matches Storyblok multi-option field)
@@ -122,7 +123,7 @@
             token: STORYBLOK_TOKEN,
             version: STORYBLOK_VERSION,
             starts_with: 'blog/',
-            sort_by: 'content.publish_date:desc',
+            sort_by: 'content.Date:desc',
             per_page: POSTS_PER_PAGE,
             page: 1,
             is_startpage: false
@@ -278,11 +279,11 @@
 
     function renderBlogCard(story) {
         var content = story.content;
-        var readTime = calculateReadTime(content.body);
+        var readTime = calculateReadTime(content.Body_Content);
         var categories = (content.categories || []).filter(function (c) { return c && c.trim(); });
-        var imageUrl = content.featured_image && content.featured_image.filename
-            ? content.featured_image.filename + '/m/600x400'
-            : 'images/favicon/Frank-Penny-Favicon-Logo-600x315-1.png';
+        var imageUrl = content.Featured_Image && content.Featured_Image.filename
+            ? content.Featured_Image.filename + '/m/600x400'
+            : '/images/favicon/Frank-Penny-Favicon-Logo-600x315-1.png';
         var imageAlt = content.featured_image_alt || content.title || '';
 
         var categoryHtml = categories.map(function (cat) {
@@ -295,7 +296,7 @@
             '</div>' +
             '<div class="blog-card-body">' +
                 '<div class="blog-card-meta">' +
-                    '<time datetime="' + (content.publish_date || '') + '">' + formatDate(content.publish_date) + '</time>' +
+                    '<time datetime="' + (content.Date || '') + '">' + formatDate(content.Date) + '</time>' +
                     '<span class="blog-card-read-time">' + readTime + ' min read</span>' +
                 '</div>' +
                 (categoryHtml ? '<div class="blog-card-categories">' + categoryHtml + '</div>' : '') +
@@ -524,13 +525,15 @@
 
     function renderBlogPost(story) {
         var content = story.content;
-        var readTime = calculateReadTime(content.body);
-        var author = content.author || 'Frank Penney';
+        var readTime = calculateReadTime(content.Body_Content);
+        // author field returns an array of IDs from Storyblok multi-option — resolve to name or default
+        var rawAuthor = Array.isArray(content.author) ? content.author[0] : content.author;
+        var author = (rawAuthor && AUTHOR_MAP[rawAuthor]) ? rawAuthor : 'Frank Penney';
         var authorInfo = AUTHOR_MAP[author] || AUTHOR_MAP['Frank Penney'];
         var categories = (content.categories || []).filter(function (c) { return c && c.trim(); });
         var tags = content.tags || story.tag_list || [];
-        var imageUrl = content.featured_image && content.featured_image.filename
-            ? content.featured_image.filename + '/m/1200x630'
+        var imageUrl = content.Featured_Image && content.Featured_Image.filename
+            ? content.Featured_Image.filename + '/m/1200x630'
             : '';
         var imageAlt = content.featured_image_alt || content.title || '';
 
@@ -567,7 +570,7 @@
         '</div>';
 
         // Render rich text body
-        var bodyHtml = renderRichText(content.body);
+        var bodyHtml = renderRichText(content.Body_Content);
 
         // Build post layout
         var postContainer = document.getElementById('blog-post-content');
@@ -588,7 +591,7 @@
                             '</div>' +
                         '</div>' +
                         '<div class="blog-post-meta-details">' +
-                            '<time datetime="' + (content.publish_date || '') + '">' + formatDate(content.publish_date) + '</time>' +
+                            '<time datetime="' + (content.Date || '') + '">' + formatDate(content.Date) + '</time>' +
                             '<span class="blog-post-read-time">' + readTime + ' min read</span>' +
                         '</div>' +
                     '</div>' +
@@ -623,7 +626,7 @@
                 'name': 'Frank Penney Injury Law',
                 'logo': { '@type': 'ImageObject', 'url': 'https://www.penneylaw.com/images/logos/frank-penney-logo.webp' }
             },
-            'datePublished': content.publish_date || '',
+            'datePublished': content.Date || '',
             'mainEntityOfPage': { '@type': 'WebPage', '@id': postUrl }
         };
         var script = document.createElement('script');
