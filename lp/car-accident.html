@@ -12,15 +12,12 @@
     <!-- Trusted Types Policy (must load before any DOM sink usage) -->
     <script>if(typeof trustedTypes!=='undefined'){try{trustedTypes.createPolicy('default',{createHTML:function(s){return s},createScriptURL:function(s){return s},createScript:function(s){return s}})}catch(e){}}</script>
 
-    <!-- Google Tag Manager (consent-gated) -->
-    <script>window.dataLayer=window.dataLayer||[];
-    function loadGTM(){if(window._gtmLoaded)return;window._gtmLoaded=true;
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PC9XN9DP');}
-    if(localStorage.getItem('cookie-consent')==='accepted'){loadGTM();}</script>
+    })(window,document,'script','dataLayer','GTM-PC9XN9DP');</script>
     <!-- End Google Tag Manager -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
