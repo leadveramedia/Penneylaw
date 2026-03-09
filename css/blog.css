@@ -712,6 +712,11 @@
 }
 
 @media (max-width: 768px) {
+    .blog-post-layout {
+        padding-left: var(--spacing-md);
+        padding-right: var(--spacing-md);
+    }
+
     .blog-filters {
         flex-direction: column;
     }
@@ -721,14 +726,12 @@
     }
 
     .blog-category-filters {
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        padding-bottom: var(--spacing-sm);
-        -webkit-overflow-scrolling: touch;
+        flex-wrap: wrap;
     }
 
     .blog-filter-btn {
-        white-space: nowrap;
+        font-size: 0.8rem;
+        padding: 6px 12px;
     }
 
     .blog-card .card-image img {
