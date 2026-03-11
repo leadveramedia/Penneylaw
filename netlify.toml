@@ -659,7 +659,7 @@
   from = "/about-us/"
   to = "/about-us"
   status = 301
-  force = true
+  force = false
 
 [[redirects]]
   from = "/case-settlements-information/"
