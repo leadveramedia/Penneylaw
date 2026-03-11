@@ -2,175 +2,409 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.penneylaw.com/about-us.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://www.penneylaw.com/accident-news-post.html</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news.html</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://www.penneylaw.com/bicycle-accidents.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/blog.html</loc>
-        <lastmod>2026-02-20</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/bus-accidents.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/car-accidents.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/case-value-calculator.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/chico.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://www.penneylaw.com/city-listing.html</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/city-post.html</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://www.penneylaw.com/contact.html</loc>
-        <lastmod>2026-02-20</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/disclaimer.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/dog-bite.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/fairfield.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/</loc>
-        <lastmod>2026-02-20</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/locations.html</loc>
-        <lastmod>2026-02-20</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/modesto.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/motorcycle-accidents.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://www.penneylaw.com/oakland.html</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/pedestrian-accidents.html</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://www.penneylaw.com/personal-injury.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/practice-areas.html</loc>
-        <lastmod>2026-02-20</lastmod>
+        <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/privacy-policy.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
+        <loc>https://www.penneylaw.com/redding.html</loc>
+        <lastmod>2026-03-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://www.penneylaw.com/resources.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/roseville.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/sacramento.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/slip-and-fall.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/stockton.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/terms-of-service.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/traumatic-brain-injuries.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/truck-accidents.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/wrongful-death.html</loc>
-        <lastmod>2026-02-26</lastmod>
+        <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.penneylaw.com/blog/are-license-plate-frames-illegal</loc>
-        <lastmod>2026-02-25</lastmod>
+        <loc>https://www.penneylaw.com/blog/motorcycle-safety-tips-statistics</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/wrongful-death-by-police-should-you-take-a-settlement</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/what-is-the-difference-between-wrongful-death-and-accidental-death-</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/california-motorcycle-helmet-laws</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/help-with-demand-letters</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/write-a-spoliation-letter-to-protect-the-evidence-of-your-case</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/california-demand-letters-sample</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/jackknife-truck-accidents-and-catastrophic-injury-claims</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/when-a-truck-accident-results-in-lifetime-medical-care-needs</loc>
+        <lastmod>2026-03-04</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/road-rash-injuries-when-skin-graft-surgery-is-required</loc>
+        <lastmod>2026-03-04</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/what-if-your-injuries-do-not-appear-until-days-after-a-car-accident</loc>
+        <lastmod>2026-03-04</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/car-accidents-and-road-debris-can-you-file-a-claim-if-something-falls-off-another-vehicle</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/construction-zone-car-accidents-in-california</loc>
+        <lastmod>2026-03-04</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/what-if-an-accident-happens-during-a-test-drive-at-a-dealership</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/blown-tires-on-big-rigs-who-is-liable-when-a-tire-explosion-causes-a-crash</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/what-are-no-zones-on-semi-trucks-and-why-do-they-cause-so-many-accidents</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/the-role-of-weigh-stations-in-truck-accident-investigations</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/motorcycle-accidents-caused-by-driver-dooring-who-is-at-fault</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/who-pays-for-your-damaged-phone-or-personal-belongings-after-a-car-accident</loc>
+        <lastmod>2026-03-04</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/can-you-file-a-claim-for-motorcycle-accidents-caused-by-road-debris</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/who-s-liable-when-multiple-motorcycles-collide-</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/how-aftermarket-modifications-can-affect-a-motorcycle-injury-claim</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/can-you-request-the-truck-dashcams-and-surveillance-footage-as-evidence</loc>
+        <lastmod>2026-03-04</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/what-is-a-semi-truck-black-box-elds</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/can-you-sue-a-driver-for-injuries-as-a-motorcycle-passenger</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/what-happens-if-someone-hits-my-parked-car</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/what-happens-if-a-teen-driver-causes-a-car-crash</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/the-5-most-dangerous-intersections-in-stockton-california</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/what-happens-if-you-re-hit-by-a-self-driving-car-in-california</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/are-you-liable-for-a-car-accident-in-a-rental-vehicle</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/is-brake-checking-illegal-in-california-</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/can-you-wear-headphones-while-driving</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/are-license-plate-frames-illegal-in-california</loc>
+        <lastmod>2026-03-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/blog/new-no-touch-law-for-cell-phones-in-california</loc>
-        <lastmod>2026-02-25</lastmod>
+        <lastmod>2026-03-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>

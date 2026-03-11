@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Default meta tags - JS updates these dynamically -->
+    <meta name="description" content="Personal injury legal resources and articles for your area from Frank Penney Injury Law. $1B+ recovered. Free consultation.">
+    <title>Local Legal Resources | Frank Penney Injury Law</title>
+    <link rel="canonical" href="https://www.penneylaw.com/">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Local Legal Resources | Frank Penney Injury Law">
+    <meta property="og:description" content="Personal injury legal resources and articles from Frank Penney Injury Law.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.penneylaw.com/">
+    <meta property="og:image" content="https://www.penneylaw.com/images/favicon/Frank-Penny-Social-Preview-1200x630.png">
+    <meta property="og:site_name" content="Frank Penney Injury Law">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Local Legal Resources | Frank Penney Injury Law">
+    <meta name="twitter:description" content="Personal injury legal resources and articles from Frank Penney Injury Law.">
+    <meta name="twitter:image" content="https://www.penneylaw.com/images/favicon/Frank-Penny-Social-Preview-1200x630.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="/css/style.min.css">
+    <link rel="stylesheet" href="/css/blog.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/Frank-Penny-Favicon-Logo-32x32-1.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/images/favicon/Frank-Penny-Favicon-Logo-512-x-512.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/images/favicon/Frank-Penny-Favicon-Logo-512-x-512.png">
+    <link rel="preload" href="/components/header.html" as="fetch" crossorigin>
+</head>
+<body class="components-loading">
+
+<a class="skip-link sr-only" href="#main-content">Skip to content</a>
+
+<div id="header-placeholder"></div>
+
+<main id="main-content" class="site-main">
+
+<!-- Breadcrumbs (JS populates city name) -->
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+        <ol class="breadcrumbs-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li class="breadcrumbs-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a href="/" class="breadcrumbs-link" itemprop="item"><span itemprop="name">Home</span></a>
+                <meta itemprop="position" content="1">
+            </li>
+            <li class="breadcrumbs-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span class="breadcrumbs-current" id="city-breadcrumb" itemprop="name">Loading...</span>
+                <meta itemprop="position" content="2">
+            </li>
+        </ol>
+    </div>
+</nav>
+
+<div class="page-header">
+    <div class="container">
+        <div class="page-header-content">
+            <h1 class="page-title" id="city-page-title">Legal Resources</h1>
+            <p class="page-subtitle" id="city-page-subtitle">Personal injury articles and legal resources for your area.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Search Bar -->
+<section class="section blog-filters-section">
+    <div class="container">
+        <div class="blog-filters" role="search" aria-label="Search articles">
+            <div class="blog-search">
+                <label for="city-search-input" class="sr-only">Search articles</label>
+                <input type="search" id="city-search-input" class="blog-search-input" placeholder="Search articles..." autocomplete="off">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Posts Grid -->
+<section class="section section-lg blog-posts-section">
+    <div class="container">
+        <h2 class="sr-only" id="city-posts-heading">Articles</h2>
+        <!-- Loading skeletons -->
+        <div id="city-posts-loading" class="grid grid-3 blog-grid" aria-live="polite">
+            <div class="card blog-card-skeleton" aria-hidden="true">
+                <div class="skeleton skeleton-image"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text-short"></div>
+            </div>
+            <div class="card blog-card-skeleton" aria-hidden="true">
+                <div class="skeleton skeleton-image"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text-short"></div>
+            </div>
+            <div class="card blog-card-skeleton" aria-hidden="true">
+                <div class="skeleton skeleton-image"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text-short"></div>
+            </div>
+        </div>
+        <!-- Actual post grid (populated by JS) -->
+        <div id="city-posts-grid" class="grid grid-3 blog-grid" aria-live="polite" style="display:none;"></div>
+        <!-- Empty state -->
+        <div id="city-posts-empty" class="blog-empty" hidden>
+            <p>No articles found for this area. Try adjusting your search.</p>
+        </div>
+        <!-- Error state -->
+        <div id="city-posts-error" class="blog-error" hidden>
+            <p>Unable to load articles. Please try again later.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Pagination -->
+<nav id="city-posts-pagination" class="blog-pagination" aria-label="Articles pagination" hidden>
+    <div class="container">
+        <div class="blog-pagination-inner"></div>
+    </div>
+</nav>
+
+<div id="cta-placeholder"></div>
+
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="/js/bundle.min.js" defer></script>
+<script src="/js/city.min.js" defer></script>
+</body>
+</html>

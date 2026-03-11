@@ -61,10 +61,1237 @@
 
 # Redirects
 [[redirects]]
+  from = "/car-accident-lawyer"
+  to = "/car-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/car-accident-lawyer/*"
   to = "/lp/car-accident.html"
   status = 301
   force = true
+
+# ==========================================
+# Migration 301 Redirects (WordPress → New Site)
+# These must come BEFORE the status-200 rewrites
+# ==========================================
+
+# --- locations.html → /locations/ (force needed since file exists) ---
+[[redirects]]
+  from = "/locations.html"
+  to = "/locations/"
+  status = 301
+  force = true
+
+# --- Group 1: Accident News ---
+[[redirects]]
+  from = "/teen-arrested-after-ventura-police-chase-ends-in-crash/"
+  to = "/accident-news/teen-arrested-after-ventura-police-chase-ends-in-crash/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/deadly-crash-on-15-freeway-in-lake-elsinore-leaves-one-dead-two-injured/"
+  to = "/accident-news/deadly-crash-on-15-freeway-in-lake-elsinore-leaves-one-dead-two-injured/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fatal-4-car-crash-on-215-freeway-in-san-bernardino-claims-three-lives/"
+  to = "/accident-news/fatal-4-car-crash-on-215-freeway-in-san-bernardino-claims-three-lives/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/when-road-rage-goes-too-far-rocklin-father-and-son-face-murder-charges/"
+  to = "/accident-news/when-road-rage-goes-too-far-rocklin-father-and-son-face-murder-charges/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tragic-turlock-crash-claims-four-lives-injures-two-others/"
+  to = "/accident-news/tragic-turlock-crash-claims-four-lives-injures-two-others/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/heartbreaking-dui-crash-in-roseville-california-claims-life-of-9-year-old-girl/"
+  to = "/accident-news/heartbreaking-dui-crash-in-roseville-california-claims-life-of-9-year-old-girl/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pursuit-in-yosemite-ends-in-fatal-3-car-collision/"
+  to = "/accident-news/pursuit-in-yosemite-ends-in-fatal-3-car-collision/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/three-dead-two-injured-in-fatal-wrong-way-crash-on-highway-46-east/"
+  to = "/accident-news/three-dead-two-injured-in-fatal-wrong-way-crash-on-highway-46-east/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/dui-crash-in-murrieta-california-leaves-one-dead-driver-arrested/"
+  to = "/accident-news/dui-crash-in-murrieta-california-leaves-one-dead-driver-arrested/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/driver-arrested-after-dui-crash-in-monterey-park-claims-three-lives/"
+  to = "/accident-news/driver-arrested-after-dui-crash-in-monterey-park-claims-three-lives/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/intentional-crash-leads-to-felony-charges-for-folsom-man/"
+  to = "/accident-news/intentional-crash-leads-to-felony-charges-for-folsom-man/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fatal-dui-crash-in-castaic-19-year-old-driver-arrested/"
+  to = "/accident-news/fatal-dui-crash-in-castaic-19-year-old-driver-arrested/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tragic-three-car-crash-in-riverside-county-la-claims-six-lives/"
+  to = "/accident-news/tragic-three-car-crash-in-riverside-county-la-claims-six-lives/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/alcohol-and-cocaine-implicated-in-deadly-cybertruck-wreck-near-oakland/"
+  to = "/accident-news/alcohol-and-cocaine-implicated-in-deadly-cybertruck-wreck-near-oakland/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/14-year-old-boy-among-five-killed-in-tragic-turlock-intersection-crash-in-stanislaus-county/"
+  to = "/accident-news/14-year-old-boy-among-five-killed-in-tragic-turlock-intersection-crash-in-stanislaus-county/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/category/accident-news/"
+  to = "/accident-news.html"
+  status = 301
+  force = true
+
+# --- Group 2: Blog Posts ---
+[[redirects]]
+  from = "/are-license-plate-frames-illegal-in-california/"
+  to = "/blog/are-license-plate-frames-illegal-in-california"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-demand-letters-sample/"
+  to = "/blog/california-demand-letters-sample/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/write-a-spoliation-letter-to-protect-the-evidence-of-your-case/"
+  to = "/blog/write-a-spoliation-letter-to-protect-the-evidence-of-your-case/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/what-happens-if-a-teen-driver-causes-a-car-crash-in-california/"
+  to = "/blog/what-happens-if-a-teen-driver-causes-a-car-crash"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/top-5-most-dangerous-intersections-in-stockton-california/"
+  to = "/blog/the-5-most-dangerous-intersections-in-stockton-california"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/help-with-demand-letters/"
+  to = "/blog/help-with-demand-letters/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/new-no-touch-law-for-cell-phones-in-california/"
+  to = "/blog/new-no-touch-law-for-cell-phones-in-california"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/motorcycle-helmet-laws/"
+  to = "/blog/motorcycle-helmet-laws/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/is-brake-checking-illegal-in-california/"
+  to = "/blog/is-brake-checking-illegal-in-california-"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/who-pays-for-your-damaged-phone-or-personal-belongings-after-a-car-accident/"
+  to = "/blog/who-pays-for-your-damaged-phone-or-personal-belongings-after-a-car-accident"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/what-happens-if-youre-hit-by-a-self-driving-car-in-california/"
+  to = "/blog/what-happens-if-you-re-hit-by-a-self-driving-car-in-california"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/map-of-sacramentos-most-dangerous-intersections/"
+  to = "/blog/the-5-most-dangerous-intersections-in-stockton-california"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/car-accidents-and-road-debris-can-you-file-a-claim-if-something-falls-off-another-vehicle/"
+  to = "/blog/car-accidents-and-road-debris-can-you-file-a-claim-if-something-falls-off-another-vehicle"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/what-is-the-difference-between-wrongful-death-and-accidental-death/"
+  to = "/blog/what-is-the-difference-between-wrongful-death-and-accidental-death/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/wrongful-death-by-police-should-you-take-a-settlement/"
+  to = "/blog/wrongful-death-by-police-should-you-take-a-settlement/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/what-if-an-accident-happens-during-a-test-drive-at-a-dealership/"
+  to = "/blog/what-if-an-accident-happens-during-a-test-drive-at-a-dealership"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/what-are-no-zones-on-semi-trucks-and-why-do-they-cause-so-many-accidents/"
+  to = "/blog/what-are-no-zones-on-semi-trucks-and-why-do-they-cause-so-many-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/motorcycle-accidents-caused-by-driver-dooring/"
+  to = "/blog/motorcycle-accidents-caused-by-driver-dooring-who-is-at-fault"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/motorcycle-safety-tips-statistics/"
+  to = "/blog/motorcycle-safety-tips-statistics/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blown-tires-on-big-rigs-who-is-liable-when-a-tire-explosion-causes-a-crash/"
+  to = "/blog/blown-tires-on-big-rigs-who-is-liable-when-a-tire-explosion-causes-a-crash"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/can-you-wear-headphones-while-driving/"
+  to = "/blog/can-you-wear-headphones-while-driving"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/what-happens-if-someone-hits-my-parked-car/"
+  to = "/blog/what-happens-if-someone-hits-my-parked-car"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/the-role-of-weigh-stations-in-truck-accident-investigations/"
+  to = "/blog/the-role-of-weigh-stations-in-truck-accident-investigations"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/construction-zone-car-accidents-in-california/"
+  to = "/blog/construction-zone-car-accidents-in-california"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/are-you-liable-for-a-car-accident-in-a-rental-vehicle/"
+  to = "/blog/are-you-liable-for-a-car-accident-in-a-rental-vehicle"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/how-aftermarket-modifications-can-affect-a-motorcycle-injury-claim/"
+  to = "/blog/how-aftermarket-modifications-can-affect-a-motorcycle-injury-claim"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/can-you-file-a-claim-for-motorcycle-accidents-caused-by-road-debris/"
+  to = "/blog/can-you-file-a-claim-for-motorcycle-accidents-caused-by-road-debris"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/what-is-a-semi-truck-black-box-elds/"
+  to = "/blog/what-is-a-semi-truck-black-box-elds"
+  status = 301
+  force = true
+
+# --- Group 3: City Articles ---
+[[redirects]]
+  from = "/redding-car-accident-lawyer/"
+  to = "/redding/car-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stockton-car-accident-lawyer/"
+  to = "/stockton/car-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stockton-motorcycle-accident-lawyer/"
+  to = "/stockton/motorcycle-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sacramento-motorcycle-accident-lawyer/"
+  to = "/sacramento/motorcycle-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sacramento-car-accident-lawyer/"
+  to = "/sacramento/car-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stockton-pedestrian-accident-lawyer/"
+  to = "/stockton/pedestrian-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stockton-wrongful-death-lawyer/"
+  to = "/stockton/wrongful-death-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stockton-uber-and-lyft-accident-lawyer/"
+  to = "/stockton/uber-and-lyft-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stockton-truck-accident-lawyer/"
+  to = "/stockton/truck-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stockton-slip-and-fall-lawyer/"
+  to = "/stockton/slip-and-fall-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/oakland-truck-accident-lawyer/"
+  to = "/oakland/truck-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/roseville-car-accident-lawyer/"
+  to = "/roseville/car-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/modesto-motorcycle-injury-lawyer/"
+  to = "/modesto/motorcycle-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sacramento-truck-accident-lawyer/"
+  to = "/sacramento/truck-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fairfield-car-accident-lawyer/"
+  to = "/fairfield/car-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/oakland-motorcycle-accident-lawyer/"
+  to = "/oakland/motorcycle-accident-lawyer/"
+  status = 301
+  force = true
+
+# --- Group 4: City Location Pages ---
+[[redirects]]
+  from = "/stockton-personal-injury-lawyer/"
+  to = "/stockton"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/modesto-personal-injury-lawyer/"
+  to = "/modesto"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sacramento-personal-injury-lawyer/"
+  to = "/sacramento"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/roseville-personal-injury-lawyer/"
+  to = "/roseville"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/chico-personal-injury-lawyer/"
+  to = "/chico"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fairfield-personal-injury-lawyer/"
+  to = "/fairfield"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/oakland-personal-injury-lawyer/"
+  to = "/oakland"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/redding-personal-injury-lawyer/"
+  to = "/redding"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/5-key-reasons-you-need-a-car-accident-lawyer-in-stockton-ca/"
+  to = "/stockton"
+  status = 301
+  force = true
+
+# --- Group 5: Practice Area Redirects ---
+[[redirects]]
+  from = "/california-truck-accident-lawyer/"
+  to = "/truck-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-bus-accident-lawyer/"
+  to = "/bus-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-bicycle-accident-lawyer/"
+  to = "/bicycle-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-motorcycle-accident-lawyer/"
+  to = "/motorcycle-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-motorcycle-injury-lawyer/"
+  to = "/motorcycle-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-wrongful-death-lawyer/"
+  to = "/wrongful-death"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-slip-and-fall-accident-lawyer/"
+  to = "/slip-and-fall"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-dog-bite-lawyer/"
+  to = "/dog-bite"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-dog-bite-laws/"
+  to = "/dog-bite"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-brain-injury-lawyer/"
+  to = "/traumatic-brain-injuries"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-car-accident-lawyer-2/"
+  to = "/car-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-big-rig-accident-lawyer/"
+  to = "/truck-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-personal-injury-lawyer/"
+  to = "/practice-areas"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-commercial-truck-accident-lawyer/"
+  to = "/practice-areas"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-drunk-driving-accident-lawyer/"
+  to = "/practice-areas"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-product-liability-lawyer/"
+  to = "/practice-areas"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-negligent-construction-lawyer/"
+  to = "/practice-areas"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-catastrophic-injury-lawyer/"
+  to = "/catastrophic-injury"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-pedestrian-accident-lawyer/"
+  to = "/pedestrian-accident"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/practice-area-vs/"
+  to = "/practice-areas"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/motorcycle-accidents-spur-harley-davidson-recall/"
+  to = "/motorcycle-accidents"
+  status = 301
+  force = true
+
+# --- Group 6: Attorney/Firm Pages ---
+[[redirects]]
+  from = "/mark-mccauley/"
+  to = "/about-us"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/frank-d-penney/"
+  to = "/about-us"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/joshua-boyce/"
+  to = "/about-us"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/you-can-bank-on-frank/"
+  to = "/about-us"
+  status = 301
+  force = true
+
+# --- Group 7: Generic Redirects to /blog, /about-us, / ---
+[[redirects]]
+  from = "/about-us/"
+  to = "/about-us"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-settlements-information/"
+  to = "/about-us"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog-2/"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog-test/"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/category/blog/"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/new-california-drunk-driving-law-restricts-uber-lyft-drivers/"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/common-reasons-for-truck-accidents-in-sacramento/"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/the-6-essential-elements-of-a-personal-injury-demand-letter/"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/how-to-file-a-personal-injury-lawsuit-without-a-lawyer/"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/wrongful-death-lawsuits-in-california-who-can-file-and-what-to-expect/"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/how-to-get-a-police-report-after-a-car-accident/"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/do-you-have-a-case-after-a-low-speed-rear-impact-collision/"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/understanding-californias-fault-laws-in-car-accident-cases/"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/4-motor-scooter-safety-tips-for-enjoying-your-ride/"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/can-you-sue-a-driver-for-injuries-as-a-motorcycle-passenger/"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/car-accident-victim-awarded-400k/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/2023-consumer-attorneys-of-the-year/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-workers-compensation-lawyer/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/school-liability-who-is-responsible-for-our-kids-safety/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/train-accidents-less-common-than-car-accidents-but-more-serious/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/navigating-accidents-help-of-a-drunk-driving-injury-lawyer-in-sacramento-ca/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/auto-draft/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sample-page/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/clone-of-blog-posts/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/unlocking-the-value-of-your-personal-injury-case-what-you-need-to-know/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/highway-crossroads-makes-sacramento-magnet-for-truck-accidents/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/california-bill-could-have-ended-motorcycle-profiling/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/know-the-risks-of-asbestos-exposure/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/whos-liable-when-multiple-motorcycles-collide/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/author/reginaldmcleod/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/author/peter/"
+  to = "/"
+  status = 301
+  force = true
+
+# --- Group 8: www.penneylaw.com Old Paths ---
+[[redirects]]
+  from = "/sacramento-office"
+  to = "/sacramento"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/reach-us"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/redding-office"
+  to = "/redding"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/wrongful-death-lawyer"
+  to = "/wrongful-death"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/motorcycle-accident-attorney"
+  to = "/motorcycle-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/slip-and-fall-accident"
+  to = "/slip-and-fall"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/bike-injury-attorney"
+  to = "/bicycle-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/car-accidents-page"
+  to = "/car-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/negligent-construction-lawyer"
+  to = "/practice-areas"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/our-privacy-policy"
+  to = "/privacy-policy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-evaluations"
+  to = "/about-us"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-settlement-information"
+  to = "/about-us"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/240k-train-accident-settlement-for-retiree"
+  to = "/about-us"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/750k-settlement-for-mild-traumatic-brain-injury"
+  to = "/about-us"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/federal-court-verdict-in-michaud-et-al-v-united-states-of-america-10-5-million-award-for-our-clients"
+  to = "/about-us"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/what-to-do-after-a-rideshare-accident-resulting-in-injury-or-death"
+  to = "/wrongful-death"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/truck-accidents-chico"
+  to = "/chico"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/truck-accidents-modesto"
+  to = "/modesto/truck-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/motorcycle-accidents-modesto"
+  to = "/modesto/motorcycle-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/motorcycle-accidents-roseville"
+  to = "/roseville/motorcycle-accident-lawyer"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stockton-motorcycle-accident-lawyer"
+  to = "/stockton/motorcycle-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/stockton-wrongful-death-lawyer"
+  to = "/stockton/wrongful-death-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sacramento-truck-accident-lawyer"
+  to = "/sacramento/truck-accident-lawyer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/wrongful-death-lawsuits-in-california-what-families-need-to-know"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/why-hiring-a-local-personal-injury-lawyer-matters-more-than-choosing-a-mill-firm"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pedestrian-landing-page"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/boat-injury-attorney"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/negligence-attorney"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/my-post"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/how-a-wrongful-death-lawyer-can-get-the-best-out-of-a-bad-situation"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/the-role-of-a-personal-injury-lawyer-in-sacramento-what-to-expect-from-your-case"
+  to = "/"
+  status = 301
+  force = true
+
+# --- Group 9: Old /blog/* Paths (need force=true to override blog rewrite) ---
+[[redirects]]
+  from = "/blog/personal-injury/3-responses-insurance-companies-after-demand-letter"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/car-accident/self-driving-cars-legal-issues"
+  to = "/blog/what-happens-if-you-re-hit-by-a-self-driving-car-in-california"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/motorcycle-accident/lane-splitting-california-law-reduce-accidents"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/car-accident/sacramento-schools-try-teen-drunk-driving-program"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/personal-injury/future-medical-costs"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/vicarious-liability-torts-in-commercial-truck-accidents"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/car-accident/can-you-be-sued-for-helping-a-car-accident-victim"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/navigating-accidents-with-drunk-driving-injury-lawyer-sacramento-ca"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/personal-injury/child-from-carmichael-dies-in-backyard-koi-pond"
+  to = "/"
+  status = 301
+  force = true
+
+# --- Group 10: Old www Archived Accident News → Homepage ---
+[[redirects]]
+  from = "/king-s-county-collision-claims-life-and-leaves-two-hospitalized"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tragic-accident-causes-major-traffic-delays-on-eastbound-i-80-in-fairfield"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/deadly-single-vehicle-crash-on-capital-city-freeway-in-sacramento"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/accident-claims-life-of-woman-in-motorized-wheelchair-in-sacramento-county"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/multi-car-collision-injures-four-on-daly-avenue"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/dui-collision-leaves-pedestrian-seriously-injured-in-sacramento"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tragedy-strikes-in-rancho-cordova-pedestrian-fatally-struck-by-vehicle"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tragic-collision-in-west-rancho-dominguez-claims-life-of-9-year-old-boy"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tragic-crash-on-i-5-claims-three-lives-one-hospitalized"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fatal-collision-claims-life-in-moss-landing"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/alcohol-related-rollover-crash-in-fresno-county-multiple-hospitalizations-prompt-investigation"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/los-angeles-rollover-five-hospitalized-some-critical"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pedestrian-fatally-struck-by-multiple-vehicles-in-stockton"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fatal-valley-center-road-crash-leads-to-dui-arrest"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/three-injured-in-serious-southern-california-car-crash"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/multi-vehicle-crash-on-highway-50-in-sacramento-causes-major-delays"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tragic-accident-claims-life-of-14-year-old-in-newport-beach"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/crash-on-highway-99-injures-three-and-halts-traffic-in-sutter-county-california"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/double-fatal-crash-investigation-underway-on-highway-70"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/multiple-injured-in-solo-vehicle-crash-on-business-80-in-sacramento"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/wrong-way-dui-driver-causes-multi-car-collision-on-101-freeway-near-camarillo-springs-road"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fiery-three-vehicle-crash-in-sacramento-leaves-multiple-injured"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/dui-driver-arrested-after-hit-and-run-injures-family-on-bikes-in-garden-grove"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tragic-pedestrian-accident-claims-life-on-highway-101"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/bicyclist-injured-in-early-morning-collision-on-vulcan-drive-in-sacramento"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fremont-fire-engine-struck-twice-while-assisting-at-traffic-collision"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/deadly-multi-vehicle-collision-in-sacramento"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/traffic-chaos-on-southbound-i-5-due-to-big-rig-overturn-and-car-fire"
+  to = "/"
+  status = 301
+  force = true
+
+# --- Misc remaining redirects ---
+[[redirects]]
+  from = "/blog/truck-accident/truck-accidents-often-preventable"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/wp-content/uploads/2025/09/Are-License-Plate-Frames-Illegal-in-California.webp"
+  to = "/blog/are-license-plate-frames-illegal-in-california"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/wp-content/uploads/2025/09/Fatal-4-Car-Crash-on-215-Freeway-in-San-Bernardino-Claims-Three-Lives.webp"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/six-things-to-do-if-you-were-hurt-in-a-boating-accident"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/how-boating-accidents-differ-from-other-personal-injury-cases"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/are-license-plate-frames-illegal-in-california/"
+  to = "/blog/are-license-plate-frames-illegal-in-california"
+  status = 301
+  force = true
+
+# ==========================================
+# End Migration Redirects
+# ==========================================
 
 # Blog post URL rewrite: /blog/post-slug -> /blog-post.html
 [[redirects]]
@@ -73,10 +1300,145 @@
   status = 200
   force = false
 
+# Accident News post URL rewrite: /accident-news/post-slug -> /accident-news-post.html
+[[redirects]]
+  from = "/accident-news/*"
+  to = "/accident-news-post.html"
+  status = 200
+  force = false
+
+# City listing pages: /[city]/ -> /city-listing.html
+[[redirects]]
+  from = "/sacramento/"
+  to = "/city-listing.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/roseville/"
+  to = "/city-listing.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/stockton/"
+  to = "/city-listing.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/modesto/"
+  to = "/city-listing.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/oakland/"
+  to = "/city-listing.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/redding/"
+  to = "/city-listing.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/chico/"
+  to = "/city-listing.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/fairfield/"
+  to = "/city-listing.html"
+  status = 200
+  force = false
+
+# City article pages: /[city]/[slug] -> /city-post.html
+[[redirects]]
+  from = "/sacramento/*"
+  to = "/city-post.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/roseville/*"
+  to = "/city-post.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/stockton/*"
+  to = "/city-post.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/modesto/*"
+  to = "/city-post.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/oakland/*"
+  to = "/city-post.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/redding/*"
+  to = "/city-post.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/chico/*"
+  to = "/city-post.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/fairfield/*"
+  to = "/city-post.html"
+  status = 200
+  force = false
+
 # Edge function for blog post meta tag injection
 [[edge_functions]]
   function = "blog-meta"
   path = "/blog/*"
+
+# Edge function for accident news post meta tag injection
+[[edge_functions]]
+  function = "blog-meta"
+  path = "/accident-news/*"
+
+# Edge functions for city article meta tag injection
+[[edge_functions]]
+  function = "blog-meta"
+  path = "/sacramento/*"
+
+[[edge_functions]]
+  function = "blog-meta"
+  path = "/roseville/*"
+
+[[edge_functions]]
+  function = "blog-meta"
+  path = "/stockton/*"
+
+[[edge_functions]]
+  function = "blog-meta"
+  path = "/modesto/*"
+
+[[edge_functions]]
+  function = "blog-meta"
+  path = "/oakland/*"
+
+[[edge_functions]]
+  function = "blog-meta"
+  path = "/redding/*"
 
 # Form notifications - Netlify will automatically detect forms with data-netlify="true"
 # Configure email notifications in Netlify Dashboard under Forms > Form Notifications

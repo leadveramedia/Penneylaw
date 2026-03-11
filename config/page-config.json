@@ -90,6 +90,16 @@
       "ctaTitle": "Injured in a Slip and Fall? Get Help Today.",
       "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
     },
+    "pedestrian-accidents": {
+      "type": "practice-area",
+      "title": "Pedestrian Accidents",
+      "serviceType": "Pedestrian Accident",
+      "modalHeading": "Injured as a Pedestrian?",
+      "modalSubtitle": "Get a free consultation about your pedestrian accident case.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured as a Pedestrian? Get Help Today.",
+      "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
     "traumatic-brain-injuries": {
       "type": "practice-area",
       "title": "Traumatic Brain Injuries",
