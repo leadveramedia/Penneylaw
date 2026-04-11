@@ -9,6 +9,7 @@
  * Runs on Deno (Netlify Edge Functions runtime).
  */
 
+// Public read-only content delivery token (intentionally client-side; visible in browser network tab regardless)
 const STORYBLOK_TOKEN = 'yDLol9DLwFeUUgsyYx3rcQtt';
 const STORYBLOK_API = 'https://api.storyblok.com/v2/cdn';
 

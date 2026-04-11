@@ -13,7 +13,8 @@
     // CONFIGURATION
     // ==========================================
 
-    var STORYBLOK_TOKEN = 'yDLol9DLwFeUUgsyYx3rcQtt'; // Public access token (read-only)
+    // Public read-only content delivery token (intentionally client-side; visible in browser network tab regardless)
+    var STORYBLOK_TOKEN = 'yDLol9DLwFeUUgsyYx3rcQtt';
     var STORYBLOK_API = 'https://api.storyblok.com/v2/cdn';
     // Use 'draft' when Storyblok preview editor is active (passes _storyblok param)
     var STORYBLOK_VERSION = window.location.search.indexOf('_storyblok') !== -1 ? 'draft' : 'published';
