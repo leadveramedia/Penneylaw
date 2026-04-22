@@ -7,12 +7,6 @@
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.penneylaw.com/accident-news-post.html</loc>
-        <lastmod>2026-03-11</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
         <loc>https://www.penneylaw.com/accident-news.html</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
@@ -53,18 +47,6 @@
         <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://www.penneylaw.com/city-listing.html</loc>
-        <lastmod>2026-03-11</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://www.penneylaw.com/city-post.html</loc>
-        <lastmod>2026-03-11</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/contact.html</loc>
@@ -118,7 +100,7 @@
         <loc>https://www.penneylaw.com/oakland.html</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/pedestrian-accidents.html</loc>
@@ -140,7 +122,7 @@
     </url>
     <url>
         <loc>https://www.penneylaw.com/privacy-policy.html</loc>
-        <lastmod>2026-02-27</lastmod>
+        <lastmod>2026-04-22</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
@@ -148,7 +130,7 @@
         <loc>https://www.penneylaw.com/redding.html</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/resources.html</loc>
@@ -203,6 +185,54 @@
         <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/sacramento/</loc>
+        <lastmod>2026-04-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/roseville/</loc>
+        <lastmod>2026-04-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/stockton/</loc>
+        <lastmod>2026-04-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/modesto/</loc>
+        <lastmod>2026-04-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/oakland/</loc>
+        <lastmod>2026-04-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/redding/</loc>
+        <lastmod>2026-04-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/chico/</loc>
+        <lastmod>2026-04-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/fairfield/</loc>
+        <lastmod>2026-04-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/blog/accidents-near-stockton-s-crosstown-freeway-why-these-ramps-are-so-dangerous</loc>
@@ -483,6 +513,186 @@
     <url>
         <loc>https://www.penneylaw.com/blog/underride-truck-accidents-and-why-they-are-so-deadly-2</loc>
         <lastmod>2026-02-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/stockton-motorcycle-crash-leaves-one-dead-victim-identified-as-terry-mcdonald</loc>
+        <lastmod>2026-04-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/tragic-three-car-crash-in-riverside-county-la-claims-six-lives</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/14-year-old-boy-among-five-killed-in-tragic-turlock-intersection-crash-in-stanislaus-county</loc>
+        <lastmod>2026-03-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/alcohol-and-cocaine-implicated-in-deadly-cybertruck-wreck-near-oakland</loc>
+        <lastmod>2026-03-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/fatal-dui-crash-in-castaic-19-year-old-driver-arrested</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/intentional-crash-leads-to-felony-charges-for-folsom-man</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/driver-arrested-after-dui-crash-in-monterey-park-claims-three-lives</loc>
+        <lastmod>2026-03-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/dui-crash-in-murrieta-california-leaves-one-dead-driver-arrested</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/three-dead-two-injured-in-fatal-wrong-way-crash-on-highway-46-east</loc>
+        <lastmod>2026-03-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/pursuit-in-yosemite-ends-in-fatal-3-car-collision</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/tragic-turlock-crash-claims-four-lives-injures-two-others</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/heartbreaking-dui-crash-in-roseville-california-claims-life-of-9-year-old-girl</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/when-road-rage-goes-too-far-rocklin-father-and-son-face-murder-charges</loc>
+        <lastmod>2026-03-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/fatal-4-car-crash-on-215-freeway-in-san-bernardino-claims-three-lives</loc>
+        <lastmod>2026-03-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/deadly-crash-on-15-freeway-in-lake-elsinore-leaves-one-dead-two-injured</loc>
+        <lastmod>2026-03-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/teen-arrested-after-ventura-police-chase-ends-in-crash</loc>
+        <lastmod>2026-03-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/sacramento/motorcycle-accident-lawyer</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/sacramento/car-accident-lawyer</loc>
+        <lastmod>2026-03-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/sacramento/truck-accident-lawyer</loc>
+        <lastmod>2026-03-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/roseville/car-accident-lawyer</loc>
+        <lastmod>2026-03-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/stockton/uber-and-lyft-accident-lawyer</loc>
+        <lastmod>2026-03-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/stockton/slip-and-fall-lawyer</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/stockton/pedestrian-accident-lawyer</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/stockton/wrongful-death-lawyer</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/stockton/motorcycle-accident-lawyer</loc>
+        <lastmod>2026-03-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/stockton/truck-accident-lawyer</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/stockton/car-accident-lawyer</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/modesto/motorcycle-accident-lawyer</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/oakland/truck-accident-lawyer</loc>
+        <lastmod>2026-03-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/redding/car-accident-lawyer</loc>
+        <lastmod>2026-03-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>

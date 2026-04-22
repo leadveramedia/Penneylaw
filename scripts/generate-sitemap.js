@@ -25,7 +25,10 @@ const EXCLUDED_FILES = new Set([
     'thank-you.html',
     'style-guide.html',
     'netlify-form-template.html',
-    'blog-post.html', // Template shell for dynamic blog posts
+    'blog-post.html',          // Shell for /blog/{slug}
+    'accident-news-post.html', // Shell for /accident-news/{slug}
+    'city-listing.html',       // Shell for /{city}/
+    'city-post.html',          // Shell for /{city}/{slug}
 ]);
 
 // Page classification for priority and changefreq
@@ -64,7 +67,15 @@ const LOCATION_FILES = new Set([
     'stockton.html',
     'modesto.html',
     'chico.html',
+    'redding.html',
+    'oakland.html',
 ]);
+
+// Cities with Storyblok-backed content (mirrors CITY_NAMES in js/city.js)
+const CITY_SLUGS = [
+    'sacramento', 'roseville', 'stockton', 'modesto',
+    'oakland', 'redding', 'chico', 'fairfield',
+];
 
 function getPageConfig(filename) {
     if (PAGE_CONFIG[filename]) {
@@ -110,39 +121,57 @@ function getStaticPages() {
     return pages;
 }
 
-async function fetchAllBlogPosts() {
+// Blog posts use content.publish_date (format: "2026-02-02 00:00" or ISO)
+function blogLastmod(story) {
+    const d = story.content && story.content.publish_date;
+    if (d) return d.split(' ')[0].split('T')[0];
+    return story.published_at
+        ? story.published_at.split('T')[0]
+        : new Date().toISOString().split('T')[0];
+}
+
+// accident-news and city posts use content.Date (capital D)
+function cmsDateLastmod(story) {
+    const d = story.content && story.content.Date;
+    if (d) return d.split(' ')[0].split('T')[0];
+    return story.published_at
+        ? story.published_at.split('T')[0]
+        : new Date().toISOString().split('T')[0];
+}
+
+async function fetchStoriesFromFolder(prefix, opts) {
+    const { buildUrl, getLastmod, priority, changefreq } = opts;
     const posts = [];
     let page = 1;
     const perPage = 100;
 
     try {
         while (true) {
-            const url = `${STORYBLOK_API}/stories?token=${STORYBLOK_TOKEN}&version=published&starts_with=blog/&is_startpage=false&per_page=${perPage}&page=${page}&sort_by=content.publish_date:desc`;
-            const response = await fetch(url);
+            const url = `${STORYBLOK_API}/stories?token=${STORYBLOK_TOKEN}&version=published` +
+                `&starts_with=${encodeURIComponent(prefix)}&is_startpage=false` +
+                `&per_page=${perPage}&page=${page}`;
+            let response = await fetch(url);
+
+            // Storyblok's CDN has a short-burst rate limit; back off once on 429.
+            if (response.status === 429) {
+                await new Promise((resolve) => setTimeout(resolve, 2000));
+                response = await fetch(url);
+            }
 
             if (!response.ok) {
-                console.warn(`Storyblok API returned ${response.status} — skipping blog posts in sitemap`);
+                console.warn(`Storyblok ${prefix} returned ${response.status} — skipping`);
                 return [];
             }
 
             const data = await response.json();
-
             if (!data.stories || data.stories.length === 0) break;
 
             for (const story of data.stories) {
-                const publishDate = story.content && story.content.publish_date;
-                // Normalize "2026-02-02 00:00" to just the date part
-                const lastmod = publishDate
-                    ? publishDate.split(' ')[0].split('T')[0]
-                    : story.published_at
-                        ? story.published_at.split('T')[0]
-                        : new Date().toISOString().split('T')[0];
-
                 posts.push({
-                    loc: SITE_URL + '/blog/' + story.slug,
-                    lastmod,
-                    changefreq: 'monthly',
-                    priority: '0.6',
+                    loc: buildUrl(story),
+                    lastmod: getLastmod(story),
+                    changefreq,
+                    priority,
                 });
             }
 
@@ -151,8 +180,7 @@ async function fetchAllBlogPosts() {
             page++;
         }
     } catch (err) {
-        console.warn('Failed to fetch blog posts from Storyblok:', err.message);
-        console.warn('Blog posts will not be included in sitemap.');
+        console.warn(`Failed to fetch ${prefix} from Storyblok:`, err.message);
         return [];
     }
 
@@ -180,13 +208,55 @@ async function main() {
     console.log('Generating sitemap...');
 
     const staticPages = getStaticPages();
-    const blogPosts = await fetchAllBlogPosts();
-    const allEntries = [...staticPages, ...blogPosts];
+
+    const today = new Date().toISOString().split('T')[0];
+    const cityListings = CITY_SLUGS.map((city) => ({
+        loc: `${SITE_URL}/${city}/`,
+        lastmod: today,
+        changefreq: 'weekly',
+        priority: '0.7',
+    }));
+
+    // Fetch serially to avoid tripping Storyblok's burst rate limit (429s).
+    const blogPosts = await fetchStoriesFromFolder('blog/', {
+        buildUrl: (s) => `${SITE_URL}/blog/${s.slug}`,
+        getLastmod: blogLastmod,
+        priority: '0.6',
+        changefreq: 'monthly',
+    });
+    const newsPosts = await fetchStoriesFromFolder('accident-news/', {
+        buildUrl: (s) => `${SITE_URL}/accident-news/${s.slug}`,
+        getLastmod: cmsDateLastmod,
+        priority: '0.6',
+        changefreq: 'monthly',
+    });
+    const cityPosts = [];
+    for (const city of CITY_SLUGS) {
+        const posts = await fetchStoriesFromFolder(`${city}/`, {
+            buildUrl: (s) => `${SITE_URL}/${city}/${s.slug}`,
+            getLastmod: cmsDateLastmod,
+            priority: '0.6',
+            changefreq: 'monthly',
+        });
+        cityPosts.push(...posts);
+    }
+
+    const allEntries = [
+        ...staticPages,
+        ...cityListings,
+        ...blogPosts,
+        ...newsPosts,
+        ...cityPosts,
+    ];
 
     const xml = buildSitemapXml(allEntries);
     fs.writeFileSync(OUTPUT_FILE, xml, 'utf-8');
 
-    console.log(`Generated sitemap.xml with ${allEntries.length} URLs (${staticPages.length} pages + ${blogPosts.length} blog posts)`);
+    console.log(
+        `Generated sitemap.xml with ${allEntries.length} URLs ` +
+        `(${staticPages.length} static pages + ${cityListings.length} city listings + ` +
+        `${blogPosts.length} blog + ${newsPosts.length} accident-news + ${cityPosts.length} city posts)`
+    );
 }
 
 main().catch(function (err) {
