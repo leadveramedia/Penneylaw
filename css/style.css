@@ -3973,3 +3973,101 @@ body.modal-open {
 .image-preview-base.active {
     opacity: 1;
 }
+
+/* ==========================================================================
+   Cookie Consent Banner
+   ========================================================================== */
+.consent-banner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2000;
+    background: var(--dark-azure);
+    color: var(--white);
+    padding: 20px 0;
+    border-top: 3px solid var(--gold);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+    transform: translateY(100%);
+    transition: transform var(--transition-base);
+}
+
+.consent-banner--visible {
+    transform: translateY(0);
+}
+
+.consent-banner__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.consent-banner__text {
+    flex: 1 1 420px;
+    min-width: 0;
+}
+
+.consent-banner__heading {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0 0 4px;
+    color: var(--white);
+}
+
+.consent-banner__body {
+    font-family: var(--font-secondary);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--white);
+}
+
+.consent-banner__link {
+    color: var(--gold);
+    text-decoration: underline;
+}
+
+.consent-banner__link:hover,
+.consent-banner__link:focus-visible {
+    color: var(--white);
+}
+
+.consent-banner__actions {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.consent-banner__btn {
+    padding: 10px 24px;
+    font-size: 14px;
+    min-width: 120px;
+}
+
+@media (max-width: 768px) {
+    .consent-banner {
+        padding: 16px 0;
+    }
+    .consent-banner__inner {
+        gap: 16px;
+    }
+    .consent-banner__actions {
+        width: 100%;
+        justify-content: stretch;
+    }
+    .consent-banner__btn {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .consent-banner {
+        transition: none;
+    }
+}

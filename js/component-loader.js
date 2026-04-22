@@ -7,6 +7,20 @@
 (function() {
     'use strict';
 
+    // Google Consent Mode v2 defaults — must fire before GTM inserts gtm.js.
+    // Updated by js/consent.js once the user makes a choice (or auto-updated on GPC).
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ window.dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted',
+        wait_for_update: 500
+    });
+
     // Load Google Tag Manager (wrapped in try-catch so GTM failures never block component loading)
     try {
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

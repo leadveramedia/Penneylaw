@@ -12,6 +12,21 @@
     <!-- Trusted Types Policy (must load before any DOM sink usage) -->
     <script>if(typeof trustedTypes!=='undefined'){try{trustedTypes.createPolicy('default',{createHTML:function(s){return s},createScriptURL:function(s){return s},createScript:function(s){return s}})}catch(e){}}</script>
 
+    <!-- Google Consent Mode v2 defaults (must fire before GTM loads gtm.js) -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ window.dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted',
+        wait_for_update: 500
+    });
+    </script>
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -1777,6 +1792,7 @@
 </footer>
 
 <script src="../js/main.js"></script>
+<script src="../js/consent.min.js" defer></script>
 <script>
 (function() {
     'use strict';
