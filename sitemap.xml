@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.penneylaw.com/about-us.html</loc>
-        <lastmod>2026-02-27</lastmod>
+        <lastmod>2026-04-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -188,51 +188,75 @@
     </url>
     <url>
         <loc>https://www.penneylaw.com/sacramento/</loc>
-        <lastmod>2026-04-22</lastmod>
+        <lastmod>2026-04-23</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/roseville/</loc>
-        <lastmod>2026-04-22</lastmod>
+        <lastmod>2026-04-23</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/stockton/</loc>
-        <lastmod>2026-04-22</lastmod>
+        <lastmod>2026-04-23</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/modesto/</loc>
-        <lastmod>2026-04-22</lastmod>
+        <lastmod>2026-04-23</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/oakland/</loc>
-        <lastmod>2026-04-22</lastmod>
+        <lastmod>2026-04-23</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/redding/</loc>
-        <lastmod>2026-04-22</lastmod>
+        <lastmod>2026-04-23</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/chico/</loc>
-        <lastmod>2026-04-22</lastmod>
+        <lastmod>2026-04-23</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/fairfield/</loc>
-        <lastmod>2026-04-22</lastmod>
+        <lastmod>2026-04-23</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/frank-d-penney/</loc>
+        <lastmod>2026-04-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/mark-mccauley/</loc>
+        <lastmod>2026-04-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/joshua-boyce/</loc>
+        <lastmod>2026-04-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/jacob-stoeltzing/</loc>
+        <lastmod>2026-04-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/blog/accidents-near-stockton-s-crosstown-freeway-why-these-ramps-are-so-dangerous</loc>

@@ -77,6 +77,11 @@
         if (path.match(/^\/blog\/[^/]+/)) {
             return 'blog-post';
         }
+        // Attorney bio pages live at /{slug}/ (directory index). Return the slug.
+        var attorneyMatch = path.match(/^\/(frank-d-penney|mark-mccauley|joshua-boyce|jacob-stoeltzing)\/?$/);
+        if (attorneyMatch) {
+            return attorneyMatch[1];
+        }
         var filename = path.split('/').pop() || 'index.html';
         return filename.replace('.html', '') || 'index';
     }

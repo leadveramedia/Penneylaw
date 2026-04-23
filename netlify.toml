@@ -630,24 +630,9 @@
   force = true
 
 # --- Group 6: Attorney/Firm Pages ---
-[[redirects]]
-  from = "/mark-mccauley/"
-  to = "/about-us"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/frank-d-penney/"
-  to = "/about-us"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/joshua-boyce/"
-  to = "/about-us"
-  status = 301
-  force = true
-
+# Note: /mark-mccauley/, /frank-d-penney/, and /joshua-boyce/ were formerly 301'd
+# to /about-us (WordPress migration). They now serve individual attorney bio pages
+# at /{slug}/index.html, so the redirects were removed to let Netlify serve them.
 [[redirects]]
   from = "/you-can-bank-on-frank/"
   to = "/about-us"

@@ -77,6 +77,14 @@ const CITY_SLUGS = [
     'oakland', 'redding', 'chico', 'fairfield',
 ];
 
+// Attorney bio pages live at /{slug}/index.html; not picked up by root-only scan.
+const ATTORNEY_SLUGS = [
+    'frank-d-penney',
+    'mark-mccauley',
+    'joshua-boyce',
+    'jacob-stoeltzing',
+];
+
 function getPageConfig(filename) {
     if (PAGE_CONFIG[filename]) {
         return PAGE_CONFIG[filename];
@@ -217,6 +225,13 @@ async function main() {
         priority: '0.7',
     }));
 
+    const attorneyPages = ATTORNEY_SLUGS.map((slug) => ({
+        loc: `${SITE_URL}/${slug}/`,
+        lastmod: today,
+        changefreq: 'monthly',
+        priority: '0.6',
+    }));
+
     // Fetch serially to avoid tripping Storyblok's burst rate limit (429s).
     const blogPosts = await fetchStoriesFromFolder('blog/', {
         buildUrl: (s) => `${SITE_URL}/blog/${s.slug}`,
@@ -244,6 +259,7 @@ async function main() {
     const allEntries = [
         ...staticPages,
         ...cityListings,
+        ...attorneyPages,
         ...blogPosts,
         ...newsPosts,
         ...cityPosts,
@@ -255,6 +271,7 @@ async function main() {
     console.log(
         `Generated sitemap.xml with ${allEntries.length} URLs ` +
         `(${staticPages.length} static pages + ${cityListings.length} city listings + ` +
+        `${attorneyPages.length} attorney pages + ` +
         `${blogPosts.length} blog + ${newsPosts.length} accident-news + ${cityPosts.length} city posts)`
     );
 }
