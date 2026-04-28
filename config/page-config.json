@@ -262,6 +262,15 @@
       "ctaTagline": "BANK ON FRANK!",
       "ctaTitle": "Ready to Discuss Your Case?",
       "ctaDescription": "Our experienced attorneys can help you understand the full value of your claim. Contact us today for a free, no-obligation consultation."
+    },
+    "attorney-referrals": {
+      "type": "resources",
+      "title": "Attorney Referrals",
+      "modalHeading": "Refer a Case",
+      "modalSubtitle": "Share the case details and our team will follow up promptly.",
+      "ctaTagline": "ATTORNEY REFERRALS",
+      "ctaTitle": "Have a Case to Refer?",
+      "ctaDescription": "Send us the key details and our team will review the matter promptly, respect the referral relationship, and discuss the next step."
     }
   },
   "defaults": {

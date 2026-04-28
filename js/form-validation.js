@@ -58,7 +58,7 @@
                     return;
                 }
                 // Build subject line for Netlify email notification
-                var fullName = (form.querySelector('[name="name"]') || {}).value || '';
+                var fullName = (form.querySelector('[name="name"], [name="firm_name"]') || {}).value || '';
                 var phone = (form.querySelector('[name="phone"]') || {}).value || '';
                 var subjectField = form.querySelector('[name="subject"]');
                 if (subjectField) {
@@ -98,7 +98,7 @@
         // Check if empty
         if (input.hasAttribute('required') && !value) {
             isValid = false;
-            errorMessage = getRequiredMessage(name);
+            errorMessage = input.getAttribute('data-required-message') || getRequiredMessage(name);
         }
         // Validate email
         else if (type === 'email' && value && !isValidEmail(value)) {
@@ -131,6 +131,7 @@
     function getRequiredMessage(fieldName) {
         const messages = {
             'name': 'Please enter your full name',
+            'firm_name': 'Please enter your firm name',
             'email': 'Please enter your email address',
             'phone': 'Please enter your phone number',
             'message': 'Please tell us how we can help'

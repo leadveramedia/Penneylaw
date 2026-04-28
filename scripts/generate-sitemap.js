@@ -37,6 +37,7 @@ const PAGE_CONFIG = {
     'contact.html':         { priority: '0.9', changefreq: 'monthly' },
     'practice-areas.html':  { priority: '0.9', changefreq: 'monthly' },
     'about-us.html':        { priority: '0.8', changefreq: 'monthly' },
+    'attorney-referrals.html': { priority: '0.6', changefreq: 'monthly' },
     'locations.html':       { priority: '0.8', changefreq: 'monthly' },
     'blog.html':            { priority: '0.7', changefreq: 'weekly' },
     'resources.html':       { priority: '0.6', changefreq: 'monthly' },
