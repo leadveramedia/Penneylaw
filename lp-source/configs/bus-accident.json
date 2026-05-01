@@ -1,0 +1,78 @@
+{
+    "slug": "bus-accident",
+    "practiceArea": "Bus Accident",
+    "title": "California Bus Accident Lawyer | Frank Penney Injury Law",
+    "metaDescription": "California bus accident lawyer for public transit, school bus, charter bus, and shuttle injuries. $1B+ recovered. Free consultation 24/7. No fee unless we win.",
+    "heroImage": "../images/practice-areas/bus-accident.webp",
+    "h1Pre": "California",
+    "h1Span": "Bus Accident Lawyer",
+    "heroSubheadline": "Injured in a Bus Accident? We Handle Public Transit, School Bus, and Charter Cases.",
+    "mobileH2": "California<br>Bus Accident Lawyer",
+    "whyText": "Bus accident cases are uniquely complicated — buses are common carriers held to a higher standard of care, government-owned buses have special claim procedures, and severe injuries are common. Frank Penney Injury Law has 30+ years navigating these complexities.",
+    "citiesTitle": "California Bus Accident Lawyers Across Northern California",
+    "citiesLede": "Frank Penney Injury Law represents <strong>bus accident</strong> victims across Sacramento, Roseville, Fairfield, Stockton, Modesto, Chico, and all of Northern California. We handle every type of bus crash: public transit (RT, SacRT, Yolobus), school bus, charter bus, tour bus, shuttle, and Greyhound. Buses are 'common carriers' under California law, meaning operators owe passengers the highest degree of care. Government-owned buses (city and county transit) are subject to short claim deadlines — often six months — so contact a bus accident lawyer immediately.",
+    "faqTitle": "Bus Accident Lawyer FAQs",
+    "serviceType": "Bus Accident Lawyer",
+    "serviceName": "California Bus Accident Lawyer",
+    "serviceDescription": "Representing California bus accident victims with $1 Billion+ recovered. We handle public transit, school bus, charter, and shuttle bus crashes throughout Sacramento, Roseville, Fairfield, Stockton, Modesto, and Chico.",
+    "breadcrumbName": "California Bus Accident Lawyer",
+    "faq": [
+        {
+            "q": "Are bus operators held to a higher standard of care than regular drivers?",
+            "a": "Yes. Under California law, buses are 'common carriers' — operators must use the highest degree of care for passenger safety, going well beyond the ordinary negligence standard. This higher standard makes it easier to establish fault for sudden stops, sharp turns, or other operator decisions that cause injury."
+        },
+        {
+            "q": "How long do I have to sue if I was hurt on a public transit bus?",
+            "a": "Government-owned buses (RT, SacRT, Yolobus, school district buses) require a formal claim under the California Government Claims Act within six months of the accident. Missing this deadline almost always bars the claim. If the claim is denied, a lawsuit must follow within strict additional deadlines. Contact a bus accident lawyer immediately."
+        },
+        {
+            "q": "What if I was a pedestrian or driver hit by a bus?",
+            "a": "You have the same rights as anyone hit by a negligent commercial vehicle. Bus operators are required to drive carefully, yield as required, and follow all traffic laws. We pursue claims against transit authorities, school districts, and private bus operators on behalf of passengers, pedestrians, cyclists, and drivers struck by buses."
+        },
+        {
+            "q": "Who can I sue after a school bus accident?",
+            "a": "Depending on the facts, the school district, the private contractor operating the bus, the driver, and the bus manufacturer may all be potentially liable. School districts are government entities, so a Government Claims Act notice within six months is critical."
+        },
+        {
+            "q": "How much is a bus accident case worth?",
+            "a": "Bus crashes often involve multiple injured passengers and substantial commercial insurance — settlements range widely. Severe-injury cases often settle in the high six or seven figures. Final value depends on the severity of injuries, medical bills, lost wages, future care, and the strength of liability evidence."
+        },
+        {
+            "q": "What evidence is important in a bus accident case?",
+            "a": "Bus video (most modern buses have multiple cameras), GPS data, the driver's logs and qualification file, drug and alcohol test results, maintenance records, and witness statements from other passengers. Government-bus video is often retained only briefly — preservation letters need to go out fast."
+        },
+        {
+            "q": "What if multiple passengers were injured in the same bus crash?",
+            "a": "Common. Each injured person has their own claim, but the policy limits may be shared across all claimants. We coordinate our representation strategically — sometimes negotiating early, sometimes filing immediately — to ensure our client recovers their fair share before policy limits are exhausted."
+        },
+        {
+            "q": "What if I was hurt by a sudden stop or sharp turn (no collision)?",
+            "a": "You can still have a strong claim. Common-carrier liability applies even without a crash — if the operator's sudden braking, sharp turn, or jerky maneuvering caused your injury, the bus operator is potentially liable. Onboard video typically captures these incidents clearly."
+        },
+        {
+            "q": "How long does a bus accident case take to resolve?",
+            "a": "Public-entity cases tend to take longer due to the claim-and-response procedure (typically 45 days for the entity to respond, then a lawsuit window). Multi-passenger cases also take longer because of the coordination required. Straightforward private-bus cases can resolve in months; complex public cases often take a year or more."
+        },
+        {
+            "q": "How much does it cost to hire a bus accident lawyer?",
+            "a": "Frank Penney Injury Law works on a contingency basis. You pay nothing up front and no fee unless we win. Free consultations are available 24/7 by phone at (888) 888-0566 or in person at any of our 6 California offices. We also make home and hospital visits anywhere in Northern California."
+        }
+    ],
+    "testimonials": [
+        {
+            "author": "Jennifer M.",
+            "case": "5-Star Google Review",
+            "text": "The settlement was more than I could have received on my own and the fact that I could hand it all over to him to resolve was without a doubt worth it! It was the best decision I ever made throughout this process."
+        },
+        {
+            "author": "Robert S.",
+            "case": "5-Star Google Review",
+            "text": "At a time when I was most vulnerable, I received support and understanding. Frank Penney Injury Lawyers provide excellent customer service. I cannot recommend them enough to my friends and family!"
+        },
+        {
+            "author": "Maria L.",
+            "case": "5-Star Google Review",
+            "text": "I would highly recommend this firm for those that do not know anything about the procedures that take place after a car injury. They were responsive, accommodating, and I had a good feeling about the firm from the start."
+        }
+    ]
+}

@@ -1,0 +1,78 @@
+{
+    "slug": "rideshare-accident",
+    "practiceArea": "Rideshare Accident",
+    "title": "California Rideshare Accident Lawyer | Frank Penney Injury Law",
+    "metaDescription": "California rideshare accident lawyer for passengers, drivers, and pedestrians hurt in rideshare crashes. $1B+ recovered. Free consultation 24/7.",
+    "heroImage": "../images/practice-areas/rideshare-accident.webp",
+    "h1Pre": "California",
+    "h1Span": "Rideshare Accident Lawyer",
+    "heroSubheadline": "Hurt in a Rideshare Crash? Get a Free Case Review.",
+    "mobileH2": "California<br>Rideshare Accident Lawyer",
+    "whyText": "Rideshare crashes involve layers of insurance and corporate liability that ordinary car accidents don't. Frank Penney Injury Law has 30+ years of personal injury experience and we know how to navigate the rideshare insurance maze for the fairest possible recovery.",
+    "citiesTitle": "California Rideshare Accident Lawyers Across Northern California",
+    "citiesLede": "Frank Penney Injury Law represents <strong>rideshare accident</strong> victims across Sacramento, Roseville, Fairfield, Stockton, Modesto, Chico, and the rest of Northern California. We handle every type of rideshare crash: passengers hurt in an Uber or Lyft vehicle, pedestrians or cyclists struck by rideshare drivers, and other drivers hit by gig drivers on the way to a pickup. California's Public Utilities Commission requires Transportation Network Companies (TNCs) to carry up to $1 million in liability coverage during certain periods — but applying it correctly takes experience.",
+    "faqTitle": "Rideshare Accident Lawyer FAQs",
+    "serviceType": "Rideshare Accident Lawyer",
+    "serviceName": "California Rideshare Accident Lawyer",
+    "serviceDescription": "Representing California rideshare accident victims with $1 Billion+ recovered. We handle passenger, pedestrian, and driver injuries from rideshare crashes throughout Sacramento, Roseville, Fairfield, Stockton, Modesto, and Chico.",
+    "breadcrumbName": "California Rideshare Accident Lawyer",
+    "faq": [
+        {
+            "q": "Who pays if I'm injured in a rideshare accident — the driver or the rideshare company?",
+            "a": "It depends on what the driver was doing at the time. If the driver was logged into the app and on a trip with a passenger, the rideshare company's $1 million liability policy typically applies. If the app was off, the driver's personal auto policy applies. There are intermediate periods (logged in, no passenger) with different coverage. We figure out which policy applies and pursue it."
+        },
+        {
+            "q": "Does the $1 million rideshare insurance policy apply to my case?",
+            "a": "It applies during 'Period 3' — when a rideshare driver has accepted a ride and either is on the way to pick up the passenger or has the passenger in the car. Earlier periods (logged in but no ride accepted, or app off) trigger different, often lower, coverage. The exact period the driver was in determines which policy pays."
+        },
+        {
+            "q": "What if I was a passenger in a rideshare vehicle when the crash happened?",
+            "a": "Passengers in an Uber, Lyft, or other rideshare vehicle have multiple potential sources of recovery: the rideshare company's $1M policy (Period 3), the driver's personal insurance, the at-fault driver's insurance if a third party caused the crash, and uninsured/underinsured motorist coverage. We pursue every available source."
+        },
+        {
+            "q": "What if I was hit by a rideshare driver while walking or biking?",
+            "a": "Pedestrians and cyclists struck by rideshare drivers have the same rights as anyone hit by a negligent driver — plus access to the rideshare company's commercial coverage during active periods. We investigate which app period the driver was in and pursue the appropriate policy."
+        },
+        {
+            "q": "How does rideshare accident liability differ for delivery (food / package) drivers?",
+            "a": "Food-delivery and package-delivery gig work (DoorDash, Uber Eats, Instacart, Amazon Flex) operates similarly to passenger rideshare, but coverage details vary by company and period. Some delivery platforms provide commercial coverage during active deliveries; others require drivers to use personal insurance. We research the specific platform's policy."
+        },
+        {
+            "q": "What evidence do I need to preserve from a rideshare crash?",
+            "a": "The trip receipt or app screenshots showing the trip details, the driver's name and license plate, the police report, photos of the scene and damage, witness statements, and your medical records. The rideshare company also has trip-level data (time, route, status) that we subpoena early in the case."
+        },
+        {
+            "q": "How long do I have to file a rideshare accident claim in California?",
+            "a": "Generally two years from the date of the rideshare crash under California's personal injury statute of limitations. Don't wait — rideshare companies aggressively investigate and document trips, and you should have an experienced rideshare accident lawyer working for you just as quickly."
+        },
+        {
+            "q": "Can I sue the rideshare company directly?",
+            "a": "Rideshare companies (Uber, Lyft, etc.) classify drivers as independent contractors and structure their insurance to limit direct corporate liability. We work within California's TNC regulations and target the appropriate insurance policy based on the driver's app status — that approach typically secures recovery from the rideshare company's commercial coverage."
+        },
+        {
+            "q": "What's the difference between Period 1, Period 2, and Period 3 rideshare insurance coverage?",
+            "a": "Period 1: app on, no ride accepted — limited contingent liability coverage from the rideshare company plus the driver's personal insurance. Period 2: ride accepted, driver on the way to pickup — full commercial coverage applies. Period 3: passenger in vehicle — full commercial coverage including the $1M liability limit. Determining the period correctly is critical."
+        },
+        {
+            "q": "How much does it cost to hire a rideshare accident lawyer?",
+            "a": "Frank Penney Injury Law works on a contingency basis. You pay nothing up front and no fee unless we win. Free consultations are available 24/7 by phone at (888) 888-0566 or at any of our 6 California offices. We also make home and hospital visits."
+        }
+    ],
+    "testimonials": [
+        {
+            "author": "Jennifer M.",
+            "case": "5-Star Google Review",
+            "text": "The settlement was more than I could have received on my own and the fact that I could hand it all over to him to resolve was without a doubt worth it! It was the best decision I ever made throughout this process."
+        },
+        {
+            "author": "Robert S.",
+            "case": "5-Star Google Review",
+            "text": "At a time when I was most vulnerable, I received support and understanding. Frank Penney Injury Lawyers provide excellent customer service. I cannot recommend them enough to my friends and family!"
+        },
+        {
+            "author": "Maria L.",
+            "case": "5-Star Google Review",
+            "text": "I would highly recommend this firm for those that do not know anything about the procedures that take place after a car injury. They were responsive, accommodating, and I had a good feeling about the firm from the start."
+        }
+    ]
+}

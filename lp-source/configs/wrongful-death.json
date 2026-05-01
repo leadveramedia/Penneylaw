@@ -1,0 +1,78 @@
+{
+    "slug": "wrongful-death",
+    "practiceArea": "Wrongful Death",
+    "title": "California Wrongful Death Lawyer | Frank Penney Injury Law",
+    "metaDescription": "California wrongful death lawyer for families who lost a loved one. $10.5M verdict. $1B+ recovered. Free consultation 24/7. Compassionate, no-fee representation.",
+    "heroImage": "../images/practice-areas/wrongful-death.webp",
+    "h1Pre": "California",
+    "h1Span": "Wrongful Death Lawyer",
+    "heroSubheadline": "Lost a Loved One? Get Compassionate, No-Fee Representation.",
+    "mobileH2": "California<br>Wrongful Death Lawyer",
+    "whyText": "Losing a loved one to someone else's negligence is devastating. Frank Penney Injury Law has 30+ years of experience helping families navigate wrongful death claims with compassion and skill — including a $10.5M wrongful death verdict.",
+    "citiesTitle": "California Wrongful Death Lawyers Across Northern California",
+    "citiesLede": "Frank Penney Injury Law represents <strong>wrongful death</strong> families across Sacramento, Roseville, Fairfield, Stockton, Modesto, Chico, and all of Northern California. Wrongful death claims arise when a loved one dies because of another's negligence — fatal car or truck accidents, medical errors, dangerous premises, or defective products. California Code of Civil Procedure §377.60 lists the family members who can bring a wrongful death claim, and the available damages cover financial and emotional loss.",
+    "faqTitle": "Wrongful Death Lawyer FAQs",
+    "serviceType": "Wrongful Death Lawyer",
+    "serviceName": "California Wrongful Death Lawyer",
+    "serviceDescription": "Representing California wrongful death families with $1 Billion+ recovered, including a $10.5M wrongful death verdict. We handle fatal accident cases throughout Sacramento, Roseville, Fairfield, Stockton, Modesto, and Chico.",
+    "breadcrumbName": "California Wrongful Death Lawyer",
+    "faq": [
+        {
+            "q": "Who can file a wrongful death claim in California?",
+            "a": "Under California Code of Civil Procedure §377.60, the surviving spouse, domestic partner, children, and (if no children) the deceased's parents and other heirs can file. Stepchildren and putative spouses may also qualify in certain circumstances. We help families understand their standing and coordinate claims among multiple eligible heirs."
+        },
+        {
+            "q": "What damages are available in a California wrongful death case?",
+            "a": "Recoverable damages include the financial support the deceased would have provided, the value of household services they performed, loss of love, companionship, comfort, care, and moral support, and funeral and burial expenses. Punitive damages are available in some cases (e.g., DUI-caused deaths) through a separate survival action."
+        },
+        {
+            "q": "How long do I have to file a wrongful death lawsuit in California?",
+            "a": "Generally two years from the date of death under California Code of Civil Procedure §335.1. Government-defendant cases (e.g., fatal injury caused by a public employee or vehicle) require a Government Claims Act notice within six months. Wrongful death deadlines are absolute — get a lawyer involved immediately."
+        },
+        {
+            "q": "What's the difference between a wrongful death claim and a survival action?",
+            "a": "A wrongful death claim compensates the family for their losses (financial support, companionship). A survival action — brought under California Code of Civil Procedure §377.30 — recovers what the deceased could have recovered if they'd lived (medical bills, lost wages, pre-death pain and suffering, and punitive damages where applicable). Most cases include both claims."
+        },
+        {
+            "q": "How is a wrongful death settlement divided among family members?",
+            "a": "California courts allocate wrongful death proceeds based on each heir's economic and emotional loss. The surviving spouse and children typically share the largest portion. We help families negotiate a fair allocation, and when the family cannot agree, the court resolves the dispute."
+        },
+        {
+            "q": "How much is a wrongful death case worth in California?",
+            "a": "Wrongful death cases are among the most valuable in personal injury — settlements and verdicts often range from high six figures to many millions, depending on the deceased's earnings, age, family circumstances, and the strength of liability evidence. Frank Penney Injury Law has obtained a $10.5M wrongful death verdict."
+        },
+        {
+            "q": "What evidence is critical in a wrongful death case?",
+            "a": "The accident or incident report, autopsy and medical records, witness statements, employment and earnings records (for lost-support calculations), the deceased's life expectancy, family testimony about the relationship, and (where applicable) financial records showing dependency. We handle this carefully and respectfully with grieving families."
+        },
+        {
+            "q": "Can I file a wrongful death claim if my loved one died in a workplace accident?",
+            "a": "Workers' compensation typically provides death benefits to dependents when an employee dies on the job. Third-party wrongful death claims may also be available — e.g., if a non-employer's negligence (a contractor, equipment manufacturer, or driver of another vehicle) caused the death. We evaluate every potential source of recovery."
+        },
+        {
+            "q": "How long does a wrongful death case take to resolve?",
+            "a": "Wrongful death cases are typically more complex than ordinary personal injury cases — multiple heirs, larger damages, and higher stakes for defendants — so they take longer to resolve. Most cases take a year or more, and some go to trial. We handle every step with the family's well-being in mind."
+        },
+        {
+            "q": "How much does it cost to hire a wrongful death lawyer?",
+            "a": "Frank Penney Injury Law works on a contingency basis. You pay nothing up front and no fee unless we win. Free consultations are available 24/7 by phone at (888) 888-0566 or at any of our 6 California offices. We also make home visits when families cannot easily travel."
+        }
+    ],
+    "testimonials": [
+        {
+            "author": "Jennifer M.",
+            "case": "5-Star Google Review",
+            "text": "The settlement was more than I could have received on my own and the fact that I could hand it all over to him to resolve was without a doubt worth it! It was the best decision I ever made throughout this process."
+        },
+        {
+            "author": "Robert S.",
+            "case": "5-Star Google Review",
+            "text": "At a time when I was most vulnerable, I received support and understanding. Frank Penney Injury Lawyers provide excellent customer service. I cannot recommend them enough to my friends and family!"
+        },
+        {
+            "author": "Maria L.",
+            "case": "5-Star Google Review",
+            "text": "I would highly recommend this firm for those that do not know anything about the procedures that take place after a car injury. They were responsive, accommodating, and I had a good feeling about the firm from the start."
+        }
+    ]
+}

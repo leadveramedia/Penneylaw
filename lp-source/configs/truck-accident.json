@@ -1,0 +1,78 @@
+{
+    "slug": "truck-accident",
+    "practiceArea": "Truck Accident",
+    "title": "California Truck Accident Lawyer | Frank Penney Injury Law",
+    "metaDescription": "California truck accident lawyer with $1B+ recovered. Semi, 18-wheeler, big rig, tractor-trailer crashes. Free consultation 24/7. No fee unless we win.",
+    "heroImage": "../images/practice-areas/truck-accident.webp",
+    "h1Pre": "California",
+    "h1Span": "Truck Accident Lawyer",
+    "heroSubheadline": "Hit by a Semi, 18-Wheeler, or Big Rig? We Hold Trucking Companies Accountable.",
+    "mobileH2": "California<br>Truck Accident Lawyer",
+    "whyText": "When you're injured by a commercial truck, you need a team that knows how to hold trucking companies and insurers accountable. At Frank Penney Injury Law, we treat every client like family — and we've recovered $1 Billion+ for accident victims across Northern California.",
+    "citiesTitle": "California Truck Accident Lawyers Across Northern California",
+    "citiesLede": "Frank Penney Injury Law represents victims of every kind of <strong>truck accident</strong> — semi-truck crashes, 18-wheeler collisions, big-rig wrecks, tractor-trailer pile-ups, and box-truck incidents. From I-5 through Sacramento and Stockton, to Highway 99 in Modesto, to I-80 through Roseville and Fairfield, to the routes around Chico, our truck accident attorneys handle commercial trucking cases across all of Northern California. We know federal motor carrier regulations (FMCSA), driver hour-of-service rules, and the maintenance standards trucking companies must follow.",
+    "faqTitle": "Truck Accident Lawyer FAQs",
+    "serviceType": "Truck Accident Lawyer",
+    "serviceName": "California Truck Accident Lawyer",
+    "serviceDescription": "Representing California truck accident victims with $1 Billion+ recovered. We handle semi-truck, 18-wheeler, big-rig, tractor-trailer, and commercial trucking accidents throughout Sacramento, Roseville, Fairfield, Stockton, Modesto, and Chico.",
+    "breadcrumbName": "California Truck Accident Lawyer",
+    "faq": [
+        {
+            "q": "How is a truck accident case different from a regular car accident case?",
+            "a": "Truck accidents involve federal regulations (FMCSA), commercial insurance policies that often exceed $1 million, and multiple potentially liable parties — the driver, trucking company, maintenance contractor, cargo loader, and even the truck manufacturer. Evidence like driver logs, ELD (electronic logging device) data, and dispatch records can disappear quickly, so getting a 18-wheeler accident lawyer involved early is critical."
+        },
+        {
+            "q": "Who can be held liable in an 18-wheeler accident — the driver, the trucking company, or both?",
+            "a": "Often both. The truck driver may be liable for negligent driving (speeding, fatigue, distraction), and the trucking company may be liable for negligent hiring, training, supervision, or for pressuring drivers to violate hour-of-service rules. The cargo loader, maintenance company, or truck manufacturer may also share fault. We investigate every potentially responsible party to maximize recovery."
+        },
+        {
+            "q": "What FMCSA regulations apply to commercial truck drivers in California?",
+            "a": "The Federal Motor Carrier Safety Administration sets rules on driver hours of service, drug and alcohol testing, vehicle maintenance, weight limits, cargo securement, and driver qualifications. Violations of these rules are powerful evidence in a tractor-trailer accident case. California also has state-specific rules that overlay federal regulations."
+        },
+        {
+            "q": "How much is a typical semi-truck accident settlement?",
+            "a": "Truck accident settlements typically far exceed car accident settlements because the injuries are usually more severe and commercial policies are larger. Cases involving serious injury or death often settle in the high six or seven figures. Frank Penney Injury Law has recovered $3.4M and $4.5M+ in big-rig and commercial trucking cases."
+        },
+        {
+            "q": "What evidence is critical in a big-rig accident case?",
+            "a": "Driver logbooks, ELD data, GPS records, dispatch communications, maintenance records, drug and alcohol test results, the driver's qualification file, the truck's black-box data, and surveillance video. Trucking companies are required to keep some of this only briefly, so a preservation-of-evidence letter must go out fast."
+        },
+        {
+            "q": "How long do I have to file a truck accident lawsuit in California?",
+            "a": "Generally two years from the date of the accident under California's personal injury statute of limitations. Government-vehicle cases (e.g., a public-fleet truck) require a claim within six months. Don't wait — evidence in commercial trucking cases vanishes quickly."
+        },
+        {
+            "q": "What if the truck driver was using their phone or fatigued?",
+            "a": "Distracted driving and fatigue are leading causes of semi-truck crashes. ELD data, cell phone records, and driver logs can prove violations of FMCSA hour-of-service rules. Proving fatigue or distraction can also support claims for punitive damages against the trucking company."
+        },
+        {
+            "q": "Can I sue the trucking company directly?",
+            "a": "Yes. Under the legal theory of vicarious liability (respondeat superior), trucking companies are responsible for their drivers' on-duty negligence. Companies can also face direct claims for negligent hiring, retention, training, supervision, and maintenance. Direct claims often unlock the trucking company's primary commercial policy plus excess coverage."
+        },
+        {
+            "q": "What's the difference between a tractor-trailer and an 18-wheeler accident?",
+            "a": "They're the same vehicle described different ways — a tractor (the cab) pulling a trailer with 18 wheels total. Big rig is another common term. Frank Penney Injury Law handles all commercial trucking cases regardless of the term used: semi, big rig, 18-wheeler, tractor-trailer, box truck, or delivery truck."
+        },
+        {
+            "q": "How quickly should I hire a truck accident lawyer after a crash?",
+            "a": "Within days, ideally. Trucking companies dispatch rapid-response teams to crash scenes — sometimes the same day — to investigate and protect themselves. Their lawyers are working immediately. You need someone working for you just as fast. Frank Penney Injury Law offers free 24/7 consultations and can come to your home or hospital."
+        }
+    ],
+    "testimonials": [
+        {
+            "author": "Jennifer M.",
+            "case": "5-Star Google Review",
+            "text": "The settlement was more than I could have received on my own and the fact that I could hand it all over to him to resolve was without a doubt worth it! It was the best decision I ever made throughout this process."
+        },
+        {
+            "author": "Robert S.",
+            "case": "5-Star Google Review",
+            "text": "At a time when I was most vulnerable, I received support and understanding. Frank Penney Injury Lawyers provide excellent customer service. I cannot recommend them enough to my friends and family!"
+        },
+        {
+            "author": "Maria L.",
+            "case": "5-Star Google Review",
+            "text": "I would highly recommend this firm for those that do not know anything about the procedures that take place after a car injury. They were responsive, accommodating, and I had a good feeling about the firm from the start."
+        }
+    ]
+}

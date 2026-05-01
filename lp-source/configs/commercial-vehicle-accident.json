@@ -1,0 +1,78 @@
+{
+    "slug": "commercial-vehicle-accident",
+    "practiceArea": "Commercial Vehicle Accident",
+    "title": "California Commercial Vehicle Accident Lawyer | Frank Penney Law",
+    "metaDescription": "California commercial vehicle accident lawyer for delivery truck, fleet, and box truck crashes. $1B+ recovered. Free consultation 24/7. No fee unless we win.",
+    "heroImage": "../images/practice-areas/commercial-vehicle-accident.webp",
+    "h1Pre": "California",
+    "h1Span": "Commercial Vehicle Accident Lawyer",
+    "heroSubheadline": "Hit by a Delivery Truck or Commercial Fleet Vehicle? Get a Free Case Review.",
+    "mobileH2": "California<br>Commercial Vehicle Lawyer",
+    "whyText": "Commercial vehicle and delivery truck accidents differ from regular car crashes — there's almost always an employer with deep insurance, the driver is usually on the clock, and federal and state regulations may apply. Frank Penney Injury Law has 30+ years of experience holding fleet operators accountable.",
+    "citiesTitle": "California Commercial Vehicle Accident Lawyers Across Northern California",
+    "citiesLede": "Frank Penney Injury Law represents <strong>commercial vehicle accident</strong> victims across Sacramento, Roseville, Fairfield, Stockton, Modesto, Chico, and the rest of Northern California. We handle delivery truck collisions, box truck crashes, and commercial fleet accidents — including incidents involving major shippers like UPS, FedEx, Amazon, and DHL drivers acting in the course of their work. Commercial fleet operators carry substantial liability insurance, and federal and state regulations governing commercial drivers (FMCSA hours of service, drug testing, vehicle maintenance) often provide powerful evidence of negligence.",
+    "faqTitle": "Commercial Vehicle Accident Lawyer FAQs",
+    "serviceType": "Commercial Vehicle Accident Lawyer",
+    "serviceName": "California Commercial Vehicle Accident Lawyer",
+    "serviceDescription": "Representing California commercial vehicle and delivery truck accident victims with $1 Billion+ recovered. We handle fleet driver crashes throughout Sacramento, Roseville, Fairfield, Stockton, Modesto, and Chico.",
+    "breadcrumbName": "California Commercial Vehicle Accident Lawyer",
+    "faq": [
+        {
+            "q": "Who is liable in a commercial delivery truck accident — the driver or the company?",
+            "a": "Usually both. Under the doctrine of respondeat superior, employers are liable for their employees' on-duty negligence. The company may also face direct claims for negligent hiring, training, supervision, vehicle maintenance, or routing decisions that pressured drivers to violate hour-of-service rules. Both theories typically open access to the company's primary and excess commercial coverage."
+        },
+        {
+            "q": "How is a delivery truck accident case different from a regular truck accident?",
+            "a": "Delivery operations (last-mile delivery, food delivery, package delivery) often involve smaller vehicles, more stops, more time pressure, and different regulatory regimes than long-haul trucking. Drivers may be employees, contractors, or gig workers — each category creates different liability and insurance landscapes. We sort out the structure quickly to identify all sources of recovery."
+        },
+        {
+            "q": "What if I was hit by a delivery driver in a residential neighborhood?",
+            "a": "Residential delivery accidents — pedestrians struck near delivery vehicles, residents backed over in driveways, neighborhood children hit on streets — are particularly common. Drivers in residential areas owe a heightened duty of care because of the obvious presence of pedestrians and children. We investigate route data, dashcam footage, and route-pressure as evidence."
+        },
+        {
+            "q": "Can I sue a major shipping company directly after a crash?",
+            "a": "Yes — when the driver was on the company's clock or operating a company-owned/leased vehicle. We pursue claims against major shippers when their drivers cause crashes, accessing both the company's primary commercial liability coverage and excess policies. Brand names like UPS, FedEx, Amazon, and DHL often have substantial insurance limits available."
+        },
+        {
+            "q": "What employer liability rules apply to commercial fleet accidents?",
+            "a": "Under California law, employers are vicariously liable for their employees' negligence within the course and scope of employment. They can also face direct liability for negligent hiring (e.g., hiring a driver with a poor record), negligent training, negligent supervision, or negligent vehicle maintenance. We pursue every theory that fits the facts."
+        },
+        {
+            "q": "How long do I have to file a commercial vehicle accident claim in California?",
+            "a": "Generally two years from the date of the accident. Government-fleet cases (e.g., a city or state vehicle) require a Government Claims Act notice within six months. Commercial fleet evidence (route data, dashcam, dispatch logs) is often retained briefly — get a lawyer involved immediately."
+        },
+        {
+            "q": "Are box truck and delivery van accidents handled differently?",
+            "a": "The legal framework is similar — employer liability, FMCSA rules where applicable, commercial insurance — but evidence varies. Box trucks may have ELDs and dashcams; delivery vans may have route-tracking apps and signature data. We adapt the discovery strategy to the specific fleet and vehicle type."
+        },
+        {
+            "q": "What evidence is critical in a commercial fleet accident case?",
+            "a": "Driver logs and ELD data, dashcam and GPS records, dispatch communications, route schedules, vehicle maintenance records, the driver's qualification file, drug and alcohol test results, and surveillance video. Preservation-of-evidence letters need to go out fast, especially against fleets that routinely overwrite footage."
+        },
+        {
+            "q": "What if the delivery driver was speeding to meet a delivery deadline?",
+            "a": "This is a frequent issue. Companies that incentivize fast deliveries — package quotas, delivery-time guarantees, peak-season bonuses — sometimes pressure drivers to drive unsafely. Discovery into the company's incentive structure can support direct corporate negligence claims and, in egregious cases, punitive damages."
+        },
+        {
+            "q": "How much is a commercial vehicle accident settlement worth?",
+            "a": "Commercial fleet cases often involve significant insurance limits (hundreds of thousands to millions of dollars in primary coverage, plus excess policies). Severe-injury cases against major fleets often settle in the high six or seven figures. Final value depends on the severity of injuries, evidence of corporate negligence, and the available coverage."
+        }
+    ],
+    "testimonials": [
+        {
+            "author": "Jennifer M.",
+            "case": "5-Star Google Review",
+            "text": "The settlement was more than I could have received on my own and the fact that I could hand it all over to him to resolve was without a doubt worth it! It was the best decision I ever made throughout this process."
+        },
+        {
+            "author": "Robert S.",
+            "case": "5-Star Google Review",
+            "text": "At a time when I was most vulnerable, I received support and understanding. Frank Penney Injury Lawyers provide excellent customer service. I cannot recommend them enough to my friends and family!"
+        },
+        {
+            "author": "Maria L.",
+            "case": "5-Star Google Review",
+            "text": "I would highly recommend this firm for those that do not know anything about the procedures that take place after a car injury. They were responsive, accommodating, and I had a good feeling about the firm from the start."
+        }
+    ]
+}

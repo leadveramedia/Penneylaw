@@ -1,0 +1,78 @@
+{
+    "slug": "slip-and-fall",
+    "practiceArea": "Slip and Fall",
+    "title": "California Slip and Fall Lawyer | Frank Penney Injury Law",
+    "metaDescription": "California slip and fall lawyer for premises liability injuries. Wet floors, broken stairs, dangerous conditions. $1B+ recovered. Free consultation 24/7.",
+    "heroImage": "../images/practice-areas/slip-and-fall.webp",
+    "h1Pre": "California",
+    "h1Span": "Slip and Fall Lawyer",
+    "heroSubheadline": "Injured on Someone Else's Property? Get a Free Case Review.",
+    "mobileH2": "California<br>Slip and Fall Lawyer",
+    "whyText": "Slip and fall cases are tougher than they look — proving the property owner knew (or should have known) about the hazard is the key. Frank Penney Injury Law has 30+ years building these cases and has recovered $1B+ for injury victims across California.",
+    "citiesTitle": "California Slip and Fall Lawyers Across Northern California",
+    "citiesLede": "Frank Penney Injury Law represents <strong>slip and fall</strong> victims across Sacramento, Roseville, Fairfield, Stockton, Modesto, Chico, and the rest of Northern California. Our slip and fall attorneys handle every kind of premises liability case: wet grocery store floors, broken stairs, poorly lit parking lots, uneven sidewalks, dangerous spills, and unmarked hazards. California premises liability law requires property owners to keep their property reasonably safe — and to warn of hazards they can't immediately fix.",
+    "faqTitle": "Slip and Fall Lawyer FAQs",
+    "serviceType": "Slip and Fall Lawyer",
+    "serviceName": "California Slip and Fall Lawyer",
+    "serviceDescription": "Representing California slip and fall victims with $1 Billion+ recovered. We handle premises liability cases, dangerous-condition claims, and trip-and-fall injuries throughout Sacramento, Roseville, Fairfield, Stockton, Modesto, and Chico.",
+    "breadcrumbName": "California Slip and Fall Lawyer",
+    "faq": [
+        {
+            "q": "What do I have to prove in a slip and fall case?",
+            "a": "Three things: (1) a dangerous condition existed on the property, (2) the property owner knew or should have known about it, and (3) the condition caused your fall and injury. Proving the owner had 'notice' of the hazard is usually the hardest part — incident reports, prior complaints, surveillance video, and inspection logs are critical evidence."
+        },
+        {
+            "q": "Can I sue if I fell in a grocery store, restaurant, or business?",
+            "a": "Yes — businesses owe customers a high duty of care. They must regularly inspect for hazards, clean up spills, fix broken floors and stairs, and warn customers of dangers they can't immediately remedy. Surveillance video, employee statements, and inspection logs typically determine liability in these cases."
+        },
+        {
+            "q": "What if I tripped on a public sidewalk?",
+            "a": "If the sidewalk is owned or maintained by a city or county (a government entity), you must file a Government Claims Act notice within six months. The hazard usually has to be 'dangerous' — not a minor crack or unevenness. Don't wait — government-claim deadlines are unforgiving."
+        },
+        {
+            "q": "What if I was partly at fault — texting, distracted, or in heels?",
+            "a": "California's pure comparative negligence rule means you can still recover even if partly at fault — your damages are reduced by your percentage. Insurance companies routinely try to inflate the injured person's fault, especially in slip-and-fall cases. Having a lawyer push back matters."
+        },
+        {
+            "q": "How much is a slip and fall case worth?",
+            "a": "Value depends on the severity of the injury, medical bills, lost wages, and future care. Cases involving fractures (especially hip fractures in older adults), back injuries, or head trauma can settle in the high six or seven figures. Minor-injury slip-and-fall cases may settle for tens of thousands."
+        },
+        {
+            "q": "How long do I have to file a slip and fall lawsuit in California?",
+            "a": "Generally two years from the date of the injury under California's personal injury statute of limitations. Government-defendant cases (e.g., a city building or public sidewalk) require a claim within six months — get a lawyer involved immediately."
+        },
+        {
+            "q": "What evidence should I preserve after a slip and fall?",
+            "a": "Photos of the hazard and your injuries, contact info for any witnesses, the incident report (request it from the business), the clothing and shoes you were wearing, and detailed medical records. If possible, return to the scene to document conditions before the property owner remediates them."
+        },
+        {
+            "q": "What if the property owner says I should have seen the hazard?",
+            "a": "The 'open and obvious' defense is common but not always a winner — especially when the hazard wasn't truly obvious, when the customer was distracted by displays or signs (as businesses intend), or when the hazard was concealed. We frequently overcome this defense with proper investigation."
+        },
+        {
+            "q": "Are wet-floor signs enough to protect a property owner from liability?",
+            "a": "Not always. The sign must be reasonably visible, placed near the hazard, and put up promptly after the spill is discovered. A sign placed too late or too far away — or a hazard that should have been cleaned up rather than just signed — doesn't shield the owner from liability."
+        },
+        {
+            "q": "How much does it cost to hire a slip and fall lawyer?",
+            "a": "Frank Penney Injury Law works on a contingency basis. You pay nothing up front and no fee unless we win. Free consultations are available 24/7 by phone at (888) 888-0566 or in person at any of our 6 California offices. We also make home and hospital visits."
+        }
+    ],
+    "testimonials": [
+        {
+            "author": "Jennifer M.",
+            "case": "5-Star Google Review",
+            "text": "The settlement was more than I could have received on my own and the fact that I could hand it all over to him to resolve was without a doubt worth it! It was the best decision I ever made throughout this process."
+        },
+        {
+            "author": "Robert S.",
+            "case": "5-Star Google Review",
+            "text": "At a time when I was most vulnerable, I received support and understanding. Frank Penney Injury Lawyers provide excellent customer service. I cannot recommend them enough to my friends and family!"
+        },
+        {
+            "author": "Maria L.",
+            "case": "5-Star Google Review",
+            "text": "I would highly recommend this firm for those that do not know anything about the procedures that take place after a car injury. They were responsive, accommodating, and I had a good feeling about the firm from the start."
+        }
+    ]
+}

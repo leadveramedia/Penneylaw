@@ -1,0 +1,78 @@
+{
+    "slug": "bicycle-accident",
+    "practiceArea": "Bicycle Accident",
+    "title": "California Bicycle Accident Lawyer | Frank Penney Injury Law",
+    "metaDescription": "California bicycle accident lawyer for cyclists hit by cars, trucks, and reckless drivers. $1B+ recovered. Free consultation 24/7. No fee unless we win.",
+    "heroImage": "../images/practice-areas/bicycle-accident.webp",
+    "h1Pre": "California",
+    "h1Span": "Bicycle Accident Lawyer",
+    "heroSubheadline": "Hit While Cycling? Get a Free Case Review.",
+    "mobileH2": "California<br>Bicycle Accident Lawyer",
+    "whyText": "Cyclists struck by motor vehicles often face severe injuries and dismissive insurance adjusters. Frank Penney Injury Law has 30+ years of experience advocating for bike accident victims across California, and we treat every cyclist like family.",
+    "citiesTitle": "California Bicycle Accident Lawyers Across Northern California",
+    "citiesLede": "Frank Penney Injury Law represents <strong>bicycle accident</strong> victims across Sacramento, Roseville, Fairfield, Stockton, Modesto, Chico, and the rest of Northern California. From bike-lane crashes on busy commuter routes to dooring incidents downtown to high-speed collisions on rural roads, our bike accident attorneys handle every kind of cyclist injury case. California Vehicle Code gives bicycles the same rights and duties as cars on most roads — and we hold drivers who violate those rights accountable.",
+    "faqTitle": "Bicycle Accident Lawyer FAQs",
+    "serviceType": "Bicycle Accident Lawyer",
+    "serviceName": "California Bicycle Accident Lawyer",
+    "serviceDescription": "Representing California bicycle accident victims with $1 Billion+ recovered. We handle cyclist injuries, dooring incidents, bike-lane crashes, and hit-and-run cases throughout Sacramento, Roseville, Fairfield, Stockton, Modesto, and Chico.",
+    "breadcrumbName": "California Bicycle Accident Lawyer",
+    "faq": [
+        {
+            "q": "What rights do cyclists have on California roads?",
+            "a": "Under California Vehicle Code §21200, cyclists have the same rights and duties as drivers of motor vehicles. That means drivers must yield to cyclists in bike lanes, give three feet of clearance when passing, and treat cyclists with the same care they'd give any other vehicle. Violations of these rules support a strong negligence claim after a bike crash."
+        },
+        {
+            "q": "What is 'dooring' and is the driver liable?",
+            "a": "Dooring happens when a parked motorist opens a door into a passing cyclist's path. Under California Vehicle Code §22517, opening a vehicle door into traffic is illegal — the driver who opens the door is almost always at fault for any resulting bike accident."
+        },
+        {
+            "q": "How much is a typical bicycle accident case worth?",
+            "a": "Cyclist injuries are often severe — fractures, head and neck trauma, road rash, and internal injuries are common. Settlements typically range from tens of thousands for moderate injuries to seven figures for catastrophic cases. Frank Penney Injury Law fights for the full value of medical bills, lost wages, future care, and pain and suffering."
+        },
+        {
+            "q": "What if I wasn't wearing a helmet during the cycling crash?",
+            "a": "Adults aren't legally required to wear helmets in California (riders under 18 are). Not wearing a helmet may reduce compensation for head injuries under comparative negligence, but doesn't affect compensation for other injuries (broken bones, road rash, internal damage) and doesn't bar your claim entirely."
+        },
+        {
+            "q": "How long do I have to file a bicycle accident lawsuit in California?",
+            "a": "Generally two years from the date of the bike crash under California's personal injury statute of limitations. Government-defendant cases (e.g., poor road maintenance by a city) require a claim within six months — get a lawyer involved fast."
+        },
+        {
+            "q": "Can I recover if I was hit by a hit-and-run driver?",
+            "a": "Yes. If you have uninsured/underinsured motorist (UM/UIM) coverage on your auto policy, that coverage typically applies even when you're on a bike. We help cyclists file UM claims, and we investigate to identify hit-and-run drivers when possible."
+        },
+        {
+            "q": "What evidence is critical in a cyclist injury case?",
+            "a": "The police report, photos of the scene and damage to your bike, witness statements, surveillance and dashcam video, the driver's insurance and statement, your medical records, and any cycling computer or GoPro data you had running. We move quickly to preserve all of it."
+        },
+        {
+            "q": "Who is at fault if a cyclist was hit in a bike lane?",
+            "a": "Drivers must yield to cyclists in marked bike lanes. A motorist who drifts into or crosses a bike lane and strikes a cyclist is almost always at fault. Right-hook collisions (a car turning right across a bike lane) are particularly common — and almost always the driver's fault."
+        },
+        {
+            "q": "Can I still recover if I was partially at fault for the bike crash?",
+            "a": "Yes. California follows pure comparative negligence — even if you bear some responsibility, you can recover damages reduced by your percentage of fault. Insurance companies often try to overstate cyclist fault, which is why having a bike accident lawyer fight back matters."
+        },
+        {
+            "q": "How much does it cost to hire a bicycle accident lawyer?",
+            "a": "Frank Penney Injury Law works on a contingency basis. You pay nothing up front and no fee unless we win. Free consultations are available 24/7 by phone at (888) 888-0566 or in person at any of our 6 California offices. We also make home and hospital visits."
+        }
+    ],
+    "testimonials": [
+        {
+            "author": "Jennifer M.",
+            "case": "5-Star Google Review",
+            "text": "The settlement was more than I could have received on my own and the fact that I could hand it all over to him to resolve was without a doubt worth it! It was the best decision I ever made throughout this process."
+        },
+        {
+            "author": "Robert S.",
+            "case": "5-Star Google Review",
+            "text": "At a time when I was most vulnerable, I received support and understanding. Frank Penney Injury Lawyers provide excellent customer service. I cannot recommend them enough to my friends and family!"
+        },
+        {
+            "author": "Maria L.",
+            "case": "5-Star Google Review",
+            "text": "I would highly recommend this firm for those that do not know anything about the procedures that take place after a car injury. They were responsive, accommodating, and I had a good feeling about the firm from the start."
+        }
+    ]
+}
