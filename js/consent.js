@@ -158,7 +158,7 @@
         document.body.appendChild(banner);
         window.requestAnimationFrame(function () {
             banner.classList.add('consent-banner--visible');
-            built.initialFocus.focus();
+            built.initialFocus.focus({ preventScroll: true });
         });
     }
 

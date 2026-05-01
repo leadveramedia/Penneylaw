@@ -346,7 +346,7 @@
             overlay.setAttribute('aria-hidden', 'false');
             document.body.classList.add('modal-open');
             var firstInput = modal.querySelector('input:not([type="hidden"])');
-            if (firstInput) firstInput.focus();
+            if (firstInput) firstInput.focus({ preventScroll: true });
         };
 
         // Floating button trigger
