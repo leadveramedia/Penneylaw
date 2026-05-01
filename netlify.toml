@@ -60,6 +60,16 @@
     Cache-Control = "public, max-age=86400"
 
 # Redirects
+
+# API: Google Ads Lead Form webhook → Netlify Function
+# Rewrite (status 200) so the URL stays /api/lead-form-webhook for Google.
+# Spec: webhook-spec-lead-form.md
+[[redirects]]
+  from = "/api/lead-form-webhook"
+  to = "/.netlify/functions/lead-form-webhook"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/car-accident-lawyer"
   to = "/car-accidents"

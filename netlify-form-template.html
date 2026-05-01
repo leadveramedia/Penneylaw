@@ -46,6 +46,23 @@
         <input name="phone" type="tel">
         <textarea name="message"></textarea>
     </form>
+
+    <!-- Google Ads Lead Form Asset (server-to-server submissions from netlify/functions/lead-form-worker.js) -->
+    <form name="google-ads-lead" data-netlify="true" netlify-honeypot="bot-field" hidden>
+        <input name="bot-field">
+        <input name="form-name" value="google-ads-lead">
+        <input name="name">
+        <input name="phone" type="tel">
+        <input name="email" type="email">
+        <input name="accident_when">
+        <input name="accident_type">
+        <input name="injured">
+        <input name="lead_id">
+        <input name="campaign_id">
+        <input name="ad_id">
+        <input name="gcl_id">
+        <input name="source">
+    </form>
 <script src="js/bundle.min.js" defer></script>
 </body>
 </html>
