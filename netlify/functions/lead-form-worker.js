@@ -135,35 +135,39 @@ exports.config = {
  * Convert a Google Ads Lead Form payload into a URL-encoded body
  * compatible with Netlify Forms server-to-server submission.
  *
- * Field mapping (matches the hidden <form name="google-ads-lead"> in
- * netlify-form-template.html):
- *   FULL_NAME      -> name
- *   PHONE_NUMBER   -> phone
- *   EMAIL          -> email
- *   "When did the accident happen?" -> accident_when
- *   "What type of accident?"        -> accident_type
- *   "Were you injured?"             -> injured
- *
- * Plus attribution metadata (lead_id, campaign_id, ad_id, gcl_id, source).
+ * Standard columns (FULL_NAME / PHONE_NUMBER / EMAIL) have stable column_ids.
+ * Custom-question column_ids vary per asset (e.g. Google may emit
+ * "when_did_this_incident_occur?" vs the spec's "When did the accident happen?")
+ * so we keyword-match across both column_id and column_name. Anything we don't
+ * recognize is preserved verbatim in the `all_answers` field so no data is lost.
  */
 function buildFormBody(payload) {
     const params = new URLSearchParams();
     params.set('form-name', FORM_NAME);
 
     const cols = Array.isArray(payload.user_column_data) ? payload.user_column_data : [];
-    const byId = {};
-    const byName = {};
-    for (const c of cols) {
-        if (c.column_id) byId[c.column_id] = c.string_value || '';
-        if (c.column_name) byName[c.column_name] = c.string_value || '';
-    }
 
-    params.set('name', byId.FULL_NAME || '');
-    params.set('phone', byId.PHONE_NUMBER || '');
-    params.set('email', byId.EMAIL || '');
-    params.set('accident_when', byName['When did the accident happen?'] || '');
-    params.set('accident_type', byName['What type of accident?'] || '');
-    params.set('injured', byName['Were you injured?'] || '');
+    // Standard fields by stable column_id
+    const stdById = {};
+    for (const c of cols) {
+        if (c.column_id) stdById[c.column_id] = c.string_value || '';
+    }
+    params.set('name', stdById.FULL_NAME || '');
+    params.set('phone', stdById.PHONE_NUMBER || '');
+    params.set('email', stdById.EMAIL || '');
+
+    // Custom questions: fuzzy keyword match across column_id + column_name.
+    params.set('accident_when', findColumn(cols, ['when']));
+    params.set('accident_type', findColumn(cols, ['type', 'accident']));
+    params.set('injured', findColumn(cols, ['injur']));
+
+    // Fallback / archive: every non-standard answer, formatted for human reading.
+    const STD = new Set(['FULL_NAME', 'PHONE_NUMBER', 'EMAIL']);
+    const allAnswers = cols
+        .filter(c => !STD.has(c.column_id))
+        .map(c => `${c.column_name || c.column_id || '?'}: ${c.string_value || ''}`)
+        .join('\n');
+    params.set('all_answers', allAnswers);
 
     params.set('lead_id', payload.lead_id || '');
     params.set('campaign_id', String(payload.campaign_id || ''));
@@ -172,6 +176,20 @@ function buildFormBody(payload) {
     params.set('source', 'Google Ads Lead Form');
 
     return params.toString();
+}
+
+/**
+ * Find the first column whose column_id OR column_name (lowercased) contains
+ * ALL of the given keyword substrings. Returns the string_value or ''.
+ */
+function findColumn(cols, keywords) {
+    for (const c of cols) {
+        const haystack = ((c.column_id || '') + ' ' + (c.column_name || '')).toLowerCase();
+        if (keywords.every(k => haystack.includes(k))) {
+            return c.string_value || '';
+        }
+    }
+    return '';
 }
 
 /**

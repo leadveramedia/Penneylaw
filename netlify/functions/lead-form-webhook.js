@@ -46,6 +46,20 @@ exports.handler = async (event) => {
     const leadId = body.lead_id;
     const signature = body.lead_id_signature;
 
+    // Google Ads "Preview" / test-mode pings include "is_test": true and omit
+    // lead_id_signature. Acknowledge with 200 so Roger's Preview tool succeeds,
+    // but don't persist (avoids cluttering Netlify Forms with test data).
+    if (body.is_test === true) {
+        console.info(JSON.stringify({
+            event: 'lead_form.test_ping',
+            lead_id: leadId,
+            campaign_id: body.campaign_id,
+            ad_id: body.ad_id,
+            latency_ms: Date.now() - start
+        }));
+        return { statusCode: 200, body: '' };
+    }
+
     if (!leadId || !signature) {
         console.warn(JSON.stringify({
             event: 'lead_form.missing_fields',
