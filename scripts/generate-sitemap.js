@@ -219,12 +219,12 @@ async function main() {
     const staticPages = getStaticPages();
 
     const today = new Date().toISOString().split('T')[0];
-    const cityListings = CITY_SLUGS.map((city) => ({
-        loc: `${SITE_URL}/${city}/`,
-        lastmod: today,
-        changefreq: 'weekly',
-        priority: '0.7',
-    }));
+
+    // Note: bare /{city}/ URLs are intentionally excluded. Netlify pretty-URL handling
+    // resolves them to the static /{city}.html landing page, so listing both forms in
+    // the sitemap creates duplicate-URL warnings. City-post URLs (/{city}/{slug}) are
+    // still indexed below since they're distinct content.
+    const cityListings = [];
 
     const attorneyPages = ATTORNEY_SLUGS.map((slug) => ({
         loc: `${SITE_URL}/${slug}/`,
