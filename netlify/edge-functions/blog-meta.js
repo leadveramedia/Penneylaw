@@ -87,6 +87,9 @@ export default async (request, context) => {
         const content = story.content;
 
         const response = await context.next();
+        if (response.status >= 300 && response.status < 400) {
+            return response;
+        }
         const html = await response.text();
 
         let title, description, postUrl, excerpt;
@@ -149,6 +152,11 @@ async function handleBareCity(citySlug, path, context) {
     const subtitle = `Personal injury articles and accident news for ${meta.name} and ${meta.county}.`;
 
     const response = await context.next();
+    // If Netlify returned a redirect (e.g. pretty-URL trailing-slash strip), pass it through
+    // unchanged. Wrapping a 3xx body in a 200 response would produce a broken page.
+    if (response.status >= 300 && response.status < 400) {
+        return response;
+    }
     const html = await response.text();
 
     let modifiedHtml = injectMeta(html, {
@@ -182,6 +190,9 @@ async function fallbackResponse(context, url) {
     // Set self-canonical to the requested URL and noindex so Google doesn't
     // dedupe the placeholder shell to the homepage.
     const response = await context.next();
+    if (response.status >= 300 && response.status < 400) {
+        return response;
+    }
     const html = await response.text();
     const selfCanonical = url.origin + url.pathname;
 
@@ -262,16 +273,13 @@ function escapeAttr(str) {
 }
 
 export const config = {
+    // Only intercept trailing-slash + slug paths. Bare /sacramento (no slash) is the static
+    // sacramento.html landing page — leaving it out so the edge function doesn't inject
+    // city-listing meta into the location-page shell.
     path: [
         "/blog/*",
         "/accident-news/*",
-        "/sacramento", "/sacramento/*",
-        "/roseville", "/roseville/*",
-        "/stockton", "/stockton/*",
-        "/modesto", "/modesto/*",
-        "/oakland", "/oakland/*",
-        "/redding", "/redding/*",
-        "/chico", "/chico/*",
-        "/fairfield", "/fairfield/*"
+        "/sacramento/*", "/roseville/*", "/stockton/*", "/modesto/*",
+        "/oakland/*", "/redding/*", "/chico/*", "/fairfield/*"
     ]
 };

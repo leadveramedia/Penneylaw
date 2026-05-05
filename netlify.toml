@@ -1308,49 +1308,49 @@
   from = "/sacramento/"
   to = "/city-listing.html"
   status = 200
-  force = false
+  force = true
 
 [[redirects]]
   from = "/roseville/"
   to = "/city-listing.html"
   status = 200
-  force = false
+  force = true
 
 [[redirects]]
   from = "/stockton/"
   to = "/city-listing.html"
   status = 200
-  force = false
+  force = true
 
 [[redirects]]
   from = "/modesto/"
   to = "/city-listing.html"
   status = 200
-  force = false
+  force = true
 
 [[redirects]]
   from = "/oakland/"
   to = "/city-listing.html"
   status = 200
-  force = false
+  force = true
 
 [[redirects]]
   from = "/redding/"
   to = "/city-listing.html"
   status = 200
-  force = false
+  force = true
 
 [[redirects]]
   from = "/chico/"
   to = "/city-listing.html"
   status = 200
-  force = false
+  force = true
 
 [[redirects]]
   from = "/fairfield/"
   to = "/city-listing.html"
   status = 200
-  force = false
+  force = true
 
 # City article pages: /[city]/[slug] -> /city-post.html
 [[redirects]]
