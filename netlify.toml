@@ -72,7 +72,7 @@
 
 [[redirects]]
   from = "/car-accident-lawyer"
-  to = "/car-accidents"
+  to = "/car-accidents.html"
   status = 301
   force = true
 
@@ -460,182 +460,182 @@
 # --- Group 4: City Location Pages ---
 [[redirects]]
   from = "/stockton-personal-injury-lawyer/"
-  to = "/stockton"
+  to = "/stockton.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/modesto-personal-injury-lawyer/"
-  to = "/modesto"
+  to = "/modesto.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/sacramento-personal-injury-lawyer/"
-  to = "/sacramento"
+  to = "/sacramento.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/roseville-personal-injury-lawyer/"
-  to = "/roseville"
+  to = "/roseville.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/chico-personal-injury-lawyer/"
-  to = "/chico"
+  to = "/chico.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/fairfield-personal-injury-lawyer/"
-  to = "/fairfield"
+  to = "/fairfield.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/oakland-personal-injury-lawyer/"
-  to = "/oakland"
+  to = "/oakland.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/redding-personal-injury-lawyer/"
-  to = "/redding"
+  to = "/redding.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/5-key-reasons-you-need-a-car-accident-lawyer-in-stockton-ca/"
-  to = "/stockton"
+  to = "/stockton.html"
   status = 301
   force = true
 
 # --- Group 5: Practice Area Redirects ---
 [[redirects]]
   from = "/california-truck-accident-lawyer/"
-  to = "/truck-accidents"
+  to = "/truck-accidents.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-bus-accident-lawyer/"
-  to = "/bus-accidents"
+  to = "/bus-accidents.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-bicycle-accident-lawyer/"
-  to = "/bicycle-accidents"
+  to = "/bicycle-accidents.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-motorcycle-accident-lawyer/"
-  to = "/motorcycle-accidents"
+  to = "/motorcycle-accidents.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-motorcycle-injury-lawyer/"
-  to = "/motorcycle-accidents"
+  to = "/motorcycle-accidents.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-wrongful-death-lawyer/"
-  to = "/wrongful-death"
+  to = "/wrongful-death.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-slip-and-fall-accident-lawyer/"
-  to = "/slip-and-fall"
+  to = "/slip-and-fall.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-dog-bite-lawyer/"
-  to = "/dog-bite"
+  to = "/dog-bite.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-dog-bite-laws/"
-  to = "/dog-bite"
+  to = "/dog-bite.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-brain-injury-lawyer/"
-  to = "/traumatic-brain-injuries"
+  to = "/traumatic-brain-injuries.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-car-accident-lawyer-2/"
-  to = "/car-accidents"
+  to = "/car-accidents.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-big-rig-accident-lawyer/"
-  to = "/truck-accidents"
+  to = "/truck-accidents.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-personal-injury-lawyer/"
-  to = "/practice-areas"
+  to = "/practice-areas.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-commercial-truck-accident-lawyer/"
-  to = "/practice-areas"
+  to = "/practice-areas.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-drunk-driving-accident-lawyer/"
-  to = "/practice-areas"
+  to = "/practice-areas.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-product-liability-lawyer/"
-  to = "/practice-areas"
+  to = "/practice-areas.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-negligent-construction-lawyer/"
-  to = "/practice-areas"
+  to = "/practice-areas.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-catastrophic-injury-lawyer/"
-  to = "/catastrophic-injury"
+  to = "/practice-areas.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/california-pedestrian-accident-lawyer/"
-  to = "/pedestrian-accident"
+  to = "/pedestrian-accidents.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/practice-area-vs/"
-  to = "/practice-areas"
+  to = "/practice-areas.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/motorcycle-accidents-spur-harley-davidson-recall/"
-  to = "/motorcycle-accidents"
+  to = "/motorcycle-accidents.html"
   status = 301
   force = true
 
@@ -645,20 +645,20 @@
 # at /{slug}/index.html, so the redirects were removed to let Netlify serve them.
 [[redirects]]
   from = "/you-can-bank-on-frank/"
-  to = "/about-us"
+  to = "/about-us.html"
   status = 301
   force = true
 
 # --- Group 7: Generic Redirects to /blog, /about-us, / ---
 [[redirects]]
   from = "/about-us/"
-  to = "/about-us"
+  to = "/about-us.html"
   status = 301
   force = false
 
 [[redirects]]
   from = "/case-settlements-information/"
-  to = "/about-us"
+  to = "/about-us.html"
   status = 301
   force = true
 
@@ -839,103 +839,103 @@
 # --- Group 8: www.penneylaw.com Old Paths ---
 [[redirects]]
   from = "/sacramento-office"
-  to = "/sacramento"
+  to = "/sacramento.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/reach-us"
-  to = "/contact"
+  to = "/contact.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/redding-office"
-  to = "/redding"
+  to = "/redding.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/wrongful-death-lawyer"
-  to = "/wrongful-death"
+  to = "/wrongful-death.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/motorcycle-accident-attorney"
-  to = "/motorcycle-accidents"
+  to = "/motorcycle-accidents.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/slip-and-fall-accident"
-  to = "/slip-and-fall"
+  to = "/slip-and-fall.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/bike-injury-attorney"
-  to = "/bicycle-accidents"
+  to = "/bicycle-accidents.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/car-accidents-page"
-  to = "/car-accidents"
+  to = "/car-accidents.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/negligent-construction-lawyer"
-  to = "/practice-areas"
+  to = "/practice-areas.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/our-privacy-policy"
-  to = "/privacy-policy"
+  to = "/privacy-policy.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/case-evaluations"
-  to = "/about-us"
+  to = "/about-us.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/case-settlement-information"
-  to = "/about-us"
+  to = "/about-us.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/240k-train-accident-settlement-for-retiree"
-  to = "/about-us"
+  to = "/about-us.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/750k-settlement-for-mild-traumatic-brain-injury"
-  to = "/about-us"
+  to = "/about-us.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/federal-court-verdict-in-michaud-et-al-v-united-states-of-america-10-5-million-award-for-our-clients"
-  to = "/about-us"
+  to = "/about-us.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/what-to-do-after-a-rideshare-accident-resulting-in-injury-or-death"
-  to = "/wrongful-death"
+  to = "/wrongful-death.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/truck-accidents-chico"
-  to = "/chico"
+  to = "/chico.html"
   status = 301
   force = true
 
@@ -1278,12 +1278,6 @@
   status = 301
   force = true
 
-[[redirects]]
-  from = "/are-license-plate-frames-illegal-in-california/"
-  to = "/blog/are-license-plate-frames-illegal-in-california"
-  status = 301
-  force = true
-
 # ==========================================
 # End Migration Redirects
 # ==========================================
@@ -1299,6 +1293,13 @@
 [[redirects]]
   from = "/accident-news/*"
   to = "/accident-news-post.html"
+  status = 200
+  force = false
+
+# Locations index: /locations/ -> /locations.html (paired with /locations.html -> /locations/ 301)
+[[redirects]]
+  from = "/locations/"
+  to = "/locations.html"
   status = 200
   force = false
 
@@ -1434,6 +1435,14 @@
 [[edge_functions]]
   function = "blog-meta"
   path = "/redding/*"
+
+[[edge_functions]]
+  function = "blog-meta"
+  path = "/chico/*"
+
+[[edge_functions]]
+  function = "blog-meta"
+  path = "/fairfield/*"
 
 # Form notifications - Netlify will automatically detect forms with data-netlify="true"
 # Configure email notifications in Netlify Dashboard under Forms > Form Notifications

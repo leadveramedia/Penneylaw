@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Defensive: edge function strips this on successful render. Keeps unrouted/failed renders out of Google. -->
+    <meta name="robots" content="noindex">
     <!-- Default meta tags - JS updates these dynamically -->
     <meta name="description" content="Frank Penney Injury Law has recovered $1 billion+ for Northern California personal injury victims. Free consultation. No fee unless we win.">
     <title>Frank Penney Injury Law | Northern California Personal Injury</title>
@@ -61,6 +63,11 @@
 
 <!-- Post Content (populated by JS) -->
 <article id="city-post-content" class="blog-post" aria-live="polite">
+    <!-- SSR placeholder (edge function injects real H1 + excerpt on success; sr-only so users see the skeleton) -->
+    <div class="ssr-post-header sr-only">
+        <h1 class="ssr-post-title">Loading article…</h1>
+        <p class="ssr-post-excerpt"></p>
+    </div>
     <!-- Loading skeleton -->
     <div id="city-post-loading" class="container blog-post-layout">
         <div class="blog-post-main">

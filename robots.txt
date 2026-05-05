@@ -12,6 +12,9 @@ Disallow: /components/
 Disallow: /netlify-form-template.html
 Disallow: /style-guide.html
 
+# Disallow paid landing pages (noindex'd, but skip crawl budget)
+Disallow: /lp/
+
 # Allow all major search engines
 User-agent: Googlebot
 Allow: /
