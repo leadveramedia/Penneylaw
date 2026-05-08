@@ -1692,6 +1692,9 @@
                 align-items: center;
                 justify-content: space-between;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+                height: 42px;
+                gap: 0.75rem;
+                overflow: hidden;
             }
             .mobile-cta-phone {
                 display: inline-flex;
@@ -1702,6 +1705,8 @@
                 font-size: 0.9375rem;
                 font-weight: 700;
                 text-decoration: none;
+                white-space: nowrap;
+                flex-shrink: 0;
             }
             .mobile-cta-phone svg {
                 width: 18px;
@@ -1718,6 +1723,7 @@
                 color: var(--lp-white);
                 text-transform: uppercase;
                 letter-spacing: 0.03em;
+                min-width: 0;
             }
             .mobile-cta-trust span {
                 white-space: nowrap;
@@ -1733,6 +1739,11 @@
             .lp-hero-callouts {
                 display: none;
             }
+        }
+        @media (max-width: 400px) {
+            .mobile-cta-trust span:first-child { display: none; }
+        }
+        @media (max-width: 768px) {
             /* Cities + FAQ also stack on mobile (rules below) */
 
             /* Hide hero tagline on mobile (already in mobile hero) */
