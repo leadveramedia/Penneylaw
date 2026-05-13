@@ -70,6 +70,9 @@ const LOCATION_FILES = new Set([
     'chico.html',
     'redding.html',
     'oakland.html',
+    'san-francisco.html',
+    'los-angeles.html',
+    'san-diego.html',
 ]);
 
 // Cities with Storyblok-backed content (mirrors CITY_NAMES in js/city.js)

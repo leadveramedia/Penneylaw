@@ -2,49 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.penneylaw.com/about-us.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/accident-news.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/attorney-referrals.html</loc>
-        <lastmod>2026-04-28</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/bicycle-accidents.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/blog.html</loc>
-        <lastmod>2026-02-27</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/bus-accidents.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/car-accidents.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/case-value-calculator.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
@@ -56,7 +56,7 @@
     </url>
     <url>
         <loc>https://www.penneylaw.com/contact.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -68,7 +68,7 @@
     </url>
     <url>
         <loc>https://www.penneylaw.com/dog-bite.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -80,15 +80,21 @@
     </url>
     <url>
         <loc>https://www.penneylaw.com/</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/locations.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/los-angeles.html</loc>
+        <lastmod>2026-05-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/modesto.html</loc>
@@ -98,7 +104,7 @@
     </url>
     <url>
         <loc>https://www.penneylaw.com/motorcycle-accidents.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -110,19 +116,19 @@
     </url>
     <url>
         <loc>https://www.penneylaw.com/pedestrian-accidents.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/personal-injury.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/practice-areas.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -157,8 +163,20 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://www.penneylaw.com/san-diego.html</loc>
+        <lastmod>2026-05-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/san-francisco.html</loc>
+        <lastmod>2026-05-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://www.penneylaw.com/slip-and-fall.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -176,43 +194,61 @@
     </url>
     <url>
         <loc>https://www.penneylaw.com/traumatic-brain-injuries.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/truck-accidents.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/wrongful-death.html</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/frank-d-penney/</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/mark-mccauley/</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/joshua-boyce/</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.penneylaw.com/jacob-stoeltzing/</loc>
-        <lastmod>2026-05-05</lastmod>
+        <lastmod>2026-05-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/what-happens-if-you-get-hit-while-double-parked-in-california</loc>
+        <lastmod>2026-05-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/how-much-is-my-personal-injury-case-worth-in-california-</loc>
+        <lastmod>2026-05-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/blog/why-attorneys-refer-complex-injury-cases-in-northern-california</loc>
+        <lastmod>2026-05-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
@@ -513,6 +549,12 @@
     <url>
         <loc>https://www.penneylaw.com/blog/underride-truck-accidents-and-why-they-are-so-deadly-2</loc>
         <lastmod>2026-02-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.penneylaw.com/accident-news/1fc773fa-bd61-4397-b332-0d4618858d91</loc>
+        <lastmod>2026-05-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
