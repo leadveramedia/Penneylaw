@@ -19,6 +19,7 @@
 
     // Configuration
     var STORAGE_KEY = 'ad_tracking_data';
+    var EC_STORAGE_KEY = 'enhanced_conversion_data';
     var TRACKING_PARAMS = [
         'utm_source',
         'utm_medium',
@@ -245,6 +246,49 @@
     }
 
     /**
+     * Extract and normalize user-provided data from a lead form for Google Ads
+     * Enhanced Conversions. Returns null if neither email nor phone is present.
+     * Raw values are stashed; GTM's Google Ads tag hashes (SHA-256) before send.
+     * @param {HTMLFormElement} form - The submitted form
+     * @returns {Object|null} leadsUserData object or null
+     */
+    function extractLeadsUserData(form) {
+        var emailInput = form.querySelector('input[name="email"]');
+        var phoneInput = form.querySelector('input[name="phone"]');
+        var nameInput = form.querySelector('input[name="name"]');
+
+        var email = emailInput ? emailInput.value.trim().toLowerCase() : '';
+        var rawPhone = phoneInput ? phoneInput.value : '';
+        var digits = rawPhone.replace(/\D/g, '');
+        var phone = '';
+        if (digits.length === 10) {
+            phone = '+1' + digits;
+        } else if (digits.length === 11 && digits.charAt(0) === '1') {
+            phone = '+' + digits;
+        } else if (digits.length > 0) {
+            phone = '+' + digits;
+        }
+
+        if (!email && !phone) {
+            return null;
+        }
+
+        var data = {};
+        if (email) data.email = email;
+        if (phone) data.phone_number = phone;
+
+        if (nameInput && nameInput.value.trim()) {
+            var nameParts = nameInput.value.trim().split(/\s+/);
+            var firstName = nameParts.shift();
+            var lastName = nameParts.join(' ');
+            data.address = { first_name: firstName };
+            if (lastName) data.address.last_name = lastName;
+        }
+
+        return data;
+    }
+
+    /**
      * Track form submission event to GTM dataLayer
      * @param {Event} event - The submit event
      */
@@ -272,6 +316,16 @@
 
         window.dataLayer.push(eventData);
         console.log('[Ad Tracking] Form submission tracked:', eventData);
+
+        // Stash user-provided data for Enhanced Conversions on thank-you.html
+        var leadsUserData = extractLeadsUserData(form);
+        if (leadsUserData) {
+            try {
+                sessionStorage.setItem(EC_STORAGE_KEY, JSON.stringify(leadsUserData));
+            } catch (e) {
+                console.warn('[Ad Tracking] Could not store enhanced conversion data:', e);
+            }
+        }
     }
 
     /**
@@ -299,6 +353,11 @@
             storeTrackingData(capturedData);
         }
 
+        // Always track form submissions (form_submit event + enhanced
+        // conversion data stash) regardless of traffic source — organic
+        // leads also need to feed Enhanced Conversions for Leads.
+        initializeFormTracking();
+
         // Step 3: Get stored tracking data (might be from previous page)
         var trackingData = getTrackingData();
 
@@ -309,14 +368,11 @@
 
         console.log('[Ad Tracking] Active tracking data:', trackingData);
 
-        // Step 4: Initialize forms with hidden fields
+        // Step 4: Initialize forms with hidden fields (UTM/gclid injection)
         initializeForms();
 
         // Step 5: Initialize phone click tracking
         initializePhoneTracking();
-
-        // Step 6: Initialize form submission tracking
-        initializeFormTracking();
 
         console.log('[Ad Tracking] Initialization complete');
     }

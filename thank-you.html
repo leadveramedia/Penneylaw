@@ -159,6 +159,13 @@
 <script src="js/bundle.min.js" defer></script>
 <script>
     window.dataLayer = window.dataLayer || [];
+    try {
+        var ecRaw = sessionStorage.getItem('enhanced_conversion_data');
+        if (ecRaw) {
+            window.dataLayer.push({ leadsUserData: JSON.parse(ecRaw) });
+            sessionStorage.removeItem('enhanced_conversion_data');
+        }
+    } catch (e) { /* fall through — conversion still fires without enhanced data */ }
     window.dataLayer.push({ event: 'form_conversion', page_path: window.location.pathname });
 </script>
 </body>
