@@ -1671,13 +1671,11 @@
   status = 301
   force = true
 
-# --- Audit: Attorney bios (directory form) ---
-[[redirects]]
-  from = "/mark-mccauley"
-  to = "/mark-mccauley/"
-  status = 301
-  force = true
-
+# --- Audit: Attorney bios (typo aliases only) ---
+# /mark-mccauley, /frank-d-penney, /joshua-boyce are served directly by the static
+# files at {slug}/index.html. Do NOT add `from = "/{slug}" to = "/{slug}/"` rules
+# here — they create an infinite 301 loop due to Netlify's pretty-URL aliasing.
+# scripts/lint-redirects.js guards against this regression.
 [[redirects]]
   from = "/joshuaboyce"
   to = "/joshua-boyce/"
@@ -1686,12 +1684,6 @@
 
 [[redirects]]
   from = "/frankdpenney"
-  to = "/frank-d-penney/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/frank-d-penney"
   to = "/frank-d-penney/"
   status = 301
   force = true

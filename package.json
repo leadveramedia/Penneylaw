@@ -13,7 +13,9 @@
     "minify:consent-js": "uglifyjs js/consent.js -o js/consent.min.js -c -m",
     "generate:sitemap": "node scripts/generate-sitemap.js",
     "build:lps": "node scripts/build-lps.js",
-    "build": "npm run minify:css && npm run minify:blog-css && npm run minify:js && npm run minify:blog-js && npm run minify:accident-news-js && npm run minify:city-js && npm run minify:consent-js && npm run build:lps && npm run generate:sitemap",
+    "lint:redirects": "node scripts/lint-redirects.js",
+    "test:redirects": "node scripts/test-redirects.js \"../Frank Penney - Migration - 2026 - Pages.csv\" http://localhost:8888",
+    "build": "npm run lint:redirects && npm run minify:css && npm run minify:blog-css && npm run minify:js && npm run minify:blog-js && npm run minify:accident-news-js && npm run minify:city-js && npm run minify:consent-js && npm run build:lps && npm run generate:sitemap",
     "convert-locations": "node scripts/convert-location-images.js"
   },
   "dependencies": {

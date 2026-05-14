@@ -39,12 +39,23 @@ function testRedirect(originalUrl) {
         if (!path) path = '/';
 
         const url = `${baseUrl}${path}`;
+        const visited = [];
 
-        const makeRequest = (requestUrl, redirectCount = 0) => {
-            if (redirectCount > 10) {
-                resolve({ path, status: 'TOO_MANY_REDIRECTS', finalUrl: requestUrl });
+        const makeRequest = (requestUrl) => {
+            if (visited.includes(requestUrl)) {
+                resolve({
+                    path,
+                    status: 'REDIRECT_LOOP',
+                    finalUrl: requestUrl,
+                    loopChain: [...visited, requestUrl],
+                });
                 return;
             }
+            if (visited.length > 10) {
+                resolve({ path, status: 'TOO_MANY_REDIRECTS', finalUrl: requestUrl, loopChain: visited });
+                return;
+            }
+            visited.push(requestUrl);
 
             const mod = requestUrl.startsWith('https') ? https : http;
             const req = mod.get(requestUrl, { timeout: 10000 }, (res) => {
@@ -53,12 +64,12 @@ function testRedirect(originalUrl) {
                     if (location.startsWith('/')) {
                         location = `${baseUrl}${location}`;
                     }
-                    makeRequest(location, redirectCount + 1);
+                    makeRequest(location);
                 } else {
                     // Get final path
                     let finalPath = requestUrl.replace(baseUrl, '');
                     if (!finalPath) finalPath = '/';
-                    resolve({ path, status: res.statusCode, finalUrl: finalPath, redirectCount });
+                    resolve({ path, status: res.statusCode, finalUrl: finalPath, redirectCount: visited.length - 1 });
                 }
             });
             req.on('error', (e) => {
@@ -74,6 +85,41 @@ function testRedirect(originalUrl) {
     });
 }
 
+// Canonical URLs that must return 200 (no loops, no 4xx/5xx). Add slugs here
+// when you ship a new top-level page. This is the safety net that would have
+// caught the /frank-d-penney/ ⇄ /frank-d-penney/ loop pre-deploy.
+const CANONICAL_URLS = [
+    '/',
+    '/about-us.html',
+    '/contact.html',
+    '/practice-areas.html',
+    '/locations.html',
+    '/frank-d-penney/',
+    '/mark-mccauley/',
+    '/joshua-boyce/',
+];
+
+async function runCanonicalSmokeTest() {
+    console.log(`\n${'='.repeat(80)}`);
+    console.log(`CANONICAL SMOKE TEST (must return 200, no loops)`);
+    console.log(`${'='.repeat(80)}\n`);
+
+    const failures = [];
+    for (const url of CANONICAL_URLS) {
+        const result = await testRedirect(`https://penneylaw.com${url}`);
+        if (result.status === 200) {
+            console.log(`  OK  ${url}`);
+        } else if (result.status === 'REDIRECT_LOOP') {
+            console.log(`  LOOP ${url} → chain: ${result.loopChain.join(' → ')}`);
+            failures.push({ url, result });
+        } else {
+            console.log(`  FAIL ${url} → HTTP ${result.status} at ${result.finalUrl}`);
+            failures.push({ url, result });
+        }
+    }
+    return failures;
+}
+
 async function main() {
     const pairs = [];
     for (const line of lines) {
@@ -87,7 +133,7 @@ async function main() {
 
     console.log(`Testing ${pairs.length} URLs against ${baseUrl}...\n`);
 
-    const results = { pass: [], fail: [], noTarget: [], error: [] };
+    const results = { pass: [], fail: [], noTarget: [], error: [], loop: [] };
 
     // Test in batches of 10 for speed
     for (let i = 0; i < pairs.length; i += 10) {
@@ -101,7 +147,9 @@ async function main() {
         }));
 
         for (const { originalUrl, newUrl, result, expectedPath, actualPath } of batchResults) {
-            if (result.status === 'ERROR' || result.status === 'TIMEOUT') {
+            if (result.status === 'REDIRECT_LOOP' || result.status === 'TOO_MANY_REDIRECTS') {
+                results.loop.push({ originalUrl, newUrl, result });
+            } else if (result.status === 'ERROR' || result.status === 'TIMEOUT') {
                 results.error.push({ originalUrl, newUrl, result });
             } else if (!newUrl || newUrl === '/') {
                 // No target URL or redirect to home - just check it doesn't 404 if redirecting to /
@@ -122,8 +170,17 @@ async function main() {
 
     // Print results
     console.log(`\n${'='.repeat(80)}`);
-    console.log(`RESULTS: ${results.pass.length} PASS | ${results.fail.length} FAIL | ${results.noTarget.length} NO TARGET | ${results.error.length} ERROR`);
+    console.log(`RESULTS: ${results.pass.length} PASS | ${results.fail.length} FAIL | ${results.loop.length} LOOP | ${results.noTarget.length} NO TARGET | ${results.error.length} ERROR`);
     console.log(`${'='.repeat(80)}\n`);
+
+    if (results.loop.length > 0) {
+        console.log('--- REDIRECT LOOPS ---');
+        for (const { originalUrl, result } of results.loop) {
+            console.log(`  LOOP: ${originalUrl}`);
+            console.log(`    Chain: ${(result.loopChain || []).join(' → ')}`);
+            console.log('');
+        }
+    }
 
     if (results.fail.length > 0) {
         console.log('--- FAILED REDIRECTS ---');
@@ -156,6 +213,10 @@ async function main() {
     for (const { originalUrl, newUrl } of results.pass) {
         console.log(`  OK: ${originalUrl} → ${newUrl || '/'}`);
     }
+
+    const smokeFailures = await runCanonicalSmokeTest();
+    const exitCode = (results.fail.length + results.loop.length + smokeFailures.length) > 0 ? 1 : 0;
+    process.exit(exitCode);
 }
 
 main();
