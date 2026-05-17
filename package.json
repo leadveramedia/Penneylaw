@@ -11,11 +11,12 @@
     "minify:accident-news-js": "uglifyjs js/accident-news.js -o js/accident-news.min.js -c -m",
     "minify:city-js": "uglifyjs js/city.js -o js/city.min.js -c -m",
     "minify:consent-js": "uglifyjs js/consent.js -o js/consent.min.js -c -m",
+    "minify:ad-tracking-js": "uglifyjs js/ad-tracking.js -o js/ad-tracking.min.js -c drop_console=true,passes=2 -m",
     "generate:sitemap": "node scripts/generate-sitemap.js",
     "build:lps": "node scripts/build-lps.js",
     "lint:redirects": "node scripts/lint-redirects.js",
     "test:redirects": "node scripts/test-redirects.js \"../Frank Penney - Migration - 2026 - Pages.csv\" http://localhost:8888",
-    "build": "npm run lint:redirects && npm run minify:css && npm run minify:blog-css && npm run minify:js && npm run minify:blog-js && npm run minify:accident-news-js && npm run minify:city-js && npm run minify:consent-js && npm run build:lps && npm run generate:sitemap",
+    "build": "npm run lint:redirects && npm run minify:css && npm run minify:blog-css && npm run minify:js && npm run minify:blog-js && npm run minify:accident-news-js && npm run minify:city-js && npm run minify:consent-js && npm run minify:ad-tracking-js && npm run build:lps && npm run generate:sitemap",
     "convert-locations": "node scripts/convert-location-images.js"
   },
   "dependencies": {

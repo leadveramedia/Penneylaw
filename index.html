@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- LCP Image - preload as early as possible -->
-    <link rel="preload" href="images/backgrounds/Billboard-Graphic-scaled.webp" as="image" type="image/webp" fetchpriority="high">
+    <!-- LCP Image - responsive preload (matches the <picture> below) -->
+    <link rel="preload" as="image" type="image/webp" fetchpriority="high"
+          imagesrcset="images/attorneys/billboard_vertical_4x5.webp 1080w, images/backgrounds/Billboard-Graphic-scaled.webp 1920w"
+          imagesizes="100vw"
+          href="images/backgrounds/Billboard-Graphic-scaled.webp">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Frank Penney Injury Law - California's premier personal injury firm. Over $1 Billion recovered. 30 years of maximum results. Free consultation.">
     <title>Frank Penney Injury Law | $1 Billion+ Recovered | California</title>
@@ -28,14 +31,14 @@
     <!-- Load fonts with display=swap for faster text rendering -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
-    <link rel="preload" href="css/style.min.css" as="style">
-    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="preload" href="css/style.min.css?v=20260517" as="style">
+    <link rel="stylesheet" href="css/style.min.css?v=20260517">
     <!-- Critical CSS for hero section to prevent CLS and optimize LCP -->
     <style>
         :root { --font-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
         .site-main { contain: layout style; }
         .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 120px 0 60px; background: linear-gradient(135deg, #033563 0%, #011a33 100%); overflow: hidden; contain: layout style; }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to right, rgba(1,42,74,.9) 0%, rgba(1,42,74,.85) 40%, rgba(1,42,74,.2) 60%, rgba(1,42,74,0) 75%), url('images/backgrounds/Billboard-Graphic-scaled.webp') center center/cover no-repeat; opacity: 1; contain: strict; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to right, rgba(1,42,74,.9) 0%, rgba(1,42,74,.85) 40%, rgba(1,42,74,.2) 60%, rgba(1,42,74,0) 75%); opacity: 1; contain: strict; pointer-events: none; }
         .hero-bg-elements { position: absolute; inset: 0; overflow: hidden; contain: strict; pointer-events: none; }
         .hero-content { contain: layout style; position: relative; z-index: 1; }
         .hero h1 { font-family: var(--font-primary); font-size: clamp(2.5rem, 1.5rem + 5vw, 5rem); font-weight: 700; line-height: 1.05; color: #fff; margin: 0 0 1.5rem; word-break: normal; hyphens: none; }
@@ -46,7 +49,7 @@
         @media (max-width: 576px) { .hero h1 { font-size: clamp(1.75rem, 6vw, 2.5rem); } .hero-subtitle { font-size: clamp(0.875rem, 2.5vw, 1.25rem); } }
         @media (max-width: 480px) { .hero { padding-top: 70px; } .hero h1 { font-size: clamp(1.5rem, 5.5vw, 2.25rem); } .hero-subtitle { font-size: clamp(0.75rem, 2vw, 1rem); } }
         @media (max-width: 360px) { html, body { overflow-x: hidden; overflow-y: auto; width: 100%; position: relative; } * { max-width: 100%; box-sizing: border-box; } .hero { width: 100%; max-width: 100%; overflow: hidden; padding-left: 0; padding-right: 0; padding-top: 40px; position: relative; } .hero::before, .hero::after { left: 0; right: 0; width: 100%; max-width: 100%; } .container, .hero .container { width: 100%; max-width: 100%; margin: 0; padding-left: 12px; padding-right: 12px; } .hero-content, .hero-wrapper { width: 100%; max-width: 100%; margin: 0; padding: 0; } .hero-wrapper { min-width: 0; } .hero-wrapper > * { min-width: 0; } .hero-bg-elements { display: none; } .hero h1 { font-size: 1.5rem; display: block; } .hero-subtitle { font-size: 0.6875rem; letter-spacing: -0.03em; display: block; } .hero h1, .hero h1 .highlight, .hero-subtitle, .hero-stat-label, .hero-buttons .btn, .hero-form-wrapper .btn, .hero-form-wrapper .btn .btn-text { white-space: normal !important; overflow-wrap: anywhere !important; word-break: break-word !important; } }
-        @media (max-width: 768px) { .hero::before { background: linear-gradient(to bottom, rgba(1,42,74,.85) 0%, rgba(1,42,74,.7) 50%, rgba(1,42,74,.5) 100%), url('images/attorneys/billboard_vertical_4x5.webp') center top/cover no-repeat; } }
+        @media (max-width: 768px) { .hero::before { background: linear-gradient(to bottom, rgba(1,42,74,.85) 0%, rgba(1,42,74,.7) 50%, rgba(1,42,74,.5) 100%); } }
         a.attorney-card { color: inherit; text-decoration: none; display: flex; flex-direction: column; }
         a.attorney-card:hover .attorney-card-name { color: var(--hot-pink); }
         a.attorney-card:focus-visible { outline: 3px solid var(--hot-pink); outline-offset: 2px; }
@@ -54,7 +57,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/Frank-Penny-Favicon-Logo-32x32-1.png">
     <link rel="icon" type="image/png" sizes="512x512" href="images/favicon/Frank-Penny-Favicon-Logo-512-x-512.png">
     <link rel="apple-touch-icon" sizes="512x512" href="images/favicon/Frank-Penny-Favicon-Logo-512-x-512.png">
-    <link rel="preload" href="components/header.html" as="fetch" crossorigin>
+    <link rel="preload" href="/components/header.html" as="fetch">
+    <link rel="preload" href="/components/footer.html" as="fetch">
+    <link rel="preload" href="/config/page-config.json" as="fetch">
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
@@ -715,6 +720,6 @@
 }
 </style>
 
-<script src="js/bundle.min.js" defer></script>
+<script src="js/bundle.min.js?v=20260517" defer></script>
 </body>
 </html>

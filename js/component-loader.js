@@ -465,46 +465,50 @@
         // Show loading state to prevent FOUC
         document.body.classList.add('components-loading');
 
-        // Load page config first, then components
-        loadPageConfig().then(function() {
-            // Build list of components to load
-            var componentPromises = [
-                loadComponent('/components/header.html', '#header-placeholder', 'replace'),
-                loadComponent('/components/footer.html', '#footer-placeholder', 'replace'),
-                loadComponent('/components/contact-modal.html', 'body', 'append')
-            ];
+        // Kick off page config + all component fetches in parallel — none of these
+        // depend on each other for fetch start. The configure* calls below run
+        // after Promise.all so config is guaranteed loaded before it's read.
+        var componentPromises = [
+            loadPageConfig(),
+            loadComponent('/components/header.html', '#header-placeholder', 'replace'),
+            loadComponent('/components/footer.html', '#footer-placeholder', 'replace'),
+            loadComponent('/components/contact-modal.html', 'body', 'append')
+        ];
 
-            // Only load CTA component if placeholder exists on the page
-            var ctaPlaceholder = document.getElementById('cta-placeholder');
-            if (ctaPlaceholder) {
-                componentPromises.push(
-                    loadComponent('/components/cta-section.html', '#cta-placeholder', 'replace')
-                );
-            }
+        // Only load CTA component if placeholder exists on the page
+        var ctaPlaceholder = document.getElementById('cta-placeholder');
+        if (ctaPlaceholder) {
+            componentPromises.push(
+                loadComponent('/components/cta-section.html', '#cta-placeholder', 'replace')
+            );
+        }
 
-            // Load all components in parallel
-            return Promise.all(componentPromises);
-        })
+        Promise.all(componentPromises)
         .then(function() {
-            // Use requestAnimationFrame to defer initialization until after layout
-            // This prevents forced synchronous layout (reflow) by allowing the browser
-            // to complete layout before we read any geometric properties
             requestAnimationFrame(function() {
-                // Configure components after loading
                 setCurrentPageIndicator();
                 configureModal();
                 configureCTA();
                 injectJsonLd();
 
-                // Re-initialize JavaScript functionality
                 reinitializeMainJS();
                 reinitializeFormValidation();
-                initModal();
-                initBackToTop();
 
-                // Remove loading state (batched with other DOM operations)
                 document.body.classList.remove('components-loading');
                 document.body.classList.add('components-loaded');
+
+                // Defer observer-heavy work (modal listener attach + IntersectionObservers
+                // in floating-CTA auto-hide and back-to-top) off the critical frame so it
+                // doesn't pile onto the layout pass triggered by component innerHTML.
+                var deferred = function() {
+                    initModal();
+                    initBackToTop();
+                };
+                if ('requestIdleCallback' in window) {
+                    requestIdleCallback(deferred, { timeout: 500 });
+                } else {
+                    setTimeout(deferred, 100);
+                }
             });
         })
         .catch(function(error) {

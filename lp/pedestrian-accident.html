@@ -9,6 +9,9 @@
     <meta name="description" content="California pedestrian accident lawyer for victims hit by cars and trucks. $1B+ recovered. Free consultation 24/7. No fee unless we win. Home & hospital visits.">
     <title>California Pedestrian Accident Lawyer | Frank Penney Injury Law</title>
     <link rel="canonical" href="https://www.penneylaw.com/lp/pedestrian-accident.html">
+    <!-- LP LCP image preload + font prewarming -->
+    <link rel="preload" as="image" type="image/webp" fetchpriority="high" href="../images/lp/pedestrian-accident.webp">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2">
 
     <!-- Trusted Types Policy (must load before any DOM sink usage) -->
     <script>if(typeof trustedTypes!=='undefined'){try{trustedTypes.createPolicy('default',{createHTML:function(s){return s},createScriptURL:function(s){return s},createScript:function(s){return s}})}catch(e){}}</script>
@@ -38,8 +41,10 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.min.css">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="../css/style.min.css?v=20260517">
     <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/Frank-Penny-Favicon-Logo-32x32-1.png">
 
     <!-- TODO before publish: confirm Sacramento ZIP code; add geo coords for Sacramento/Fairfield/Stockton/Modesto/Chico; add AggregateRating block once Google Business Profile review count is sourced. -->
@@ -2401,8 +2406,36 @@
     </div>
 </footer>
 
-<script src="../js/main.js"></script>
-<script src="../js/consent.min.js" defer></script>
+<script>
+(function(){
+    var toggle = document.getElementById('mobile-menu-toggle');
+    var mobileNav = document.getElementById('mobile-nav');
+    if(!toggle||!mobileNav) return;
+    function close(){
+        toggle.classList.remove('active');
+        mobileNav.classList.remove('active');
+        toggle.setAttribute('aria-expanded','false');
+        mobileNav.setAttribute('aria-hidden','true');
+        document.body.classList.remove('menu-open');
+    }
+    toggle.addEventListener('click', function(){
+        var open = toggle.getAttribute('aria-expanded') === 'true';
+        if(open){ close(); return; }
+        toggle.classList.add('active');
+        mobileNav.classList.add('active');
+        toggle.setAttribute('aria-expanded','true');
+        mobileNav.setAttribute('aria-hidden','false');
+        document.body.classList.add('menu-open');
+    });
+    mobileNav.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', close);
+    });
+    document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape' && mobileNav.classList.contains('active')){ close(); toggle.focus(); }
+    });
+})();
+</script>
+<script src="../js/consent.min.js?v=20260517" defer></script>
 <script>
 (function() {
     'use strict';
@@ -2659,7 +2692,7 @@
 </script>
 
 <!-- Ad Tracking for Paid Campaigns (GTM events, phone tracking) -->
-<script src="../js/ad-tracking.js?v=4" defer></script>
+<script src="../js/ad-tracking.min.js?v=20260517" defer></script>
 
 </body>
 </html>

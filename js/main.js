@@ -137,32 +137,28 @@
 
         if (!revealElements.length) return;
 
-        const revealOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+        if (!('IntersectionObserver' in window)) {
+            revealElements.forEach(function (el) { el.classList.add('revealed'); });
+            return;
+        }
+
+        const setup = function () {
+            const observer = new IntersectionObserver(function (entries, obs) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            revealElements.forEach(function (el) { observer.observe(el); });
         };
 
-        const revealCallback = function (entries, observer) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                    observer.unobserve(entry.target);
-                }
-            });
-        };
-
-        // Check if IntersectionObserver is supported
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver(revealCallback, revealOptions);
-
-            revealElements.forEach(function (el) {
-                observer.observe(el);
-            });
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(setup, { timeout: 500 });
         } else {
-            // Fallback for older browsers - just show all elements
-            revealElements.forEach(function (el) {
-                el.classList.add('revealed');
-            });
+            setTimeout(setup, 100);
         }
     }
 
