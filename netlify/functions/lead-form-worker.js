@@ -32,7 +32,10 @@ exports.handler = async (event) => {
     // (exports.handler) functions; scheduled functions need this too.
     connectLambda(event);
 
-    const store = getStore({ name: STORE_NAME, consistency: 'strong' });
+    // Eventual consistency is sufficient: worker runs 1 min after webhook
+    // writes, well past any consistency window. Strong consistency would
+    // require uncachedEdgeURL context which isn't auto-injected for v1 Functions.
+    const store = getStore({ name: STORE_NAME });
 
     let inboxList;
     try {

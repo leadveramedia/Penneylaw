@@ -90,7 +90,11 @@ exports.handler = async (event) => {
     }
 
     try {
-        const store = getStore({ name: STORE_NAME, consistency: 'strong' });
+        // Eventual consistency is sufficient here: Google's retries are
+        // seconds-to-hours apart, and the worker reads ~1 min later.
+        // Strong consistency requires an `uncachedEdgeURL` context property
+        // that's not auto-injected for v1 (exports.handler) Functions.
+        const store = getStore({ name: STORE_NAME });
         const key = `inbox/${leadId}.json`;
 
         // Idempotency: if the blob already exists, this is a Google retry.
