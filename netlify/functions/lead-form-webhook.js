@@ -20,12 +20,17 @@
  */
 
 const crypto = require('crypto');
-const { getStore } = require('@netlify/blobs');
+const { getStore, connectLambda } = require('@netlify/blobs');
 
 const STORE_NAME = 'lead-form';
 
 exports.handler = async (event) => {
     const start = Date.now();
+
+    // Bootstrap Blobs context from the Lambda event. Required for v1-style
+    // (exports.handler) Netlify Functions; v2 functions get this auto-injected.
+    // Without it, getStore() throws "environment has not been configured".
+    connectLambda(event);
 
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: '' };

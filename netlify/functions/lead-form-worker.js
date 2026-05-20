@@ -16,7 +16,7 @@
  *   - dlq/<lead_id>.json       failed 3+ times, manual review
  */
 
-const { getStore } = require('@netlify/blobs');
+const { getStore, connectLambda } = require('@netlify/blobs');
 
 const STORE_NAME = 'lead-form';
 const FORM_NAME = 'google-ads-lead';
@@ -25,8 +25,13 @@ const FORM_POST_URL = 'https://penneylaw.com/netlify-form-template.html';
 const MAX_ATTEMPTS = 3;
 const PER_LEAD_TIMEOUT_MS = 10_000;
 
-exports.handler = async () => {
+exports.handler = async (event) => {
     const startedAt = Date.now();
+
+    // Bootstrap Blobs context from the Lambda event. Required for v1-style
+    // (exports.handler) functions; scheduled functions need this too.
+    connectLambda(event);
+
     const store = getStore({ name: STORE_NAME, consistency: 'strong' });
 
     let inboxList;
