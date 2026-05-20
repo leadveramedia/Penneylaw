@@ -1,17 +1,20 @@
 /**
  * Netlify Function: Google Ads Lead Form Webhook
  *
- * Receives lead submissions from Google Ads Lead Form Assets, verifies the
- * SHA-256 signature Google attaches to every payload, and durably stores the
- * lead in a Netlify Blobs store. Forwarding to the Netlify Forms inbox is
- * handled asynchronously by lead-form-worker.js (scheduled cron, every 1 min).
+ * Receives lead submissions from Google Ads Lead Form Assets, authenticates
+ * the request by comparing the `google_key` field in the body to our stored
+ * copy of the same secret, and durably stores the lead in a Netlify Blobs
+ * store. Forwarding to the Netlify Forms inbox is handled asynchronously by
+ * lead-form-worker.js (scheduled cron, every 1 min).
  *
  * Spec: ../../webhook-spec-lead-form.md
  * Endpoint: POST https://penneylaw.com/api/lead-form-webhook
  *   (rewritten via netlify.toml redirect to /.netlify/functions/lead-form-webhook)
  *
  * Environment variables required (set in Netlify Dashboard):
- *   GOOGLE_LEAD_FORM_KEY  HMAC secret shared with Google Ads asset.
+ *   GOOGLE_LEAD_FORM_KEY  Shared secret. Same value must be set in the
+ *                         Google Ads Lead Form asset configuration so Google
+ *                         echoes it back in the request body's `google_key`.
  *
  * Time budget: must respond within 5s. Practical p99 target <500ms.
  */
@@ -44,10 +47,10 @@ exports.handler = async (event) => {
     }
 
     const leadId = body.lead_id;
-    const signature = body.lead_id_signature;
+    const providedKey = body.google_key;
 
-    // Google Ads "Preview" / test-mode pings include "is_test": true and omit
-    // lead_id_signature. Acknowledge with 200 so Roger's Preview tool succeeds,
+    // Google Ads "Preview" / test-mode pings include "is_test": true and may
+    // omit google_key. Acknowledge with 200 so Roger's Preview tool succeeds,
     // but don't persist (avoids cluttering Netlify Forms with test data).
     if (body.is_test === true) {
         console.info(JSON.stringify({
@@ -60,19 +63,19 @@ exports.handler = async (event) => {
         return { statusCode: 200, body: '' };
     }
 
-    if (!leadId || !signature) {
+    if (!leadId || !providedKey) {
         console.warn(JSON.stringify({
             event: 'lead_form.missing_fields',
             has_lead_id: !!leadId,
-            has_signature: !!signature,
+            has_google_key: !!providedKey,
             latency_ms: Date.now() - start
         }));
         return { statusCode: 400, body: '' };
     }
 
-    if (!verifySignature(leadId, signature, googleKey)) {
+    if (!constantTimeEquals(providedKey, googleKey)) {
         console.warn(JSON.stringify({
-            event: 'lead_form.hmac_fail',
+            event: 'lead_form.key_mismatch',
             lead_id: leadId,
             campaign_id: body.campaign_id,
             ad_id: body.ad_id,
@@ -134,16 +137,13 @@ exports.handler = async (event) => {
 };
 
 /**
- * Verify Google's signature: base64(SHA256(lead_id + google_key)).
- * Constant-time compare to avoid timing oracle.
+ * Constant-time string comparison. Use for any auth-secret check so we don't
+ * leak length / prefix info via response timing.
  */
-function verifySignature(leadId, providedSignature, googleKey) {
-    const expected = crypto
-        .createHash('sha256')
-        .update(leadId + googleKey)
-        .digest('base64');
-    const a = Buffer.from(expected);
-    const b = Buffer.from(providedSignature);
-    if (a.length !== b.length) return false;
-    return crypto.timingSafeEqual(a, b);
+function constantTimeEquals(a, b) {
+    if (typeof a !== 'string' || typeof b !== 'string') return false;
+    const aBuf = Buffer.from(a);
+    const bBuf = Buffer.from(b);
+    if (aBuf.length !== bBuf.length) return false;
+    return crypto.timingSafeEqual(aBuf, bBuf);
 }

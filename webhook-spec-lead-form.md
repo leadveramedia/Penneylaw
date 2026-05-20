@@ -2,8 +2,8 @@
 
 **Owner:** website dev team
 **Stakeholder:** Frank Penney Injury Law / Roger Shao
-**Date:** 2026-05-01
-**Status:** Spec — pending implementation
+**Date:** 2026-05-01 (revised 2026-05-20)
+**Status:** Live in production. Auth model corrected 2026-05-20 — original spec assumed an HMAC `lead_id_signature` field that Google does not actually send; corrected to `google_key` direct comparison.
 **Related:** Google Ads Lead Form Asset (created out of the ads-manager codebase)
 
 ## 1. What this is
@@ -87,8 +87,7 @@ Google POSTs a JSON body in this shape. Field names are `snake_case`. Some field
   "adgroup_id": 158742305472,
   "creative_id": 782349618465,
   "ad_id": 782349618465,
-  "google_key": "REDACTED_HMAC_SECRET",
-  "lead_id_signature": "BASE64_OF_SHA256_OF_lead_id_AND_google_key",
+  "google_key": "REDACTED_SHARED_SECRET",
   "gcl_id": "Cj0KCQjw..."
 }
 ```
@@ -105,8 +104,7 @@ Google POSTs a JSON body in this shape. Field names are `snake_case`. Some field
 | `adgroup_id` | int64 | Yes | The ad group within the campaign. |
 | `creative_id` | int64 | Sometimes | The RSA's creative ID. May equal `ad_id`. |
 | `ad_id` | int64 | Yes | The specific ad shown. |
-| `google_key` | string | Yes | The HMAC secret you've been given. Use to verify `lead_id_signature` (see §4). |
-| `lead_id_signature` | string | Yes | Base64-encoded SHA-256 hash of `lead_id` + `google_key`. **You verify this on every request.** |
+| `google_key` | string | Yes | Shared secret you configured in the Lead Form asset. Compare to your stored copy for auth (see §4). |
 | `gcl_id` | string | Sometimes | Google Click ID — present if the user came from a click-trackable ad. Pass to your CRM if you do offline conversion uploads. |
 
 ### `user_column_data[]` field reference
@@ -132,26 +130,36 @@ The form has **6 fixed entries** in `user_column_data`:
 
 The `column_name` for the custom questions matches the question text verbatim.
 
-## 4. Authentication — HMAC verification
+## 4. Authentication — `google_key` shared-secret comparison
 
-Google does **not** send an auth header. Instead, the request body contains:
-- `google_key` — the secret you've been given
-- `lead_id_signature` — a base64-encoded SHA-256 hash of `lead_id + google_key`
+Google does **not** send an auth header and does **not** send an HMAC signature on the body. The original spec was wrong about `lead_id_signature`; corrected 2026-05-20 after observing real Google Ads deliveries in production logs (`{event: "lead_form.missing_fields", has_signature: false}`).
+
+The actual auth model is: the request body contains a `google_key` string field whose value is the same secret you configured in the Google Ads asset. Your endpoint compares that value against its own stored copy.
 
 On **every request**, your endpoint must:
 
 1. Parse the body as JSON
-2. Compute `expected_signature = base64(SHA256(lead_id + google_key))`
-3. Constant-time compare `expected_signature` against the request's `lead_id_signature` field
+2. Read `body.google_key`
+3. Constant-time compare against the value stored in `process.env.GOOGLE_LEAD_FORM_KEY`
 4. **If they don't match, return 401 and log the attempt** (it's either a misconfigured client or an attack)
 
-The `google_key` your endpoint stores **must match** the secret we configure in the Google Ads asset. We'll provide it via secure channel (1Password / Bitwarden / encrypted email — your choice) after running `lead-form init --execute`. The secret is 32 url-safe base64 chars (no `/`, `+`, or padding) — example: `mZik1iCetX7JW9mes9zjlIwtWWWJ5UerV_5JFxMCNe8`.
+The same secret string must be set in **two places**, and they must be identical:
+- Netlify Dashboard → Project configuration → Environment variables → `GOOGLE_LEAD_FORM_KEY`
+- Google Ads → Ads & assets → Lead form → Webhook URL configuration → "Key" field
 
-**Do not log the `google_key` in plaintext** in your structured logs. Mask it or truncate.
+We provide the value via secure channel (1Password / encrypted email). 32 url-safe base64 chars works well — example: `mZik1iCetX7JW9mes9zjlIwtWWWJ5UerV_5JFxMCNe8`.
+
+**Do not log the secret in plaintext** in your structured logs. Mask it or truncate.
 
 ### Why this scheme
 
-The `lead_id_signature` proves Google sent the request (since only Google and you know the `google_key`). It also proves the `lead_id` wasn't tampered with — useful when Google retries the same lead. Without HMAC verification, anyone who finds the URL could forge fake leads.
+Google echoes the `google_key` you provided when configuring the asset back to your endpoint on every webhook delivery. Matching it against your stored copy proves Google sent the request (since only Google and you know the secret). It does NOT prove the `lead_id` is untampered — but Google's request originates from their infra and is delivered over HTTPS, so tampering would require compromising the TLS connection. Acceptable threat model for lead delivery.
+
+### Why the original spec was wrong
+
+The original spec described an HMAC `lead_id_signature` field that does not exist in Google's actual Lead Form webhook payload. Implementations following the original spec would reject 100% of real leads with HTTP 400 ("missing_fields"). The rejection is silent from the firm's perspective: leads still appear in the Google Ads UI Leads tab (visible to whoever logs into the ads account), but they never propagate to downstream CRMs.
+
+This was caught after 2 real leads were lost on 2026-05-20.
 
 ## 5. Response + retry handling
 
@@ -306,41 +314,28 @@ const express = require('express');
 const crypto = require('crypto');
 const app = express();
 
-// Read raw body for HMAC verification
-app.use('/api/lead-form-webhook', express.raw({ type: 'application/json' }));
+app.use('/api/lead-form-webhook', express.json());
 
 const GOOGLE_KEY = process.env.GOOGLE_LEAD_FORM_KEY; // from secrets manager
 
 app.post('/api/lead-form-webhook', async (req, res) => {
   const start = Date.now();
-  let body;
-  try {
-    body = JSON.parse(req.body.toString('utf8'));
-  } catch (e) {
-    console.warn({ event: 'lead_form.malformed_json' });
+  const body = req.body || {};
+
+  const { lead_id, google_key } = body;
+  if (!lead_id || !google_key) {
     return res.status(400).end();
   }
 
-  // 1. Verify HMAC
-  const { lead_id, lead_id_signature } = body;
-  if (!lead_id || !lead_id_signature) {
-    return res.status(400).end();
-  }
-  const expected = crypto
-    .createHash('sha256')
-    .update(lead_id + GOOGLE_KEY)
-    .digest('base64');
-  const providedBuf = Buffer.from(lead_id_signature);
-  const expectedBuf = Buffer.from(expected);
-  if (
-    providedBuf.length !== expectedBuf.length ||
-    !crypto.timingSafeEqual(providedBuf, expectedBuf)
-  ) {
-    console.warn({ event: 'lead_form.hmac_fail', lead_id });
+  // Constant-time compare to avoid timing oracle.
+  const a = Buffer.from(google_key);
+  const b = Buffer.from(GOOGLE_KEY);
+  if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) {
+    console.warn({ event: 'lead_form.key_mismatch', lead_id });
     return res.status(401).end();
   }
 
-  // 2. Idempotent insert into durable store
+  // Idempotent insert into durable store
   try {
     const inserted = await db.leadForms.insertIfNew({
       lead_id,
@@ -366,6 +361,8 @@ app.post('/api/lead-form-webhook', async (req, res) => {
 
 app.listen(3000);
 ```
+
+> The Python and Go examples below still show the original HMAC pattern and would need similar updates if reused. The live implementation is in `netlify/functions/lead-form-webhook.js`.
 
 ### Python / FastAPI
 
