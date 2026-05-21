@@ -29,8 +29,23 @@ exports.handler = async (event) => {
     const startedAt = Date.now();
 
     // Bootstrap Blobs context from the Lambda event. Required for v1-style
-    // (exports.handler) functions; scheduled functions need this too.
-    connectLambda(event);
+    // (exports.handler) functions. Scheduled function events have a different
+    // shape than HTTP events, so this can throw — catch and log so the cron
+    // doesn't error-spin silently.
+    try {
+        connectLambda(event);
+    } catch (err) {
+        console.error(JSON.stringify({
+            event: 'lead_form.worker.connect_lambda_fail',
+            error: err.message,
+            event_shape: {
+                has_blobs: !!(event && event.blobs),
+                has_headers: !!(event && event.headers),
+                keys: event && typeof event === 'object' ? Object.keys(event) : []
+            }
+        }));
+        return { statusCode: 500, body: '' };
+    }
 
     // Eventual consistency is sufficient: worker runs 1 min after webhook
     // writes, well past any consistency window. Strong consistency would

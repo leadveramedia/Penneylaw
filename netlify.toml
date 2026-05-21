@@ -11,6 +11,13 @@
 [build.environment]
   SECRETS_SCAN_OMIT_KEYS = "DEEPL_API_TYPE"
 
+# Scheduled Functions. v1-style (exports.handler) functions need the schedule
+# declared here — inline `exports.config = { schedule }` only auto-registers
+# for v2 functions (export default). Runs lead-form-worker every minute to
+# drain the Blobs `inbox/` and POST queued leads to Netlify Forms.
+[functions."lead-form-worker"]
+  schedule = "* * * * *"
+
 # 404 handling - Netlify automatically serves 404.html for missing pages
 # No catch-all redirect needed for static HTML sites
 
