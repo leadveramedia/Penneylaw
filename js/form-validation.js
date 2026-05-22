@@ -20,6 +20,17 @@
     window.initContactForms = initContactForms;
 
     /**
+     * Translate a key via window.I18N[<html lang>]; fall back to English.
+     */
+    function t(key, fallback) {
+        var lang = document.documentElement.lang;
+        if (lang && lang !== 'en' && window.I18N && window.I18N[lang] && window.I18N[lang][key]) {
+            return window.I18N[lang][key];
+        }
+        return fallback;
+    }
+
+    /**
      * Initialize Contact Forms
      */
     function initContactForms() {
@@ -103,17 +114,17 @@
         // Validate email
         else if (type === 'email' && value && !isValidEmail(value)) {
             isValid = false;
-            errorMessage = 'Please enter a valid email address';
+            errorMessage = t('validation.email', 'Please enter a valid email address');
         }
         // Validate phone
         else if (type === 'tel' && value && !isValidPhone(value)) {
             isValid = false;
-            errorMessage = 'Please enter a valid phone number';
+            errorMessage = t('validation.phone', 'Please enter a valid phone number');
         }
         // Validate minimum length for message
         else if (name === 'message' && value && value.length < 10) {
             isValid = false;
-            errorMessage = 'Please provide more details about your case';
+            errorMessage = t('validation.messageMin', 'Please provide more details about your case');
         }
 
         if (!isValid) {
@@ -137,7 +148,11 @@
             'message': 'Please tell us how we can help'
         };
 
-        return messages[fieldName] || 'This field is required';
+        var fallback = messages[fieldName] || 'This field is required';
+        var key = messages[fieldName]
+            ? 'validation.required.' + fieldName
+            : 'validation.required.default';
+        return t(key, fallback);
     }
 
     /**

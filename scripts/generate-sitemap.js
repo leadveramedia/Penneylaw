@@ -89,6 +89,30 @@ const ATTORNEY_SLUGS = [
     'jacob-stoeltzing',
 ];
 
+// Pages that have hreflang alternates. Keyed by absolute URL (no host) for the EN
+// canonical; value is the full alternate set (including self). Every URL in this map
+// emits identical <xhtml:link rel="alternate" hreflang="..."/> children so that
+// Google sees reciprocal hreflang on all variants.
+const TRANSLATED_PAGES = {
+    '/car-accidents.html': [
+        { hreflang: 'en',        loc: '/car-accidents.html' },
+        { hreflang: 'es',        loc: '/es/car-accidents.html' },
+        { hreflang: 'ru',        loc: '/ru/car-accidents.html' },
+        { hreflang: 'x-default', loc: '/car-accidents.html' },
+    ],
+};
+// Build a reverse lookup: any URL that should emit hreflang -> its alternate set.
+const HREFLANG_BY_PATH = (function () {
+    const map = {};
+    for (const enPath of Object.keys(TRANSLATED_PAGES)) {
+        const alts = TRANSLATED_PAGES[enPath];
+        for (const a of alts) {
+            map[a.loc] = alts;
+        }
+    }
+    return map;
+})();
+
 function getPageConfig(filename) {
     if (PAGE_CONFIG[filename]) {
         return PAGE_CONFIG[filename];
@@ -128,6 +152,27 @@ function getStaticPages() {
             changefreq: config.changefreq,
             priority: config.priority,
         });
+    }
+
+    // Translated pages live in /es/ and /ru/ subdirectories. The root scan
+    // doesn't recurse, so add each known alternate explicitly (skipping
+    // entries whose loc matches the EN source already discovered above).
+    const enLocs = new Set(pages.map((p) => p.loc));
+    for (const altList of Object.values(TRANSLATED_PAGES)) {
+        for (const alt of altList) {
+            if (alt.hreflang === 'x-default') continue;
+            const fullPath = path.join(ROOT_DIR, alt.loc.replace(/^\//, ''));
+            if (!fs.existsSync(fullPath)) continue;
+            const fullUrl = SITE_URL + alt.loc;
+            if (enLocs.has(fullUrl)) continue;
+            const stat = fs.statSync(fullPath);
+            pages.push({
+                loc: fullUrl,
+                lastmod: stat.mtime.toISOString().split('T')[0],
+                changefreq: 'monthly',
+                priority: '0.8',
+            });
+        }
     }
 
     return pages;
@@ -201,7 +246,8 @@ async function fetchStoriesFromFolder(prefix, opts) {
 
 function buildSitemapXml(entries) {
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n';
+    xml += '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
 
     for (const entry of entries) {
         xml += '    <url>\n';
@@ -209,6 +255,19 @@ function buildSitemapXml(entries) {
         xml += '        <lastmod>' + entry.lastmod + '</lastmod>\n';
         xml += '        <changefreq>' + entry.changefreq + '</changefreq>\n';
         xml += '        <priority>' + entry.priority + '</priority>\n';
+
+        // Emit reciprocal hreflang alternates if this URL has translated variants.
+        const sitePath = entry.loc.startsWith(SITE_URL)
+            ? entry.loc.slice(SITE_URL.length) || '/'
+            : entry.loc;
+        const alternates = HREFLANG_BY_PATH[sitePath];
+        if (alternates) {
+            for (const alt of alternates) {
+                xml += '        <xhtml:link rel="alternate" hreflang="' + alt.hreflang +
+                    '" href="' + SITE_URL + alt.loc + '"/>\n';
+            }
+        }
+
         xml += '    </url>\n';
     }
 

@@ -20,6 +20,26 @@
       "ctaTitle": "Injured in a Car Accident? Get Help Today.",
       "ctaDescription": "Don't wait to get the legal help you need. Contact Frank Penney Injury Law for a free, no-obligation consultation."
     },
+    "es/car-accidents": {
+      "type": "practice-area",
+      "title": "Accidentes Automovilísticos",
+      "serviceType": "Abogado de Accidentes Automovilísticos",
+      "modalHeading": "¿Lesionado en un Accidente Automovilístico?",
+      "modalSubtitle": "Obtenga una consulta gratuita sobre su caso de accidente automovilístico.",
+      "ctaTagline": "",
+      "ctaTitle": "¿Lesionado en un Accidente Automovilístico? Obtenga Ayuda Hoy.",
+      "ctaDescription": "No espere para obtener la ayuda legal que necesita. Contacte a Frank Penney Injury Law para una consulta gratuita y sin compromiso."
+    },
+    "ru/car-accidents": {
+      "type": "practice-area",
+      "title": "Автомобильные аварии",
+      "serviceType": "Адвокат по автомобильным авариям",
+      "modalHeading": "Пострадали в автомобильной аварии?",
+      "modalSubtitle": "Получите бесплатную консультацию по вашему делу об автомобильной аварии.",
+      "ctaTagline": "",
+      "ctaTitle": "Пострадали в автомобильной аварии? Получите помощь сегодня.",
+      "ctaDescription": "Не откладывайте получение необходимой юридической помощи. Свяжитесь с Frank Penney Injury Law для бесплатной консультации без обязательств."
+    },
     "truck-accidents": {
       "type": "practice-area",
       "title": "Truck Accidents",

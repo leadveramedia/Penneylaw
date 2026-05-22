@@ -82,8 +82,36 @@
         if (attorneyMatch) {
             return attorneyMatch[1];
         }
+        // Language-prefixed pages: /es/foo.html -> es/foo, /ru/foo.html -> ru/foo
+        var langMatch = path.match(/^\/(es|ru)\/([^/]+)\.html$/);
+        if (langMatch) {
+            return langMatch[1] + '/' + langMatch[2];
+        }
         var filename = path.split('/').pop() || 'index.html';
         return filename.replace('.html', '') || 'index';
+    }
+
+    /**
+     * Apply i18n string swap to a DOM subtree based on <html lang>.
+     * Looks up keys in window.I18N[lang]; no-op on EN or when table missing.
+     */
+    function applyI18n(root) {
+        if (!root) return;
+        var lang = document.documentElement.lang;
+        if (!lang || lang === 'en' || !window.I18N || !window.I18N[lang]) return;
+        var table = window.I18N[lang];
+        root.querySelectorAll('[data-i18n]').forEach(function(el) {
+            var v = table[el.getAttribute('data-i18n')];
+            if (v) el.textContent = v;
+        });
+        root.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+            var v = table[el.getAttribute('data-i18n-placeholder')];
+            if (v) el.setAttribute('placeholder', v);
+        });
+        root.querySelectorAll('[data-i18n-aria-label]').forEach(function(el) {
+            var v = table[el.getAttribute('data-i18n-aria-label')];
+            if (v) el.setAttribute('aria-label', v);
+        });
     }
 
     /**
@@ -490,6 +518,7 @@
                 configureModal();
                 configureCTA();
                 injectJsonLd();
+                applyI18n(document.body);
 
                 reinitializeMainJS();
                 reinitializeFormValidation();

@@ -1,21 +1,21 @@
 <!-- Floating Contact Button -->
 <div class="contact-modal-trigger" id="contact-modal-trigger">
-    <button class="floating-contact-btn" aria-label="Bank on Frank">
+    <button class="floating-contact-btn" aria-label="Bank on Frank" data-i18n-aria-label="modal.floatingBtn.ariaLabel">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
             <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
         </svg>
-        <span class="btn-label">Bank on Frank</span>
+        <span class="btn-label" data-i18n="modal.floatingBtn.label">Bank on Frank</span>
     </button>
 </div>
 
 <!-- Contact Modal Overlay -->
 <div class="contact-modal-overlay" id="contact-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-subtitle">
     <div class="contact-modal">
-        <button class="modal-close" aria-label="Close modal">&times;</button>
+        <button class="modal-close" aria-label="Close modal" data-i18n-aria-label="modal.close.ariaLabel">&times;</button>
 
         <!-- Dynamic heading - populated by JS based on page context -->
         <h3 class="modal-title" id="modal-title">Get Your Free Consultation</h3>
-        <p style="font-weight: 700; color: var(--hot-pink); margin: 0 0 0.5rem 0; text-align: center; font-size: 1.5rem;">No Fees Unless You Win</p>
+        <p style="font-weight: 700; color: var(--hot-pink); margin: 0 0 0.5rem 0; text-align: center; font-size: 1.5rem;" data-i18n="modal.noFees">No Fees Unless You Win</p>
         <p class="modal-subtitle" id="modal-subtitle">Tell us about your case and we'll contact you within 24 hours.</p>
 
         <form id="modal-contact-form" class="contact-form" name="modal-contact" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
@@ -27,31 +27,31 @@
             </p>
 
             <div class="form-group">
-                <label for="modal-contact_name" class="form-label">Full Name <span class="required" aria-hidden="true">*</span></label>
-                <input type="text" id="modal-contact_name" name="name" class="form-input" required placeholder="Your full name" aria-describedby="modal-contact_name_error" aria-required="true" autocomplete="name">
-                <span class="form-error" id="modal-contact_name_error" role="alert" aria-live="polite">Please enter your full name</span>
+                <label for="modal-contact_name" class="form-label"><span data-i18n="modal.name.label">Full Name</span> <span class="required" aria-hidden="true">*</span></label>
+                <input type="text" id="modal-contact_name" name="name" class="form-input" required placeholder="Your full name" data-i18n-placeholder="modal.name.placeholder" aria-describedby="modal-contact_name_error" aria-required="true" autocomplete="name">
+                <span class="form-error" id="modal-contact_name_error" role="alert" aria-live="polite" data-i18n="validation.required.name">Please enter your full name</span>
             </div>
 
             <div class="form-group">
-                <label for="modal-contact_email" class="form-label">Email Address <span class="required" aria-hidden="true">*</span></label>
-                <input type="email" id="modal-contact_email" name="email" class="form-input" required placeholder="your@email.com" aria-describedby="modal-contact_email_error" aria-required="true" autocomplete="email">
-                <span class="form-error" id="modal-contact_email_error" role="alert" aria-live="polite">Please enter a valid email address</span>
+                <label for="modal-contact_email" class="form-label"><span data-i18n="modal.email.label">Email Address</span> <span class="required" aria-hidden="true">*</span></label>
+                <input type="email" id="modal-contact_email" name="email" class="form-input" required placeholder="your@email.com" data-i18n-placeholder="modal.email.placeholder" aria-describedby="modal-contact_email_error" aria-required="true" autocomplete="email">
+                <span class="form-error" id="modal-contact_email_error" role="alert" aria-live="polite" data-i18n="validation.email">Please enter a valid email address</span>
             </div>
 
             <div class="form-group">
-                <label for="modal-contact_phone" class="form-label">Phone Number <span class="required" aria-hidden="true">*</span></label>
-                <input type="tel" id="modal-contact_phone" name="phone" class="form-input" required placeholder="(555) 123-4567" aria-describedby="modal-contact_phone_error" aria-required="true" autocomplete="tel">
-                <span class="form-error" id="modal-contact_phone_error" role="alert" aria-live="polite">Please enter a valid phone number</span>
+                <label for="modal-contact_phone" class="form-label"><span data-i18n="modal.phone.label">Phone Number</span> <span class="required" aria-hidden="true">*</span></label>
+                <input type="tel" id="modal-contact_phone" name="phone" class="form-input" required placeholder="(555) 123-4567" data-i18n-placeholder="modal.phone.placeholder" aria-describedby="modal-contact_phone_error" aria-required="true" autocomplete="tel">
+                <span class="form-error" id="modal-contact_phone_error" role="alert" aria-live="polite" data-i18n="validation.phone">Please enter a valid phone number</span>
             </div>
 
             <div class="form-group">
-                <label for="modal-contact_message" class="form-label">How Can We Help? <span class="required" aria-hidden="true">*</span></label>
-                <textarea id="modal-contact_message" name="message" class="form-textarea" required rows="4" placeholder="Describe your situation..." aria-describedby="modal-contact_message_error" aria-required="true" autocomplete="off"></textarea>
-                <span class="form-error" id="modal-contact_message_error" role="alert" aria-live="polite">Please tell us how we can help</span>
+                <label for="modal-contact_message" class="form-label"><span data-i18n="modal.message.label">How Can We Help?</span> <span class="required" aria-hidden="true">*</span></label>
+                <textarea id="modal-contact_message" name="message" class="form-textarea" required rows="4" placeholder="Describe your situation..." data-i18n-placeholder="modal.message.placeholder" aria-describedby="modal-contact_message_error" aria-required="true" autocomplete="off"></textarea>
+                <span class="form-error" id="modal-contact_message_error" role="alert" aria-live="polite" data-i18n="validation.required.message">Please tell us how we can help</span>
             </div>
 
             <button type="submit" class="btn btn-primary btn-full btn-lg">
-                <span class="btn-text">Bank on Frank</span>
+                <span class="btn-text" data-i18n="modal.submit">Bank on Frank</span>
                 <span class="btn-loading" style="display: none;">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;">
                         <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
@@ -60,7 +60,7 @@
                 </span>
             </button>
 
-            <p class="form-disclaimer" style="font-size: 0.75rem; color: var(--medium-gray); text-align: center; margin-top: 1rem;">
+            <p class="form-disclaimer" style="font-size: 0.75rem; color: var(--medium-gray); text-align: center; margin-top: 1rem;" data-i18n="modal.disclaimer">
                 No fee unless we win. Your information is confidential.
             </p>
         </form>
