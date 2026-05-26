@@ -87,6 +87,7 @@ const ATTORNEY_SLUGS = [
     'mark-mccauley',
     'joshua-boyce',
     'jacob-stoeltzing',
+    'liam-conley',
 ];
 
 // Pages that have hreflang alternates. Keyed by absolute URL (no host) for the EN
