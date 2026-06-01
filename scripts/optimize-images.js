@@ -13,8 +13,8 @@ const imagesToOptimize = [
   },
   // Team photo - displayed at ~637x425
   {
-    input: 'images/attorneys/frankpenney Team.png',
-    output: 'images/attorneys/frankpenney-team.webp',
+    input: 'images/attorneys/frankpenney-team-2026.png',
+    output: 'images/attorneys/frankpenney-team-2026.webp',
     width: 800,
     quality: 85
   },
