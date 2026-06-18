@@ -30,7 +30,7 @@ const CITY_META = {
     fairfield:  { name: 'Fairfield',  county: 'Solano County' },
 };
 
-const DEFAULT_OG_IMAGE = 'https://www.penneylaw.com/images/favicon/Frank-Penny-Social-Preview-1200x630.png';
+const DEFAULT_OG_IMAGE = 'https://penneylaw.com/images/favicon/Frank-Penny-Social-Preview-1200x630.png';
 
 export default async (request, context) => {
     const url = new URL(request.url);
@@ -97,18 +97,18 @@ export default async (request, context) => {
         if (contentType === 'blog') {
             title = (content.meta_title || content.title) + ' | Frank Penney Injury Law';
             description = content.meta_description || content.excerpt || '';
-            postUrl = 'https://www.penneylaw.com/blog/' + story.slug;
+            postUrl = 'https://penneylaw.com/blog/' + story.slug;
             excerpt = content.excerpt || extractTextSnippet(content.Body_Content) || description;
         } else if (contentType === 'accident-news') {
             title = content.title + ' | Frank Penney Injury Law';
             description = content.Subheadline || extractTextSnippet(content.Body_Content) || '';
-            postUrl = 'https://www.penneylaw.com/accident-news/' + story.slug;
+            postUrl = 'https://penneylaw.com/accident-news/' + story.slug;
             excerpt = content.Subheadline || extractTextSnippet(content.Body_Content) || description;
         } else {
             // city post
             title = (content.meta_title || content.title) + ' | Frank Penney Injury Law';
             description = content.meta_description || content.excerpt || '';
-            postUrl = 'https://www.penneylaw.com/' + story.full_slug;
+            postUrl = 'https://penneylaw.com/' + story.full_slug;
             excerpt = content.excerpt || extractTextSnippet(content.Body_Content) || description;
         }
 
@@ -142,10 +142,10 @@ export default async (request, context) => {
 async function handleBareCity(citySlug, path, context) {
     const meta = CITY_META[citySlug];
     if (!meta) {
-        return await fallbackResponse(context, new URL('https://www.penneylaw.com' + path));
+        return await fallbackResponse(context, new URL('https://penneylaw.com' + path));
     }
 
-    const canonical = `https://www.penneylaw.com/${citySlug}/`;
+    const canonical = `https://penneylaw.com/${citySlug}/`;
     const title = `${meta.name} Personal Injury Articles & Local Resources | Frank Penney Injury Law`;
     const description = `Personal injury articles, accident news, and legal resources for ${meta.name}, CA (${meta.county}). $1B+ recovered for our clients.`;
     const h1 = `${meta.name} Legal Resources`;
@@ -194,7 +194,9 @@ async function fallbackResponse(context, url) {
         return response;
     }
     const html = await response.text();
-    const selfCanonical = url.origin + url.pathname;
+    // Force the canonical host to non-www (the site's primary domain) so a
+    // direct-to-www edge invocation can't leak a www self-canonical.
+    const selfCanonical = 'https://penneylaw.com' + url.pathname;
 
     let modifiedHtml = html;
     modifiedHtml = modifiedHtml.replace(

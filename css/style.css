@@ -4092,3 +4092,164 @@ body.modal-open {
         transition: none;
     }
 }
+
+/* ========================================
+   RESULTS SHOWCASE (audit #7) — reusable component
+   ======================================== */
+.results-showcase {
+    background: var(--white);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.result-card {
+    background: var(--white);
+    padding: 2rem 1rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    border-bottom: 4px solid var(--pastel-azure);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.result-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-bottom-color: var(--gold-accessible);
+}
+
+.result-amount {
+    font-family: var(--font-primary);
+    font-weight: 800;
+    /* Gold-accessible (#B8960C) for WCAG AA on the white card */
+    color: var(--gold-accessible);
+    font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+    line-height: 1.1;
+    margin: 0 0 0.25rem;
+}
+
+.result-type {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    color: var(--dark-azure);
+    font-size: 0.9375rem;
+    margin: 0;
+}
+
+.results-disclaimer {
+    text-align: center;
+    color: var(--medium-gray);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    max-width: 760px;
+    margin: var(--spacing-lg) auto 0;
+}
+
+.results-disclaimer a {
+    color: var(--dark-azure);
+    text-decoration: underline;
+}
+
+/* ========================================
+   TESTIMONIALS / GOOGLE REVIEWS (audit #9) — reusable component
+   ======================================== */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.testimonial-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.testimonial-stars {
+    color: var(--gold-accessible);
+    font-size: 1.25rem;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+.testimonial-text {
+    font-family: var(--font-secondary);
+    color: var(--charcoal);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0;
+    quotes: "\201C" "\201D";
+}
+
+.testimonial-author {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    color: var(--dark-azure);
+    font-size: 0.875rem;
+}
+
+/* ========================================
+   TEXT-TO-CHAT (audit #8) — floating, bottom-left
+   ======================================== */
+.text-chat-trigger {
+    position: fixed;
+    left: 24px;
+    bottom: 24px;
+    z-index: 998;
+}
+
+.text-chat-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--dark-azure);
+    color: var(--white);
+    padding: 14px 22px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 700;
+    box-shadow: var(--shadow-xl);
+    text-decoration: none;
+    transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.text-chat-btn:hover {
+    background: #022748;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(3, 53, 99, 0.3);
+}
+
+.text-chat-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .text-chat-trigger {
+        left: 16px;
+        bottom: 16px;
+    }
+    .text-chat-btn {
+        padding: 12px 18px;
+        font-size: 0.875rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .result-card,
+    .text-chat-btn {
+        transition: none;
+    }
+}

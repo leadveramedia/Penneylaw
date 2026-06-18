@@ -472,7 +472,7 @@
         // Update page title and canonical
         document.title = cityName + ' Personal Injury Articles | Frank Penney Injury Law';
         var canonical = document.querySelector('link[rel="canonical"]');
-        if (canonical) canonical.href = 'https://www.penneylaw.com/' + city + '/';
+        if (canonical) canonical.href = 'https://penneylaw.com/' + city + '/';
 
         var metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) metaDesc.setAttribute('content', 'Personal injury legal resources and articles for ' + cityName + ', California from Frank Penney Injury Law. $1B+ recovered. Free consultation.');
@@ -503,7 +503,7 @@
         // Update page title, canonical, and meta
         document.title = (content.meta_title || content.title) + ' | Frank Penney Injury Law';
         var canonical = document.querySelector('link[rel="canonical"]');
-        if (canonical) canonical.href = 'https://www.penneylaw.com/' + story.full_slug;
+        if (canonical) canonical.href = 'https://penneylaw.com/' + story.full_slug;
 
         var metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc && (content.meta_description || content.excerpt)) {
@@ -534,7 +534,7 @@
         }).join('');
 
         // Social sharing URLs
-        var postUrl = 'https://www.penneylaw.com/' + story.full_slug;
+        var postUrl = 'https://penneylaw.com/' + story.full_slug;
         var postTitle = encodeURIComponent(content.title);
         var shareHtml = '<div class="blog-share">' +
             '<span class="blog-share-label">Share this article:</span>' +
@@ -598,12 +598,12 @@
             '@type': 'BlogPosting',
             'headline': content.title,
             'description': content.meta_description || content.excerpt || '',
-            'image': imageUrl || 'https://www.penneylaw.com/images/favicon/Frank-Penny-Favicon-Logo-600x315-1.png',
+            'image': imageUrl || 'https://penneylaw.com/images/favicon/Frank-Penny-Favicon-Logo-600x315-1.png',
             'author': { '@type': 'Person', 'name': author },
             'publisher': {
                 '@type': 'Organization',
                 'name': 'Frank Penney Injury Law',
-                'logo': { '@type': 'ImageObject', 'url': 'https://www.penneylaw.com/images/logos/frank-penney-logo.webp' }
+                'logo': { '@type': 'ImageObject', 'url': 'https://penneylaw.com/images/logos/frank-penney-logo.webp' }
             },
             'datePublished': content.Date || '',
             'mainEntityOfPage': { '@type': 'WebPage', '@id': postUrl }

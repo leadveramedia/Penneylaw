@@ -11,7 +11,7 @@ const fs = require('fs');
 const path = require('path');
 const fetch = require('node-fetch');
 
-const SITE_URL = 'https://www.penneylaw.com';
+const SITE_URL = 'https://penneylaw.com';
 const ROOT_DIR = path.resolve(__dirname, '..');
 const OUTPUT_FILE = path.join(ROOT_DIR, 'sitemap.xml');
 
@@ -95,11 +95,11 @@ const ATTORNEY_SLUGS = [
 // emits identical <xhtml:link rel="alternate" hreflang="..."/> children so that
 // Google sees reciprocal hreflang on all variants.
 const TRANSLATED_PAGES = {
-    '/car-accidents.html': [
-        { hreflang: 'en',        loc: '/car-accidents.html' },
-        { hreflang: 'es',        loc: '/es/car-accidents.html' },
-        { hreflang: 'ru',        loc: '/ru/car-accidents.html' },
-        { hreflang: 'x-default', loc: '/car-accidents.html' },
+    '/car-accidents': [
+        { hreflang: 'en',        loc: '/car-accidents' },
+        { hreflang: 'es',        loc: '/es/car-accidents' },
+        { hreflang: 'ru',        loc: '/ru/car-accidents' },
+        { hreflang: 'x-default', loc: '/car-accidents' },
     ],
 };
 // Build a reverse lookup: any URL that should emit hreflang -> its alternate set.
@@ -140,9 +140,13 @@ function getStaticPages() {
         const stat = fs.statSync(fullPath);
         if (!stat.isFile()) continue;
 
+        // Canonical URL form is non-www + clean (no .html). Exception:
+        // `locations` canonicalizes to the trailing-slash directory form.
         const loc = file === 'index.html'
             ? SITE_URL + '/'
-            : SITE_URL + '/' + file;
+            : file === 'locations.html'
+                ? SITE_URL + '/locations/'
+                : SITE_URL + '/' + file.replace(/\.html$/, '');
 
         const lastmod = stat.mtime.toISOString().split('T')[0];
         const config = getPageConfig(file);
@@ -162,7 +166,9 @@ function getStaticPages() {
     for (const altList of Object.values(TRANSLATED_PAGES)) {
         for (const alt of altList) {
             if (alt.hreflang === 'x-default') continue;
-            const fullPath = path.join(ROOT_DIR, alt.loc.replace(/^\//, ''));
+            // alt.loc is now the clean (extensionless) URL; the file on disk
+            // still has the .html extension, so re-append it when probing.
+            const fullPath = path.join(ROOT_DIR, alt.loc.replace(/^\//, '') + '.html');
             if (!fs.existsSync(fullPath)) continue;
             const fullUrl = SITE_URL + alt.loc;
             if (enLocs.has(fullUrl)) continue;

@@ -20,7 +20,7 @@ const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
-const SITE_URL = 'https://www.penneylaw.com';
+const SITE_URL = 'https://penneylaw.com';
 
 // Source -> targets. Add more pages here when expanding the program.
 const TRANSLATIONS = [
@@ -133,16 +133,23 @@ async function translatePreserving(strings, targetLang) {
     return out;
 }
 
+// Canonical URLs are non-www + clean (no .html); the file path keeps its
+// extension, so strip .html only when building the public URL.
+function cleanUrlPath(p) {
+    return p.replace(/\.html$/, '');
+}
+
 function selfUrl(outPath) {
-    return SITE_URL + '/' + outPath;
+    return SITE_URL + '/' + cleanUrlPath(outPath);
 }
 
 function buildHreflangLinks(sourceFilename) {
+    const clean = cleanUrlPath(sourceFilename);
     return [
-        { hreflang: 'en',        href: SITE_URL + '/' + sourceFilename },
-        { hreflang: 'es',        href: SITE_URL + '/es/' + sourceFilename },
-        { hreflang: 'ru',        href: SITE_URL + '/ru/' + sourceFilename },
-        { hreflang: 'x-default', href: SITE_URL + '/' + sourceFilename },
+        { hreflang: 'en',        href: SITE_URL + '/' + clean },
+        { hreflang: 'es',        href: SITE_URL + '/es/' + clean },
+        { hreflang: 'ru',        href: SITE_URL + '/ru/' + clean },
+        { hreflang: 'x-default', href: SITE_URL + '/' + clean },
     ];
 }
 

@@ -445,7 +445,7 @@
         // Update page title and canonical
         document.title = content.title + ' | Frank Penney Injury Law';
         var canonical = document.querySelector('link[rel="canonical"]');
-        if (canonical) canonical.href = 'https://www.penneylaw.com/accident-news/' + story.slug;
+        if (canonical) canonical.href = 'https://penneylaw.com/accident-news/' + story.slug;
 
         // Update meta description
         var metaDesc = document.querySelector('meta[name="description"]');
@@ -456,7 +456,7 @@
         if (breadcrumbTitle) breadcrumbTitle.textContent = content.title;
 
         // Social sharing URLs
-        var postUrl = 'https://www.penneylaw.com/accident-news/' + story.slug;
+        var postUrl = 'https://penneylaw.com/accident-news/' + story.slug;
         var postTitle = encodeURIComponent(content.title);
         var shareHtml = '<div class="blog-share">' +
             '<span class="blog-share-label">Share this article:</span>' +
@@ -507,11 +507,11 @@
             '@type': 'NewsArticle',
             'headline': content.title,
             'description': excerpt,
-            'image': imageUrl || 'https://www.penneylaw.com/images/favicon/Frank-Penny-Favicon-Logo-600x315-1.png',
+            'image': imageUrl || 'https://penneylaw.com/images/favicon/Frank-Penny-Favicon-Logo-600x315-1.png',
             'publisher': {
                 '@type': 'Organization',
                 'name': 'Frank Penney Injury Law',
-                'logo': { '@type': 'ImageObject', 'url': 'https://www.penneylaw.com/images/logos/frank-penney-logo.webp' }
+                'logo': { '@type': 'ImageObject', 'url': 'https://penneylaw.com/images/logos/frank-penney-logo.webp' }
             },
             'datePublished': content.Date || '',
             'mainEntityOfPage': { '@type': 'WebPage', '@id': postUrl }

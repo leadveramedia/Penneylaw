@@ -1,11 +1,11 @@
 # Robots.txt for Frank Penney Injury Law
-# https://www.penneylaw.com
+# https://penneylaw.com
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://www.penneylaw.com/sitemap.xml
+Sitemap: https://penneylaw.com/sitemap.xml
 
 # Disallow internal/utility pages
 Disallow: /components/

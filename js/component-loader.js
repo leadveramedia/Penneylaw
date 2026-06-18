@@ -259,7 +259,7 @@
                 '@type': 'LegalService',
                 'name': 'Frank Penney Injury Law - ' + config.title,
                 'description': config.locationDescription || '',
-                'url': 'https://www.penneylaw.com/' + getCurrentPageSlug() + '.html',
+                'url': 'https://penneylaw.com/' + getCurrentPageSlug(),
                 'telephone': '+1-888-888-0566',
                 'priceRange': 'Free Consultation',
                 'address': {
@@ -279,7 +279,7 @@
                 'parentOrganization': {
                     '@type': 'LegalService',
                     'name': 'Frank Penney Injury Law',
-                    'url': 'https://www.penneylaw.com/'
+                    'url': 'https://penneylaw.com/'
                 }
             };
         } else {
@@ -500,7 +500,9 @@
             loadPageConfig(),
             loadComponent('/components/header.html', '#header-placeholder', 'replace'),
             loadComponent('/components/footer.html', '#footer-placeholder', 'replace'),
-            loadComponent('/components/contact-modal.html', 'body', 'append')
+            loadComponent('/components/contact-modal.html', 'body', 'append'),
+            // Floating text-to-chat affordance (audit #8) — site-wide.
+            loadComponent('/components/text-chat.html', 'body', 'append')
         ];
 
         // Only load CTA component if placeholder exists on the page
@@ -508,6 +510,20 @@
         if (ctaPlaceholder) {
             componentPromises.push(
                 loadComponent('/components/cta-section.html', '#cta-placeholder', 'replace')
+            );
+        }
+
+        // Results showcase (audit #7) — only where a placeholder exists.
+        if (document.getElementById('results-placeholder')) {
+            componentPromises.push(
+                loadComponent('/components/results-showcase.html', '#results-placeholder', 'replace')
+            );
+        }
+
+        // Testimonials / reviews (audit #9) — only where a placeholder exists.
+        if (document.getElementById('testimonials-placeholder')) {
+            componentPromises.push(
+                loadComponent('/components/testimonials.html', '#testimonials-placeholder', 'replace')
             );
         }
 

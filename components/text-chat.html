@@ -1,0 +1,22 @@
+<!-- Text-to-Chat Component (SCAFFOLD) -->
+<!--
+  SCAFFOLD: Interim mobile click-to-text button (sms:). Works today with no
+  vendor — taps open the user's SMS app pre-addressed to the firm line.
+  WHEN A CHAT VENDOR IS CHOSEN (Podium / Twilio / tawk.to):
+    1. Paste the vendor's embed <script> where marked below.
+    2. Point it at the tracked number (replace +18888880566).
+    3. Configure an after-hours auto-response in the vendor dashboard
+       (we advertise 24/7 availability).
+  Loaded site-wide by component-loader.js (appended to <body>).
+-->
+<div class="text-chat-trigger" id="text-chat-trigger">
+    <a class="text-chat-btn"
+       href="sms:+18888880566?&body=Hi%20Frank%20Penney%20Injury%20Law%2C%20I%20have%20a%20question%20about%20a%20possible%20injury%20case."
+       aria-label="Text us about your case">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+        </svg>
+        <span class="text-chat-label">Text Us</span>
+    </a>
+</div>
+<!-- LIVE-CHAT VENDOR EMBED GOES HERE (replaces the sms button above when ready) -->
