@@ -4197,6 +4197,120 @@ body.modal-open {
     font-size: 0.875rem;
 }
 
+/* Horizontal scroll-snap carousel: 3 cards visible, scroll/swipe for the rest */
+.testimonials-carousel {
+    position: relative;
+}
+
+.testimonials-track {
+    display: flex;
+    gap: var(--spacing-lg);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    /* top/side padding leaves room for card shadows; bottom for the scrollbar */
+    padding: 6px 6px var(--spacing-sm);
+    scrollbar-width: thin;
+    scrollbar-color: var(--pastel-azure) transparent;
+}
+
+.testimonials-track::-webkit-scrollbar {
+    height: 8px;
+}
+
+.testimonials-track::-webkit-scrollbar-thumb {
+    background: var(--pastel-azure);
+    border-radius: 999px;
+}
+
+.testimonials-track:focus-visible {
+    outline: 3px solid var(--dark-azure);
+    outline-offset: 4px;
+}
+
+.testimonials-track .testimonial-card {
+    /* show 3 across (two gaps), cards keep equal height via flex stretch */
+    flex: 0 0 calc((100% - 2 * var(--spacing-lg)) / 3);
+    scroll-snap-align: start;
+}
+
+.testimonials-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--pastel-azure);
+    background: var(--white);
+    color: var(--dark-azure);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.testimonials-nav:hover {
+    background: var(--pastel-azure);
+}
+
+.testimonials-nav:focus-visible {
+    outline: 3px solid var(--dark-azure);
+    outline-offset: 2px;
+}
+
+.testimonials-nav:disabled {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.testimonials-nav svg {
+    width: 20px;
+    height: 20px;
+}
+
+.testimonials-prev {
+    left: -8px;
+}
+
+.testimonials-prev svg {
+    transform: rotate(90deg);
+}
+
+.testimonials-next {
+    right: -8px;
+}
+
+.testimonials-next svg {
+    transform: rotate(-90deg);
+}
+
+@media (max-width: 992px) {
+    .testimonials-track .testimonial-card {
+        flex-basis: calc((100% - var(--spacing-lg)) / 2);
+    }
+}
+
+@media (max-width: 640px) {
+    .testimonials-track .testimonial-card {
+        flex-basis: 85%;
+    }
+
+    .testimonials-nav {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .testimonials-track {
+        scroll-behavior: auto;
+    }
+}
+
 /* ========================================
    TEXT-TO-CHAT (audit #8) — floating, bottom-left
    ======================================== */

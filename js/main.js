@@ -20,6 +20,7 @@
             initLocationDropdown();
             initPracticeAreaDropdown();
             initMobileDropdown();
+            initTestimonialsCarousel();
         }
     });
 
@@ -33,6 +34,50 @@
     window.initPracticeAreaDropdown = initPracticeAreaDropdown;
     window.initMobileDropdown = initMobileDropdown;
     window.initLanguageSelector = initLanguageSelector;
+    window.initTestimonialsCarousel = initTestimonialsCarousel;
+
+    /**
+     * Testimonials carousel — prev/next buttons scroll the track one "page"
+     * (the visible width, ~3 cards) and disable at the ends. The track is also
+     * natively scrollable/swipeable and keyboard-focusable. Re-run safe via a
+     * data-flag guard (component-loader calls this after the component loads).
+     */
+    function initTestimonialsCarousel() {
+        const carousels = document.querySelectorAll('.testimonials-carousel');
+        carousels.forEach(function (carousel) {
+            const track = carousel.querySelector('.testimonials-track');
+            const prev = carousel.querySelector('.testimonials-prev');
+            const next = carousel.querySelector('.testimonials-next');
+            if (!track || !prev || !next || track.dataset.carouselReady) return;
+            track.dataset.carouselReady = 'true';
+
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function scrollByPage(direction) {
+                track.scrollBy({
+                    left: track.clientWidth * direction,
+                    behavior: prefersReducedMotion ? 'auto' : 'smooth'
+                });
+            }
+
+            function updateButtons() {
+                // EDGE tolerance absorbs the resting scroll-snap offset and
+                // sub-pixel rounding so the prev/next buttons hide at the ends.
+                const EDGE = 8;
+                const maxScroll = track.scrollWidth - track.clientWidth;
+                prev.disabled = track.scrollLeft <= EDGE;
+                next.disabled = track.scrollLeft >= maxScroll - EDGE;
+            }
+
+            prev.addEventListener('click', function () { scrollByPage(-1); });
+            next.addEventListener('click', function () { scrollByPage(1); });
+            track.addEventListener('scroll', function () {
+                window.requestAnimationFrame(updateButtons);
+            });
+            window.addEventListener('resize', updateButtons);
+            updateButtons();
+        });
+    }
 
     /**
      * Mobile Menu Toggle

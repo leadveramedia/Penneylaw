@@ -1,35 +1,107 @@
-<!-- Testimonials / Google Reviews Component (SCAFFOLD) -->
+<!-- Testimonials / Google Reviews Component -->
 <!--
-  SCAFFOLD: Replace the placeholder reviews below with real, individually
-  attributable Google reviews (or embed the official Google reviews widget).
-  Then add one Review JSON-LD object per review actually shown here.
+  Real, individually attributable Google reviews shown in a horizontal,
+  scroll-snap carousel (3 visible at a time on desktop). Each .testimonial-text
+  block is a verbatim excerpt of the client's review and is kept IDENTICAL to
+  the matching Review JSON-LD on the homepage (index.html LegalService "review"
+  array, same order). If you edit a quote here, update the corresponding
+  reviewBody there so structured data matches visible text.
   DO NOT add aggregateRating JSON-LD for the firm's own rating (Google policy
-  + CA Bar considerations). Loaded by component-loader.js into any page
-  containing <div id="testimonials-placeholder"></div>.
+  + CA Bar considerations). Carousel buttons are wired by initTestimonialsCarousel()
+  in main.js. Loaded by component-loader.js into any page containing
+  <div id="testimonials-placeholder"></div>.
 -->
 <section class="section bg-light testimonials" aria-labelledby="reviews-heading">
     <div class="container">
         <div class="section-header" data-reveal>
             <span class="section-subtitle">Client Reviews</span>
             <h2 id="reviews-heading" class="section-title heading-azure">What Our Clients Say</h2>
-            <p class="section-description">Rated 4.8 stars across hundreds of Google reviews.</p>
+            <p class="section-description">Real five-star reviews from clients on our Google Business Profile.</p>
         </div>
-        <div class="testimonials-grid">
-            <figure class="testimonial-card" data-reveal>
-                <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <blockquote class="testimonial-text">[Add a real Google review here. Keep the displayed text identical to any Review schema you add.]</blockquote>
-                <figcaption class="testimonial-author">&mdash; [First name L.], Google Review</figcaption>
-            </figure>
-            <figure class="testimonial-card" data-reveal>
-                <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <blockquote class="testimonial-text">[Add a real Google review here.]</blockquote>
-                <figcaption class="testimonial-author">&mdash; [First name L.], Google Review</figcaption>
-            </figure>
-            <figure class="testimonial-card" data-reveal>
-                <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <blockquote class="testimonial-text">[Add a real Google review here.]</blockquote>
-                <figcaption class="testimonial-author">&mdash; [First name L.], Google Review</figcaption>
-            </figure>
+        <div class="testimonials-carousel" data-reveal>
+            <button type="button" class="testimonials-nav testimonials-prev" aria-label="Show previous reviews">
+                <svg aria-hidden="true" focusable="false" width="20" height="20"><use href="/images/icons.svg#icon-chevron-down"></use></svg>
+            </button>
+            <div class="testimonials-track" role="group" aria-label="Client reviews &mdash; scroll for more" tabindex="0">
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">Was involved in a car accident not my fault and I called Penney and they got me in right away. Josh my lawyer at Frank Penney fought hard for me. They were able to get me 5 times the settlement originally offered by State Farm. Couldn't be happier.</blockquote>
+                    <figcaption class="testimonial-author">&mdash; Ivan N., Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">I was assigned to Mark McCauley and have been impressed with his work-ethic and caring demeanor since our very first meeting. Over the last 18 months, I have had extensive treatment all because Mark was willing to push even when my insurance company resisted. I will continue to recommend Frank Penney Injury Lawyers to anyone that is in need of an exemplary attorney.</blockquote>
+                    <figcaption class="testimonial-author">&mdash; Robin S., Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">If you have been in an auto accident, seek out Frank Penney Injury Lawyers. They are the best at what they do. A very special thanks to Joshua Boyce &mdash; my guiding star, the man in my corner, and an incredible and caring human being.</blockquote>
+                    <figcaption class="testimonial-author">&mdash; Mark H., Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">My case was a motor vehicle accident involving a motorcycle and car &mdash; I broke my femur. In the end, the opposing party was negligent and I won the case and earned the maximum settlement offered by the opposing insurance company. Stop looking around and choose Frank Penney Injury Lawyers.</blockquote>
+                    <figcaption class="testimonial-author">&mdash; Max U., Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">I feel so blessed to have had Frank Penney Injury Lawyers represent me after I was injured in an auto accident. I was a victim of a hit and run and I am so thankful I found them to help. My attorney, Mark, was so responsive and made sure I received updates on my claim.</blockquote>
+                    <figcaption class="testimonial-author">&mdash; Stacey H., Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">From the very beginning, the team was professional, compassionate, and always made me feel like a priority. Frank and his staff truly cared about my recovery and worked hard to make sure I received a fair settlement. I'm so grateful for their dedication and highly recommend them to anyone in need of a reliable and trustworthy personal injury lawyer!</blockquote>
+                    <figcaption class="testimonial-author">&mdash; Andre T., Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">Working with Frank Penney as my personal injury attorney has been an amazing experience. He's dedicated and fights hard for his clients. I would highly recommend Frank Penney Injury Lawyers and his team to anyone needing a trustworthy and powerful firm.</blockquote>
+                    <figcaption class="testimonial-author">&mdash; Ashleigh R., Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">Mark McCauley was just astounding. He fought hard for me and my settlement was more than I thought possible. If you are looking for a personal injury attorney, make them your first call.</blockquote>
+                    <figcaption class="testimonial-author">&mdash; David L., Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">I can't say enough about Frank Penney Injury Lawyers and all the hard work they put into winning my case. I am very impressed on how they got such a great settlement for me and my daughter. They will be my personal injury lawyer for life.</blockquote>
+                    <figcaption class="testimonial-author">&mdash; Jaclyn M., Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">Frank Penney and his team seriously came through for me. I got rear ended on the freeway, and had no idea what to do next. They handled everything &mdash; paperwork, calls, negotiations &mdash; and when the settlement hit, I was astonished.</blockquote>
+                    <figcaption class="testimonial-author">&mdash; Karmel J., Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">While stopped at a red light, a very high speed motorcycle went into the back of my car, completely totaling my vehicle and creating significant injuries for me. From the very first call to Frank Penney Injury Lawyers, I felt sympathy, compassion and a desire to help me. I could not have asked for a better legal team in my corner.</blockquote>
+                    <figcaption class="testimonial-author">&mdash; Brian H., Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">After I was injured in a substantial rear-end collision, the other insurance company fought hard to avoid accepting responsibility &mdash; but James and Priscilla fought both harder and smarter on my behalf. I was shocked when my case ultimately went all the way to trial, but James delivered a solid victory &mdash; a victory that not only met but exceeded our last demand.</blockquote>
+                    <figcaption class="testimonial-author">&mdash; Kyle H., Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">Joshua, at Frank Penny Injury Lawyers, handled my very complex injury case as if I was part of their family. His dedication and thoroughness resulted in a settlement that will help me overcome the injuries and complications I had suffered. Thanks again, Frank Penney and Staff.</blockquote>
+                    <figcaption class="testimonial-author">&mdash; smactek, Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">I was in a car accident and rear ended. My chiropractor actually referred me to Frank Penney! They lined me up with the medical help I needed and negotiated a great settlement for me in a timely manner. Highly recommended.</blockquote>
+                    <figcaption class="testimonial-author">&mdash; Robert M., Google Review</figcaption>
+                </figure>
+                <figure class="testimonial-card">
+                    <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <blockquote class="testimonial-text">Me and my husband got into a car accident back in October 2020. We went with Frank Penny Injury Lawyers because they're only the best around! We closed our case without having to go to court. Thank you Frank Penny Injury Lawyers &mdash; we were very pleased!</blockquote>
+                    <figcaption class="testimonial-author">&mdash; Bellamaria A., Google Review</figcaption>
+                </figure>
+            </div>
+            <button type="button" class="testimonials-nav testimonials-next" aria-label="Show more reviews">
+                <svg aria-hidden="true" focusable="false" width="20" height="20"><use href="/images/icons.svg#icon-chevron-down"></use></svg>
+            </button>
         </div>
         <p class="results-disclaimer">
             Testimonials reflect the individual experiences of past clients and are not a guarantee or prediction of the outcome of your case. <a href="/disclaimer">See full disclaimer</a>.
