@@ -60,6 +60,86 @@
       "ctaTitle": "Suffered an Amputation Injury? Get Help Today.",
       "ctaDescription": "Limb-loss injuries carry lifelong costs. Contact Frank Penney Injury Law for a free, no-obligation consultation about your claim."
     },
+    "rear-end-collision": {
+      "type": "resource",
+      "title": "Rear-End Collisions",
+      "serviceType": "Rear-End Collision Lawyer",
+      "modalHeading": "Hit From Behind?",
+      "modalSubtitle": "Get a free consultation about your rear-end collision claim.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in a Rear-End Crash? Get Help Today.",
+      "ctaDescription": "Contact Frank Penney Injury Law for a free, no-obligation consultation about your claim."
+    },
+    "head-on-collision": {
+      "type": "resource",
+      "title": "Head-On Collisions",
+      "serviceType": "Head-On Collision Lawyer",
+      "modalHeading": "Injured in a Head-On Crash?",
+      "modalSubtitle": "Get a free consultation about your head-on collision claim.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in a Head-On Crash? Get Help Today.",
+      "ctaDescription": "Contact Frank Penney Injury Law for a free, no-obligation consultation about your claim."
+    },
+    "t-bone-accident": {
+      "type": "resource",
+      "title": "T-Bone Accidents",
+      "serviceType": "T-Bone Accident Lawyer",
+      "modalHeading": "Hurt in an Intersection Crash?",
+      "modalSubtitle": "Get a free consultation about your side-impact accident claim.",
+      "ctaTagline": "",
+      "ctaTitle": "Hurt in a T-Bone Crash? Get Help Today.",
+      "ctaDescription": "Contact Frank Penney Injury Law for a free, no-obligation consultation about your claim."
+    },
+    "rollover-accident": {
+      "type": "resource",
+      "title": "Rollover Accidents",
+      "serviceType": "Rollover Accident Lawyer",
+      "modalHeading": "Injured in a Rollover?",
+      "modalSubtitle": "Get a free consultation about your rollover accident claim.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured in a Rollover? Get Help Today.",
+      "ctaDescription": "Contact Frank Penney Injury Law for a free, no-obligation consultation about your claim."
+    },
+    "hit-and-run-accident": {
+      "type": "resource",
+      "title": "Hit-and-Run Accidents",
+      "serviceType": "Hit-and-Run Accident Lawyer",
+      "modalHeading": "Hit by a Driver Who Fled?",
+      "modalSubtitle": "Get a free consultation about your hit-and-run claim.",
+      "ctaTagline": "",
+      "ctaTitle": "Hit by a Fleeing Driver? Get Help Today.",
+      "ctaDescription": "Contact Frank Penney Injury Law for a free, no-obligation consultation about your claim."
+    },
+    "distracted-driving-accident": {
+      "type": "resource",
+      "title": "Distracted Driving Accidents",
+      "serviceType": "Distracted Driving Accident Lawyer",
+      "modalHeading": "Hit by a Distracted Driver?",
+      "modalSubtitle": "Get a free consultation about your distracted driving claim.",
+      "ctaTagline": "",
+      "ctaTitle": "Hit by a Distracted Driver? Get Help Today.",
+      "ctaDescription": "Contact Frank Penney Injury Law for a free, no-obligation consultation about your claim."
+    },
+    "drunk-driving-accident": {
+      "type": "resource",
+      "title": "Drunk Driving Accidents",
+      "serviceType": "Drunk Driving Accident Lawyer",
+      "modalHeading": "Injured by a Drunk Driver?",
+      "modalSubtitle": "Get a free consultation about your DUI accident claim.",
+      "ctaTagline": "",
+      "ctaTitle": "Injured by a Drunk Driver? Get Help Today.",
+      "ctaDescription": "Contact Frank Penney Injury Law for a free, no-obligation consultation about your claim."
+    },
+    "rideshare-accident": {
+      "type": "resource",
+      "title": "Rideshare Accidents",
+      "serviceType": "Uber and Lyft Accident Lawyer",
+      "modalHeading": "Hurt in an Uber or Lyft Crash?",
+      "modalSubtitle": "Get a free consultation about your rideshare accident claim.",
+      "ctaTagline": "",
+      "ctaTitle": "Hurt in an Uber or Lyft Crash? Get Help Today.",
+      "ctaDescription": "Contact Frank Penney Injury Law for a free, no-obligation consultation about your claim."
+    },
     "personal-injury": {
       "type": "practice-area",
       "title": "Personal Injury",

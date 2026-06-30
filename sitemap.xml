@@ -84,16 +84,40 @@
         <priority>0.3</priority>
     </url>
     <url>
+        <loc>https://penneylaw.com/distracted-driving-accident</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://penneylaw.com/dog-bite</loc>
         <lastmod>2026-06-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://penneylaw.com/drunk-driving-accident</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://penneylaw.com/fairfield</loc>
         <lastmod>2026-06-30</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://penneylaw.com/head-on-collision</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://penneylaw.com/hit-and-run-accident</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://penneylaw.com/how-much-is-my-case-worth</loc>
@@ -168,6 +192,12 @@
         <priority>0.3</priority>
     </url>
     <url>
+        <loc>https://penneylaw.com/rear-end-collision</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://penneylaw.com/redding</loc>
         <lastmod>2026-06-25</lastmod>
         <changefreq>monthly</changefreq>
@@ -178,6 +208,18 @@
         <lastmod>2026-06-30</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://penneylaw.com/rideshare-accident</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://penneylaw.com/rollover-accident</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://penneylaw.com/roseville</loc>
@@ -220,6 +262,12 @@
         <lastmod>2026-06-30</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://penneylaw.com/t-bone-accident</loc>
+        <lastmod>2026-06-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://penneylaw.com/terms-of-service</loc>

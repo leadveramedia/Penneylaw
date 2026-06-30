@@ -319,6 +319,54 @@
   force = true
 
 [[redirects]]
+  from = "/rear-end-collision.html"
+  to = "/rear-end-collision"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/head-on-collision.html"
+  to = "/head-on-collision"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/t-bone-accident.html"
+  to = "/t-bone-accident"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/rollover-accident.html"
+  to = "/rollover-accident"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/hit-and-run-accident.html"
+  to = "/hit-and-run-accident"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/distracted-driving-accident.html"
+  to = "/distracted-driving-accident"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/drunk-driving-accident.html"
+  to = "/drunk-driving-accident"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/rideshare-accident.html"
+  to = "/rideshare-accident"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/wrongful-death.html"
   to = "/wrongful-death"
   status = 301
