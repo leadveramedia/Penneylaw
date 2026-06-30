@@ -301,6 +301,24 @@
   force = true
 
 [[redirects]]
+  from = "/spinal-cord-injury.html"
+  to = "/spinal-cord-injury"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/burn-injury.html"
+  to = "/burn-injury"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/amputation-injury.html"
+  to = "/amputation-injury"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/wrongful-death.html"
   to = "/wrongful-death"
   status = 301

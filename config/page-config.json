@@ -30,6 +30,36 @@
       "ctaTitle": "Ready to Start Your Injury Claim? We'll Guide You.",
       "ctaDescription": "From investigation to settlement, we handle the process so you can focus on healing. Free, no-obligation consultation."
     },
+    "spinal-cord-injury": {
+      "type": "resource",
+      "title": "Spinal Cord Injury",
+      "serviceType": "Spinal Cord Injury",
+      "modalHeading": "Injured by a Spinal Cord Injury?",
+      "modalSubtitle": "Get a free consultation about your spinal cord injury claim.",
+      "ctaTagline": "",
+      "ctaTitle": "Suffered a Spinal Cord Injury? Get Help Today.",
+      "ctaDescription": "Catastrophic injuries demand experienced representation. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "burn-injury": {
+      "type": "resource",
+      "title": "Burn Injury",
+      "serviceType": "Burn Injury",
+      "modalHeading": "Suffered a Serious Burn?",
+      "modalSubtitle": "Get a free consultation about your burn injury claim.",
+      "ctaTagline": "",
+      "ctaTitle": "Suffered a Serious Burn Injury? Get Help Today.",
+      "ctaDescription": "We pursue full compensation for burns, scarring, and disfigurement. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
+    "amputation-injury": {
+      "type": "resource",
+      "title": "Amputation Injury",
+      "serviceType": "Amputation Injury",
+      "modalHeading": "Lost a Limb in an Accident?",
+      "modalSubtitle": "Get a free consultation about your amputation injury claim.",
+      "ctaTagline": "",
+      "ctaTitle": "Suffered an Amputation Injury? Get Help Today.",
+      "ctaDescription": "Limb-loss injuries carry lifelong costs. Contact Frank Penney Injury Law for a free, no-obligation consultation about your claim."
+    },
     "personal-injury": {
       "type": "practice-area",
       "title": "Personal Injury",
