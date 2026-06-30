@@ -134,7 +134,13 @@
 
 [[redirects]]
   from = "/case-value-calculator.html"
-  to = "/case-value-calculator"
+  to = "/how-much-is-my-case-worth"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/case-value-calculator"
+  to = "/how-much-is-my-case-worth"
   status = 301
   force = true
 
@@ -1208,7 +1214,7 @@
 
 [[redirects]]
   from = "/case-evaluations"
-  to = "/case-value-calculator"
+  to = "/how-much-is-my-case-worth"
   status = 301
   force = true
 
@@ -2039,7 +2045,7 @@
 # --- Audit: Case Value Calculator ---
 [[redirects]]
   from = "/personal-injury-lawyer/personal-injury-case-evaluation"
-  to = "/case-value-calculator"
+  to = "/how-much-is-my-case-worth"
   status = 301
   force = true
 

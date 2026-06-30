@@ -58,6 +58,26 @@
         "priceRange": "Free Consultation"
     }
     </script>
+    <!-- WebApplication schema for the embedded case value calculator (consolidated from the former calculator page) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Personal Injury Case Value Calculator",
+        "description": "Free online calculator that estimates the potential value of your California personal injury case based on medical expenses, lost wages, and pain and suffering.",
+        "url": "https://penneylaw.com/how-much-is-my-case-worth",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+        "provider": {
+            "@type": "LegalService",
+            "name": "Frank Penney Injury Law",
+            "url": "https://penneylaw.com/",
+            "telephone": "+1-888-888-0566"
+        }
+    }
+    </script>
     <!-- FAQ schema — answer text MUST match the visible FAQ section verbatim -->
     <script type="application/ld+json">
     {
@@ -173,8 +193,7 @@
             </noscript>
             <script
                 src="https://casevalue.law/embed.js"
-                data-case-type="motor"
-                data-case-types="motor"
+                data-case-types="motor,premises,dog_bite,wrongful_death"
                 data-state="California"
                 data-partner="penney-law"
                 data-intake-email="info@penneylaw.com"
@@ -270,7 +289,7 @@
             </div>
         </div>
         <p class="text-gray" style="text-align: center; max-width: 760px; margin: 2rem auto 0;">
-            Ready to put a number to it? Try the <a href="/case-value-calculator">case value calculator</a>, learn about <a href="/uninsured-motorist-accidents">uninsured motorist claims</a>, or review our <a href="/car-accidents">car accident</a> practice. We serve <a href="/sacramento">Sacramento</a>, <a href="/roseville">Roseville</a>, <a href="/oakland">Oakland</a>, and all of Northern California.
+            Ready to put a number to it? Use the calculator above, learn about <a href="/uninsured-motorist-accidents">uninsured motorist claims</a>, or review our <a href="/car-accidents">car accident</a> practice. We serve <a href="/sacramento">Sacramento</a>, <a href="/roseville">Roseville</a>, <a href="/oakland">Oakland</a>, and all of Northern California.
         </p>
     </div>
 </section>
@@ -326,8 +345,8 @@
             <h2 class="section-title">Related Resources</h2>
         </div>
         <div class="grid grid-5" style="gap: 1rem; margin-top: 2rem;">
-            <a href="/case-value-calculator" class="card" style="text-align: center; padding: 1.5rem; text-decoration: none;" data-reveal="">
-                <h3 style="color: var(--dark-azure); font-size: 1rem; margin: 0;">Case Value Calculator</h3>
+            <a href="/personal-injury-claim-process" class="card" style="text-align: center; padding: 1.5rem; text-decoration: none;" data-reveal="">
+                <h3 style="color: var(--dark-azure); font-size: 1rem; margin: 0;">Injury Claim Process</h3>
             </a>
             <a href="/uninsured-motorist-accidents" class="card" style="text-align: center; padding: 1.5rem; text-decoration: none;" data-reveal="">
                 <h3 style="color: var(--dark-azure); font-size: 1rem; margin: 0;">Uninsured Motorist Claims</h3>
