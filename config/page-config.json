@@ -1,5 +1,15 @@
 {
   "pages": {
+    "uninsured-motorist-accidents": {
+      "type": "resource",
+      "title": "Uninsured Motorist Accidents",
+      "serviceType": "Uninsured Motorist Accident",
+      "modalHeading": "Hit by an Uninsured Driver?",
+      "modalSubtitle": "Get a free consultation about your uninsured or underinsured motorist claim.",
+      "ctaTagline": "",
+      "ctaTitle": "Hit by an Uninsured or Underinsured Driver? Get Help Today.",
+      "ctaDescription": "Don't let your own insurer shortchange you. Contact Frank Penney Injury Law for a free, no-obligation consultation about your UM/UIM claim."
+    },
     "personal-injury": {
       "type": "practice-area",
       "title": "Personal Injury",

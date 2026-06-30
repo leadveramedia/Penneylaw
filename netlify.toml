@@ -283,6 +283,12 @@
   force = true
 
 [[redirects]]
+  from = "/uninsured-motorist-accidents.html"
+  to = "/uninsured-motorist-accidents"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/wrongful-death.html"
   to = "/wrongful-death"
   status = 301
