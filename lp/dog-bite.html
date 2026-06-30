@@ -9,9 +9,6 @@
     <meta name="description" content="California dog bite lawyer for victims of dog attacks. Strict liability law is on your side. $1B+ recovered. Free consultation 24/7. No fee unless we win.">
     <title>California Dog Bite Lawyer | Frank Penney Injury Law</title>
     <link rel="canonical" href="https://www.penneylaw.com/lp/dog-bite.html">
-    <!-- LP LCP image preload + font prewarming -->
-    <link rel="preload" as="image" type="image/webp" fetchpriority="high" href="../images/lp/dog-bite.webp">
-    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2">
 
     <!-- Trusted Types Policy (must load before any DOM sink usage) -->
     <script>if(typeof trustedTypes!=='undefined'){try{trustedTypes.createPolicy('default',{createHTML:function(s){return s},createScriptURL:function(s){return s},createScript:function(s){return s}})}catch(e){}}</script>
@@ -41,10 +38,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="../css/style.min.css?v=20260618">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.min.css?v=20260517">
     <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/Frank-Penny-Favicon-Logo-32x32-1.png">
 
     <!-- TODO before publish: confirm Sacramento ZIP code; add geo coords for Sacramento/Fairfield/Stockton/Modesto/Chico; add AggregateRating block once Google Business Profile review count is sourced. -->
@@ -1697,9 +1692,6 @@
                 align-items: center;
                 justify-content: space-between;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-                height: 42px;
-                gap: 0.75rem;
-                overflow: hidden;
             }
             .mobile-cta-phone {
                 display: inline-flex;
@@ -1710,8 +1702,6 @@
                 font-size: 0.9375rem;
                 font-weight: 700;
                 text-decoration: none;
-                white-space: nowrap;
-                flex-shrink: 0;
             }
             .mobile-cta-phone svg {
                 width: 18px;
@@ -1728,7 +1718,6 @@
                 color: var(--lp-white);
                 text-transform: uppercase;
                 letter-spacing: 0.03em;
-                min-width: 0;
             }
             .mobile-cta-trust span {
                 white-space: nowrap;
@@ -1744,11 +1733,6 @@
             .lp-hero-callouts {
                 display: none;
             }
-        }
-        @media (max-width: 400px) {
-            .mobile-cta-trust span:first-child { display: none; }
-        }
-        @media (max-width: 768px) {
             /* Cities + FAQ also stack on mobile (rules below) */
 
             /* Hide hero tagline on mobile (already in mobile hero) */
@@ -2090,7 +2074,7 @@
                 <p class="lp-mobile-tagline">BANK ON FRANK!</p>
             </div>
             <div class="lp-mobile-frank">
-                <img src="../images/attorneys/frank-penney.webp" alt="Frank Penney" class="lp-mobile-frank-img" width="240" height="360">
+                <img src="../images/attorneys/frank-penney.webp" alt="Frank Penney" class="lp-mobile-frank-img">
                 <span class="lp-mobile-shield">No Fee Unless We Win!</span>
             </div>
         </div>
@@ -2406,36 +2390,8 @@
     </div>
 </footer>
 
-<script>
-(function(){
-    var toggle = document.getElementById('mobile-menu-toggle');
-    var mobileNav = document.getElementById('mobile-nav');
-    if(!toggle||!mobileNav) return;
-    function close(){
-        toggle.classList.remove('active');
-        mobileNav.classList.remove('active');
-        toggle.setAttribute('aria-expanded','false');
-        mobileNav.setAttribute('aria-hidden','true');
-        document.body.classList.remove('menu-open');
-    }
-    toggle.addEventListener('click', function(){
-        var open = toggle.getAttribute('aria-expanded') === 'true';
-        if(open){ close(); return; }
-        toggle.classList.add('active');
-        mobileNav.classList.add('active');
-        toggle.setAttribute('aria-expanded','true');
-        mobileNav.setAttribute('aria-hidden','false');
-        document.body.classList.add('menu-open');
-    });
-    mobileNav.querySelectorAll('a').forEach(function(a){
-        a.addEventListener('click', close);
-    });
-    document.addEventListener('keydown', function(e){
-        if(e.key === 'Escape' && mobileNav.classList.contains('active')){ close(); toggle.focus(); }
-    });
-})();
-</script>
-<script src="../js/consent.min.js?v=20260618" defer></script>
+<script src="../js/main.js?v=20260517"></script>
+<script src="../js/consent.min.js?v=20260517" defer></script>
 <script>
 (function() {
     'use strict';
@@ -2692,7 +2648,7 @@
 </script>
 
 <!-- Ad Tracking for Paid Campaigns (GTM events, phone tracking) -->
-<script src="../js/ad-tracking.min.js?v=20260618" defer></script>
+<script src="../js/ad-tracking.min.js?v=20260517" defer></script>
 
 </body>
 </html>

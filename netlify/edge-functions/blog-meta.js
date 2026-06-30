@@ -131,6 +131,19 @@ export default async (request, context) => {
         // Strip the defensive shell noindex on successful render
         modifiedHtml = stripShellNoindex(modifiedHtml);
 
+        // Inject Article/NewsArticle/BlogPosting JSON-LD for richer SERP results + AI citation.
+        // Shells ship with no JSON-LD, so this is the only article schema on these pages.
+        const articleType = contentType === 'blog' ? 'BlogPosting'
+            : contentType === 'accident-news' ? 'NewsArticle' : 'Article';
+        modifiedHtml = injectArticleJsonLd(modifiedHtml, articleType, {
+            headline: title.replace(' | Frank Penney Injury Law', ''),
+            description,
+            image: imageUrl,
+            url: postUrl,
+            datePublished: story.first_published_at || story.created_at || null,
+            dateModified: story.published_at || story.first_published_at || story.created_at || null,
+        });
+
         return new Response(modifiedHtml, { headers: response.headers });
 
     } catch (error) {
@@ -246,6 +259,29 @@ function injectSsrPostHeader(html, title, excerpt) {
         /<div class="ssr-post-header sr-only">[\s\S]*?<\/div>/,
         replacement
     );
+}
+
+function injectArticleJsonLd(html, type, data) {
+    const obj = {
+        '@context': 'https://schema.org',
+        '@type': type,
+        headline: String(data.headline || '').substring(0, 110),
+        description: data.description,
+        image: data.image,
+        url: data.url,
+        mainEntityOfPage: { '@type': 'WebPage', '@id': data.url },
+        author: { '@type': 'Organization', name: 'Frank Penney Injury Law', url: 'https://penneylaw.com/' },
+        publisher: {
+            '@type': 'Organization',
+            name: 'Frank Penney Injury Law',
+            logo: { '@type': 'ImageObject', url: 'https://penneylaw.com/images/logos/FP-Logo-Dark-Background.png' }
+        }
+    };
+    if (data.datePublished) obj.datePublished = data.datePublished;
+    if (data.dateModified) obj.dateModified = data.dateModified;
+    // Escape HTML-special chars so embedded content can't break out of the <script> element.
+    const json = JSON.stringify(obj).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026');
+    return html.replace('</head>', `    <script type="application/ld+json">${json}</script>\n</head>`);
 }
 
 function stripShellNoindex(html) {

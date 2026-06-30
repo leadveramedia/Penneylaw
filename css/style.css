@@ -2198,7 +2198,7 @@ body.menu-open {
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr 1.4fr;
     gap: var(--spacing-2xl);
 }
 
