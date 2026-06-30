@@ -10,6 +10,26 @@
       "ctaTitle": "Hit by an Uninsured or Underinsured Driver? Get Help Today.",
       "ctaDescription": "Don't let your own insurer shortchange you. Contact Frank Penney Injury Law for a free, no-obligation consultation about your UM/UIM claim."
     },
+    "how-much-is-my-case-worth": {
+      "type": "resource",
+      "title": "How Much Is My Case Worth",
+      "serviceType": "Personal Injury",
+      "modalHeading": "Find Out What Your Case Is Worth",
+      "modalSubtitle": "Get a free, no-obligation evaluation of your personal injury claim.",
+      "ctaTagline": "",
+      "ctaTitle": "Wondering What Your Case Is Worth? Find Out Free.",
+      "ctaDescription": "Get a real assessment of your claim's value from attorneys who have recovered over $1 billion. Free, no-obligation consultation."
+    },
+    "personal-injury-claim-process": {
+      "type": "resource",
+      "title": "Personal Injury Claim Process",
+      "serviceType": "Personal Injury",
+      "modalHeading": "Ready to Start Your Claim?",
+      "modalSubtitle": "Get a free consultation and we'll guide you through every step.",
+      "ctaTagline": "",
+      "ctaTitle": "Ready to Start Your Injury Claim? We'll Guide You.",
+      "ctaDescription": "From investigation to settlement, we handle the process so you can focus on healing. Free, no-obligation consultation."
+    },
     "personal-injury": {
       "type": "practice-area",
       "title": "Personal Injury",

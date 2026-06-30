@@ -289,6 +289,18 @@
   force = true
 
 [[redirects]]
+  from = "/how-much-is-my-case-worth.html"
+  to = "/how-much-is-my-case-worth"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/personal-injury-claim-process.html"
+  to = "/personal-injury-claim-process"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/wrongful-death.html"
   to = "/wrongful-death"
   status = 301
