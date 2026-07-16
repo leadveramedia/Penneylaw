@@ -51,7 +51,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" type="image/webp" fetchpriority="high" media="(max-width: 768px)" href="../images/attorneys/lp-mobile-hero-bg.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="../css/style.min.css?v=20260517">
     <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/Frank-Penny-Favicon-Logo-32x32-1.png">
 
@@ -1500,7 +1502,7 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background: url('../images/attorneys/Image Feb 4, 2026, 02_47_26 PM.png') center center/cover no-repeat;
+                background: url('../images/attorneys/lp-mobile-hero-bg.webp') center center/cover no-repeat;
                 opacity: 0.55;
             }
             .lp-mobile-hero-inner {
@@ -2087,7 +2089,7 @@
                 <p class="lp-mobile-tagline">BANK ON FRANK!</p>
             </div>
             <div class="lp-mobile-frank">
-                <img src="../images/attorneys/frank-penney.webp" alt="Frank Penney" class="lp-mobile-frank-img">
+                <img src="../images/attorneys/frank-penney.webp" alt="Frank Penney" class="lp-mobile-frank-img" width="240" height="360">
                 <span class="lp-mobile-shield">No Fee Unless We Win!</span>
             </div>
         </div>
@@ -2241,7 +2243,7 @@
 <section class="lp-why" id="lp-why">
     <div class="lp-why-inner">
         <div class="lp-why-image">
-            <img src="../images/attorneys/frankpenney-team-2026.webp" alt="Frank Penney Injury Law Team">
+            <img src="../images/attorneys/frankpenney-team-2026.webp" alt="Frank Penney Injury Law Team" width="800" height="533">
         </div>
         <div class="lp-why-content">
             <span class="lp-section-label">Why Choose Us</span>
@@ -2407,7 +2409,7 @@
     </div>
 </footer>
 
-<script src="../js/main.js?v=20260517"></script>
+<script src="../js/main.min.js?v=20260517"></script>
 <script src="../js/consent.min.js?v=20260517" defer></script>
 <script>
 (function() {

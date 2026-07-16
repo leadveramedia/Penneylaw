@@ -2911,7 +2911,8 @@ body.components-loaded {
     right: 24px;
     bottom: 24px;
     z-index: 998;
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    /* visibility flips instantly (0s) so it isn't a non-composited animation; opacity/transform carry the fade */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
 }
 
 /* Auto-hide when other CTA buttons are visible */
@@ -2920,6 +2921,8 @@ body.components-loaded {
     transform: translateY(20px);
     visibility: hidden;
     pointer-events: none;
+    /* delay the instant visibility:hidden until the fade-out finishes */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
 }
 
 .floating-contact-btn {
@@ -2934,7 +2937,8 @@ body.components-loaded {
     font-size: 1rem;
     font-weight: 700;
     box-shadow: var(--shadow-xl);
-    transition: all var(--transition-fast);
+    /* explicit props (not `all`) so the inherited visibility change isn't transitioned */
+    transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
     cursor: pointer;
     border: none;
 }

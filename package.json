@@ -7,6 +7,7 @@
     "minify:css": "cleancss -o css/style.min.css css/style.css",
     "minify:blog-css": "cleancss -o css/blog.min.css css/blog.css",
     "minify:js": "uglifyjs js/trusted-types.js js/main.js js/component-loader.js js/form-validation.js js/consent.js -o js/bundle.min.js -c -m",
+    "minify:main-js": "uglifyjs js/main.js -o js/main.min.js -c -m",
     "minify:blog-js": "uglifyjs js/blog.js -o js/blog.min.js -c -m",
     "minify:accident-news-js": "uglifyjs js/accident-news.js -o js/accident-news.min.js -c -m",
     "minify:city-js": "uglifyjs js/city.js -o js/city.min.js -c -m",
@@ -17,7 +18,7 @@
     "build:translations": "node scripts/build-translations.js",
     "lint:redirects": "node scripts/lint-redirects.js",
     "test:redirects": "node scripts/test-redirects.js \"../Frank Penney - Migration - 2026 - Pages.csv\" http://localhost:8888",
-    "build": "npm run lint:redirects && npm run minify:css && npm run minify:blog-css && npm run minify:js && npm run minify:blog-js && npm run minify:accident-news-js && npm run minify:city-js && npm run minify:consent-js && npm run minify:ad-tracking-js && npm run build:lps && npm run generate:sitemap",
+    "build": "npm run lint:redirects && npm run minify:css && npm run minify:blog-css && npm run minify:js && npm run minify:main-js && npm run minify:blog-js && npm run minify:accident-news-js && npm run minify:city-js && npm run minify:consent-js && npm run minify:ad-tracking-js && npm run build:lps && npm run generate:sitemap",
     "convert-locations": "node scripts/convert-location-images.js"
   },
   "dependencies": {
