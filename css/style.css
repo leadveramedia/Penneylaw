@@ -4158,6 +4158,17 @@ body.modal-open {
     text-decoration: underline;
 }
 
+/* WCAG AA: --light-gray (#F5F5F5) is near-white, so on bg-light sections the
+   medium-gray body text (4.48:1) and hot-pink subtitle (4.15:1) fall just under
+   4.5:1. Darken both here; white-bg sections keep the standard pink/medium-gray. */
+.bg-light .section-subtitle {
+    color: #C70B7F; /* darker hot-pink — 5.09:1 on #F5F5F5 */
+}
+.bg-light .section-description,
+.bg-light .results-disclaimer {
+    color: var(--dark-gray); /* 9.5:1 on #F5F5F5 */
+}
+
 /* ========================================
    TESTIMONIALS / GOOGLE REVIEWS (audit #9) — reusable component
    ======================================== */
