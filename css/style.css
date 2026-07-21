@@ -2000,6 +2000,72 @@ body.menu-open {
     color: var(--dark-azure);
 }
 
+/* Office map embeds */
+.office-map {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: var(--light-gray);
+    overflow: hidden;
+}
+
+.office-map iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.office-map-rounded {
+    border-radius: 12px;
+    margin-top: 1rem;
+}
+
+.map-open-btn {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 1;
+    box-shadow: var(--shadow-md);
+}
+
+/* Photo banner with overlaid city name */
+.office-card-banner {
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+}
+
+.office-card-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.office-card-banner .office-card-city {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 2rem 1.25rem 0.75rem;
+    font-family: var(--font-primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+    background: linear-gradient(transparent, rgba(3, 53, 99, 0.9)); /* dark-azure scrim for AA contrast */
+}
+
+.office-card-phone a {
+    color: var(--gold-accessible);
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.office-card-phone a:hover {
+    color: var(--dark-azure);
+}
+
 /* ========================================
    SECTIONS
 ======================================== */
