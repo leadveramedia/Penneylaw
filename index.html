@@ -29,12 +29,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Preload critical font weights -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2" as="font" type="font/woff2" crossorigin>
     <!-- Load fonts with display=swap for faster text rendering -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
-    <link rel="preload" href="css/style.min.css?v=20260618" as="style">
-    <link rel="stylesheet" href="css/style.min.css?v=20260618">
+    <link rel="preload" href="css/style.min.css?v=20260726" as="style">
+    <link rel="stylesheet" href="css/style.min.css?v=20260726">
     <!-- Critical CSS for hero section to prevent CLS and optimize LCP -->
     <style>
         :root { --font-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
@@ -248,7 +247,7 @@
     <div class="container">
         <div class="hero-wrapper">
             <!-- Hero Content -->
-            <div class="hero-content" data-reveal>
+            <div class="hero-content">
                 <span class="hero-subtitle">California's Premier Injury Law Firm</span>
                 <h1>Fighting for<br><span class="highlight">Maximum<br>Compensation</span><br>for Injury Victims</h1>
             
@@ -273,7 +272,7 @@
                 </div>
 
                 <!-- Team Photo (mobile only, replaces stats; LCP element on phones) -->
-                <img class="hero-team-photo" src="images/attorneys/frankpenney-team-2026.webp" alt="Frank Penney Injury Law attorneys — Frank Penney, Mark McCauley, Joshua Boyce, Jacob Stoeltzing, Liam Conley" width="800" height="533" decoding="async">
+                <img class="hero-team-photo" src="images/attorneys/frankpenney-team-2026.webp" alt="Frank Penney Injury Law attorneys — Frank Penney, Mark McCauley, Joshua Boyce, Jacob Stoeltzing, Liam Conley" width="800" height="533" fetchpriority="high">
 
                 <!-- Hero Buttons -->
                 <div class="hero-buttons">
@@ -288,7 +287,7 @@
             </div>
 
             <!-- Hero Contact Form -->
-            <div class="hero-form-wrapper" data-reveal>
+            <div class="hero-form-wrapper">
                 <h2 class="hero-form-title">Get Your Free Consultation</h2>
                 <p style="font-weight: 700; color: var(--hot-pink); margin: 0 0 0.5rem 0; text-align: center; font-size: 1.5rem;">No Fees Unless You Win</p>
                 <p class="hero-form-subtitle">Tell us about your case and we'll contact you within 24 hours.</p>
