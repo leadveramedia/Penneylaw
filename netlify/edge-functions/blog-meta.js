@@ -96,7 +96,7 @@ export default async (request, context) => {
 
         if (contentType === 'blog') {
             title = (content.meta_title || content.title) + ' | Frank Penney Injury Law';
-            description = content.meta_description || content.excerpt || '';
+            description = content.meta_description || content.excerpt || extractTextSnippet(content.Body_Content) || '';
             postUrl = 'https://penneylaw.com/blog/' + story.slug;
             excerpt = content.excerpt || extractTextSnippet(content.Body_Content) || description;
         } else if (contentType === 'accident-news') {
@@ -107,7 +107,7 @@ export default async (request, context) => {
         } else {
             // city post
             title = (content.meta_title || content.title) + ' | Frank Penney Injury Law';
-            description = content.meta_description || content.excerpt || '';
+            description = content.meta_description || content.excerpt || extractTextSnippet(content.Body_Content) || '';
             postUrl = 'https://penneylaw.com/' + story.full_slug;
             excerpt = content.excerpt || extractTextSnippet(content.Body_Content) || description;
         }
@@ -180,17 +180,21 @@ async function handleBareCity(citySlug, path, context) {
     });
 
     // Update visible H1 + subtitle + breadcrumb (city-listing.html placeholders)
-    modifiedHtml = modifiedHtml.replace(
+    modifiedHtml = sub(
+        modifiedHtml,
         /<h1 class="page-title" id="city-page-title">[^<]*<\/h1>/,
         `<h1 class="page-title" id="city-page-title">${escapeHtml(h1)}</h1>`
     );
-    modifiedHtml = modifiedHtml.replace(
+    modifiedHtml = sub(
+        modifiedHtml,
         /<p class="page-subtitle" id="city-page-subtitle">[^<]*<\/p>/,
         `<p class="page-subtitle" id="city-page-subtitle">${escapeHtml(subtitle)}</p>`
     );
+    // Keeps a real capture group ($1 = the span's other attributes), so this one uses a
+    // replacer function rather than sub() to preserve the group while staying literal.
     modifiedHtml = modifiedHtml.replace(
         /<span class="breadcrumbs-current" id="city-breadcrumb"([^>]*)>[^<]*<\/span>/,
-        `<span class="breadcrumbs-current" id="city-breadcrumb"$1>${escapeHtml(meta.name)}</span>`
+        (_match, attrs) => `<span class="breadcrumbs-current" id="city-breadcrumb"${attrs}>${escapeHtml(meta.name)}</span>`
     );
 
     modifiedHtml = stripShellNoindex(modifiedHtml);
@@ -212,9 +216,12 @@ async function fallbackResponse(context, url) {
     const selfCanonical = 'https://penneylaw.com' + url.pathname;
 
     let modifiedHtml = html;
-    modifiedHtml = modifiedHtml.replace(
+    // sub() matters here: url.pathname is request-controlled and keeps "$" and "&"
+    // literal, so a request for /blog/$&x would otherwise re-inject the matched tag.
+    modifiedHtml = sub(
+        modifiedHtml,
         /<link rel="canonical" href="[^"]*">/,
-        `<link rel="canonical" href="${selfCanonical}">`
+        `<link rel="canonical" href="${escapeAttr(selfCanonical)}">`
     );
     // Replace existing robots meta if present, otherwise add one before </head>
     if (/<meta name="robots" content="[^"]*">/.test(modifiedHtml)) {
@@ -231,19 +238,36 @@ async function fallbackResponse(context, url) {
     return new Response(modifiedHtml, { headers: response.headers });
 }
 
-function injectMeta(html, { title, description, canonical, ogImage }) {
+// Exported for scripts/test-edge-meta.mjs. Netlify only uses the default export + config.
+export function injectMeta(html, { title, description, canonical, ogImage }) {
     let out = html;
-    out = out.replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`);
-    out = out.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escapeAttr(description)}">`);
-    out = out.replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${canonical}">`);
-    out = out.replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escapeAttr(title)}">`);
-    out = out.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${escapeAttr(description)}">`);
-    out = out.replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${canonical}">`);
-    out = out.replace(/<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${escapeAttr(ogImage)}">`);
-    out = out.replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${escapeAttr(title)}">`);
-    out = out.replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${escapeAttr(description)}">`);
-    out = out.replace(/<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${escapeAttr(ogImage)}">`);
+    out = sub(out, /<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`);
+    // Only overwrite descriptions when we actually have one — the shells ship with a
+    // generic firm description, and blanking it is worse than leaving the fallback.
+    if (description) {
+        out = sub(out, /<meta name="description" content="[^"]*">/, `<meta name="description" content="${escapeAttr(description)}">`);
+    }
+    out = sub(out, /<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${escapeAttr(canonical)}">`);
+    out = sub(out, /<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escapeAttr(title)}">`);
+    if (description) {
+        out = sub(out, /<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${escapeAttr(description)}">`);
+    }
+    out = sub(out, /<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${escapeAttr(canonical)}">`);
+    out = sub(out, /<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${escapeAttr(ogImage)}">`);
+    out = sub(out, /<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${escapeAttr(title)}">`);
+    if (description) {
+        out = sub(out, /<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${escapeAttr(description)}">`);
+    }
+    out = sub(out, /<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${escapeAttr(ogImage)}">`);
     return out;
+}
+
+// String.replace() interprets $&, $`, $', $$ in a replacement STRING. Our replacements
+// carry escaped CMS body text, where escapeAttr turns < " & into &-entities — so a "$<"
+// in a post ("damages under $<25,000") becomes "$&lt;" and the $& re-injects the matched
+// tag, breaking out of the attribute. Passing a function makes the replacement literal.
+function sub(html, pattern, replacement) {
+    return html.replace(pattern, () => replacement);
 }
 
 function injectSsrPostHeader(html, title, excerpt) {
@@ -255,10 +279,7 @@ function injectSsrPostHeader(html, title, excerpt) {
         `        <h1 class="ssr-post-title">${escapeHtml(title)}</h1>\n` +
         `        <p class="ssr-post-excerpt">${escapeHtml(excerpt)}</p>\n` +
         `    </div>`;
-    return html.replace(
-        /<div class="ssr-post-header sr-only">[\s\S]*?<\/div>/,
-        replacement
-    );
+    return sub(html, /<div class="ssr-post-header sr-only">[\s\S]*?<\/div>/, replacement);
 }
 
 function injectArticleJsonLd(html, type, data) {
@@ -266,7 +287,6 @@ function injectArticleJsonLd(html, type, data) {
         '@context': 'https://schema.org',
         '@type': type,
         headline: String(data.headline || '').substring(0, 110),
-        description: data.description,
         image: data.image,
         url: data.url,
         mainEntityOfPage: { '@type': 'WebPage', '@id': data.url },
@@ -277,11 +297,12 @@ function injectArticleJsonLd(html, type, data) {
             logo: { '@type': 'ImageObject', url: 'https://penneylaw.com/images/logos/FP-Logo-Dark-Background.png' }
         }
     };
+    if (data.description) obj.description = data.description;
     if (data.datePublished) obj.datePublished = data.datePublished;
     if (data.dateModified) obj.dateModified = data.dateModified;
     // Escape HTML-special chars so embedded content can't break out of the <script> element.
     const json = JSON.stringify(obj).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026');
-    return html.replace('</head>', `    <script type="application/ld+json">${json}</script>\n</head>`);
+    return sub(html, '</head>', `    <script type="application/ld+json">${json}</script>\n</head>`);
 }
 
 function stripShellNoindex(html) {
@@ -290,7 +311,7 @@ function stripShellNoindex(html) {
     return html.replace(/\s*<meta name="robots" content="noindex">\s*\n?/, '\n');
 }
 
-function extractTextSnippet(richText) {
+export function extractTextSnippet(richText) {
     if (!richText || !richText.content) return '';
     function getText(node) {
         if (!node) return '';
@@ -298,15 +319,19 @@ function extractTextSnippet(richText) {
         if (!node.content) return '';
         return node.content.map(getText).join(' ');
     }
-    const text = richText.content.map(getText).join(' ').trim();
-    return text.substring(0, 160) + (text.length > 160 ? '...' : '');
+    const text = richText.content.map(getText).join(' ').replace(/\s+/g, ' ').trim();
+    if (text.length <= 160) return text;
+    // Trim back to a word boundary so SERP snippets don't end mid-word. Falls back to a
+    // hard cut when the first 157 chars contain no space (single very long token).
+    const cut = text.slice(0, 157);
+    return (/\s/.test(cut) ? cut.replace(/\s+\S*$/, '') : cut) + '...';
 }
 
 function escapeHtml(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-function escapeAttr(str) {
+export function escapeAttr(str) {
     return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
