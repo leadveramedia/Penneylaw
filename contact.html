@@ -167,6 +167,25 @@
                 <form id="contact-page-form" class="contact-form" name="contact" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
                     <input type="hidden" name="form-name" value="contact">
                     <input type="hidden" name="subject" value="">
+                    <!-- Ad Tracking Fields (populated by js/ad-tracking.js; declared here so
+                         Netlify Forms includes them in submission notifications) -->
+                    <input type="hidden" name="utm_source" value="">
+                    <input type="hidden" name="utm_medium" value="">
+                    <input type="hidden" name="utm_campaign" value="">
+                    <input type="hidden" name="utm_content" value="">
+                    <input type="hidden" name="utm_term" value="">
+                    <input type="hidden" name="gclid" value="">
+                    <input type="hidden" name="gbraid" value="">
+                    <input type="hidden" name="wbraid" value="">
+                    <input type="hidden" name="fbclid" value="">
+                    <input type="hidden" name="ttclid" value="">
+                    <input type="hidden" name="msclkid" value="">
+                    <input type="hidden" name="landing_page" value="">
+                    <input type="hidden" name="referrer" value="">
+                    <input type="hidden" name="first_utm_source" value="">
+                    <input type="hidden" name="first_utm_medium" value="">
+                    <input type="hidden" name="first_landing_page" value="">
+                    <input type="hidden" name="first_touch_ts" value="">
                     <p class="hidden" style="display: none;">
                         <label>Don't fill this out: <input name="bot-field"></label>
                     </p>
@@ -396,6 +415,6 @@
 }
 </style>
 
-<script src="js/bundle.min.js?v=20260618" defer></script>
+<script src="js/bundle.min.js?v=20260730" defer></script>
 </body>
 </html>

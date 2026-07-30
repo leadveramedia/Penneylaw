@@ -1,25 +1,38 @@
 /**
- * Ad Tracking Script for PenneyLaw Landing Pages
+ * Ad Tracking Script — loads site-wide via js/bundle.min.js, and standalone on lp/ pages.
  *
- * Captures URL parameters from paid ad campaigns (UTM params, gclid, fbclid)
- * and injects them into forms for tracking in email notifications and GTM events.
+ * Captures URL parameters from paid campaigns (UTM params and the Google/Meta/TikTok/
+ * Microsoft click IDs) and injects them into forms so lead notifications carry their source.
  *
  * Features:
  * - Captures UTM parameters and ad platform click IDs
- * - Stores tracking data in sessionStorage
+ * - Persists first-touch AND last-touch attribution in localStorage (90-day TTL and retention)
  * - Auto-injects hidden fields into all Netlify forms
- * - Tracks phone clicks as GTM events
- * - Tracks form submissions as GTM events
+ * - Tracks phone clicks and form submissions as GTM dataLayer events
+ * - Stashes Enhanced Conversions data and a one-shot conversion token for thank-you.html
  *
- * @version 1.0.0
+ * NOTE: CallRail is the attribution system of record for calls and forms (it loads via GTM
+ * on every page with its own session cookie). The fields here are a human-readable source
+ * trail in the lead email and a backup — not the primary attribution path.
+ *
+ * @version 2.0.0
  */
 
 (function() {
     'use strict';
 
     // Configuration
-    var STORAGE_KEY = 'ad_tracking_data';
-    var EC_STORAGE_KEY = 'enhanced_conversion_data';
+    var ATTR_KEY = 'penney_attr';                    // localStorage: first + last touch
+    var EC_STORAGE_KEY = 'enhanced_conversion_data';  // sessionStorage: per-submission
+    var CONVERSION_TOKEN_KEY = 'pending_conversion';  // sessionStorage: one-shot, read by thank-you.html
+
+    // Attribution TTL, doing double duty: it caps how long first-touch is held onto, AND it
+    // is the retention window — a record untouched for this long is deleted on next read, so
+    // the 90 days disclosed in privacy-policy.html is real and not just a reset interval.
+    // 90 days matches Google's _gcl_aw cookie; shorter would undercount personal-injury
+    // consideration cycles, which routinely run weeks.
+    var ATTR_TTL_MS = 90 * 24 * 60 * 60 * 1000;
+
     var TRACKING_PARAMS = [
         'utm_source',
         'utm_medium',
@@ -29,7 +42,9 @@
         'gclid',      // Google Ads Click ID
         'gbraid',     // Google Ads Broad Match (iOS/cross-domain)
         'wbraid',     // Google Ads Web-to-App
-        'fbclid'      // Facebook Ads Click ID
+        'fbclid',     // Meta Click ID — covers both Facebook and Instagram
+        'ttclid',     // TikTok Click ID
+        'msclkid'     // Microsoft Ads Click ID
     ];
 
     /**
@@ -48,45 +63,97 @@
             }
         });
 
-        // Add additional context
+        // Add additional context. Every key here must also be declared as a hidden input in
+        // the forms (and in netlify-form-template.html) or Netlify drops it from
+        // notifications — which is why there's no `timestamp`: Netlify already stamps each
+        // submission, and first_touch_ts covers the attribution timing that isn't redundant.
         if (Object.keys(trackingData).length > 0) {
             trackingData.landing_page = window.location.pathname;
             trackingData.referrer = document.referrer || 'direct';
-            trackingData.timestamp = new Date().toISOString();
         }
 
         return trackingData;
     }
 
     /**
-     * Store tracking data in sessionStorage
-     * @param {Object} data - Tracking data to store
+     * Read the stored attribution record, or an empty shell if absent/corrupt.
+     * @returns {{first: Object|null, first_ts: number, last: Object|null, last_ts: number}}
+     */
+    function readAttr() {
+        var empty = { first: null, first_ts: 0, last: null, last_ts: 0 };
+        try {
+            var raw = localStorage.getItem(ATTR_KEY);
+            var parsed = raw ? JSON.parse(raw) : null;
+            if (parsed && typeof parsed === 'object') {
+                // Enforce the disclosed retention window: a record untouched for the full TTL
+                // is deleted rather than kept indefinitely.
+                if (parsed.last_ts && (Date.now() - parsed.last_ts) > ATTR_TTL_MS) {
+                    localStorage.removeItem(ATTR_KEY);
+                    return empty;
+                }
+                return parsed;
+            }
+        } catch (e) {
+            console.warn('[Ad Tracking] Could not read attribution record:', e);
+        }
+        return empty;
+    }
+
+    /**
+     * Record a freshly captured param set. Last-touch is always overwritten; first-touch is
+     * written only when absent or past its TTL, so the original source of a long
+     * consideration cycle survives later visits and closed tabs.
+     * @param {Object} data - Newly captured tracking params
      */
     function storeTrackingData(data) {
         if (!data || Object.keys(data).length === 0) {
             return;
         }
 
+        var rec = readAttr();
+        var now = Date.now();
+
+        if (!rec.first || !rec.first_ts || (now - rec.first_ts) > ATTR_TTL_MS) {
+            rec.first = data;
+            rec.first_ts = now;
+        }
+        rec.last = data;
+        rec.last_ts = now;
+
         try {
-            sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            console.log('[Ad Tracking] Stored tracking data:', data);
+            localStorage.setItem(ATTR_KEY, JSON.stringify(rec));
         } catch (e) {
-            console.warn('[Ad Tracking] Could not store tracking data in sessionStorage:', e);
+            console.warn('[Ad Tracking] Could not store attribution record:', e);
         }
     }
 
     /**
-     * Retrieve tracking data from sessionStorage
-     * @returns {Object} Stored tracking data or empty object
+     * Tracking data for hidden form fields and dataLayer events.
+     *
+     * Returns LAST-touch params — what the ad platforms expect for click IDs — plus a few
+     * first-touch fields, so a lead notification shows where the visitor originally came
+     * from and not only the click that closed them.
+     * @returns {Object} Tracking data, or empty object if nothing has been captured
      */
     function getTrackingData() {
-        try {
-            var stored = sessionStorage.getItem(STORAGE_KEY);
-            return stored ? JSON.parse(stored) : {};
-        } catch (e) {
-            console.warn('[Ad Tracking] Could not retrieve tracking data:', e);
+        var rec = readAttr();
+        if (!rec.last) {
             return {};
         }
+
+        var out = {};
+        Object.keys(rec.last).forEach(function (key) {
+            out[key] = rec.last[key];
+        });
+
+        if (rec.first) {
+            if (rec.first.utm_source) out.first_utm_source = rec.first.utm_source;
+            if (rec.first.utm_medium) out.first_utm_medium = rec.first.utm_medium;
+            if (rec.first.landing_page) out.first_landing_page = rec.first.landing_page;
+            if (rec.first_ts) out.first_touch_ts = new Date(rec.first_ts).toISOString();
+        }
+
+        return out;
     }
 
     /**
@@ -99,31 +166,24 @@
             return;
         }
 
-        var fieldsUpdated = 0;
-        var fieldsCreated = 0;
-
-        // Populate tracking fields (update existing or create new)
+        // Populate tracking fields (update existing or create new).
+        // Note: Netlify Forms builds its field list from the STATIC HTML at deploy time, so
+        // fields created here only reach the notification if they're also declared in the
+        // page markup. That's why the forms declare them explicitly.
         Object.keys(trackingData).forEach(function(key) {
-            // Check if field already exists in the form
             var existingInput = form.querySelector('input[name="' + key + '"]');
 
             if (existingInput) {
-                // Update existing field value
                 existingInput.value = trackingData[key];
-                fieldsUpdated++;
             } else {
-                // Create new hidden field if it doesn't exist
                 var input = document.createElement('input');
                 input.type = 'hidden';
                 input.name = key;
                 input.value = trackingData[key];
                 input.setAttribute('data-ad-tracking', 'true');
                 form.appendChild(input);
-                fieldsCreated++;
             }
         });
-
-        console.log('[Ad Tracking] Form "' + (form.name || form.id) + '": Updated ' + fieldsUpdated + ' fields, Created ' + fieldsCreated + ' fields');
     }
 
     /**
@@ -132,13 +192,11 @@
     function initializeForms() {
         var trackingData = getTrackingData();
         if (Object.keys(trackingData).length === 0) {
-            console.log('[Ad Tracking] No tracking data available');
             return;
         }
 
         // Find all forms (Netlify strips data-netlify attr at build time, so use name+method)
         var forms = document.querySelectorAll('form[name][method="POST"]');
-        console.log('[Ad Tracking] Found ' + forms.length + ' forms');
 
         forms.forEach(function(form) {
             injectHiddenFields(form, trackingData);
@@ -198,7 +256,6 @@
         });
 
         window.dataLayer.push(eventData);
-        console.log('[Ad Tracking] Phone click tracked:', eventData);
     }
 
     /**
@@ -206,7 +263,6 @@
      */
     function initializePhoneTracking() {
         var phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-        console.log('[Ad Tracking] Found ' + phoneLinks.length + ' phone links');
 
         phoneLinks.forEach(function(link) {
             link.addEventListener('click', trackPhoneClick);
@@ -315,7 +371,16 @@
         });
 
         window.dataLayer.push(eventData);
-        console.log('[Ad Tracking] Form submission tracked:', eventData);
+
+        // Everything below represents a lead, so skip it when the browser can already tell the
+        // form is incomplete. js/form-validation.js calls preventDefault() on invalid forms,
+        // but that does NOT stop this listener — it's a separate handler on the same element —
+        // so without this guard a failed attempt would arm the conversion token.
+        // Forms carry `novalidate` (custom error UI), which suppresses the native bubbles but
+        // leaves checkValidity() working.
+        if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
+            return;
+        }
 
         // Stash user-provided data for Enhanced Conversions on thank-you.html
         var leadsUserData = extractLeadsUserData(form);
@@ -325,6 +390,15 @@
             } catch (e) {
                 console.warn('[Ad Tracking] Could not store enhanced conversion data:', e);
             }
+        }
+
+        // One-shot token proving a real submission happened. thank-you.html fires
+        // `form_conversion` only when this is present, then clears it — so refreshes,
+        // back-navigation and direct hits on the thank-you page don't re-count a lead.
+        try {
+            sessionStorage.setItem(CONVERSION_TOKEN_KEY, '1');
+        } catch (e) {
+            console.warn('[Ad Tracking] Could not set conversion token:', e);
         }
     }
 
@@ -343,7 +417,6 @@
      * Initialize all tracking functionality
      */
     function init() {
-        console.log('[Ad Tracking] Initializing...');
 
         // Step 1: Capture URL parameters
         var capturedData = captureTrackingParams();
@@ -362,11 +435,9 @@
         var trackingData = getTrackingData();
 
         if (Object.keys(trackingData).length === 0) {
-            console.log('[Ad Tracking] No tracking parameters found in URL or storage');
             return;
         }
 
-        console.log('[Ad Tracking] Active tracking data:', trackingData);
 
         // Step 4: Initialize forms with hidden fields (UTM/gclid injection)
         initializeForms();
@@ -374,7 +445,6 @@
         // Step 5: Initialize phone click tracking
         initializePhoneTracking();
 
-        console.log('[Ad Tracking] Initialization complete');
     }
 
     // Initialize when DOM is ready
@@ -395,7 +465,6 @@
                         // Check if added node contains forms
                         var forms = node.querySelectorAll ? node.querySelectorAll('form[name][method="POST"]') : [];
                         if (forms.length > 0 || (node.tagName === 'FORM' && node.getAttribute('method') === 'POST' && node.hasAttribute('name'))) {
-                            console.log('[Ad Tracking] New forms detected, re-initializing...');
                             setTimeout(function() {
                                 initializeForms();
                                 initializeFormTracking();

@@ -158,17 +158,43 @@
 <div id="footer-placeholder"></div>
 
 
-<script src="js/bundle.min.js?v=20260618" defer></script>
+<script src="js/bundle.min.js?v=20260730" defer></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
-    try {
-        var ecRaw = sessionStorage.getItem('enhanced_conversion_data');
-        if (ecRaw) {
-            window.dataLayer.push({ leadsUserData: JSON.parse(ecRaw) });
-            sessionStorage.removeItem('enhanced_conversion_data');
+    // Deferred to DOMContentLoaded on purpose. bundle.min.js is `defer`, and it carries the
+    // Consent Mode defaults plus the GTM snippet. Running inline would queue the conversion
+    // event AHEAD of the consent default, and GTM treats an event with no registered default
+    // as consent-granted. Deferred scripts execute before DOMContentLoaded fires, so this
+    // ordering guarantees consent is registered first.
+    document.addEventListener('DOMContentLoaded', function () {
+        window.dataLayer = window.dataLayer || [];
+
+        // One-shot token set by js/ad-tracking.js on a real form submit. Without it this page
+        // is just a URL anyone can reload, bookmark or navigate back to — each of which would
+        // otherwise re-count a lead.
+        var submitted = false;
+        try {
+            submitted = sessionStorage.getItem('pending_conversion') === '1';
+            if (submitted) {
+                sessionStorage.removeItem('pending_conversion');
+            }
+        } catch (e) { /* storage blocked — fall through and skip the conversion */ }
+
+        if (!submitted) {
+            return;
         }
-    } catch (e) { /* fall through — conversion still fires without enhanced data */ }
-    window.dataLayer.push({ event: 'form_conversion', page_path: window.location.pathname });
+
+        try {
+            var ecRaw = sessionStorage.getItem('enhanced_conversion_data');
+            if (ecRaw) {
+                // Pushed RAW on purpose. GTM's Google Ads tag hashes (SHA-256) client-side;
+                // hashing here as well would double-hash and break Enhanced Conversions matching.
+                window.dataLayer.push({ leadsUserData: JSON.parse(ecRaw) });
+                sessionStorage.removeItem('enhanced_conversion_data');
+            }
+        } catch (e) { /* fall through — conversion still fires without enhanced data */ }
+
+        window.dataLayer.push({ event: 'form_conversion', page_path: window.location.pathname });
+    });
 </script>
 </body>
 </html>

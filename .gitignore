@@ -26,3 +26,7 @@ yarn-error.log*
 
 # Netlify
 .netlify/
+
+# Local GTM container snapshots (audit scratch). The real rollback anchor is GTM's own
+# Versions UI, which retains every published version — see GTM-CHANGES.md.
+.gtm-snapshots/
