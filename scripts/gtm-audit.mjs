@@ -276,12 +276,24 @@ function audit(resource, csp) {
         add('MEDIUM', 'enhanced-conversions-conflict',
             `both AUTO (${autoModes.map(([i]) => 'macro' + i).join(', ')}) and CODE (${codeModes.map(([i]) => 'macro' + i).join(', ')}) user-data variables exist`);
     }
-    tags.forEach((t, i) => {
-        if (t.function === '__awct' && t.vtp_enableEnhancedConversionsCheckbox === false) {
-            add('MEDIUM', 'enhanced-conversions-off',
-                `${label(i)} has Enhanced Conversions disabled`, `label=${t.vtp_conversionLabel}`);
+    // Enhanced Conversions is delivered by the Ads User-Provided Data (__awud) tag, NOT by the
+    // awct tag's checkbox — that tag stores no EC parameters and writing them there is silently
+    // ignored. So the real question is whether a user-data tag exists AND resolves to a
+    // CODE-mode variable. Flagging the awct checkbox instead produces false alarms.
+    if (awudTags.length) {
+        const wired = awudTags.some(([, t]) => {
+            const ref = t.vtp_userDataVariable;
+            const idx = Array.isArray(ref) && ref[0] === 'macro' ? ref[1] : null;
+            return idx != null && macros[idx]?.vtp_mode === 'CODE';
+        });
+        if (!wired) {
+            add('HIGH', 'enhanced-conversions-not-wired',
+                'no Ads User-Provided Data tag resolves to a CODE-mode variable — Enhanced Conversions is sending scraped or no data');
         }
-    });
+    } else if (tags.some((t) => t.function === '__awct')) {
+        add('LOW', 'enhanced-conversions-absent',
+            'Google Ads conversions exist but no User-Provided Data tag — Enhanced Conversions is off entirely');
+    }
 
     // 7. Conversion Linker hygiene
     tags.forEach((t, i) => {

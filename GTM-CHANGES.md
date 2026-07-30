@@ -1,187 +1,116 @@
-# GTM-PC9XN9DP — change list
+# GTM-PC9XN9DP — audit record and remaining work
 
-Findings from an audit of live container **version 20**, and the exact edits to make in the
-GTM UI. Re-run `npm run audit:gtm` at any time — it parses the public compiled container
-(`https://www.googletagmanager.com/gtm.js?id=GTM-PC9XN9DP`), needs no credentials, and exits
-non-zero while unaccepted high-severity findings remain.
+Audit of container **v20** (2026-07-30) plus the fixes applied. **Live version is now 22**,
+published 2026-07-30, containing all four container fixes.
 
-**Rollback reference:** GTM's own **Versions** tab retains every published version, including
-the pre-change v20 — republishing it is the rollback. (`npm run audit:gtm -- --file <path>` can
-also audit a saved copy; `.gtm-snapshots/` is gitignored local scratch, not a deliverable.)
+Re-run the audit any time with `npm run audit:gtm` — it parses the *public* compiled container,
+needs no credentials, and exits non-zero on unaccepted high-severity findings. It currently
+**passes**.
 
-## Before you start
+## Tooling
 
-**Deploy the site-code changes first.** They must be committed and live before step 4, because
-that step points the conversion at the `form_conversion` event, which the site only emits once
-the new `thank-you.html` is deployed.
-
-Work in a **new GTM workspace** (Workspace dropdown → `+`), not the Default Workspace, so
-everything can be discarded in one click. Publish Version A (steps 1–3) and Version B
-(step 4) **separately** — see "Publish order".
-
-## Account context that shaped these decisions
-
-| | |
-|---|---|
-| Bidding | All campaigns on **Maximize Conversion Value** |
-| Primary conversion (feeds bidding) | **tel: click**, `pEKdCNrT-cobELiOuLBB`, static value, `Count = One` |
-| Secondary (observation only) | **thank-you web**, `kZCHCOSz-cobELiOuLBB` |
-| Real valued conversions | Manually valued, pushed via **Zapier from CallRail** (offline import, matched on gclid) |
-
-Nothing below touches the tel: click conversion, so **bidding is not disturbed.**
-
----
-
-## 1. Delete the duplicate consent-default tag — HIGH
-
-**Find it:** Tags → the Custom Template tag firing on **Consent Initialization**
-(internally `__cvt_K8GSG`).
-
-**Do:** Delete the tag.
-
-**Why:** It issues a *second* `consent default` command. The site already issues one in
-`js/component-loader.js:14-22` before `gtm.js` loads. The GTM copy is strictly worse — it
-sets `wait_for_update: "0"` (zeroing the window `js/consent.js` needs to land its update) and
-denies `functionality_storage` **and** `security_storage`, both of which the site grants.
-Deleting it leaves one source of truth and results in *more* measurement, not less.
-
-It is a fossil: consent was removed from the site on 2026-03-04 and re-added on 2026-04-22,
-so for six weeks GTM was the only place a default could live. Nobody removed it afterwards.
-
-## 2. Fix the Conversion Linker — CRITICAL
-
-**Find it:** Tags → **Conversion Linker** (fires on All Pages).
-
-**Do:**
-- Tick **Enable URL passthrough**.
-- Under *Linker Domains*, delete the **137 Netlify deploy-preview hostnames** (anything
-  containing `--` or `.netlify.app`). Keep exactly:
-  `penneylaw.com`, `bankonfrank.com`, `stockton-personalinjury.com`.
-
-**Why this is the most important fix:** `ad_storage` is denied by default, so without URL
-passthrough the **gclid is lost** — and gclid is what your Zapier/CallRail offline conversion
-import matches on. Every consent-denied visitor is currently a lead that can't be attributed
-back to the click that produced it.
-
-## 3. Fix Enhanced Conversions — HIGH
-
-Currently wired backwards. The correct variable exists and is connected to nothing, while the
-live path scrapes the DOM.
-
-**Do, in order:**
-
-1. **Variables** → confirm the user-provided-data variable in **Code** mode with *Data
-   Source* = the `leadsUserData` Data Layer Variable (internally `macro 19`). Leave as is.
-2. **Tags** → thank-you conversion (`kZCHCOSz-cobELiOuLBB`) → tick **Include user-provided
-   data from your website** → select the Code-mode variable from step 1.
-3. **Delete** the **Google Ads User-Provided Data** tag (fires on Form Submission,
-   internally `__awud`).
-4. **Delete** the two remaining **Automatic**-mode user-provided-data variables.
-5. **Google Ads** → Goals → Conversions → Settings → accept the **Enhanced Conversions for
-   Leads** terms if not already accepted.
-
-**Why:** the active variable is in **Automatic** mode, which scrapes the page for emails and
-phone numbers. `(888) 888-0566` appears in the header, hero, CTA and footer of every page, so
-Automatic mode can send **the firm's own number as the lead's phone** — that corrupts matching
-rather than merely failing to help. Deleting the `__awud` tag also fixes a second problem: it
-fired on every submit *attempt*, including client-side-invalid and abandoned ones.
-
-**Do not add hashing to the site.** GTM's Ads tag hashes client-side. `thank-you.html` pushes
-`leadsUserData` raw on purpose; hashing it ourselves would double-hash and break matching.
-
-## 4. Repoint the thank-you conversion to a real submit event — MEDIUM
-
-⚠️ **Requires the site code to be deployed first.** Publish this as its own version.
-
-**Do:**
-1. **Triggers** → New → **Custom Event**, Event name exactly `form_conversion`, fires on
-   All Custom Events.
-2. **Tags** → thank-you conversion (`kZCHCOSz-cobELiOuLBB`) → remove the existing
-   *Page URL contains "thank-you"* pageview trigger → add the new `form_conversion` trigger.
-
-**Why:** it currently fires on any pageview whose URL contains `thank-you`, so refreshes,
-back-navigation and direct hits all re-count. Meanwhile `form_conversion` had no trigger at
-all — the site was pushing an event nothing listened to.
-
-**Expect the reported count to drop.** That's inflation disappearing. This action is
-**Secondary/observation-only**, so bidding is unaffected and there is no re-learning risk.
-The new `thank-you.html` also gates `form_conversion` behind a one-shot token set on real
-submit, so refreshes no longer emit the event at all.
-
-## 5–6. Add the paid-social pixels
-
-Prerequisite: the widened CSP (`analytics.tiktok.com`, `connect.facebook.net`) must be
-deployed. **Before that, any pixel fails silently with no error in the GTM UI.**
-
-| | TikTok | Meta |
+| Script | Auth | Purpose |
 |---|---|---|
-| Tag | TikTok Pixel (community template preferred) | Meta Pixel |
-| Pixel ID | `<TIKTOK_PIXEL_ID>` | `<META_PIXEL_ID>` |
-| Trigger | `form_conversion` | `form_conversion` |
-| Event | generic conversion | `Lead` |
-| Parameters | **none** | **none** |
+| `scripts/gtm-audit.mjs` | none | Audits the live published container. Safe to run anywhere. |
+| `scripts/gtm-apply.mjs` | keyless impersonation | Applies fixes into a new workspace and creates a version. **Never publishes** — no publish code path exists in the file. |
 
-**Send no practice-area, page-path, campaign name, or value.** Meta Pixel on personal-injury
-pages has drawn wiretapping and health-privacy litigation, and Meta's business tools terms
-prohibit health data — a `Lead` event carrying `/traumatic-brain-injuries` tells Meta
-something about the person. Volume alone is enough for the platforms to optimize on.
+`gtm-apply.mjs` auth is keyless service-account impersonation:
 
-Also note: **conversion optimization means leaving boosted posts.** In-app Instagram boosts
-can't optimize to a pixel conversion; that needs Ads Manager with a conversion objective.
+```bash
+gcloud auth login
+export GTM_IMPERSONATE_SA=penneylaw@brilliant-dock-493920-q2.iam.gserviceaccount.com
+node scripts/gtm-apply.mjs --plan            # read-only
+node scripts/gtm-apply.mjs --apply=f1,f2     # -> new workspace -> new version, unpublished
+```
 
-## 7. Prefer built-in templates over Custom HTML
+Plain gcloud ADC does **not** work: Google restricts gcloud's shared OAuth client to a scope
+allowlist excluding `tagmanager.*` ("This app is blocked"). Service-account *keys* are also
+blocked by the `iam.disableServiceAccountKeyCreation` org policy. Impersonation satisfies both,
+because the tagmanager scopes are requested on the *impersonated* token via the IAM Credentials
+API and no key is ever created. Requires `roles/iam.serviceAccountTokenCreator` on the service
+account (project Owner is deliberately **not** sufficient), `iamcredentials.googleapis.com`
+enabled, and the service account added under GTM → Admin → Container → User Management with
+**Edit**.
 
-The CSP sets `require-trusted-types-for 'script'` with no `unsafe-eval`. Hand-written Custom
-HTML tags are a recurring silent-failure source here. Use the gallery template when one exists.
+## Applied in v22
 
----
+| Fix | What changed |
+|---|---|
+| **f1** | Deleted `Consent - Default (denied)` — a second `consent default` command with `wait_for_update: "0"` that denied `functionality_storage` and `security_storage`, contradicting the head snippet in `js/component-loader.js`. A fossil from the Mar 4 → Apr 22 window when the site had no consent mode of its own. |
+| **f2** | Conversion Linker: `enableUrlPassthrough: true`, and linker domains pruned **140 → 3**. This preserves gclid when `ad_storage` is denied (the default state) — gclid is what the Zapier/CallRail offline import matches on, so this was the highest-value fix. |
+| **f3** | `Enhanced conversion tag` repointed from an **AUTO**-mode variable (which scraped the DOM and could send the firm's own `(888) 888-0566` as the lead's phone) to the CODE-mode `UPD - Lead Form User Data`, which reads the `leadsUserData` dataLayer variable. Its trigger moved off `gtm.formSubmit` (every submit *attempt*, including invalid) onto `form_conversion`. Both AUTO variables deleted. |
+| **f4** | Created Custom Event trigger `form_conversion`; repointed `PPC Landing Page Submission` onto it, off `Page URL contains "thank-you"` (which re-fired on refresh, back-nav and direct hits). |
 
-## Publish order
+**The PRIMARY tel: click conversion (`pEKdCNrT-cobELiOuLBB`) was never touched**, so Maximize
+Conversion Value bidding was not disturbed.
 
-1. **Version A** — steps 1, 2, 3. Safe; ship together.
-2. **Version B** — step 4, alone, after the site deploy. Watch 48h.
-3. **Version C** — steps 5–6, pixels, after the CSP is live. Re-check for CSP violations
-   after each pixel.
+### Correction worth recording
 
-## Verify
+Enhanced Conversions is **not** a checkbox on the `awct` conversion tag. That tag stores no EC
+parameters at all, and writing them there is silently accepted and ignored. EC lives on the
+separate Ads User-Provided Data (`awud`) tag via its `userDataVariable`. An earlier draft of
+this document said otherwise; `gtm-apply.mjs` caught it by verifying its own writes against the
+compiled container rather than trusting an HTTP 200.
 
-Run GTM **Preview** against `/`, `/contact`, `/lp/car-accident.html`, `/thank-you`, both
-accepting and rejecting the banner:
+Also: **do not hash `leadsUserData` in site code.** GTM's Ads tag hashes client-side; hashing
+first would double-hash and break matching. `thank-you.html` pushes it raw on purpose.
 
-- Exactly **one** `consent default` in the dataLayer, with `functionality_storage` and
-  `security_storage` **granted** and `wait_for_update: 500`.
-- `form_conversion` fires **once** on a real submit and **not** on refresh or a direct hit.
-- On the thank-you conversion request, `em=` / `pn=` params present — that proves Enhanced
-  Conversions hashed client-side. Should fail before step 3, pass after.
-- Pixels fire on `form_conversion` carrying **no** page path or practice area.
-- **Zero CSP violations** in the browser console.
-- Click a `tel:` link on the homepage and confirm `pEKdCNrT-cobELiOuLBB` still fires — this
-  runs off GTM's native link-click listener, independent of `ad-tracking.js`.
+## The two recurring Google action items
 
-Then: `npm run audit:gtm` should report only ACCEPTED findings.
+Both were diagnosed empirically against production and fixed in site code (not the container).
 
-After 48h in Google Ads → Goals → Conversions:
-- tel: click conversion (Primary) — **unchanged**.
-- thank-you conversion (Secondary) — **lower**, and now honest.
-- Confirm the Zapier/CallRail offline import still lands, and watch whether gclid match rates
-  improve now that URL passthrough is on.
+**"Additional domains detected for configuration"** — `penneylaw.netlify.app` returned HTTP 200
+and served `bundle.min.js`, i.e. the **live production container**, with no hostname gate
+anywhere. Every deploy preview fired the real container, so Google kept detecting the tag on
+those hostnames and prompting; accepting repeatedly is how 137 ephemeral `--hash.netlify.app`
+hostnames accumulated in the linker config. Worse: QA traffic counted as real sessions, test
+form submissions booked real conversions, and internal phone-link clicks fed the PRIMARY
+conversion driving Smart Bidding.
 
-## Rollback
+*Fix:* the GTM snippet is now gated to `penneylaw.com` / `www.penneylaw.com` in both
+`js/component-loader.js` and `lp-source/template.html`. Verified: on a non-production hostname
+the page now contacts only Google Fonts. Tag QA is unaffected — GTM Preview runs against
+production, which is allowed. Side benefit: GTM no longer fires on `localhost`.
 
-- Unpublished: discard the workspace (Workspace → Actions → Delete).
-- Published: Versions → the previous version → **Publish**. GTM retains v20 indefinitely, so
-  the pre-change container is always one click away.
+**"Your website's security settings are blocking measurement"** — captured live: exactly one
+host, `https://analytics.google.com`, violating `connect-src`. It is a *different domain* from
+`www.google-analytics.com` and is not matched by `*.google-analytics.com` or `www.google.com`.
+GA4 posts there when Google Ads linking / Google signals is enabled.
+
+*Fix:* added `https://analytics.google.com` and `https://*.analytics.google.com` to
+`connect-src` and `img-src` in `netlify.toml`. All other third-party hosts already passed
+(`ad.doubleclick.net`, `stats.g.doubleclick.net`, `googleads.g.doubleclick.net`, four Clarity
+hosts, two CallRail hosts).
+
+## Remaining
+
+1. **Accept Enhanced Conversions for Leads terms** in Google Ads → Goals → Conversions →
+   Settings. No API can do this, and f3 is inert without it.
+2. **Paid-social pixels (f5/f6).** Need a TikTok Pixel ID and Meta Pixel ID, then:
+   ```bash
+   TIKTOK_PIXEL_ID=... META_PIXEL_ID=... node scripts/gtm-apply.mjs --apply=f5,f6
+   ```
+   Both fire a **generic** event on `form_conversion` with no page path, practice area, or
+   value — deliberate, given Meta Pixel litigation around health-adjacent data on
+   personal-injury sites.
+3. **Instagram conversion optimization requires leaving boosted posts** — in-app boosts can't
+   optimize toward a pixel conversion.
+4. **Watch Google Ads for 48h.** The thank-you conversion (Secondary) should drop to an honest
+   number; the tel: click conversion (Primary) should not move.
 
 ## Consciously accepted — not changing
 
 - **CallRail and Clarity fire before consent.** Raised, including that Clarity records form
-  interactions; the decision is to leave both ungated. CallRail in particular sits upstream of
-  the gclid capture the Zapier revenue pipeline depends on, so gating it would break attribution.
-- **Bidding optimizes tel: clicks, not connected calls.** Deliberate — clicks give Smart
-  Bidding the volume and recency it needs; human-valued offline imports arrive later and
-  sparser. Revisit if per-campaign call volume supports ~30+/month.
-- **No differentiated lead values.** Maximize Conversion Value therefore behaves much like
-  Maximize Conversions for web conversions; real values enter via the Zapier import.
-- **17 orphan variables and hardcoded measurement IDs** — cosmetic, left alone.
-- **No `<noscript>` GTM iframe** — correct to omit; these forms need JS anyway, and a noscript
-  iframe can't respect consent mode.
+  interactions; the decision is to gate neither. CallRail sits upstream of the gclid capture the
+  Zapier revenue pipeline depends on.
+- **Bidding optimizes tel: clicks, not connected calls.** Deliberate — clicks give Smart Bidding
+  the volume and recency it needs. Revisit if per-campaign call volume supports ~30+/month.
+- **`phone_click` and `form_submit` remain dead events** (pushed by the site, no triggers). Phone
+  conversions work via GTM's native link-click listener, independent of `ad-tracking.js`.
+- **No differentiated lead values**; real values enter via the Zapier import.
+- **17 orphan variables and hardcoded measurement IDs** — cosmetic.
+
+## Rollback
+
+- Unpublished workspace: GTM → Workspace → Actions → Delete.
+- Published version: Versions → pick previous → **Publish**. GTM retains v20 indefinitely.

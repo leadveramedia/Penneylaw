@@ -41,12 +41,15 @@
     });
     </script>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <!-- Google Tag Manager — production hostnames only. Deploy previews serve this same page,
+         and firing the live container there pollutes GA4/Ads with QA traffic and books real
+         conversions from test submissions. Mirrors the gate in js/component-loader.js. -->
+    <script>if(['penneylaw.com','www.penneylaw.com'].indexOf(window.location.hostname)!==-1){
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PC9XN9DP');</script>
+    })(window,document,'script','dataLayer','GTM-PC9XN9DP');}</script>
     <!-- End Google Tag Manager -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
