@@ -102,6 +102,12 @@
   force = true
 
 [[redirects]]
+  from = "/community.html"
+  to = "/community"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/accident-news.html"
   to = "/accident-news"
   status = 301

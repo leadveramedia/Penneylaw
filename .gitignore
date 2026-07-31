@@ -30,3 +30,8 @@ yarn-error.log*
 # Local GTM container snapshots (audit scratch). The real rollback anchor is GTM's own
 # Versions UI, which retains every published version — see GTM-CHANGES.md.
 .gtm-snapshots/
+
+# NOTE: netlify.toml sets publish = ".", so ANY file committed here is served at its own
+# public URL. Keep source material (raw photos, client paperwork, contact lists) outside
+# this directory entirely — .gitignore does not protect you, because `netlify deploy`
+# uploads the publish dir from local disk regardless of git.

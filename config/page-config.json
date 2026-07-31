@@ -351,6 +351,15 @@
       "ctaTitle": "Ready to Get the Compensation You Deserve?",
       "ctaDescription": "Don't wait to get the help you need. Our team is standing by to provide a free, no-obligation consultation about your case."
     },
+    "community": {
+      "type": "about",
+      "title": "Community & Charitable Giving",
+      "modalHeading": "Get Your Free Consultation",
+      "modalSubtitle": "Tell us about your case and we'll contact you within 24 hours.",
+      "ctaTagline": "BANK ON FRANK!",
+      "ctaTitle": "Injured? We're Here When You Need Us.",
+      "ctaDescription": "The same commitment we bring to our community, we bring to every client. Contact Frank Penney Injury Law for a free, no-obligation consultation."
+    },
     "about-us": {
       "type": "about",
       "title": "About Us",
