@@ -73,6 +73,57 @@
 
 # Redirects
 
+# ==========================================
+# Internal documentation must not be publicly readable.
+# publish = "." serves every committed file at its own URL, so BRAND-GUIDELINES.md,
+# GTM-CHANGES.md, SEO-OFFSITE-PLAYBOOK.md, lp-improvement-plan-*.md and
+# webhook-spec-lead-form.md were all returning 200 to anyone who asked. The last one
+# documents the live /api/lead-form-webhook endpoint and its shared-secret auth model.
+#
+# These stay tracked in git on purpose — CLAUDE.md instructs contributors to read
+# BRAND-GUIDELINES.md, and the rest are real working history. We stop *serving* them
+# rather than untracking them.
+#
+# force = true is required: the physical files exist, so without it Netlify serves
+# them (200) instead of applying this rule. Deliberately NOT paired with a robots.txt
+# Disallow — a 404 is what deindexes an already-crawled URL, whereas blocking the
+# crawl would freeze these in the index.
+#
+# One rule per file, NOT "/*.md": Netlify's splat matches whole path segments, not
+# filename suffixes, so "/*.md" matches nothing and fails silently (verified — all
+# five still returned 200 with full content). Adding a new root .md file means
+# adding a rule here.
+# ==========================================
+[[redirects]]
+  from = "/BRAND-GUIDELINES.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/GTM-CHANGES.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/SEO-OFFSITE-PLAYBOOK.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/lp-improvement-plan-2026-05-01.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/webhook-spec-lead-form.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # API: Google Ads Lead Form webhook → Netlify Function
 # Rewrite (status 200) so the URL stays /api/lead-form-webhook for Google.
 # Spec: webhook-spec-lead-form.md
