@@ -20,8 +20,9 @@
     "audit:gtm": "node scripts/gtm-audit.mjs",
     "test": "node scripts/test-edge-meta.mjs && node scripts/test-ad-tracking.mjs",
     "test:redirects": "node scripts/test-redirects.js \"../Frank Penney - Migration - 2026 - Pages.csv\" http://localhost:8888",
-    "build": "npm run lint:redirects && npm run minify:css && npm run minify:blog-css && npm run minify:js && npm run minify:main-js && npm run minify:blog-js && npm run minify:accident-news-js && npm run minify:city-js && npm run minify:consent-js && npm run minify:ad-tracking-js && npm run build:lps && npm run generate:sitemap",
-    "convert-locations": "node scripts/convert-location-images.js"
+    "build": "npm run lint:redirects && npm run minify:css && npm run minify:blog-css && npm run minify:js && npm run minify:main-js && npm run minify:blog-js && npm run minify:accident-news-js && npm run minify:city-js && npm run minify:consent-js && npm run minify:ad-tracking-js && npm run build:lp-css && npm run build:lps && npm run generate:sitemap",
+    "convert-locations": "node scripts/convert-location-images.js",
+    "build:lp-css": "node scripts/build-lp-critical-css.js"
   },
   "dependencies": {
     "@netlify/blobs": "^10.7.4",
