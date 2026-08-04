@@ -4134,26 +4134,86 @@ body.modal-open {
     flex-shrink: 0;
 }
 
+/* Both choices carry identical weight — CPRA regs (11 CCR § 7004(a)(2)) require
+   symmetry in choice, and a filled Accept against an outlined Reject is the
+   textbook asymmetry. Only the label differs between the two buttons. */
 .consent-banner__btn {
     padding: 10px 24px;
     font-size: 14px;
     min-width: 120px;
 }
 
+/* Confirmation shown after the footer opt-out link is used. */
+.consent-banner__status {
+    font-family: var(--font-secondary);
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
+    color: var(--white);
+}
+
+.consent-banner__undo {
+    background: none;
+    border: 0;
+    padding: 0;
+    margin-left: 8px;
+    font: inherit;
+    color: var(--gold);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
+    /* Compact single-row layout: this banner is bottom-fixed, and at its former
+       ~193px it covered the submit button on the PPC landing pages for the whole
+       of every first visit. Text and buttons share one row; the heading is
+       dropped because the body copy already carries the message. */
     .consent-banner {
-        padding: 16px 0;
+        padding: 10px 0;
+    }
+    .consent-banner__heading {
+        display: none;
     }
     .consent-banner__inner {
-        gap: 16px;
+        gap: 12px;
+        flex-wrap: nowrap;
+        padding: 0 12px;
+    }
+    .consent-banner__text {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+    .consent-banner__body {
+        font-size: 12.5px;
+        line-height: 1.35;
     }
     .consent-banner__actions {
-        width: 100%;
-        justify-content: stretch;
+        width: auto;
+        flex-shrink: 0;
+        gap: 8px;
     }
     .consent-banner__btn {
-        flex: 1;
+        padding: 0 12px;
+        font-size: 13px;
         min-width: 0;
+        /* 44px tap target is a hard floor here, per .btn's mobile rule above */
+        min-height: 44px;
+    }
+}
+
+/* Narrow phones: the body copy wraps to more lines and the banner grew to
+   91px at 360 and 124px at 320. Shrink the text rather than let it eat a
+   quarter of the screen. */
+@media (max-width: 380px) {
+    .consent-banner__body {
+        font-size: 11.5px;
+    }
+    .consent-banner__btn {
+        padding: 0 9px;
+        font-size: 12px;
+    }
+    .consent-banner__inner {
+        gap: 8px;
     }
 }
 

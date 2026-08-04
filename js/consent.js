@@ -113,9 +113,10 @@
 
         var body = document.createElement('p');
         body.className = 'consent-banner__body';
+        // Kept short deliberately: the banner is bottom-fixed and every extra
+        // line of copy is a line of the mobile fold it covers.
         body.appendChild(document.createTextNode(
-            'We use cookies to analyze site traffic and improve your experience. ' +
-            'You can accept all cookies, reject non-essential cookies, or read our '
+            'We use cookies to analyze traffic and measure ads. See our '
         ));
         var link = document.createElement('a');
         link.href = '/privacy-policy.html';
@@ -128,6 +129,9 @@
         var actions = document.createElement('div');
         actions.className = 'consent-banner__actions';
 
+        // Identical classes on both buttons — 11 CCR § 7004(a)(2) requires the
+        // opt-out to be no harder than the opt-in, so neither may be styled as
+        // the preferred choice.
         var rejectBtn = document.createElement('button');
         rejectBtn.type = 'button';
         rejectBtn.className = 'btn btn-outline-white consent-banner__btn';
@@ -136,7 +140,7 @@
 
         var acceptBtn = document.createElement('button');
         acceptBtn.type = 'button';
-        acceptBtn.className = 'btn btn-primary consent-banner__btn';
+        acceptBtn.className = 'btn btn-outline-white consent-banner__btn';
         acceptBtn.textContent = 'Accept All';
         acceptBtn.addEventListener('click', handleAccept);
 
@@ -147,7 +151,10 @@
         inner.appendChild(actions);
         root.appendChild(inner);
 
-        return { root: root, initialFocus: acceptBtn };
+        // Focus the region rather than a button: focusing Accept made it the
+        // privileged choice, which is the same § 7004 symmetry problem.
+        root.setAttribute('tabindex', '-1');
+        return { root: root, initialFocus: root };
     }
 
     function showBanner() {
@@ -184,6 +191,56 @@
         showBanner();
     };
 
+    /**
+     * Direct opt-out for the "Do Not Sell or Share My Personal Information"
+     * link. This used to call openConsentPrefs(), which reopened the accept/
+     * reject prompt — so a consumer exercising the § 1798.120 opt-out landed on
+     * a dialog offering to accept instead. The opt-out now simply happens, and
+     * the banner reports it with an undo.
+     */
+    window.optOutOfSale = function () {
+        applyConsent('denied', 'user');
+
+        if (banner && banner.parentNode) {
+            banner.parentNode.removeChild(banner);
+            banner = null;
+        }
+
+        var root = document.createElement('section');
+        root.className = 'consent-banner';
+        root.setAttribute('role', 'status');
+        root.setAttribute('aria-live', 'polite');
+        root.setAttribute('tabindex', '-1');
+
+        var inner = document.createElement('div');
+        inner.className = 'consent-banner__inner';
+
+        var status = document.createElement('p');
+        status.className = 'consent-banner__status';
+        status.appendChild(document.createTextNode(
+            "You've opted out of the sale and sharing of your personal information."
+        ));
+
+        var undo = document.createElement('button');
+        undo.type = 'button';
+        undo.className = 'consent-banner__undo';
+        undo.textContent = 'Undo';
+        undo.addEventListener('click', function () {
+            applyConsent('granted', 'user');
+            closeBanner();
+        });
+        status.appendChild(undo);
+
+        inner.appendChild(status);
+        root.appendChild(inner);
+        document.body.appendChild(root);
+        banner = root;
+
+        window.requestAnimationFrame(function () {
+            banner.classList.add('consent-banner--visible');
+        });
+    };
+
     document.addEventListener('keydown', handleKeydown);
 
     // Delegated click handler — footer is loaded async by component-loader,
@@ -191,6 +248,11 @@
     document.addEventListener('click', function (e) {
         var target = e.target;
         while (target && target !== document) {
+            if (target.hasAttribute && target.hasAttribute('data-consent-optout')) {
+                e.preventDefault();
+                window.optOutOfSale();
+                return;
+            }
             if (target.hasAttribute && target.hasAttribute('data-consent-prefs')) {
                 e.preventDefault();
                 window.openConsentPrefs();
