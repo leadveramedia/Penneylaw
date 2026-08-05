@@ -493,7 +493,7 @@
                 '<div class="blog-sidebar-cta">' +
                     '<h3>Injured in an Accident?</h3>' +
                     '<p>Get a free consultation from our experienced attorneys.</p>' +
-                    '<a href="/contact.html" class="btn btn-primary btn-full">Bank on Frank</a>' +
+                    '<a href="/contact" class="btn btn-primary btn-full">Bank on Frank</a>' +
                     '<a href="tel:8888880566" class="btn btn-outline btn-full">Call (888) 888-0566</a>' +
                 '</div>' +
             '</aside>' +
@@ -548,7 +548,7 @@
         var slug = path.replace(/^\//, '').replace(/\/$/, '');
 
         if (!slug || slug === 'accident-news' || slug === 'accident-news-post' || slug === 'accident-news-post.html') {
-            window.location.href = '/accident-news.html';
+            window.location.href = '/accident-news';
             return;
         }
 

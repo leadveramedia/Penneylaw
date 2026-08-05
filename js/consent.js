@@ -119,7 +119,7 @@
             'We use cookies to analyze traffic and measure ads. See our '
         ));
         var link = document.createElement('a');
-        link.href = '/privacy-policy.html';
+        link.href = '/privacy-policy';
         link.className = 'consent-banner__link';
         link.textContent = 'Privacy Policy';
         body.appendChild(link);

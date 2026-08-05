@@ -549,12 +549,12 @@
 
         // Category pills
         var categoryHtml = categories.map(function (cat) {
-            return '<a href="/blog.html?category=' + encodeURIComponent(cat) + '" class="blog-post-category">' + escapeHtml(cat) + '</a>';
+            return '<a href="/blog?category=' + encodeURIComponent(cat) + '" class="blog-post-category">' + escapeHtml(cat) + '</a>';
         }).join('');
 
         // Tag pills
         var tagHtml = tags.map(function (tag) {
-            return '<a href="/blog.html?tag=' + encodeURIComponent(tag) + '" class="blog-post-tag">' + escapeHtml(tag) + '</a>';
+            return '<a href="/blog?tag=' + encodeURIComponent(tag) + '" class="blog-post-tag">' + escapeHtml(tag) + '</a>';
         }).join('');
 
         // Social sharing URLs
@@ -606,7 +606,7 @@
                 '<div class="blog-sidebar-cta">' +
                     '<h3>Injured in an Accident?</h3>' +
                     '<p>Get a free consultation from our experienced attorneys.</p>' +
-                    '<a href="/contact.html" class="btn btn-primary btn-full">Bank on Frank</a>' +
+                    '<a href="/contact" class="btn btn-primary btn-full">Bank on Frank</a>' +
                     '<a href="tel:8888880566" class="btn btn-outline btn-full">Call (888) 888-0566</a>' +
                 '</div>' +
             '</aside>' +
@@ -672,7 +672,7 @@
         var slug = path.replace(/^\//, '').replace(/\/$/, '');
 
         if (!slug || slug === 'blog' || slug === 'blog-post' || slug === 'blog-post.html') {
-            window.location.href = '/blog.html';
+            window.location.href = '/blog';
             return;
         }
 
