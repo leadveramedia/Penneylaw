@@ -23,10 +23,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="css/style.min.css?v=20260726">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/Frank-Penny-Favicon-Logo-32x32-1.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="images/favicon/Frank-Penny-Favicon-Logo-512-x-512.png">
-    <link rel="apple-touch-icon" sizes="512x512" href="images/favicon/Frank-Penny-Favicon-Logo-512-x-512.png">
+    <link rel="stylesheet" href="/css/style.min.css?v=20260726">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/Frank-Penny-Favicon-Logo-32x32-1.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/images/favicon/Frank-Penny-Favicon-Logo-512-x-512.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/images/favicon/Frank-Penny-Favicon-Logo-512-x-512.png">
     <link rel="preload" href="/components/header.html" as="fetch">
     <link rel="preload" href="/components/footer.html" as="fetch">
     <link rel="preload" href="/config/page-config.json" as="fetch">
@@ -35,6 +35,14 @@
     {
         "@context": "https://schema.org",
         "@type": "LegalService",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "1508 Eureka Rd",
+            "addressLocality": "Roseville",
+            "addressRegion": "CA",
+            "postalCode": "95661",
+            "addressCountry": "US"
+        },
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.9",
@@ -115,7 +123,7 @@
             <!-- Roseville -->
             <div class="card" style="overflow: hidden;" data-reveal>
                 <div class="office-card-banner">
-                    <img src="images/locations/roseville.webp" alt="" width="654" height="368" loading="lazy">
+                    <img src="/images/locations/roseville.webp" alt="" width="654" height="368" loading="lazy">
                     <h3 class="office-card-city">Roseville Office</h3>
                 </div>
                 <div class="office-map">
@@ -140,7 +148,7 @@
             <!-- Sacramento -->
             <div class="card" style="overflow: hidden;" data-reveal>
                 <div class="office-card-banner">
-                    <img src="images/locations/sacramento.webp" alt="" width="654" height="368" loading="lazy">
+                    <img src="/images/locations/sacramento.webp" alt="" width="654" height="368" loading="lazy">
                     <h3 class="office-card-city">Sacramento Office</h3>
                 </div>
                 <div class="office-map">
@@ -165,7 +173,7 @@
             <!-- Fairfield -->
             <div class="card" style="overflow: hidden;" data-reveal>
                 <div class="office-card-banner">
-                    <img src="images/locations/fairfield.webp" alt="" width="654" height="368" loading="lazy">
+                    <img src="/images/locations/fairfield.webp" alt="" width="654" height="368" loading="lazy">
                     <h3 class="office-card-city">Fairfield Office</h3>
                 </div>
                 <div class="office-map">
@@ -190,7 +198,7 @@
             <!-- Stockton -->
             <div class="card" style="overflow: hidden;" data-reveal>
                 <div class="office-card-banner">
-                    <img src="images/locations/stockton.webp" alt="" width="654" height="368" loading="lazy">
+                    <img src="/images/locations/stockton.webp" alt="" width="654" height="368" loading="lazy">
                     <h3 class="office-card-city">Stockton Office</h3>
                 </div>
                 <div class="office-map">
@@ -215,7 +223,7 @@
             <!-- Modesto -->
             <div class="card" style="overflow: hidden;" data-reveal>
                 <div class="office-card-banner">
-                    <img src="images/locations/modesto.webp" alt="" width="654" height="368" loading="lazy">
+                    <img src="/images/locations/modesto.webp" alt="" width="654" height="368" loading="lazy">
                     <h3 class="office-card-city">Modesto Office</h3>
                 </div>
                 <div class="office-map">
@@ -241,7 +249,7 @@
             <!-- Chico -->
             <div class="card" style="overflow: hidden;" data-reveal>
                 <div class="office-card-banner">
-                    <img src="images/locations/chico.webp" alt="" width="654" height="368" loading="lazy">
+                    <img src="/images/locations/chico.webp" alt="" width="654" height="368" loading="lazy">
                     <h3 class="office-card-city">Chico Office</h3>
                 </div>
                 <div class="office-map">
@@ -267,7 +275,7 @@
             <!-- Oakland -->
             <div class="card" style="overflow: hidden;" data-reveal>
                 <div class="office-card-banner">
-                    <img src="images/locations/oakland.webp" alt="" width="654" height="368" loading="lazy">
+                    <img src="/images/locations/oakland.webp" alt="" width="654" height="368" loading="lazy">
                     <h3 class="office-card-city">Oakland Office</h3>
                 </div>
                 <div class="office-map">
@@ -293,7 +301,7 @@
             <!-- Redding (service area) -->
             <a href="/redding" class="card location-card-link" style="overflow: hidden; text-decoration: none; display: block;" data-reveal>
                 <div style="height: 180px; overflow: hidden;">
-                    <img src="images/locations/redding.webp" alt="Redding Service Area" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="/images/locations/redding.webp" alt="Redding Service Area" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="card-content">
                     <h3 style="color: var(--dark-azure); margin-bottom: 8px;">Redding</h3>
@@ -309,7 +317,7 @@
             <!-- San Francisco (service area) -->
             <a href="/san-francisco" class="card location-card-link" style="overflow: hidden; text-decoration: none; display: block;" data-reveal>
                 <div style="height: 180px; overflow: hidden;">
-                    <img src="images/locations/san-francisco.webp" alt="San Francisco Service Area" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="/images/locations/san-francisco.webp" alt="San Francisco Service Area" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="card-content">
                     <h3 style="color: var(--dark-azure); margin-bottom: 8px;">San Francisco</h3>
@@ -325,7 +333,7 @@
             <!-- Los Angeles (service area) -->
             <a href="/los-angeles" class="card location-card-link" style="overflow: hidden; text-decoration: none; display: block;" data-reveal>
                 <div style="height: 180px; overflow: hidden;">
-                    <img src="images/locations/los-angeles.webp" alt="Los Angeles Service Area" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="/images/locations/los-angeles.webp" alt="Los Angeles Service Area" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="card-content">
                     <h3 style="color: var(--dark-azure); margin-bottom: 8px;">Los Angeles</h3>
@@ -341,7 +349,7 @@
             <!-- San Diego (service area) -->
             <a href="/san-diego" class="card location-card-link" style="overflow: hidden; text-decoration: none; display: block;" data-reveal>
                 <div style="height: 180px; overflow: hidden;">
-                    <img src="images/locations/san-diego.webp" alt="San Diego Service Area" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="/images/locations/san-diego.webp" alt="San Diego Service Area" width="654" height="368" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="card-content">
                     <h3 style="color: var(--dark-azure); margin-bottom: 8px;">San Diego</h3>
@@ -380,6 +388,6 @@
 <div id="footer-placeholder"></div>
 
 
-<script src="js/bundle.min.js?v=20260730" defer></script>
+<script src="/js/bundle.min.js?v=20260730" defer></script>
 </body>
 </html>

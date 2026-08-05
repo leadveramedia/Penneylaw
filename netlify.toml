@@ -469,7 +469,10 @@
 # These must come BEFORE the status-200 rewrites
 # ==========================================
 
-# --- locations.html → /locations/ (force needed since file exists) ---
+# --- locations.html → /locations/ ---
+# locations.html was moved to locations/index.html so /locations/ serves 200 natively
+# (same directory-index pattern as the attorney bios). This 301 keeps the legacy
+# .html URL alive; force is now redundant but harmless.
 [[redirects]]
   from = "/locations.html"
   to = "/locations/"
@@ -2726,61 +2729,11 @@
   status = 200
   force = false
 
-# Locations index: /locations/ -> /locations.html (paired with /locations.html -> /locations/ 301)
-[[redirects]]
-  from = "/locations/"
-  to = "/locations.html"
-  status = 200
-  force = false
-
-# City listing pages: /[city]/ -> /city-listing.html
-[[redirects]]
-  from = "/sacramento/"
-  to = "/city-listing.html"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/roseville/"
-  to = "/city-listing.html"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/stockton/"
-  to = "/city-listing.html"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/modesto/"
-  to = "/city-listing.html"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/oakland/"
-  to = "/city-listing.html"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/redding/"
-  to = "/city-listing.html"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/chico/"
-  to = "/city-listing.html"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/fairfield/"
-  to = "/city-listing.html"
-  status = 200
-  force = false
+# Bare city hubs (/sacramento/ etc.) intentionally have NO rule. city-listing.html was
+# deleted because the hub could never render: Netlify pretty-URL aliasing strips
+# /[city]/ to /[city] since [city].html exists, and that stripping beats any redirect
+# rule here. An explicit "/[city]/" -> "/[city]" 301 is a SELF-LOOP for the same reason
+# (scripts/lint-redirects.js rejects it). City articles now surface on the location page.
 
 # City article pages: /[city]/[slug] -> /city-post.html
 [[redirects]]

@@ -18,17 +18,28 @@ const STORYBLOK_API = 'https://api.storyblok.com/v2/cdn';
 // City folders managed by Storyblok
 const CITY_FOLDERS = ['sacramento', 'roseville', 'stockton', 'modesto', 'oakland', 'redding', 'chico', 'fairfield'];
 
-// Per-city metadata for bare-city content hubs
-const CITY_META = {
-    sacramento: { name: 'Sacramento', county: 'Sacramento County' },
-    roseville:  { name: 'Roseville',  county: 'Placer County' },
-    stockton:   { name: 'Stockton',   county: 'San Joaquin County' },
-    modesto:    { name: 'Modesto',    county: 'Stanislaus County' },
-    oakland:    { name: 'Oakland',    county: 'Alameda County' },
-    redding:    { name: 'Redding',    county: 'Shasta County' },
-    chico:      { name: 'Chico',      county: 'Butte County' },
-    fairfield:  { name: 'Fairfield',  county: 'Solano County' },
-};
+const BRAND_SUFFIX = ' | Frank Penney Injury Law';
+const TITLE_MAX = 60;
+
+/**
+ * Append the brand suffix only when the result still fits a SERP title.
+ *
+ * Storyblok headlines run 75-90 chars on their own, so unconditionally adding
+ * 26 more guaranteed the brand name was exactly the part Google truncated —
+ * 57 of 60 blog titles measured over 60 chars, the longest at 117. Dropping the
+ * suffix on long headlines spends the budget on words that actually get read.
+ */
+function withBrand(headline) {
+    const base = String(headline || '').trim();
+    // Guard the empty case: without it a story missing its title yields a
+    // <title> of " | Frank Penney Injury Law", leading separator and all.
+    if (!base) return 'Frank Penney Injury Law';
+    return base.length + BRAND_SUFFIX.length <= TITLE_MAX ? base + BRAND_SUFFIX : base;
+}
+
+// NOTE: there is deliberately no bare-city handler. /{city}/ pretty-URL-strips to
+// /{city} because {city}.html exists, so the old city-listing.html hub could never
+// render. City articles now surface on the static location pages instead.
 
 const DEFAULT_OG_IMAGE = 'https://penneylaw.com/images/favicon/Frank-Penny-Social-Preview-1200x630.png';
 
@@ -39,7 +50,6 @@ export default async (request, context) => {
     // Detect content type from path
     let contentType = null;
     let slug = null;
-    let citySlug = null;
 
     if (path.match(/^\/blog\/[a-z0-9][\w-]*\/?$/i)) {
         contentType = 'blog';
@@ -49,28 +59,14 @@ export default async (request, context) => {
         slug = 'accident-news/' + path.replace(/^\/accident-news\//, '').replace(/\/$/, '');
     } else {
         const cityPostMatch = path.match(/^\/([a-z]+)\/([a-z0-9][\w-]*)\/?$/i);
-        const bareCityMatch = path.match(/^\/([a-z]+)\/?$/i);
         if (cityPostMatch && CITY_FOLDERS.indexOf(cityPostMatch[1]) !== -1) {
             contentType = 'city';
             slug = cityPostMatch[1] + '/' + cityPostMatch[2];
-        } else if (bareCityMatch && CITY_FOLDERS.indexOf(bareCityMatch[1]) !== -1) {
-            contentType = 'bare-city';
-            citySlug = bareCityMatch[1];
         }
     }
 
     if (!contentType) {
         return context.next();
-    }
-
-    // Bare-city listings don't fetch a story — they just set per-city meta on the city-listing.html shell.
-    if (contentType === 'bare-city') {
-        try {
-            return await handleBareCity(citySlug, path, context);
-        } catch (error) {
-            console.error('Edge function bare-city error:', error);
-            return await fallbackResponse(context, url);
-        }
     }
 
     try {
@@ -92,25 +88,30 @@ export default async (request, context) => {
         }
         const html = await response.text();
 
-        let title, description, postUrl, excerpt;
+        // Track the bare headline separately from the <title>. It feeds the SSR H1 and
+        // the Article JSON-LD, which used to recover it by string-stripping the suffix
+        // off the title — that breaks now the suffix is conditional.
+        let headline, description, postUrl, excerpt;
 
         if (contentType === 'blog') {
-            title = (content.meta_title || content.title) + ' | Frank Penney Injury Law';
+            headline = content.meta_title || content.title;
             description = content.meta_description || content.excerpt || extractTextSnippet(content.Body_Content) || '';
             postUrl = 'https://penneylaw.com/blog/' + story.slug;
             excerpt = content.excerpt || extractTextSnippet(content.Body_Content) || description;
         } else if (contentType === 'accident-news') {
-            title = content.title + ' | Frank Penney Injury Law';
+            headline = content.title;
             description = content.Subheadline || extractTextSnippet(content.Body_Content) || '';
             postUrl = 'https://penneylaw.com/accident-news/' + story.slug;
             excerpt = content.Subheadline || extractTextSnippet(content.Body_Content) || description;
         } else {
             // city post
-            title = (content.meta_title || content.title) + ' | Frank Penney Injury Law';
+            headline = content.meta_title || content.title;
             description = content.meta_description || content.excerpt || extractTextSnippet(content.Body_Content) || '';
             postUrl = 'https://penneylaw.com/' + story.full_slug;
             excerpt = content.excerpt || extractTextSnippet(content.Body_Content) || description;
         }
+
+        const title = withBrand(headline);
 
         const imageUrl = (content.og_image && content.og_image.filename)
             ? content.og_image.filename + '/m/1200x630'
@@ -126,7 +127,7 @@ export default async (request, context) => {
         });
 
         // Inject SSR H1 + excerpt for non-JS crawlers
-        modifiedHtml = injectSsrPostHeader(modifiedHtml, title.replace(' | Frank Penney Injury Law', ''), excerpt);
+        modifiedHtml = injectSsrPostHeader(modifiedHtml, headline, excerpt);
 
         // Strip the defensive shell noindex on successful render
         modifiedHtml = stripShellNoindex(modifiedHtml);
@@ -136,7 +137,7 @@ export default async (request, context) => {
         const articleType = contentType === 'blog' ? 'BlogPosting'
             : contentType === 'accident-news' ? 'NewsArticle' : 'Article';
         modifiedHtml = injectArticleJsonLd(modifiedHtml, articleType, {
-            headline: title.replace(' | Frank Penney Injury Law', ''),
+            headline,
             description,
             image: imageUrl,
             url: postUrl,
@@ -151,56 +152,6 @@ export default async (request, context) => {
         return await fallbackResponse(context, url);
     }
 };
-
-async function handleBareCity(citySlug, path, context) {
-    const meta = CITY_META[citySlug];
-    if (!meta) {
-        return await fallbackResponse(context, new URL('https://penneylaw.com' + path));
-    }
-
-    const canonical = `https://penneylaw.com/${citySlug}/`;
-    const title = `${meta.name} Personal Injury Articles & Local Resources | Frank Penney Injury Law`;
-    const description = `Personal injury articles, accident news, and legal resources for ${meta.name}, CA (${meta.county}). $1B+ recovered for our clients.`;
-    const h1 = `${meta.name} Legal Resources`;
-    const subtitle = `Personal injury articles and accident news for ${meta.name} and ${meta.county}.`;
-
-    const response = await context.next();
-    // If Netlify returned a redirect (e.g. pretty-URL trailing-slash strip), pass it through
-    // unchanged. Wrapping a 3xx body in a 200 response would produce a broken page.
-    if (response.status >= 300 && response.status < 400) {
-        return response;
-    }
-    const html = await response.text();
-
-    let modifiedHtml = injectMeta(html, {
-        title,
-        description,
-        canonical,
-        ogImage: DEFAULT_OG_IMAGE,
-    });
-
-    // Update visible H1 + subtitle + breadcrumb (city-listing.html placeholders)
-    modifiedHtml = sub(
-        modifiedHtml,
-        /<h1 class="page-title" id="city-page-title">[^<]*<\/h1>/,
-        `<h1 class="page-title" id="city-page-title">${escapeHtml(h1)}</h1>`
-    );
-    modifiedHtml = sub(
-        modifiedHtml,
-        /<p class="page-subtitle" id="city-page-subtitle">[^<]*<\/p>/,
-        `<p class="page-subtitle" id="city-page-subtitle">${escapeHtml(subtitle)}</p>`
-    );
-    // Keeps a real capture group ($1 = the span's other attributes), so this one uses a
-    // replacer function rather than sub() to preserve the group while staying literal.
-    modifiedHtml = modifiedHtml.replace(
-        /<span class="breadcrumbs-current" id="city-breadcrumb"([^>]*)>[^<]*<\/span>/,
-        (_match, attrs) => `<span class="breadcrumbs-current" id="city-breadcrumb"${attrs}>${escapeHtml(meta.name)}</span>`
-    );
-
-    modifiedHtml = stripShellNoindex(modifiedHtml);
-
-    return new Response(modifiedHtml, { headers: response.headers });
-}
 
 async function fallbackResponse(context, url) {
     // EF couldn't render the page (Storyblok unavailable, story missing, etc.).
@@ -337,8 +288,8 @@ export function escapeAttr(str) {
 
 export const config = {
     // Only intercept trailing-slash + slug paths. Bare /sacramento (no slash) is the static
-    // sacramento.html landing page — leaving it out so the edge function doesn't inject
-    // city-listing meta into the location-page shell.
+    // sacramento.html landing page and must be left out — the edge function has no business
+    // rewriting meta on a hand-authored location page.
     path: [
         "/blog/*",
         "/accident-news/*",

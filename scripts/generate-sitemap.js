@@ -27,7 +27,6 @@ const EXCLUDED_FILES = new Set([
     'netlify-form-template.html',
     'blog-post.html',          // Shell for /blog/{slug}
     'accident-news-post.html', // Shell for /accident-news/{slug}
-    'city-listing.html',       // Shell for /{city}/
     'city-post.html',          // Shell for /{city}/{slug}
 ]);
 
@@ -140,13 +139,11 @@ function getStaticPages() {
         const stat = fs.statSync(fullPath);
         if (!stat.isFile()) continue;
 
-        // Canonical URL form is non-www + clean (no .html). Exception:
-        // `locations` canonicalizes to the trailing-slash directory form.
+        // Canonical URL form is non-www + clean (no .html). The `locations` page is no
+        // longer handled here — it lives at locations/index.html and is added in main().
         const loc = file === 'index.html'
             ? SITE_URL + '/'
-            : file === 'locations.html'
-                ? SITE_URL + '/locations/'
-                : SITE_URL + '/' + file.replace(/\.html$/, '');
+            : SITE_URL + '/' + file.replace(/\.html$/, '');
 
         const lastmod = stat.mtime.toISOString().split('T')[0];
         const config = getPageConfig(file);
@@ -203,8 +200,21 @@ function cmsDateLastmod(story) {
         : new Date().toISOString().split('T')[0];
 }
 
+/**
+ * Page through a Storyblok folder and map each story to whatever the caller needs.
+ *
+ * `mapStory` is optional and exists so scripts/build-archives.js can ask for slugs +
+ * titles instead of sitemap entries, without duplicating the pagination and 429
+ * back-off below. Omit it and you get the sitemap entry shape.
+ */
 async function fetchStoriesFromFolder(prefix, opts) {
-    const { buildUrl, getLastmod, priority, changefreq } = opts;
+    const { buildUrl, getLastmod, priority, changefreq, mapStory } = opts;
+    const toEntry = mapStory || ((story) => ({
+        loc: buildUrl(story),
+        lastmod: getLastmod(story),
+        changefreq,
+        priority,
+    }));
     const posts = [];
     let page = 1;
     const perPage = 100;
@@ -231,12 +241,7 @@ async function fetchStoriesFromFolder(prefix, opts) {
             if (!data.stories || data.stories.length === 0) break;
 
             for (const story of data.stories) {
-                posts.push({
-                    loc: buildUrl(story),
-                    lastmod: getLastmod(story),
-                    changefreq,
-                    priority,
-                });
+                posts.push(toEntry(story));
             }
 
             const total = parseInt(response.headers.get('Total'), 10) || 0;
@@ -295,6 +300,17 @@ async function main() {
     // still indexed below since they're distinct content.
     const cityListings = [];
 
+    // locations/ is a directory-index page (locations/index.html), so the root *.html
+    // scan in getStaticPages() can't see it. The trailing-slash form is canonical here
+    // because Netlify serves a directory index at the slash URL and 301s the bare form
+    // to it — the same shape as the attorney bios below.
+    const locationsPage = [{
+        loc: `${SITE_URL}/locations/`,
+        lastmod: today,
+        changefreq: 'monthly',
+        priority: '0.8',
+    }];
+
     const attorneyPages = ATTORNEY_SLUGS.map((slug) => ({
         loc: `${SITE_URL}/${slug}/`,
         lastmod: today,
@@ -329,6 +345,7 @@ async function main() {
     const allEntries = [
         ...staticPages,
         ...cityListings,
+        ...locationsPage,
         ...attorneyPages,
         ...blogPosts,
         ...newsPosts,
@@ -340,13 +357,20 @@ async function main() {
 
     console.log(
         `Generated sitemap.xml with ${allEntries.length} URLs ` +
-        `(${staticPages.length} static pages + ${cityListings.length} city listings + ` +
+        `(${staticPages.length} static pages + ${locationsPage.length} locations index + ` +
         `${attorneyPages.length} attorney pages + ` +
         `${blogPosts.length} blog + ${newsPosts.length} accident-news + ${cityPosts.length} city posts)`
     );
 }
 
-main().catch(function (err) {
-    console.error('Sitemap generation failed:', err);
-    process.exit(1);
-});
+// Exported so scripts/build-archives.js can reuse the Storyblok fetcher instead of
+// duplicating it. The guard below means requiring this file does NOT regenerate the
+// sitemap as a side effect.
+module.exports = { fetchStoriesFromFolder, CITY_SLUGS, SITE_URL };
+
+if (require.main === module) {
+    main().catch(function (err) {
+        console.error('Sitemap generation failed:', err);
+        process.exit(1);
+    });
+}

@@ -35,3 +35,11 @@ yarn-error.log*
 # public URL. Keep source material (raw photos, client paperwork, contact lists) outside
 # this directory entirely — .gitignore does not protect you, because `netlify deploy`
 # uploads the publish dir from local disk regardless of git.
+
+# Internal strategy docs — netlify.toml has publish = ".", so anything committed
+# here is publicly fetchable (see the earlier "stop serving internal documentation
+# from the publish root" fix). Keep these out of the repo entirely.
+SEO-OFFSITE-PLAYBOOK.pdf
+
+# Debris from `netlify dev` / edge-function local runs
+deno.lock
