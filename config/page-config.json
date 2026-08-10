@@ -1,5 +1,23 @@
 {
   "pages": {
+    "social-media-addiction-lawsuit": {
+      "type": "resource",
+      "title": "Social Media Addiction Lawsuits",
+      "modalHeading": "Free Social Media Addiction Case Review",
+      "modalSubtitle": "Tell us a little and we'll let you know whether we can help. No obligation.",
+      "ctaTagline": "",
+      "ctaTitle": "Wondering Whether Your Family Has a Claim? Find Out Free.",
+      "ctaDescription": "A free, no-obligation review of whether heavy social media use before age 18 supports a claim. No fee unless there is a recovery."
+    },
+    "roblox-child-exploitation-lawsuit": {
+      "type": "resource",
+      "title": "Roblox Child Exploitation Lawsuits",
+      "modalHeading": "Confidential Case Review",
+      "modalSubtitle": "You will not be asked to describe what happened in writing. A lawyer will call you privately.",
+      "ctaTagline": "",
+      "ctaTitle": "Speak With Someone Privately",
+      "ctaDescription": "Free and confidential. Nothing is filed anywhere because you reached out, and you are not committing to anything by asking a question."
+    },
     "uninsured-motorist-accidents": {
       "type": "resource",
       "title": "Uninsured Motorist Accidents",

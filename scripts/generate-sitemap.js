@@ -23,6 +23,7 @@ const STORYBLOK_API = 'https://api.storyblok.com/v2/cdn';
 const EXCLUDED_FILES = new Set([
     '404.html',
     'thank-you.html',
+    'thank-you-confidential.html', // Page B's confirmation; noindex, same as thank-you.html
     'style-guide.html',
     'netlify-form-template.html',
     'blog-post.html',          // Shell for /blog/{slug}

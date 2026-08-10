@@ -38,7 +38,7 @@
 
         forms.forEach(function (form) {
             // Real-time validation on blur
-            const inputs = form.querySelectorAll('input, textarea');
+            const inputs = form.querySelectorAll('input, select, textarea');
             inputs.forEach(function (input) {
                 input.addEventListener('blur', function () {
                     validateField(input);
@@ -46,6 +46,12 @@
 
                 // Clear error on input
                 input.addEventListener('input', function () {
+                    clearFieldError(input);
+                });
+
+                // `input` does not fire on <select> in every browser, and checkbox groups need
+                // the whole group's error cleared when any box in it changes.
+                input.addEventListener('change', function () {
                     clearFieldError(input);
                 });
 
@@ -85,7 +91,10 @@
      */
     function validateForm(form) {
         let isValid = true;
-        const inputs = form.querySelectorAll('input[required], textarea[required]');
+        // `select[required]` must be listed explicitly. Forms carry `novalidate` (custom error
+        // UI), so anything missing from this selector is not validated at all — native
+        // validation will not catch it either.
+        const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
 
         inputs.forEach(function (input) {
             if (!validateField(input)) {
@@ -105,6 +114,19 @@
         const name = input.name;
         let isValid = true;
         let errorMessage = '';
+
+        // Checkboxes and radios must be tested on `checked`, never on `value` — an unchecked box
+        // still reports value "on", so the generic empty-check below passes it unconditionally.
+        // Satisfied when ANY control sharing this name is checked, which covers both a lone
+        // attestation box and a "select at least one" group with one rule.
+        if (type === 'checkbox' || type === 'radio') {
+            if (input.hasAttribute('required') && !isGroupChecked(input)) {
+                showFieldError(input, input.getAttribute('data-required-message') || getRequiredMessage(name));
+                return false;
+            }
+            clearFieldError(input);
+            return true;
+        }
 
         // Check if empty
         if (input.hasAttribute('required') && !value) {
@@ -134,6 +156,21 @@
         }
 
         return isValid;
+    }
+
+    /**
+     * True when any checkbox/radio sharing this control's name is checked.
+     * Scoped to the owning form so two forms on one page can't satisfy each other.
+     */
+    function isGroupChecked(input) {
+        const scope = input.form || document;
+        const group = input.name
+            ? scope.querySelectorAll('input[name="' + input.name.replace(/"/g, '\\"') + '"]')
+            : [input];
+        for (let i = 0; i < group.length; i++) {
+            if (group[i].checked) return true;
+        }
+        return false;
     }
 
     /**
@@ -183,6 +220,15 @@
         formGroup.classList.remove('has-error');
         input.classList.remove('error');
         input.setAttribute('aria-invalid', 'false');
+
+        // In a checkbox group only the box carrying `required` gets marked, so checking a
+        // different box must clear that one too or it keeps a red border with no error text.
+        if (input.type === 'checkbox' || input.type === 'radio') {
+            formGroup.querySelectorAll('.error').forEach(function (el) {
+                el.classList.remove('error');
+                el.setAttribute('aria-invalid', 'false');
+            });
+        }
 
         const errorEl = formGroup.querySelector('.form-error');
         if (errorEl) {

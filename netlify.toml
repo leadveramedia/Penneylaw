@@ -357,6 +357,18 @@
   force = true
 
 [[redirects]]
+  from = "/social-media-addiction-lawsuit.html"
+  to = "/social-media-addiction-lawsuit"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/roblox-child-exploitation-lawsuit.html"
+  to = "/roblox-child-exploitation-lawsuit"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/how-much-is-my-case-worth.html"
   to = "/how-much-is-my-case-worth"
   status = 301

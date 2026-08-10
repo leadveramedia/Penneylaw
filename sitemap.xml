@@ -33,7 +33,7 @@
     </url>
     <url>
         <loc>https://penneylaw.com/blog</loc>
-        <lastmod>2026-08-05</lastmod>
+        <lastmod>2026-08-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -199,12 +199,18 @@
     </url>
     <url>
         <loc>https://penneylaw.com/resources</loc>
-        <lastmod>2026-08-05</lastmod>
+        <lastmod>2026-08-10</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://penneylaw.com/rideshare-accident</loc>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://penneylaw.com/roblox-child-exploitation-lawsuit</loc>
         <lastmod>2026-08-10</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
@@ -244,6 +250,12 @@
         <lastmod>2026-08-10</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://penneylaw.com/social-media-addiction-lawsuit</loc>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://penneylaw.com/spinal-cord-injury</loc>
@@ -345,6 +357,18 @@
     </url>
     <url>
         <loc>https://penneylaw.com/liam-conley/</loc>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://penneylaw.com/blog/can-you-file-a-claim-after-a-hit-and-run-if-the-driver-is-never-found</loc>
+        <lastmod>2026-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://penneylaw.com/blog/what-happens-if-a-witness-changes-their-story-after-an-accident</loc>
         <lastmod>2026-08-10</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>

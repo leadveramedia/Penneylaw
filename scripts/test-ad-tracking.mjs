@@ -31,13 +31,15 @@ function makeStore() {
 
 /**
  * A minimal stand-in for a Netlify lead form.
- * @param {{valid?: boolean, values?: Record<string,string>}} opts
+ * @param {{valid?: boolean, values?: Record<string,string>, attrs?: Record<string,string>}} opts
  */
-function makeForm({ valid = true, values = {} } = {}) {
+function makeForm({ valid = true, values = {}, attrs = {} } = {}) {
     const submitHandlers = [];
     return {
         name: 'contact',
         id: 'contact-form',
+        hasAttribute: (a) => Object.prototype.hasOwnProperty.call(attrs, a),
+        getAttribute: (a) => (Object.prototype.hasOwnProperty.call(attrs, a) ? attrs[a] : null),
         checkValidity: () => valid,
         addEventListener(evt, fn) { if (evt === 'submit') submitHandlers.push(fn); },
         querySelector(sel) {
@@ -283,6 +285,35 @@ function loadThankYou({ token, ecData, ecRaw }) {
     assert.equal(first.dataLayer.filter((d) => d.event === 'form_conversion').length, 1);
     const second = loadThankYou({ token: first.session.getItem('pending_conversion') });
     assert.equal(second.dataLayer.length, 0, 'refresh after a conversion re-fired it');
+}
+
+// 14. `data-no-enhanced-conversions` suppresses the Enhanced Conversions stash entirely, but
+//     still arms the conversion token. The mass tort intake forms carry this attribute: a
+//     submission there reports a child's psychiatric diagnosis or sexual abuse, and this stash
+//     is otherwise written regardless of Consent Mode state. Losing this guard would stage that
+//     contact data for transmission to ad platforms.
+{
+    const form = makeForm({
+        valid: true,
+        values: { email: 'A@B.com', phone: '(916) 555-1234', name: 'Jo Smith' },
+        attrs: { 'data-no-enhanced-conversions': '' },
+    });
+    const { session } = visit({ pathname: '/roblox-child-exploitation-lawsuit', now: T0, forms: [form] });
+    form.submit();
+    assert.equal(session.getItem('enhanced_conversion_data'), null,
+        'opted-out form staged contact data for ad platforms');
+    assert.equal(session.getItem('pending_conversion'), '1',
+        'opting out of Enhanced Conversions must not stop the lead being counted');
+}
+
+// 15. The same handler on an ordinary form still writes the stash — proves the guard is scoped
+//     per form and did not quietly disable Enhanced Conversions across the whole site.
+{
+    const form = makeForm({ valid: true, values: { email: 'A@B.com', phone: '(916) 555-1234', name: 'Jo Smith' } });
+    const { session } = visit({ pathname: '/contact', now: T0, forms: [form] });
+    form.submit();
+    assert.ok(session.getItem('enhanced_conversion_data'),
+        'guard leaked to forms that did not opt out');
 }
 
 console.log('test-ad-tracking: all assertions passed');

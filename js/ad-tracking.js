@@ -309,6 +309,14 @@
      * @returns {Object|null} leadsUserData object or null
      */
     function extractLeadsUserData(form) {
+        // Opt-out for forms whose submitters must never have contact data staged for ad
+        // platforms. The mass tort intake forms carry this: a submission there reports a
+        // child's psychiatric diagnosis or sexual abuse, and this stash is written regardless
+        // of Consent Mode state. Opt-in per form so nothing else changes behaviour.
+        if (form.hasAttribute('data-no-enhanced-conversions')) {
+            return null;
+        }
+
         var emailInput = form.querySelector('input[name="email"]');
         var phoneInput = form.querySelector('input[name="phone"]');
         var nameInput = form.querySelector('input[name="name"]');
