@@ -1,0 +1,81 @@
+# Frank Penney Injury Law
+
+> California personal injury law firm representing accident victims across Northern
+> California and statewide. Over $1 billion recovered and more than 30 years of
+> experience. Free consultation; no fee unless we win.
+
+Headquarters: 1508 Eureka Rd, Roseville, CA 95661
+Phone: 1-888-888-0566
+Contact: https://penneylaw.com/contact
+
+Nothing on this site is legal advice, and reading it does not create an
+attorney-client relationship. Case results depend on the facts of each case and
+past results do not guarantee a similar outcome.
+
+## Practice Areas
+
+- [Personal Injury](https://penneylaw.com/personal-injury): General California personal injury representation.
+- [Car Accidents](https://penneylaw.com/car-accidents): California car and auto collision claims.
+- [Truck Accidents](https://penneylaw.com/truck-accidents): Commercial truck and semi-truck crash claims, including FMCSA and ELD evidence.
+- [Motorcycle Accidents](https://penneylaw.com/motorcycle-accidents): Motorcycle crash claims, including lane-splitting and helmet-law questions.
+- [Bicycle Accidents](https://penneylaw.com/bicycle-accidents): Cyclist injury claims.
+- [Pedestrian Accidents](https://penneylaw.com/pedestrian-accidents): Crosswalk and pedestrian right-of-way claims.
+- [Bus Accidents](https://penneylaw.com/bus-accidents): Public transit and private bus injury claims.
+- [Slip and Fall](https://penneylaw.com/slip-and-fall): California premises liability claims.
+- [Dog Bite](https://penneylaw.com/dog-bite): Dog bite claims under California's strict liability statute.
+- [Wrongful Death](https://penneylaw.com/wrongful-death): Wrongful death claims for surviving family members.
+- [Traumatic Brain Injuries](https://penneylaw.com/traumatic-brain-injuries): TBI and head injury claims.
+
+## Legal Guides and Resources
+
+- [Resources](https://penneylaw.com/resources): Index of all guides, injury types, and accident scenarios.
+- [How Much Is My Case Worth](https://penneylaw.com/how-much-is-my-case-worth): Case value guide plus an interactive estimate tool.
+- [Personal Injury Claim Process](https://penneylaw.com/personal-injury-claim-process): Step-by-step walkthrough of a California claim.
+- [Uninsured Motorist Accidents](https://penneylaw.com/uninsured-motorist-accidents): UM/UIM coverage under Ins. Code § 11580.2.
+- [Attorney Referrals](https://penneylaw.com/attorney-referrals): Co-counsel and referral information for other attorneys.
+
+### Catastrophic Injury Types
+
+- [Spinal Cord Injury](https://penneylaw.com/spinal-cord-injury)
+- [Burn Injury](https://penneylaw.com/burn-injury)
+- [Amputation Injury](https://penneylaw.com/amputation-injury)
+
+### Accident Types
+
+- [Rear-End Collision](https://penneylaw.com/rear-end-collision)
+- [Head-On Collision](https://penneylaw.com/head-on-collision)
+- [T-Bone Accident](https://penneylaw.com/t-bone-accident)
+- [Rollover Accident](https://penneylaw.com/rollover-accident)
+- [Hit-and-Run Accident](https://penneylaw.com/hit-and-run-accident)
+- [Distracted Driving Accident](https://penneylaw.com/distracted-driving-accident)
+- [Drunk Driving Accident](https://penneylaw.com/drunk-driving-accident)
+- [Rideshare Accident](https://penneylaw.com/rideshare-accident): Uber and Lyft claims.
+
+## Locations
+
+- [All Locations](https://penneylaw.com/locations/): Seven offices plus statewide service areas.
+- [Roseville](https://penneylaw.com/roseville) (headquarters)
+- [Sacramento](https://penneylaw.com/sacramento)
+- [Stockton](https://penneylaw.com/stockton)
+- [Modesto](https://penneylaw.com/modesto)
+- [Chico](https://penneylaw.com/chico)
+- [Fairfield](https://penneylaw.com/fairfield)
+- [Oakland](https://penneylaw.com/oakland)
+- [Redding](https://penneylaw.com/redding) (service area)
+- [San Francisco](https://penneylaw.com/san-francisco) (service area)
+- [Los Angeles](https://penneylaw.com/los-angeles) (service area)
+- [San Diego](https://penneylaw.com/san-diego) (service area)
+
+## Firm
+
+- [About Us](https://penneylaw.com/about-us): Firm history, attorneys, and results.
+- [Community and Charitable Giving](https://penneylaw.com/community)
+- [Blog](https://penneylaw.com/blog): California injury law articles.
+- [Accident News](https://penneylaw.com/accident-news): Northern California accident coverage.
+
+## Optional
+
+- [Sitemap](https://penneylaw.com/sitemap.xml): Every indexable URL, including all blog, news, and city articles.
+- [Privacy Policy](https://penneylaw.com/privacy-policy)
+- [Terms of Service](https://penneylaw.com/terms-of-service)
+- [Disclaimer](https://penneylaw.com/disclaimer)

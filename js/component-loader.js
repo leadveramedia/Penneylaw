@@ -261,8 +261,10 @@
                 'areaServed': {
                     '@type': 'State',
                     'name': 'California'
-                },
-                'serviceType': config.serviceType
+                }
+                // No 'serviceType': it is not a valid property of LegalService and
+                // Google/Semrush report it as a markup error. config.serviceType is
+                // still read above purely as the "is this a practice-area page" gate.
             };
         } else if (config.type === 'location' && config.streetAddress) {
             jsonLd = {

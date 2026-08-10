@@ -10,7 +10,7 @@
  *     escaped description containing "$<" broke out of the attribute.
  */
 import assert from 'node:assert/strict';
-import { injectMeta, escapeAttr, extractTextSnippet } from '../netlify/edge-functions/blog-meta.js';
+import { injectMeta, escapeAttr, extractTextSnippet, injectRelatedPosts } from '../netlify/edge-functions/blog-meta.js';
 
 const rich = (s) => ({ content: [{ content: [{ type: 'text', text: s }] }] });
 
@@ -81,5 +81,40 @@ assert.equal(extractTextSnippet(rich('a  b\n\nc\td')), 'a b c d');
 }
 // A single 200-char token has no space to break on — must still truncate, not return ''.
 assert.equal(extractTextSnippet(rich('x'.repeat(200))), 'x'.repeat(157) + '...');
+
+// 6. injectRelatedPosts: unhides the shell section and puts real crawlable
+//    anchors in the grid. This is the fix for the 59 "only one internal link"
+//    URLs, so it has to survive shell edits.
+{
+    const RELATED_SHELL =
+        '<section id="blog-related-posts" class="section section-lg bg-light" hidden>' +
+        '<div id="blog-related-grid" class="grid grid-3 blog-grid"></div>' +
+        '</section>';
+
+    const out = injectRelatedPosts(RELATED_SHELL, 'blog', [
+        { url: '/blog/one', title: 'First Post', excerpt: 'Ex one.' },
+        { url: '/blog/two', title: 'Second Post', excerpt: '' },
+    ]);
+    assert.equal(countOf(out, ' hidden>'), 0, 'related section must be unhidden');
+    assert.equal(countOf(out, 'href="/blog/one"'), 1);
+    assert.equal(countOf(out, 'href="/blog/two"'), 1);
+    assert.ok(out.includes('>First Post</h3>'), 'anchor text must be the post title');
+    assert.equal(countOf(out, 'blog-card-excerpt'), 1, 'empty excerpt should emit no <p>');
+
+    // No related posts -> shell untouched, section stays hidden.
+    assert.equal(injectRelatedPosts(RELATED_SHELL, 'blog', []), RELATED_SHELL);
+    // Unknown content type is a no-op rather than a crash.
+    assert.equal(injectRelatedPosts(RELATED_SHELL, 'nope', [{ url: '/x', title: 'X' }]), RELATED_SHELL);
+
+    // Same $& hazard as injectMeta: CMS titles are escaped, and "$&" in the
+    // replacement text must not re-inject the matched tag.
+    const tricky = injectRelatedPosts(RELATED_SHELL, 'blog', [
+        { url: '/blog/x', title: 'Damages under $<25,000 & "more"', excerpt: '' },
+    ]);
+    assert.equal(countOf(tricky, '<div id="blog-related-grid"'), 1, '$& re-injected the matched tag');
+    // Text content escapes & < > only; the aria-label attribute also escapes the quotes.
+    assert.equal(countOf(tricky, '>Damages under $&lt;25,000 &amp; "more"</h3>'), 1);
+    assert.equal(countOf(tricky, 'aria-label="Read: Damages under $&lt;25,000 &amp; &quot;more&quot;"'), 1);
+}
 
 console.log('test-edge-meta: all assertions passed');

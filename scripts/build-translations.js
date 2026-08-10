@@ -3,7 +3,7 @@
  *
  * Reads the EN source, sends translatable strings to DeepL, and writes
  * the result with translated copy + translated meta + canonical-to-self
- * + reciprocal hreflang tags + a <script src="/js/i18n-strings.js"> tag
+ * + reciprocal hreflang tags + a <script src="/js/i18n-strings.min.js"> tag
  * so the modal/form-validation can pick up translations at runtime.
  *
  * Usage:
@@ -155,7 +155,7 @@ function buildHreflangLinks(sourceFilename) {
 
 /**
  * Mutate $ (cheerio root for one target language). Translates copy + rewrites
- * meta/canonical/hreflang/JSON-LD/og:locale and injects i18n-strings.js script.
+ * meta/canonical/hreflang/JSON-LD/og:locale and injects i18n-strings.min.js script.
  */
 async function transformDoc($, target, sourceFilename) {
     // 1) Set html lang
@@ -259,16 +259,17 @@ async function transformDoc($, target, sourceFilename) {
         insertAfter.after(link);
     }
 
-    // 7) JSON-LD: translate description + serviceType, rewrite url; keep
+    // 7) JSON-LD: translate description, rewrite url; keep
     //    name/address/telephone/geo/areaServed literal. priceRange "Free
     //    Consultation" gets translated via DeepL.
+    //    Deliberately does NOT carry serviceType through: it is not a valid
+    //    property of LegalService and Google reports it as a markup error.
     const ldNode = $('script[type="application/ld+json"]').first();
     if (ldNode.length) {
         try {
             const ld = JSON.parse(ldNode.contents().toString());
             const fieldsToTranslate = [];
             if (ld.description) fieldsToTranslate.push({ key: 'description', val: ld.description });
-            if (ld.serviceType) fieldsToTranslate.push({ key: 'serviceType', val: ld.serviceType });
             if (ld.priceRange)  fieldsToTranslate.push({ key: 'priceRange',  val: ld.priceRange });
 
             if (fieldsToTranslate.length > 0) {
@@ -310,9 +311,9 @@ async function transformDoc($, target, sourceFilename) {
         });
     });
 
-    // 10) Inject i18n-strings.js so modal & form-validation pick up translations.
-    if ($('script[src="/js/i18n-strings.js"]').length === 0) {
-        const i18nScript = '<script src="/js/i18n-strings.js" defer></script>';
+    // 10) Inject i18n-strings.min.js so modal & form-validation pick up translations.
+    if ($('script[src="/js/i18n-strings.min.js"]').length === 0) {
+        const i18nScript = '<script src="/js/i18n-strings.min.js" defer></script>';
         // Insert before the existing bundle.min.js script
         const bundleScript = $('script[src*="bundle.min.js"]');
         if (bundleScript.length) {

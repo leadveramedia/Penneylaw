@@ -3,7 +3,11 @@
  *
  * Intercepts requests to /blog/*, /accident-news/*, /{city}/*, and /{city}/
  * and injects per-page <title>, <meta description>, canonical, OG/Twitter,
- * H1 + excerpt, and JSON-LD by fetching content from Storyblok's CDN API.
+ * H1 + excerpt, JSON-LD, and the related-posts links by fetching content from
+ * Storyblok's CDN API.
+ *
+ * Responses carry a CDN cache header so the synchronous Storyblok fetch isn't
+ * paid on every request (these pages measured 981ms TTFB uncached).
  *
  * On failure, sets a self-canonical and adds noindex so a broken render
  * isn't deduped to the homepage by Google.
@@ -43,6 +47,103 @@ function withBrand(headline) {
 
 const DEFAULT_OG_IMAGE = 'https://penneylaw.com/images/favicon/Frank-Penny-Social-Preview-1200x630.png';
 
+// Browser revalidates every time; the CDN absorbs the Storyblok round-trip.
+// ponytail: 1h CDN TTL. A freshly published post can lag by up to this long —
+// lower it, or add an on-publish cache purge, if editors need faster turnaround.
+const BROWSER_CACHE = 'public, max-age=0, must-revalidate';
+const CDN_CACHE = 'public, s-maxage=3600, stale-while-revalidate=86400';
+// Failed renders are noindex'd; keep them out of cache long enough to shed load
+// during a Storyblok outage but short enough that recovery is near-immediate.
+const CDN_CACHE_FALLBACK = 'public, s-maxage=60';
+
+/**
+ * Build the response with CDN caching.
+ *
+ * `response.headers` from context.next() may be immutable, hence the copy. Status
+ * is passed through explicitly — omitting it defaults to 200, which is the bug
+ * class the 3xx guards upstream exist to avoid.
+ */
+function cachedResponse(html, response, cdnCache) {
+    const headers = new Headers(response.headers);
+    headers.set('Cache-Control', BROWSER_CACHE);
+    headers.set('Netlify-CDN-Cache-Control', cdnCache);
+    return new Response(html, { status: response.status, headers });
+}
+
+// The shells ship a related-posts <section hidden> that js/blog.js fills in on
+// hydration. Filling it at the edge instead puts the links in the HTML, which is
+// what a crawler sees: before this, every CMS post had exactly one incoming
+// internal link (its entry in the static archive block) and 59 URLs were reported
+// as "only one internal link". The client-side version also bailed out entirely
+// for any post with no categories set.
+const RELATED_COUNT = 3;
+const RELATED_TARGETS = {
+    'blog': { section: 'blog-related-posts', grid: 'blog-related-grid' },
+    'accident-news': { section: 'accident-news-related-posts', grid: 'accident-news-related-grid' },
+    'city': { section: 'city-related-posts', grid: 'city-related-grid' },
+};
+
+/**
+ * Newest siblings from a Storyblok folder, excluding the post being rendered.
+ * Returns [] on any failure — related links are a nice-to-have and must never
+ * take the page down.
+ */
+async function fetchRelated(folder, excludeSlug) {
+    try {
+        const res = await fetch(
+            `${STORYBLOK_API}/stories?token=${STORYBLOK_TOKEN}&version=published`
+            + `&starts_with=${encodeURIComponent(folder)}/`
+            + `&excluding_slugs=${encodeURIComponent(excludeSlug)}`
+            + `&per_page=${RELATED_COUNT}&sort_by=first_published_at:desc`
+        );
+        if (!res.ok) return [];
+        const data = await res.json();
+        return (data.stories || [])
+            .map((s) => ({
+                url: '/' + s.full_slug,
+                title: (s.content && s.content.title) || s.name || '',
+                excerpt: (s.content && (s.content.excerpt || s.content.Subheadline)) || '',
+            }))
+            .filter((s) => s.title && s.url !== '/' + excludeSlug);
+    } catch (error) {
+        console.error('Related posts fetch failed:', error);
+        return [];
+    }
+}
+
+/**
+ * Unhide the shell's related-posts section and fill its grid with real anchors.
+ * js/blog.js later overwrites the same grid with its richer cards, so this is a
+ * pre-hydration stand-in, not a competing block. Card classes match renderBlogCard
+ * in js/blog.js so the unhydrated view is styled.
+ */
+export function injectRelatedPosts(html, contentType, related) {
+    const target = RELATED_TARGETS[contentType];
+    if (!target || !related.length) return html;
+
+    const cards = related.map((r) =>
+        `<a href="${escapeAttr(r.url)}" class="card blog-card" aria-label="Read: ${escapeAttr(r.title)}">` +
+            '<div class="blog-card-body">' +
+                `<h3 class="blog-card-title">${escapeHtml(r.title)}</h3>` +
+                (r.excerpt ? `<p class="blog-card-excerpt">${escapeHtml(r.excerpt)}</p>` : '') +
+                '<span class="blog-card-read-more">Read Article</span>' +
+            '</div>' +
+        '</a>'
+    ).join('');
+
+    let out = html.replace(
+        new RegExp(`(<section id="${target.section}"[^>]*?) hidden>`),
+        (m, attrs) => `${attrs}>`
+    );
+    // Replacer function, not a string: the cards carry escaped CMS text where a
+    // literal "$&" would otherwise re-inject the matched tag (see sub() below).
+    out = out.replace(
+        new RegExp(`<div id="${target.grid}"([^>]*)></div>`),
+        (m, attrs) => `<div id="${target.grid}"${attrs}>${cards}</div>`
+    );
+    return out;
+}
+
 export default async (request, context) => {
     const url = new URL(request.url);
     const path = url.pathname;
@@ -69,10 +170,17 @@ export default async (request, context) => {
         return context.next();
     }
 
+    // The related-posts folder is the first path segment for every content type:
+    // 'blog', 'accident-news', or the city name.
+    const relatedFolder = slug.split('/')[0];
+
     try {
-        const storyResponse = await fetch(
-            `${STORYBLOK_API}/stories/${slug}?token=${STORYBLOK_TOKEN}&version=published`
-        );
+        // Concurrent: the related list is independent of the story body, so it costs
+        // no extra serial latency on top of the story fetch.
+        const [storyResponse, relatedFromFolder] = await Promise.all([
+            fetch(`${STORYBLOK_API}/stories/${slug}?token=${STORYBLOK_TOKEN}&version=published`),
+            fetchRelated(relatedFolder, slug),
+        ]);
 
         if (!storyResponse.ok) {
             return await fallbackResponse(context, url);
@@ -145,7 +253,18 @@ export default async (request, context) => {
             dateModified: story.published_at || story.first_published_at || story.created_at || null,
         });
 
-        return new Response(modifiedHtml, { headers: response.headers });
+        // City folders hold as few as one post each, so top up thin folders from
+        // /blog rather than shipping a one-link section.
+        let related = relatedFromFolder;
+        if (related.length < RELATED_COUNT && relatedFolder !== 'blog') {
+            const extra = await fetchRelated('blog', slug);
+            related = related
+                .concat(extra.filter((e) => !related.some((r) => r.url === e.url)))
+                .slice(0, RELATED_COUNT);
+        }
+        modifiedHtml = injectRelatedPosts(modifiedHtml, contentType, related);
+
+        return cachedResponse(modifiedHtml, response, CDN_CACHE);
 
     } catch (error) {
         console.error('Edge function error:', error);
@@ -186,7 +305,7 @@ async function fallbackResponse(context, url) {
             '    <meta name="robots" content="noindex, follow">\n</head>'
         );
     }
-    return new Response(modifiedHtml, { headers: response.headers });
+    return cachedResponse(modifiedHtml, response, CDN_CACHE_FALLBACK);
 }
 
 // Exported for scripts/test-edge-meta.mjs. Netlify only uses the default export + config.
