@@ -45,7 +45,7 @@ function withBrand(headline) {
 // /{city} because {city}.html exists, so the old city-listing.html hub could never
 // render. City articles now surface on the static location pages instead.
 
-const DEFAULT_OG_IMAGE = 'https://penneylaw.com/images/favicon/Frank-Penny-Social-Preview-1200x630.png';
+const DEFAULT_OG_IMAGE = 'https://penneylaw.com/images/favicon/social-preview-2026-1200x630.png';
 
 // Browser revalidates every time; the CDN absorbs the Storyblok round-trip.
 // ponytail: 1h CDN TTL. A freshly published post can lag by up to this long —

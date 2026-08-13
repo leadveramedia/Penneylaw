@@ -276,7 +276,7 @@
         var excerpt = getExcerpt(content);
         var imageUrl = content.Featured_Image && content.Featured_Image.filename
             ? content.Featured_Image.filename + '/m/600x400'
-            : '/images/favicon/Frank-Penny-Favicon-Logo-600x315-1.png';
+            : '/images/favicon/social-preview-2026-1200x630.png';
         var imageAlt = content.title || '';
 
         return '<a href="/accident-news/' + escapeHtml(story.slug) + '" class="card blog-card" aria-label="Read: ' + escapeHtml(content.title) + '">' +
@@ -507,7 +507,7 @@
             '@type': 'NewsArticle',
             'headline': content.title,
             'description': excerpt,
-            'image': imageUrl || 'https://penneylaw.com/images/favicon/Frank-Penny-Favicon-Logo-600x315-1.png',
+            'image': imageUrl || 'https://penneylaw.com/images/favicon/social-preview-2026-1200x630.png',
             'publisher': {
                 '@type': 'Organization',
                 'name': 'Frank Penney Injury Law',

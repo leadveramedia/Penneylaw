@@ -284,7 +284,7 @@
         var categories = (content.categories || []).filter(function (c) { return c && c.trim(); });
         var imageUrl = content.Featured_Image && content.Featured_Image.filename
             ? content.Featured_Image.filename + '/m/600x400'
-            : '/images/favicon/Frank-Penny-Favicon-Logo-600x315-1.png';
+            : '/images/favicon/social-preview-2026-1200x630.png';
         var imageAlt = content.featured_image_alt || content.title || '';
 
         var categoryHtml = categories.map(function (cat) {
@@ -620,7 +620,7 @@
             '@type': 'BlogPosting',
             'headline': content.title,
             'description': content.excerpt || '',
-            'image': imageUrl || 'https://penneylaw.com/images/favicon/Frank-Penny-Favicon-Logo-600x315-1.png',
+            'image': imageUrl || 'https://penneylaw.com/images/favicon/social-preview-2026-1200x630.png',
             'author': { '@type': 'Person', 'name': author },
             'publisher': {
                 '@type': 'Organization',
