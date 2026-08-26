@@ -1,15 +1,14 @@
 /**
  * Netlify Scheduled Function: Lead Form Worker
  *
- * Runs every 5 minutes. Picks up pending leads from the lead-form Blobs store
+ * Runs every minute. Picks up pending leads from the lead-form Blobs store
  * (written by lead-form-webhook.js), reshapes them into a Netlify Forms
  * server-to-server submission, and forwards. The existing Netlify Forms
  * email-notification plumbing then alerts the firm's intake.
  *
  * Spec: ../../webhook-spec-lead-form.md
  *
- * Schedule: every 5 minutes. Declared in BOTH netlify.toml and the
- * `exports.config` below; they must be changed together.
+ * Schedule: every 1 minute (configured via the exported `config.schedule`).
  *
  * Behaviour:
  *   - inbox/<lead_id>.json     pending lead, awaiting forwarding
@@ -150,10 +149,9 @@ exports.handler = async (event) => {
     return { statusCode: 200, body: '' };
 };
 
-// Netlify reads this to schedule the function. "*/5 * * * *" = every 5 minutes.
-// Duplicated in netlify.toml [functions."lead-form-worker"] -- change both.
+// Netlify reads this to schedule the function. "* * * * *" = every minute.
 exports.config = {
-    schedule: '*/5 * * * *'
+    schedule: '* * * * *'
 };
 
 /**
