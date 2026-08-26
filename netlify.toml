@@ -13,10 +13,22 @@
 
 # Scheduled Functions. v1-style (exports.handler) functions need the schedule
 # declared here — inline `exports.config = { schedule }` only auto-registers
-# for v2 functions (export default). Runs lead-form-worker every minute to
+# for v2 functions (export default). Runs lead-form-worker every 5 minutes to
 # drain the Blobs `inbox/` and POST queued leads to Netlify Forms.
+#
+# Cadence: was every minute (43,200 invocations/month, each doing a real Blobs
+# list round trip). The only producer of this queue is the Google Ads Lead Form
+# Asset via /api/lead-form-webhook; every form on the site posts straight to
+# Netlify Forms and never touches it. */5 cuts invocations ~80% for at most 5
+# minutes of added lead latency, well inside the 30-minute "last successful
+# delivery age" alert line in webhook-spec-lead-form.md.
+#
+# IMPORTANT: duplicated in lead-form-worker.js `exports.config`. Change both.
+# The worker has no internal backoff -- `attempts` increments once per run --
+# so this interval is ALSO the retry spacing: a persistently failing lead now
+# reaches the DLQ in ~15 minutes instead of ~3.
 [functions."lead-form-worker"]
-  schedule = "* * * * *"
+  schedule = "*/5 * * * *"
 
 # 404 handling - Netlify automatically serves 404.html for missing pages
 # No catch-all redirect needed for static HTML sites
