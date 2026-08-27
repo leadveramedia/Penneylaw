@@ -511,7 +511,7 @@
             'publisher': {
                 '@type': 'Organization',
                 'name': 'Frank Penney Injury Law',
-                'logo': { '@type': 'ImageObject', 'url': 'https://penneylaw.com/images/logos/frank-penney-logo.webp' }
+                'logo': { '@type': 'ImageObject', 'url': 'https://penneylaw.com/images/logos/frank-penney-logo-pink-2026.webp' }
             },
             'datePublished': content.Date || '',
             'mainEntityOfPage': { '@type': 'WebPage', '@id': postUrl }

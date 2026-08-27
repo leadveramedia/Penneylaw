@@ -1007,9 +1007,17 @@ body.menu-open {
 
 /* Header responsive - smaller screens */
 @media (max-width: 768px) {
+    /* Let the wordmark shrink before the hamburger gets pushed off-screen:
+       the 2026 logo is ~5.8:1, so a fixed height overflowed 360-430px phones. */
+    .site-logo {
+        flex-shrink: 1;
+        min-width: 0;
+    }
     .site-logo img,
     .site-logo .logo-img {
-        height: 60px;
+        height: auto;
+        max-height: 60px;
+        max-width: 100%;
     }
 
     .header-main {
@@ -1029,7 +1037,7 @@ body.menu-open {
 @media (max-width: 480px) {
     .site-logo img,
     .site-logo .logo-img {
-        height: 50px;
+        max-height: 50px;
     }
 
     .header-cta .btn {
@@ -1064,7 +1072,7 @@ body.menu-open {
 @media (max-width: 420px) {
     .site-logo img,
     .site-logo .logo-img {
-        height: 45px;
+        max-height: 45px;
     }
 
     .header-cta .btn {
@@ -1091,7 +1099,7 @@ body.menu-open {
 @media (max-width: 375px) {
     .site-logo img,
     .site-logo .logo-img {
-        height: 40px;
+        max-height: 40px;
     }
 
     .header-cta .btn {

@@ -3,13 +3,13 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
         <loc>https://penneylaw.com/about-us</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://penneylaw.com/accident-news</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
@@ -33,7 +33,7 @@
     </url>
     <url>
         <loc>https://penneylaw.com/blog</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -127,7 +127,7 @@
     </url>
     <url>
         <loc>https://penneylaw.com/</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -199,7 +199,7 @@
     </url>
     <url>
         <loc>https://penneylaw.com/resources</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
@@ -327,37 +327,37 @@
     </url>
     <url>
         <loc>https://penneylaw.com/locations/</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://penneylaw.com/frank-d-penney/</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://penneylaw.com/mark-mccauley/</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://penneylaw.com/joshua-boyce/</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://penneylaw.com/jacob-stoeltzing/</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://penneylaw.com/liam-conley/</loc>
-        <lastmod>2026-08-13</lastmod>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>

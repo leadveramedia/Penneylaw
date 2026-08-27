@@ -27,7 +27,7 @@
         'Jacob Stoeltzing': { image: '/images/attorneys/jacob-stoeltzing.webp', title: 'Attorney' },
         'Joshua Boyce': { image: '/images/attorneys/joshua-boyce.webp', title: 'Attorney' },
         'Mark McCauley': { image: '/images/attorneys/mark-mccauley.webp', title: 'Attorney' },
-        'Guest Author': { image: '/images/logos/frank-penney-logo.webp', title: '' }
+        'Guest Author': { image: '/images/logos/frank-penney-logo-pink-2026.webp', title: '' }
     };
 
     // City display name map
@@ -603,7 +603,7 @@
             'publisher': {
                 '@type': 'Organization',
                 'name': 'Frank Penney Injury Law',
-                'logo': { '@type': 'ImageObject', 'url': 'https://penneylaw.com/images/logos/frank-penney-logo.webp' }
+                'logo': { '@type': 'ImageObject', 'url': 'https://penneylaw.com/images/logos/frank-penney-logo-pink-2026.webp' }
             },
             'datePublished': content.Date || '',
             'mainEntityOfPage': { '@type': 'WebPage', '@id': postUrl }

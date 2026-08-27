@@ -364,7 +364,7 @@ function injectArticleJsonLd(html, type, data) {
         publisher: {
             '@type': 'Organization',
             name: 'Frank Penney Injury Law',
-            logo: { '@type': 'ImageObject', url: 'https://penneylaw.com/images/logos/FP-Logo-Dark-Background.png' }
+            logo: { '@type': 'ImageObject', url: 'https://penneylaw.com/images/logos/frank-penney-logo-pink-2026.png' }
         }
     };
     if (data.description) obj.description = data.description;

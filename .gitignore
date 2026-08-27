@@ -43,3 +43,6 @@ SEO-OFFSITE-PLAYBOOK.pdf
 
 # Debris from `netlify dev` / edge-function local runs
 deno.lock
+# Vector source art for the 2026 pink logo -- publish = "." would serve these publicly
+images/favicon/favicon_pink2026.pdf
+images/logos/Frank Penney Logo pink 2026.pdf
