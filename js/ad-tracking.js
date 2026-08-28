@@ -276,7 +276,10 @@
      */
     function getFormType(form) {
         var formId = form.id || '';
-        var formName = form.name || '';
+        // getAttribute, not form.name: every lead form has an <input name="name">, and a
+        // form's named-control lookup shadows the property, so form.name is that INPUT
+        // ELEMENT. formName.includes() then throws and this whole submit handler dies.
+        var formName = form.getAttribute('name') || '';
 
         // Check for mobile
         if (formId.includes('mobile') || formName.includes('mobile')) {
@@ -358,7 +361,7 @@
      */
     function trackFormSubmit(event) {
         var form = event.target;
-        var formName = form.name || form.id || 'unnamed-form';
+        var formName = form.getAttribute('name') || form.id || 'unnamed-form';  // see getFormType
         var formType = getFormType(form);
         var trackingData = getTrackingData();
 
@@ -408,6 +411,46 @@
         } catch (e) {
             console.warn('[Ad Tracking] Could not set conversion token:', e);
         }
+
+        setTimeout(flushCallRailCapture, 0);
+    }
+
+    /**
+     * Send CallRail's form capture before the native POST navigates away.
+     *
+     * CallRail's external_forms.js (loaded via GTM) does not preventDefault or use
+     * keepalive: on submit it writes the parsed form to localStorage `calltrk_form_data`
+     * and schedules a plain XHR behind a 1s debounce. Our forms POST natively, so the
+     * page unloads first and that XHR never fires. CallRail then relies on re-sending
+     * from localStorage when the NEXT page loads swap.js — which loses the lead whenever
+     * the visitor leaves the thank-you page early or the script is blocked there.
+     * Verified headlessly 2026-08-28: 0/5 captures fired on the form page itself.
+     *
+     * Runs on a 0ms timer so CallRail's own synchronous submit listener has written the
+     * final payload; a form POST's navigation doesn't start until handlers finish, and
+     * `keepalive` lets the request outlive the unload. Nothing here parses form data —
+     * we forward CallRail's own stash to CallRail's own endpoint (same company/access key
+     * as the GTM tag). The stash is cleared synchronously once the request is issued:
+     * the response arrives after unload, so a .then() never runs, and leaving the stash
+     * made CallRail's thank-you retry double-submit every lead (verified live, two
+     * `success:true` responses). A keepalive request is delivered by the browser even
+     * after unload, so the only loss case is a network failure — which would have failed
+     * the Netlify POST too.
+     */
+    var CALLRAIL_CAPTURE_URL = 'https://app.callrail.com/companies/957398046/becf11a93c25bc6ff502/12/form_capture.json';
+    function flushCallRailCapture() {
+        var raw;
+        try { raw = localStorage.getItem('calltrk_form_data'); } catch (e) { return; }
+        if (!raw || typeof fetch !== 'function') return;
+        try {
+            fetch(CALLRAIL_CAPTURE_URL, {
+                method: 'POST',
+                body: raw,
+                keepalive: true,
+                headers: { 'Content-Type': 'text/plain', 'Accept': 'application/json' }
+            }).catch(function() { /* nothing to do post-unload */ });
+            localStorage.removeItem('calltrk_form_data');
+        } catch (e) { /* fetch threw synchronously — leave the stash for CallRail's retry */ }
     }
 
     /**
