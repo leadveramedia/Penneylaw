@@ -25,6 +25,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-2026-32.png">
     <link rel="icon" type="image/png" sizes="512x512" href="images/favicon/favicon-2026-512.png">
     <link rel="apple-touch-icon" sizes="512x512" href="images/favicon/favicon-2026-512.png">
+    <link rel="preload" as="image" type="image/webp" fetchpriority="high" href="/images/logos/frank-penney-logo-pink-2026.webp">
     <link rel="preload" href="/components/header.html" as="fetch">
     <link rel="preload" href="/components/footer.html" as="fetch">
     <link rel="preload" href="/config/page-config.json" as="fetch">
@@ -147,8 +148,8 @@
 <section class="section section-lg">
     <div class="container">
         <div class="grid grid-2 grid-centered">
-            <div data-reveal="">
-                <img src="images/practice-areas/car-accident.webp" alt="Uninsured motorist accident attorney in California" width="800" height="800" loading="lazy" style="width: 100%; height: auto; border-radius: 12px;">
+            <div>
+                <img fetchpriority="high" src="images/practice-areas/car-accident.webp" alt="Uninsured motorist accident attorney in California" width="800" height="800" loading="eager" style="width: 100%; height: auto; border-radius: 12px;">
             </div>
             <div data-reveal="">
                 <span class="section-subtitle">UM / UIM Claims</span>
