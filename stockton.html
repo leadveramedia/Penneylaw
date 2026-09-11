@@ -24,7 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="css/style.min.css?v=20260726">
+    <link rel="stylesheet" href="css/style.min.css?v=20260911">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-2026-32.png">
     <link rel="icon" type="image/png" sizes="512x512" href="images/favicon/favicon-2026-512.png">
     <link rel="apple-touch-icon" sizes="512x512" href="images/favicon/favicon-2026-512.png">
@@ -160,9 +160,13 @@
             <div>
                 <img src="images/locations/stockton.webp" alt="Frank Penney Injury Law Stockton Office" width="654" height="368" style="width: 100%; height: auto; border-radius: 12px;" fetchpriority="high" loading="eager">
             <div class="office-map office-map-rounded">
-                <iframe src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+5250+Claremont+Avenue+Stockton+CA+95207&output=embed"
-                        title="Map of the Frank Penney Injury Law Stockton office"
-                        loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <button type="button" class="office-map-facade"
+                        data-map-src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+5250+Claremont+Avenue+Stockton+CA+95207&output=embed"
+                        data-map-title="Map of the Frank Penney Injury Law Stockton office"
+                        aria-label="Map of the Frank Penney Injury Law Stockton office — load the interactive map">
+                            <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
+                            <span>Load interactive map</span>
+                        </button>
                 <a href="https://maps.app.goo.gl/XK5iLQGfAGom6tCLA"
                    target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
                    aria-label="Open the Stockton office in Google Maps (opens in new tab)">Open in Maps</a>
@@ -194,7 +198,7 @@
 </section>
 
 <!-- Service Area -->
-<section class="section section-lg" style="background: linear-gradient(rgba(3, 53, 99, 0.85), rgba(3, 53, 99, 0.85)), url('images/backgrounds/Los-Angeles-skyline.jpg') center/cover no-repeat; color: white;">
+<section class="section section-lg" style="background: linear-gradient(rgba(3, 53, 99, 0.85), rgba(3, 53, 99, 0.85)), url('images/backgrounds/Los-Angeles-skyline.webp') center/cover no-repeat; color: white;">
     <div class="container">
         <div class="text-center" style="max-width: 800px; margin: 0 auto;" data-reveal>
             <span class="section-subtitle" style="color: var(--gold);">Areas We Serve</span>
@@ -353,7 +357,7 @@
 <div id="footer-placeholder"></div>
 
 
-<script src="js/bundle.min.js?v=20260828" defer></script>
+<script src="js/bundle.min.js?v=20260911" defer></script>
 <script src="js/location-links.min.js?v=20260625" defer></script>
 </body>
 </html>

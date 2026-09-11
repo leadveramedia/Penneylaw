@@ -445,6 +445,7 @@
         if (typeof window.initMobileDropdown === 'function') window.initMobileDropdown();
         if (typeof window.initScrollReveal === 'function') window.initScrollReveal();
         if (typeof window.initSmoothScroll === 'function') window.initSmoothScroll();
+        if (typeof window.initMapFacades === 'function') window.initMapFacades();
         if (typeof window.initLanguageSelector === 'function') window.initLanguageSelector();
         if (typeof window.initTestimonialsCarousel === 'function') window.initTestimonialsCarousel();
     }

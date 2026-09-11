@@ -16,6 +16,7 @@
             initStickyHeader();
             initScrollReveal();
             initSmoothScroll();
+            initMapFacades();
             initAttorneyDropdown();
             initLocationDropdown();
             initPracticeAreaDropdown();
@@ -29,6 +30,7 @@
     window.initStickyHeader = initStickyHeader;
     window.initScrollReveal = initScrollReveal;
     window.initSmoothScroll = initSmoothScroll;
+    window.initMapFacades = initMapFacades;
     window.initAttorneyDropdown = initAttorneyDropdown;
     window.initLocationDropdown = initLocationDropdown;
     window.initPracticeAreaDropdown = initPracticeAreaDropdown;
@@ -177,6 +179,33 @@
     /**
      * Scroll Reveal Animation
      */
+    // Google Maps embeds cost ~350KB of JS and ~20 tile requests each, and
+    // index/contact/locations carry seven apiece. Pages ship a facade button
+    // instead; the real iframe is built only when a visitor asks for it.
+    // Delegated so it covers every .office-map on the page with one listener.
+    function initMapFacades() {
+        // Both DOMContentLoaded and component-loader can reach this; the
+        // listener is on document, so only bind it once.
+        if (window.__mapFacadesBound) return;
+        window.__mapFacadesBound = true;
+
+        document.addEventListener('click', function (e) {
+            const facade = e.target.closest && e.target.closest('.office-map-facade');
+            if (!facade || !facade.dataset.mapSrc) return;
+
+            const iframe = document.createElement('iframe');
+            iframe.src = facade.dataset.mapSrc;
+            iframe.title = facade.dataset.mapTitle || 'Office location map';
+            iframe.loading = 'lazy';
+            iframe.allowFullscreen = true;
+            iframe.referrerPolicy = 'no-referrer-when-downgrade';
+
+            facade.replaceWith(iframe);
+            // Focus was on the button we just removed; move it to the map.
+            iframe.focus();
+        });
+    }
+
     function initScrollReveal() {
         const revealElements = document.querySelectorAll('[data-reveal]');
 

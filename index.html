@@ -32,8 +32,8 @@
     <!-- Load fonts with display=swap for faster text rendering -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
-    <link rel="preload" href="css/style.min.css?v=20260726" as="style">
-    <link rel="stylesheet" href="css/style.min.css?v=20260726">
+    <link rel="preload" href="css/style.min.css?v=20260911" as="style">
+    <link rel="stylesheet" href="css/style.min.css?v=20260911">
     <!-- Critical CSS for hero section to prevent CLS and optimize LCP -->
     <style>
         :root { --font-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
@@ -663,9 +663,13 @@
                     <h3 class="office-card-city">Roseville</h3>
                 </div>
                 <div class="office-map">
-                    <iframe src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+1508+Eureka+Rd+Roseville+CA+95661&output=embed"
-                            title="Map of the Frank Penney Injury Law Roseville office"
-                            loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <button type="button" class="office-map-facade"
+                            data-map-src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+1508+Eureka+Rd+Roseville+CA+95661&output=embed"
+                            data-map-title="Map of the Frank Penney Injury Law Roseville office"
+                            aria-label="Map of the Frank Penney Injury Law Roseville office — load the interactive map">
+                                <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
+                                <span>Load interactive map</span>
+                            </button>
                     <a href="https://share.google/OdklS74LpPOTcFPLI"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
                        aria-label="Open the Roseville office in Google Maps (opens in new tab)">Open in Maps</a>
@@ -684,9 +688,13 @@
                     <h3 class="office-card-city">Fairfield</h3>
                 </div>
                 <div class="office-map">
-                    <iframe src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+1652+West+Texas+Street+Suite+248+Fairfield+CA+94533&output=embed"
-                            title="Map of the Frank Penney Injury Law Fairfield office"
-                            loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <button type="button" class="office-map-facade"
+                            data-map-src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+1652+West+Texas+Street+Suite+248+Fairfield+CA+94533&output=embed"
+                            data-map-title="Map of the Frank Penney Injury Law Fairfield office"
+                            aria-label="Map of the Frank Penney Injury Law Fairfield office — load the interactive map">
+                                <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
+                                <span>Load interactive map</span>
+                            </button>
                     <a href="https://maps.app.goo.gl/anqPqAjWUVQQTDoE7"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
                        aria-label="Open the Fairfield office in Google Maps (opens in new tab)">Open in Maps</a>
@@ -705,9 +713,13 @@
                     <h3 class="office-card-city">Modesto</h3>
                 </div>
                 <div class="office-map">
-                    <iframe src="https://maps.google.com/maps?q=1111+J+Street+Modesto+CA+95354&output=embed"
-                            title="Map of the Frank Penney Injury Law Modesto office"
-                            loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <button type="button" class="office-map-facade"
+                            data-map-src="https://maps.google.com/maps?q=1111+J+Street+Modesto+CA+95354&output=embed"
+                            data-map-title="Map of the Frank Penney Injury Law Modesto office"
+                            aria-label="Map of the Frank Penney Injury Law Modesto office — load the interactive map">
+                                <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
+                                <span>Load interactive map</span>
+                            </button>
                     <!-- TODO: replace with GMB share link -->
                     <a href="https://www.google.com/maps/search/?api=1&query=1111+J+Street+Modesto+CA+95354"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
@@ -727,9 +739,13 @@
                     <h3 class="office-card-city">Chico</h3>
                 </div>
                 <div class="office-map">
-                    <iframe src="https://maps.google.com/maps?q=1108+Sherman+Ave+Chico+CA+95926&output=embed"
-                            title="Map of the Frank Penney Injury Law Chico office"
-                            loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <button type="button" class="office-map-facade"
+                            data-map-src="https://maps.google.com/maps?q=1108+Sherman+Ave+Chico+CA+95926&output=embed"
+                            data-map-title="Map of the Frank Penney Injury Law Chico office"
+                            aria-label="Map of the Frank Penney Injury Law Chico office — load the interactive map">
+                                <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
+                                <span>Load interactive map</span>
+                            </button>
                     <!-- TODO: replace with GMB share link -->
                     <a href="https://www.google.com/maps/search/?api=1&query=1108+Sherman+Ave+Chico+CA+95926"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
@@ -749,9 +765,13 @@
                     <h3 class="office-card-city">Sacramento</h3>
                 </div>
                 <div class="office-map">
-                    <iframe src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+333+University+Avenue+Suite+200+Sacramento+CA+95825&output=embed"
-                            title="Map of the Frank Penney Injury Law Sacramento office"
-                            loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <button type="button" class="office-map-facade"
+                            data-map-src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+333+University+Avenue+Suite+200+Sacramento+CA+95825&output=embed"
+                            data-map-title="Map of the Frank Penney Injury Law Sacramento office"
+                            aria-label="Map of the Frank Penney Injury Law Sacramento office — load the interactive map">
+                                <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
+                                <span>Load interactive map</span>
+                            </button>
                     <a href="https://maps.app.goo.gl/hpfQD9uRYcKj9SJd6"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
                        aria-label="Open the Sacramento office in Google Maps (opens in new tab)">Open in Maps</a>
@@ -770,9 +790,13 @@
                     <h3 class="office-card-city">Stockton</h3>
                 </div>
                 <div class="office-map">
-                    <iframe src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+5250+Claremont+Avenue+Stockton+CA+95207&output=embed"
-                            title="Map of the Frank Penney Injury Law Stockton office"
-                            loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <button type="button" class="office-map-facade"
+                            data-map-src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+5250+Claremont+Avenue+Stockton+CA+95207&output=embed"
+                            data-map-title="Map of the Frank Penney Injury Law Stockton office"
+                            aria-label="Map of the Frank Penney Injury Law Stockton office — load the interactive map">
+                                <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
+                                <span>Load interactive map</span>
+                            </button>
                     <a href="https://maps.app.goo.gl/XK5iLQGfAGom6tCLA"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
                        aria-label="Open the Stockton office in Google Maps (opens in new tab)">Open in Maps</a>
@@ -791,9 +815,13 @@
                     <h3 class="office-card-city">Oakland</h3>
                 </div>
                 <div class="office-map">
-                    <iframe src="https://maps.google.com/maps?q=1300+Clay+St+Suite+600+Oakland+CA+94612&output=embed"
-                            title="Map of the Frank Penney Injury Law Oakland office"
-                            loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <button type="button" class="office-map-facade"
+                            data-map-src="https://maps.google.com/maps?q=1300+Clay+St+Suite+600+Oakland+CA+94612&output=embed"
+                            data-map-title="Map of the Frank Penney Injury Law Oakland office"
+                            aria-label="Map of the Frank Penney Injury Law Oakland office — load the interactive map">
+                                <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
+                                <span>Load interactive map</span>
+                            </button>
                     <!-- TODO: replace with GMB share link -->
                     <a href="https://www.google.com/maps/search/?api=1&query=1300+Clay+St+Suite+600+Oakland+CA+94612"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
@@ -908,6 +936,6 @@
 }
 </style>
 
-<script src="js/bundle.min.js?v=20260828" defer></script>
+<script src="js/bundle.min.js?v=20260911" defer></script>
 </body>
 </html>
