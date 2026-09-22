@@ -181,8 +181,22 @@
      */
     // Google Maps embeds cost ~350KB of JS and ~20 tile requests each, and
     // index/contact/locations carry seven apiece. Pages ship a facade button
-    // instead; the real iframe is built only when a visitor asks for it.
-    // Delegated so it covers every .office-map on the page with one listener.
+    // instead; the real iframe is built when the facade nears the viewport
+    // (so page load stays light but visitors still see a map), or on click.
+    function loadMap(facade, focus) {
+        if (!facade.isConnected || !facade.dataset.mapSrc) return;
+
+        const iframe = document.createElement('iframe');
+        iframe.src = facade.dataset.mapSrc;
+        iframe.title = facade.dataset.mapTitle || 'Office location map';
+        iframe.allowFullscreen = true;
+        iframe.referrerPolicy = 'no-referrer-when-downgrade';
+
+        facade.replaceWith(iframe);
+        // Focus was on the button we just removed; move it to the map.
+        if (focus) iframe.focus();
+    }
+
     function initMapFacades() {
         // Both DOMContentLoaded and component-loader can reach this; the
         // listener is on document, so only bind it once.
@@ -191,19 +205,24 @@
 
         document.addEventListener('click', function (e) {
             const facade = e.target.closest && e.target.closest('.office-map-facade');
-            if (!facade || !facade.dataset.mapSrc) return;
-
-            const iframe = document.createElement('iframe');
-            iframe.src = facade.dataset.mapSrc;
-            iframe.title = facade.dataset.mapTitle || 'Office location map';
-            iframe.loading = 'lazy';
-            iframe.allowFullscreen = true;
-            iframe.referrerPolicy = 'no-referrer-when-downgrade';
-
-            facade.replaceWith(iframe);
-            // Focus was on the button we just removed; move it to the map.
-            iframe.focus();
+            if (facade) loadMap(facade, true);
         });
+
+        if (!('IntersectionObserver' in window)) return;
+        // City pages have a map in the first screen; waiting for the first
+        // scroll keeps it out of the initial load (and the LCP window).
+        function observeFacades() {
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    observer.unobserve(entry.target);
+                    loadMap(entry.target, false);
+                });
+            }, { rootMargin: '200px 0px' });
+            document.querySelectorAll('.office-map-facade').forEach(function (f) { observer.observe(f); });
+        }
+        if (window.scrollY > 0) observeFacades();
+        else window.addEventListener('scroll', observeFacades, { once: true, passive: true });
     }
 
     function initScrollReveal() {
