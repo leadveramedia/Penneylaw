@@ -40,6 +40,7 @@
  *   f4  create the form_conversion trigger and repoint the thank-you conversion onto it
  *   f5  TikTok pixel  (requires TIKTOK_PIXEL_ID)
  *   f6  Meta pixel    (requires META_PIXEL_ID)
+ *   f7  OpenAI (ChatGPT ads) pixel  (requires OPENAI_PIXEL_ID)
  */
 import { execFileSync } from 'node:child_process';
 
@@ -446,6 +447,64 @@ function fixes(ws, wsPath) {
         });
     }
 
+    // f7 — OpenAI (ChatGPT ads) Measurement Pixel. Unlike f5/f6 the base tag loads on EVERY
+    // page: the ad click id (oppref) arrives on the landing URL and the SDK cookies it there,
+    // so a thank-you-only tag would never see it. Consent is opt-out: on unless the visitor
+    // rejected, opted out of sale, or sends GPC; js/consent.js re-syncs it on a mid-page choice.
+    // Events are generic — no page path, practice area, value, or user data.
+    {
+        const pid = process.env.OPENAI_PIXEL_ID;
+        const INIT = 'OpenAI Pixel - Init';
+        const phone = tagByLabel(PHONE_LABEL);
+        const already = ws.tags.some((t) => t.name === INIT);
+        const html = (js) => [{ type: 'template', key: 'html', value: `<script>${js}</script>` },
+            { type: 'boolean', key: 'supportDocumentWrite', value: 'false' }];
+        // Init runs as a setup tag, so it is guaranteed to precede the event tags even when
+        // form_conversion is processed in the same GTM tick as All Pages.
+        const setupTag = [{ tagName: INIT, stopOnSetupFailure: true }];
+        out.push({
+            id: 'f7',
+            found: Boolean(pid && phone && !already),
+            describe: already ? `"${INIT}" already exists — nothing to do`
+                : !pid ? 'skipped — set OPENAI_PIXEL_ID to create this pixel'
+                : !phone ? 'PRIMARY phone conversion tag not found (needed for its tel: trigger)'
+                : `CREATE Custom HTML tag "${INIT}" on All Pages (once per page, opt-out consent)\n` +
+                  `        CREATE Custom HTML tag "OpenAI Pixel - Lead" (lead_created) on form_conversion\n` +
+                  `        CREATE Custom HTML tag "OpenAI Pixel - Phone Click" (custom phone_click) on ` +
+                  `the PRIMARY phone conversion's trigger [${(phone.firingTriggerId || []).join(', ')}] — that tag is not modified`,
+            async run() {
+                const formTrig = await ensureFormConversionTrigger(wsPath);
+                await api('POST', `${wsPath}/tags`, {
+                    name: INIT,
+                    type: 'html',
+                    tagFiringOption: 'oncePerLoad',
+                    parameter: html(
+                        '(function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;' +
+                        'var js=d.createElement(s);js.async=true;js.src=u;var f=d.getElementsByTagName(s)[0];' +
+                        'f.parentNode.insertBefore(js,f)})(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");' +
+                        'oaiq("consent",!(navigator.globalPrivacyControl===true||' +
+                        '/(?:^|; )penney_consent=[^;]*denied/.test(document.cookie)));' +
+                        `oaiq("init",{pixelId:${JSON.stringify(pid)}});`),
+                    firingTriggerId: ['2147479553'],   // built-in All Pages
+                });
+                await api('POST', `${wsPath}/tags`, {
+                    name: 'OpenAI Pixel - Lead',
+                    type: 'html',
+                    parameter: html('oaiq("measure","lead_created",{type:"customer_action"});'),
+                    setupTag,
+                    firingTriggerId: [formTrig.triggerId],
+                });
+                await api('POST', `${wsPath}/tags`, {
+                    name: 'OpenAI Pixel - Phone Click',
+                    type: 'html',
+                    parameter: html('oaiq("measure","custom",{type:"custom"},{custom_event_name:"phone_click"});'),
+                    setupTag,
+                    firingTriggerId: phone.firingTriggerId,
+                });
+            },
+        });
+    }
+
     return out;
 }
 
@@ -583,6 +642,11 @@ console.log('quick_preview: compiles cleanly');
         const conv = cTags.find((t) => (t.parameter || [])
             .some((p) => p.key === 'conversionLabel' && p.value === THANKYOU_LABEL));
         if (!conv) problems.push('f4: thank-you conversion vanished from the compiled container');
+    }
+
+    if (requested.includes('f7')) {
+        const n = cTags.filter((t) => String(paramOf(t, 'html')?.value || '').includes('oaiq(')).length;
+        if (n !== 3) problems.push(`f7: expected 3 OpenAI pixel tags in the compiled container, found ${n}`);
     }
 
 

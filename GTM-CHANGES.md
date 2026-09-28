@@ -93,9 +93,22 @@ hosts, two CallRail hosts).
    Both fire a **generic** event on `form_conversion` with no page path, practice area, or
    value — deliberate, given Meta Pixel litigation around health-adjacent data on
    personal-injury sites.
-3. **Instagram conversion optimization requires leaving boosted posts** — in-app boosts can't
+3. **OpenAI / ChatGPT ads pixel (f7).** Create a Pixel ID in ChatGPT Ads Manager → Conversions,
+   then:
+   ```bash
+   OPENAI_PIXEL_ID=... node scripts/gtm-apply.mjs --apply=f7
+   ```
+   Unlike f5/f6 the base tag fires on **All Pages** — the click id (`oppref`) lands on the entry
+   URL and the SDK cookies it there. Events: `lead_created` on `form_conversion`, custom
+   `phone_click` on the PRIMARY tel: trigger (reused, not modified). No user data or values.
+   Consent is **opt-out** (owner's call): on unless `penney_consent` is denied or GPC is set;
+   `js/consent.js` re-syncs it on a mid-page choice. Keep **Automatic Advanced Matching OFF** in
+   Ads Manager — it scrapes the DOM and can pick up the firm's own number (the f3 problem).
+   CSP hosts (`bzrcdn.openai.com`, `bzr.openai.com`) are already in `netlify.toml` — deploy the
+   site before publishing the container version.
+4. **Instagram conversion optimization requires leaving boosted posts** — in-app boosts can't
    optimize toward a pixel conversion.
-4. **Watch Google Ads for 48h.** The thank-you conversion (Secondary) should drop to an honest
+5. **Watch Google Ads for 48h.** The thank-you conversion (Secondary) should drop to an honest
    number; the tel: click conversion (Primary) should not move.
 
 ## Consciously accepted — not changing

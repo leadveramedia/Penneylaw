@@ -60,6 +60,9 @@
     function applyConsent(state, source) {
         var update = state === 'granted' ? GRANTED : DENIED;
         gtag('consent', 'update', update);
+        // OpenAI pixel (GTM f7) has no Consent Mode; its init tag reads this cookie, this
+        // keeps it in sync when the choice changes mid-page. false also deletes its cookies.
+        if (window.oaiq) window.oaiq('consent', state === 'granted');
         writeCookie({ state: state, source: source || 'user', ts: Date.now() });
     }
 
