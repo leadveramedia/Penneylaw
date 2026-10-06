@@ -159,7 +159,7 @@
 <div id="footer-placeholder"></div>
 
 
-<script src="js/bundle.min.js?v=20260928" defer></script>
+<script src="js/bundle.min.js?v=20261006" defer></script>
 <script>
     // Deferred to DOMContentLoaded on purpose. bundle.min.js is `defer`, and it carries the
     // Consent Mode defaults plus the GTM snippet. Running inline would queue the conversion
@@ -194,7 +194,18 @@
             }
         } catch (e) { /* fall through — conversion still fires without enhanced data */ }
 
-        window.dataLayer.push({ event: 'form_conversion', page_path: window.location.pathname });
+        // Dedup id shared with the OpenAI Conversions API call for this same lead
+        // (js/ad-tracking.js stampConversionEventId). GTM's OpenAI lead tag reads it.
+        var conversion = { event: 'form_conversion', page_path: window.location.pathname };
+        try {
+            var eventId = sessionStorage.getItem('conversion_event_id');
+            if (eventId) {
+                conversion.conversion_event_id = eventId;
+                sessionStorage.removeItem('conversion_event_id');
+            }
+        } catch (e) { /* conversion still fires, just without a dedup id */ }
+
+        window.dataLayer.push(conversion);
     });
 </script>
 </body>

@@ -35,6 +35,8 @@ function makeStore() {
  */
 function makeForm({ valid = true, values = {}, attrs = {} } = {}) {
     const submitHandlers = [];
+    // One object per field, so values the script writes on submit can be read back.
+    const fields = Object.fromEntries(Object.entries(values).map(([k, v]) => [k, { value: v }]));
     return {
         name: 'contact',
         id: 'contact-form',
@@ -44,9 +46,9 @@ function makeForm({ valid = true, values = {}, attrs = {} } = {}) {
         addEventListener(evt, fn) { if (evt === 'submit') submitHandlers.push(fn); },
         querySelector(sel) {
             const m = sel.match(/name="([^"]+)"/);
-            const key = m && m[1];
-            return key in values ? { value: values[key] } : null;
+            return (m && fields[m[1]]) || null;
         },
+        fields,
         querySelectorAll: () => [],
         appendChild() {},
         closest: () => null,
@@ -56,7 +58,7 @@ function makeForm({ valid = true, values = {}, attrs = {} } = {}) {
 }
 
 /** Run ad-tracking.js against a fake page. Returns the storage it wrote to. */
-function visit({ search = '', pathname = '/', localStore, now, forms = [] }) {
+function visit({ search = '', pathname = '/', localStore, now, forms = [], cookie = '', navigator }) {
     const local = localStore || makeStore();
     const session = makeStore();
     const dataLayer = [];
@@ -67,8 +69,9 @@ function visit({ search = '', pathname = '/', localStore, now, forms = [] }) {
         createElement: () => ({ setAttribute() {} }),
         querySelectorAll: (sel) => (sel.includes('form') ? forms : []),
         referrer: '',
+        cookie,
     };
-    const win = { dataLayer, location: { search, pathname }, addEventListener() {} };
+    const win = { dataLayer, location: { search, pathname }, addEventListener() {}, navigator };
 
     const RealDate = Date;
     class FixedDate extends RealDate {
@@ -153,7 +156,7 @@ const read = (local) => JSON.parse(local.getItem('penney_attr'));
 }
 
 // 7. New click IDs are captured.
-for (const [param, value] of [['ttclid', 'TT123'], ['msclkid', 'MS456'], ['fbclid', 'FB789']]) {
+for (const [param, value] of [['ttclid', 'TT123'], ['msclkid', 'MS456'], ['fbclid', 'FB789'], ['oppref', 'OP1']]) {
     const { local } = visit({ search: `?${param}=${value}`, now: T0 });
     assert.equal(read(local).last[param], value, `${param} not captured`);
 }
@@ -314,6 +317,67 @@ function loadThankYou({ token, ecData, ecRaw }) {
     form.submit();
     assert.ok(session.getItem('enhanced_conversion_data'),
         'guard leaked to forms that did not opt out');
+}
+
+// ---------------------------------------------------------------------------------------
+// OpenAI dedup id. The form field is what makes netlify/functions/submission-created.js send
+// the lead to OpenAI, so it must be empty whenever OpenAI may not receive this lead.
+// ---------------------------------------------------------------------------------------
+
+const leadValues = () => ({ email: 'A@B.com', phone: '(916) 555-1234', name: 'Jo Smith', conversion_event_id: '' });
+
+// 17. Ordinary form: field and thank-you stash carry the same id.
+{
+    const form = makeForm({ values: leadValues() });
+    const { session } = visit({ pathname: '/contact', now: T0, forms: [form] });
+    form.submit();
+    const id = form.fields.conversion_event_id.value;
+    assert.ok(id, 'ordinary lead got no conversion_event_id — OpenAI server event would never send');
+    assert.equal(session.getItem('conversion_event_id'), id, 'pixel and server would not dedupe');
+}
+
+// 18. Mass tort intake forms: no id anywhere.
+{
+    const form = makeForm({ values: leadValues(), attrs: { 'data-no-enhanced-conversions': '' } });
+    const { session } = visit({ pathname: '/roblox-child-exploitation-lawsuit', now: T0, forms: [form] });
+    form.submit();
+    assert.equal(form.fields.conversion_event_id.value, '', 'intake form lead would be sent to OpenAI');
+    assert.equal(session.getItem('conversion_event_id'), null);
+}
+
+// 19. Opted out (cookie denied, or GPC): the server must not send, so the field stays empty.
+for (const opts of [{ cookie: 'x=1; penney_consent=%7B%22s%22%3A%22denied%22%7D' }, { navigator: { globalPrivacyControl: true } }]) {
+    const form = makeForm({ values: leadValues() });
+    visit({ pathname: '/contact', now: T0, forms: [form], ...opts });
+    form.submit();
+    assert.equal(form.fields.conversion_event_id.value, '', `opted-out lead would be sent to OpenAI (${JSON.stringify(opts)})`);
+}
+
+// 20. An invalid submit stamps nothing.
+{
+    const form = makeForm({ valid: false, values: leadValues() });
+    const { session } = visit({ pathname: '/contact', now: T0, forms: [form] });
+    form.submit();
+    assert.equal(form.fields.conversion_event_id.value, '');
+    assert.equal(session.getItem('conversion_event_id'), null);
+}
+
+// 21. thank-you.html forwards the id with the conversion and consumes it.
+{
+    const session = makeStore();
+    session.setItem('conversion_event_id', 'evt-9');
+    const dataLayer = [];
+    let domReady = null;
+    session.setItem('pending_conversion', '1');
+    new Function('window', 'document', 'sessionStorage', thankYouScript())(
+        { dataLayer, location: { pathname: '/thank-you' } },
+        { addEventListener(evt, fn) { if (evt === 'DOMContentLoaded') domReady = fn; } },
+        session,
+    );
+    domReady();
+    const conv = dataLayer.find((d) => d.event === 'form_conversion');
+    assert.equal(conv.conversion_event_id, 'evt-9', 'GTM OpenAI lead tag would get no event_id');
+    assert.equal(session.getItem('conversion_event_id'), null, 'id not consumed');
 }
 
 console.log('test-ad-tracking: all assertions passed');

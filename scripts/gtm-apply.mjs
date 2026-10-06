@@ -41,6 +41,7 @@
  *   f5  TikTok pixel  (requires TIKTOK_PIXEL_ID)
  *   f6  Meta pixel    (requires META_PIXEL_ID)
  *   f7  OpenAI (ChatGPT ads) pixel  (requires OPENAI_PIXEL_ID)
+ *   f8  OpenAI lead event: hashed user data + conversion_event_id (updates f7's Lead tag)
  */
 import { execFileSync } from 'node:child_process';
 
@@ -248,6 +249,24 @@ function setParam(entity, key, patch) {
 
 const bool = (entity, key, value) => setParam(entity, key, { type: 'boolean', value: String(value) });
 
+/**
+ * "OpenAI Pixel - Lead" body. Re-inits the pixel with SHA-256 hashed contact data from
+ * leadsUserData (raw, pushed by thank-you.html) and sends lead_created with the
+ * conversion_event_id that netlify/functions/submission-created.js also sends, so OpenAI
+ * dedupes pixel + server into one lead. Normalization must match that function's buildUser.
+ * Promise.resolve() first so a missing crypto.subtle can't throw before the measure call.
+ * String.raw keeps the regex backslashes; \x60 is a backtick.
+ */
+const openAiLeadJs = (pid) => String.raw`(function(){
+var m=google_tag_manager["${PUBLIC_ID}"].dataLayer,u=m.get("leadsUserData")||{},a=u.address||{},id=m.get("conversion_event_id");
+function n(s){return String(s||"").toLowerCase().replace(/[\s!-\/:-@\[-\x60{-~]/g,"")}
+var p=String(u.phone_number||"").replace(/\D/g,"").replace(/^0+/,"");
+var v={email_sha256:String(u.email||"").trim().toLowerCase(),phone_number_sha256:p.length>=8&&p.length<=15?p:"",first_name_sha256:n(a.first_name),last_name_sha256:n(a.last_name)};
+var k=Object.keys(v).filter(function(x){return v[x]});
+function h(s){return crypto.subtle.digest("SHA-256",new TextEncoder().encode(s)).then(function(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return("0"+x.toString(16)).slice(-2)}).join("")})}
+Promise.resolve().then(function(){return Promise.all(k.map(function(x){return h(v[x])}))}).then(function(r){if(!k.length)return;var user={};k.forEach(function(x,i){user[x]=r[i]});oaiq("init",{pixelId:${JSON.stringify(pid)},user:user})})["catch"](function(){}).then(function(){var o={type:"customer_action"};if(id)oaiq("measure","lead_created",o,{event_id:id});else oaiq("measure","lead_created",o)});
+})();`;
+
 const isFormConversionTrigger = (t) =>
     t.type === 'customEvent' &&
     (t.customEventFilter || []).some((f) =>
@@ -451,7 +470,8 @@ function fixes(ws, wsPath) {
     // page: the ad click id (oppref) arrives on the landing URL and the SDK cookies it there,
     // so a thank-you-only tag would never see it. Consent is opt-out: on unless the visitor
     // rejected, opted out of sale, or sends GPC; js/consent.js re-syncs it on a mid-page choice.
-    // Events are generic — no page path, practice area, value, or user data.
+    // Events carry no page path, practice area or value. The lead event adds hashed contact
+    // data and a dedup id (f8); the mass tort intake forms never stage contact data for it.
     {
         const pid = process.env.OPENAI_PIXEL_ID;
         const INIT = 'OpenAI Pixel - Init';
@@ -490,7 +510,7 @@ function fixes(ws, wsPath) {
                 await api('POST', `${wsPath}/tags`, {
                     name: 'OpenAI Pixel - Lead',
                     type: 'html',
-                    parameter: html('oaiq("measure","lead_created",{type:"customer_action"});'),
+                    parameter: html(openAiLeadJs(pid)),
                     setupTag,
                     firingTriggerId: [formTrig.triggerId],
                 });
@@ -501,6 +521,29 @@ function fixes(ws, wsPath) {
                     setupTag,
                     firingTriggerId: phone.firingTriggerId,
                 });
+            },
+        });
+    }
+
+    // f8 — rewrite an existing f7 Lead tag to openAiLeadJs: hashed user data + dedup id.
+    // Clears Ads Manager's "missing user data" warning and pairs with the Conversions API
+    // (submission-created.js). The pixel id comes from the live Init tag, so no env needed.
+    {
+        const lead = ws.tags.find((t) => t.name === 'OpenAI Pixel - Lead');
+        const init = ws.tags.find((t) => t.name === 'OpenAI Pixel - Init');
+        const pid = (String(paramOf(init || {}, 'html')?.value || '').match(/pixelId:"([^"]+)"/) || [])[1];
+        const want = pid ? `<script>${openAiLeadJs(pid)}</script>` : '';
+        const current = lead ? paramOf(lead, 'html')?.value : '';
+        out.push({
+            id: 'f8',
+            found: Boolean(lead && pid && current !== want),
+            describe: !lead || !pid ? 'OpenAI Lead/Init tags not found — apply f7 first'
+                : current === want ? '"OpenAI Pixel - Lead" already up to date — nothing to do'
+                : 'UPDATE tag "OpenAI Pixel - Lead" — re-init with SHA-256 email/phone/name from ' +
+                  'leadsUserData, lead_created with event_id = conversion_event_id',
+            async run() {
+                setParam(lead, 'html', { type: 'template', value: want });
+                await api('PUT', lead.path, lead);
             },
         });
     }
@@ -647,6 +690,14 @@ console.log('quick_preview: compiles cleanly');
     if (requested.includes('f7')) {
         const n = cTags.filter((t) => String(paramOf(t, 'html')?.value || '').includes('oaiq(')).length;
         if (n !== 3) problems.push(`f7: expected 3 OpenAI pixel tags in the compiled container, found ${n}`);
+    }
+
+    if (requested.includes('f8')) {
+        const lead = cTags.find((t) => /oaiq\("measure","lead_created"/.test(String(paramOf(t, 'html')?.value || '')));
+        const body = String(paramOf(lead || {}, 'html')?.value || '');
+        if (!body.includes('conversion_event_id') || !body.includes('email_sha256')) {
+            problems.push('f8: the compiled OpenAI lead tag lacks the user-data / event_id code');
+        }
     }
 
 

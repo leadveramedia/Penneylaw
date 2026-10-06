@@ -100,12 +100,24 @@ hosts, two CallRail hosts).
    ```
    Unlike f5/f6 the base tag fires on **All Pages** — the click id (`oppref`) lands on the entry
    URL and the SDK cookies it there. Events: `lead_created` on `form_conversion`, custom
-   `phone_click` on the PRIMARY tel: trigger (reused, not modified). No user data or values.
+   `phone_click` on the PRIMARY tel: trigger (reused, not modified). No values; user data
+   is added by f8.
    Consent is **opt-out** (owner's call): on unless `penney_consent` is denied or GPC is set;
    `js/consent.js` re-syncs it on a mid-page choice. Keep **Automatic Advanced Matching OFF** in
    Ads Manager — it scrapes the DOM and can pick up the firm's own number (the f3 problem).
    CSP hosts (`bzrcdn.openai.com`, `bzr.openai.com`) are already in `netlify.toml` — deploy the
    site before publishing the container version.
+3a. **OpenAI user data + Conversions API (f8).** Clears Ads Manager's "missing user data" and
+   "no recent server-to-server events" warnings. Deploy the site first, then:
+   ```bash
+   node scripts/gtm-apply.mjs --apply=f8    # pixel id is read from the live Init tag
+   ```
+   The Lead tag re-inits the pixel with SHA-256 email/phone/name from `leadsUserData` and sends
+   `event_id` = `conversion_event_id`. `netlify/functions/submission-created.js` sends the same
+   lead server-side with the same id, so OpenAI counts it once. Set `OPENAI_PIXEL_ID` and
+   `OPENAI_CAPI_KEY` (Ads Manager → Conversions) in Netlify env; without both it sends nothing.
+   Never sent: mass tort intake forms (`data-no-enhanced-conversions`), opted-out visitors
+   (`penney_consent` denied / GPC), Google Ads lead-form posts. Disclosed in privacy-policy.html.
 4. **Instagram conversion optimization requires leaving boosted posts** — in-app boosts can't
    optimize toward a pixel conversion.
 5. **Watch Google Ads for 48h.** The thank-you conversion (Secondary) should drop to an honest

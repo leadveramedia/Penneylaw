@@ -25,6 +25,7 @@
     var ATTR_KEY = 'penney_attr';                    // localStorage: first + last touch
     var EC_STORAGE_KEY = 'enhanced_conversion_data';  // sessionStorage: per-submission
     var CONVERSION_TOKEN_KEY = 'pending_conversion';  // sessionStorage: one-shot, read by thank-you.html
+    var EVENT_ID_KEY = 'conversion_event_id';         // sessionStorage: OpenAI pixel/server dedup id
 
     // Attribution TTL, doing double duty: it caps how long first-touch is held onto, AND it
     // is the retention window — a record untouched for this long is deleted on next read, so
@@ -44,7 +45,8 @@
         'wbraid',     // Google Ads Web-to-App
         'fbclid',     // Meta Click ID — covers both Facebook and Instagram
         'ttclid',     // TikTok Click ID
-        'msclkid'     // Microsoft Ads Click ID
+        'msclkid',    // Microsoft Ads Click ID
+        'oppref'      // OpenAI (ChatGPT ads) click reference — forwarded by submission-created.js
     ];
 
     /**
@@ -356,6 +358,33 @@
     }
 
     /**
+     * One id per lead, shared by the OpenAI pixel lead event (thank-you.html -> GTM) and the
+     * Conversions API call (netlify/functions/submission-created.js) so OpenAI dedupes them.
+     * The form field is what makes the server send, so it stays empty when OpenAI must not
+     * get this lead: the mass tort intake forms, or a visitor who opted out (same test as the
+     * GTM pixel init: penney_consent denied, or GPC).
+     * @param {HTMLFormElement} form - The submitted form
+     */
+    function stampConversionEventId(form) {
+        if (form.hasAttribute('data-no-enhanced-conversions')) {
+            return;
+        }
+        var id = window.crypto && window.crypto.randomUUID
+            ? window.crypto.randomUUID()
+            : Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+        try {
+            sessionStorage.setItem(EVENT_ID_KEY, id);
+        } catch (e) { /* pixel lead event still fires, just without a dedup id */ }
+
+        var optedOut = (window.navigator || {}).globalPrivacyControl === true ||
+            /(?:^|; )penney_consent=[^;]*denied/.test(document.cookie || '');
+        var field = form.querySelector('input[name="conversion_event_id"]');
+        if (field && !optedOut) {
+            field.value = id;
+        }
+    }
+
+    /**
      * Track form submission event to GTM dataLayer
      * @param {Event} event - The submit event
      */
@@ -392,6 +421,8 @@
         if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
             return;
         }
+
+        stampConversionEventId(form);
 
         // Stash user-provided data for Enhanced Conversions on thank-you.html
         var leadsUserData = extractLeadsUserData(form);
