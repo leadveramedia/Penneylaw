@@ -103,8 +103,12 @@ hosts, two CallRail hosts).
    `phone_click` on the PRIMARY tel: trigger (reused, not modified). No values; user data
    is added by f8.
    Consent is **opt-out** (owner's call): on unless `penney_consent` is denied or GPC is set;
-   `js/consent.js` re-syncs it on a mid-page choice. Keep **Automatic Advanced Matching OFF** in
-   Ads Manager — it scrapes the DOM and can pick up the firm's own number (the f3 problem).
+   `js/consent.js` re-syncs it on a mid-page choice. **Automatic Advanced Matching is always on**:
+   OpenAI enables it server-side (`bzrcdn.openai.com/pixel-config/v1/<pixel>.json`) and there is
+   no switch in Ads Manager or the SDK. Checked 2026-10-06 against SDK 0.1.41: it reads email /
+   phone / name from form inputs via document-level listeners, not page text, so the footer's
+   `info@penneylaw.com` is not picked up. It does read the mass tort intake forms too; the owner
+   chose to keep the pixel there because ChatGPT ads drive those campaigns.
    CSP hosts (`bzrcdn.openai.com`, `bzr.openai.com`) are already in `netlify.toml` — deploy the
    site before publishing the container version.
 3a. **OpenAI user data + Conversions API (f8).** Clears Ads Manager's "missing user data" and
@@ -116,8 +120,10 @@ hosts, two CallRail hosts).
    `event_id` = `conversion_event_id`. `netlify/functions/submission-created.js` sends the same
    lead server-side with the same id, so OpenAI counts it once. Set `OPENAI_PIXEL_ID` and
    `OPENAI_CAPI_KEY` (Ads Manager → Conversions) in Netlify env; without both it sends nothing.
-   Never sent: mass tort intake forms (`data-no-enhanced-conversions`), opted-out visitors
-   (`penney_consent` denied / GPC), Google Ads lead-form posts. Disclosed in privacy-policy.html.
+   Our code never sends explicit data or server events for: mass tort intake forms
+   (`data-no-enhanced-conversions`), opted-out visitors (`penney_consent` denied / GPC), Google
+   Ads lead-form posts. (Automatic Advanced Matching still reads the intake forms — see 3.)
+   Disclosed in privacy-policy.html.
 4. **Instagram conversion optimization requires leaving boosted posts** — in-app boosts can't
    optimize toward a pixel conversion.
 5. **Watch Google Ads for 48h.** The thank-you conversion (Secondary) should drop to an honest
