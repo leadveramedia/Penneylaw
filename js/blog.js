@@ -443,10 +443,9 @@
 
         var urlParams = new URLSearchParams(window.location.search);
         var tagParam = urlParams.get('tag');
-        if (tagParam) {
-            currentTag = tagParam;
-            showActiveTag(tagParam);
-        }
+        // Label is shown by loadBlogPosts only once the tag returns posts: echoing raw
+        // ?tag= text let anyone put arbitrary words on our domain (phishing text injection).
+        if (tagParam) currentTag = tagParam;
     }
 
     function showActiveTag(tagName) {
@@ -488,6 +487,7 @@
 
         fetchStories(params)
             .then(function (result) {
+                if (currentTag && result.stories.length) showActiveTag(currentTag);
                 renderPostsGrid(result.stories);
                 renderPagination(result.total, result.perPage, currentPage);
             })
