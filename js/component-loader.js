@@ -89,7 +89,7 @@
             return 'blog-post';
         }
         // Attorney bio pages live at /{slug}/ (directory index). Return the slug.
-        var attorneyMatch = path.match(/^\/(frank-d-penney|mark-mccauley|joshua-boyce|jacob-stoeltzing|liam-conley)\/?$/);
+        var attorneyMatch = path.match(/^\/(frank-d-penney|mark-mccauley|joshua-boyce|jacob-stoeltzing|liam-conley|marissa-hauck)\/?$/);
         if (attorneyMatch) {
             return attorneyMatch[1];
         }

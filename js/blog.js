@@ -27,6 +27,8 @@
         'Frank Penney': { image: '/images/attorneys/frank-penney.webp', title: 'Founding Attorney' },
         'Jacob Stoeltzing': { image: '/images/attorneys/jacob-stoeltzing.webp', title: 'Attorney' },
         'Joshua Boyce': { image: '/images/attorneys/joshua-boyce.webp', title: 'Attorney' },
+        'Liam Conley': { image: '/images/attorneys/liam-conley.webp', title: 'Attorney' },
+        'Marissa Hauck': { image: '/images/attorneys/marissa-hauck.webp', title: 'Attorney' },
         'Mark McCauley': { image: '/images/attorneys/mark-mccauley.webp', title: 'Attorney' },
         'Guest Author': { image: '/images/logos/frank-penney-logo-pink-2026.webp', title: '' }
     };
