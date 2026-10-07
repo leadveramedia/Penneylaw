@@ -31,18 +31,11 @@
         'Guest Author': { image: '/images/logos/frank-penney-logo-pink-2026.webp', title: '' }
     };
 
-    // Category list (matches Storyblok multi-option field)
-    var CATEGORIES = [
-        'Car Accidents', 'Truck Accidents', 'Personal Injury',
-        'Insurance Claims', 'Legal Tips', 'Community', 'Firm News'
-    ];
-
     // ==========================================
     // STATE
     // ==========================================
 
     var currentPage = 1;
-    var currentCategory = 'all';
     var currentTag = '';
     var currentSearch = '';
     var totalPages = 1;
@@ -394,27 +387,6 @@
         });
     }
 
-    function renderCategoryFilters() {
-        var container = document.querySelector('.blog-category-filters');
-        if (!container) return;
-
-        var html = '<button class="blog-filter-btn active" data-category="all">All</button>';
-        CATEGORIES.forEach(function (cat) {
-            html += '<button class="blog-filter-btn" data-category="' + escapeHtml(cat) + '">' + escapeHtml(cat) + '</button>';
-        });
-        container.innerHTML = html;
-
-        container.querySelectorAll('.blog-filter-btn').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                container.querySelectorAll('.blog-filter-btn').forEach(function (b) { b.classList.remove('active'); });
-                this.classList.add('active');
-                currentCategory = this.getAttribute('data-category');
-                currentPage = 1;
-                loadBlogPosts();
-            });
-        });
-    }
-
     function initSearch() {
         var searchInput = document.getElementById('blog-search-input');
         if (!searchInput) return;
@@ -463,10 +435,6 @@
             per_page: POSTS_PER_PAGE
         };
 
-        if (currentCategory && currentCategory !== 'all') {
-            params['filter_query[categories][in]'] = currentCategory;
-        }
-
         if (currentTag) {
             params.with_tag = currentTag;
         }
@@ -498,25 +466,12 @@
             });
     }
 
+    // No category filter: the Storyblok "Blog page" type has no categories field, so filtering
+    // on one returned nothing for every button. Add the field and posts' values before bringing
+    // it back.
     function initBlogListing() {
-        renderCategoryFilters();
         initSearch();
         initTagFilter();
-
-        // Check URL for category parameter
-        var urlParams = new URLSearchParams(window.location.search);
-        var catParam = urlParams.get('category');
-        if (catParam) {
-            currentCategory = catParam;
-            var buttons = document.querySelectorAll('.blog-filter-btn');
-            buttons.forEach(function (btn) {
-                btn.classList.remove('active');
-                if (btn.getAttribute('data-category') === catParam) {
-                    btn.classList.add('active');
-                }
-            });
-        }
-
         loadBlogPosts();
     }
 
@@ -549,7 +504,7 @@
 
         // Category pills
         var categoryHtml = categories.map(function (cat) {
-            return '<a href="/blog?category=' + encodeURIComponent(cat) + '" class="blog-post-category">' + escapeHtml(cat) + '</a>';
+            return '<span class="blog-post-category">' + escapeHtml(cat) + '</span>';
         }).join('');
 
         // Tag pills
