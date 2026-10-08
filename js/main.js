@@ -87,65 +87,43 @@
     function initMobileMenu() {
         const toggle = document.getElementById('mobile-menu-toggle');
         const mobileNav = document.getElementById('mobile-nav');
-        const navMenu = document.querySelector('.nav-menu');
 
-        if (!toggle) return;
+        if (!toggle || !mobileNav) return;
+
+        // Every open/close path goes through here so aria state, scroll lock and
+        // inert never drift apart. While open, everything except the header and the
+        // overlay is inert, so Tab can't wander into the page hidden behind it.
+        function setOpen(open) {
+            mobileNav.classList.toggle('active', open);
+            mobileNav.setAttribute('aria-hidden', String(!open));
+            toggle.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', String(open));
+            document.body.classList.toggle('menu-open', open);
+            Array.prototype.forEach.call(document.body.children, function (el) {
+                if (el.contains(mobileNav) || el.contains(toggle) || el.classList.contains('consent-banner')) return;
+                el.inert = open;
+            });
+            if (open) {
+                const first = mobileNav.querySelector('a, button');
+                if (first) first.focus();
+            }
+        }
+        // The LP template's anchor-scroll handler closes the menu through this.
+        window.closeMobileMenu = function () { setOpen(false); };
 
         toggle.addEventListener('click', function () {
-            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-            toggle.setAttribute('aria-expanded', !isExpanded);
-
-            // Toggle mobile nav
-            if (mobileNav) {
-                mobileNav.classList.toggle('active');
-                mobileNav.setAttribute('aria-hidden', isExpanded);
-                if (isExpanded) {
-                    toggle.focus();
-                }
-            }
-
-            // Toggle regular nav menu on tablet
-            if (navMenu) {
-                navMenu.classList.toggle('active');
-            }
-
-            // Toggle body scroll
-            document.body.classList.toggle('menu-open');
-
-            // Animate hamburger icon
-            toggle.classList.toggle('active');
+            setOpen(toggle.getAttribute('aria-expanded') !== 'true');
         });
 
-        // Close menu on link click (except dropdown triggers)
-        const mobileLinks = document.querySelectorAll('.mobile-menu a, .nav-menu a');
-        mobileLinks.forEach(function (link) {
-            link.addEventListener('click', function () {
-                // Don't close menu if clicking a dropdown trigger
-                if (this.classList.contains('mobile-dropdown-trigger')) {
-                    return;
-                }
-                if (mobileNav) {
-                    mobileNav.classList.remove('active');
-                }
-                if (navMenu) {
-                    navMenu.classList.remove('active');
-                }
-                toggle.classList.remove('active');
-                toggle.setAttribute('aria-expanded', 'false');
-                document.body.classList.remove('menu-open');
-            });
+        // Close menu on link click (dropdown triggers are <button>s, so they're not matched)
+        mobileNav.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () { setOpen(false); });
         });
 
         // Close menu on escape key
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('active')) {
-                mobileNav.classList.remove('active');
-                if (navMenu) {
-                    navMenu.classList.remove('active');
-                }
-                toggle.classList.remove('active');
-                toggle.setAttribute('aria-expanded', 'false');
-                document.body.classList.remove('menu-open');
+            if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                setOpen(false);
                 toggle.focus();
             }
         });

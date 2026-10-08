@@ -258,7 +258,9 @@
      * Format phone number as user types
      */
     function formatPhoneNumber(input) {
-        let value = input.value.replace(/\D/g, '');
+        // US area codes never start with 1, so a leading 1 is always the country
+        // code ("+1 916…", autofill) — drop it before truncating, or the last digit is lost.
+        let value = input.value.replace(/\D/g, '').replace(/^1/, '');
 
         // Limit to 10 digits
         if (value.length > 10) {

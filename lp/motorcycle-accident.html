@@ -352,6 +352,8 @@ body {
     background: rgba(3, 53, 99, 0.98);
     z-index: 999;
     padding: 100px 24px 24px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     transform: translateX(-100%);
     transition: transform var(--transition-base);
 }
@@ -474,9 +476,6 @@ body.menu-open {
         flex-direction: column;
         padding: var(--spacing-lg);
         box-shadow: var(--shadow-lg);
-    }
-.nav-menu.active {
-        display: flex;
     }
 .main-navigation {
         margin-left: auto;
@@ -3489,8 +3488,8 @@ h1,
     </div>
 </footer>
 
-<script src="../js/main.min.js?v=20260922" defer></script>
-<script src="../js/consent.min.js?v=20260928" defer></script>
+<script src="../js/main.min.js?v=20261007" defer></script>
+<script src="../js/consent.min.js?v=20261007" defer></script>
 <script>
 (function() {
     'use strict';
@@ -3520,12 +3519,8 @@ h1,
                 window.scrollTo({ top: targetPosition, behavior: motionOk ? 'smooth' : 'auto' });
                 // Close mobile menu if open
                 var mobileNav = document.getElementById('mobile-nav');
-                var mobileToggle = document.getElementById('mobile-menu-toggle');
-                if (mobileNav && mobileNav.classList.contains('active')) {
-                    mobileNav.classList.remove('active');
-                    mobileToggle.classList.remove('active');
-                    mobileToggle.setAttribute('aria-expanded', 'false');
-                    mobileNav.setAttribute('aria-hidden', 'true');
+                if (mobileNav && mobileNav.classList.contains('active') && window.closeMobileMenu) {
+                    window.closeMobileMenu();
                 }
             }
         });
@@ -3535,15 +3530,15 @@ h1,
 
     // Validation patterns
     var patterns = {
-        name: /^[a-zA-Z\s\-']{2,100}$/,
-        email: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-        phone: /^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
+        // Any script's letters: José, Nguyễn and Ольга are real leads.
+        name: /^[\p{L}\p{M}\s.'-]{2,100}$/u,
+        email: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
     };
 
     // Error messages
     var errorMessages = {
         required: 'This field is required',
-        name: 'Please enter a valid name (letters only)',
+        name: 'Please enter your name',
         email: 'Please enter a valid email address',
         phone: 'Please enter a valid phone number',
         messageRequired: 'Please tell us how we can help',
@@ -3552,7 +3547,9 @@ h1,
 
     // Phone formatting
     function formatPhone(value) {
-        var digits = value.replace(/\D/g, '');
+        // US area codes never start with 1, so a leading 1 is the country code
+        // ("+1 916…", autofill) — drop it before truncating, or the last digit is lost.
+        var digits = value.replace(/\D/g, '').replace(/^1/, '');
         if (digits.length > 10) digits = digits.substring(0, 10);
         if (digits.length === 0) return '';
         if (digits.length <= 3) return '(' + digits;
@@ -3621,7 +3618,7 @@ h1,
                 return false;
             }
         } else if (type === 'tel') {
-            var digits = value.replace(/\D/g, '');
+            var digits = value.replace(/\D/g, '').replace(/^1/, '');
             if (digits.length > 0 && digits.length !== 10) {
                 showError(input, errorMessages.phone);
                 return false;

@@ -92,7 +92,10 @@
     }
 
     function handleKeydown(e) {
-        if (e.key === 'Escape' && banner) {
+        // Only when the key was pressed inside the banner — Esc elsewhere (closing the
+        // mobile menu, the contact modal) must not silently record "Reject All". e.target,
+        // not activeElement: the modal's own Esc handler may have just moved focus here.
+        if (e.key === 'Escape' && banner && banner.contains(e.target)) {
             handleReject();
         }
     }

@@ -872,6 +872,8 @@ body {
     background: rgba(3, 53, 99, 0.98);
     z-index: 999;
     padding: 100px 24px 24px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     transform: translateX(-100%);
     transition: transform var(--transition-base);
 }
@@ -1027,9 +1029,6 @@ body.menu-open {
         box-shadow: var(--shadow-lg);
     }
 
-    .nav-menu.active {
-        display: flex;
-    }
 
     /* Ensure header elements fit on tablet */
     .main-navigation {
@@ -1703,7 +1702,9 @@ body.menu-open {
     background: var(--white);
     border: 2px solid #e5e7eb;
     border-radius: var(--radius-md);
-    transition: all 0.3s ease;
+    /* Not `all`: visibility is inherited, so `all` animated the modal's open and
+       left fields un-focusable for 0.3s after it appeared. */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .form-input:focus,
@@ -3137,6 +3138,9 @@ body.components-loaded {
 .contact-modal-overlay.active {
     opacity: 1;
     visibility: visible;
+    /* Visibility flips instantly on open so openModal() can focus the first field;
+       an interpolated visibility is still "hidden" at that moment and focus() is refused. */
+    transition: opacity var(--transition-base), visibility 0s;
 }
 
 .contact-modal {

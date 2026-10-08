@@ -283,6 +283,8 @@ body {
     background: rgba(3, 53, 99, 0.98);
     z-index: 999;
     padding: 100px 24px 24px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     transform: translateX(-100%);
     transition: transform var(--transition-base);
 }
@@ -405,9 +407,6 @@ body.menu-open {
         flex-direction: column;
         padding: var(--spacing-lg);
         box-shadow: var(--shadow-lg);
-    }
-.nav-menu.active {
-        display: flex;
     }
 .main-navigation {
         margin-left: auto;

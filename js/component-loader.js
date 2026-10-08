@@ -380,13 +380,23 @@
 
         var modalTriggerElement = null;
 
+        // Everything behind the open modal is inert, so Tab stays inside it.
+        var setBackgroundInert = function(on) {
+            Array.prototype.forEach.call(document.body.children, function(el) {
+                if (!el.contains(overlay) && !el.classList.contains('consent-banner')) el.inert = on;
+            });
+        };
+
         // Open modal
         var openModal = function() {
             modalTriggerElement = document.activeElement;
             overlay.classList.add('active');
             overlay.setAttribute('aria-hidden', 'false');
             document.body.classList.add('modal-open');
-            var firstInput = modal.querySelector('input:not([type="hidden"])');
+            setBackgroundInert(true);
+            // Skip the honeypot: it's a visible-to-DOM text input hidden by CSS, so it
+            // matched first and focus never actually entered the modal.
+            var firstInput = modal.querySelector('input:not([type="hidden"]):not([name="bot-field"])');
             if (firstInput) firstInput.focus({ preventScroll: true });
         };
 
@@ -409,6 +419,7 @@
             overlay.classList.remove('active');
             overlay.setAttribute('aria-hidden', 'true');
             document.body.classList.remove('modal-open');
+            setBackgroundInert(false);
             if (modalTriggerElement && modalTriggerElement.focus) {
                 modalTriggerElement.focus();
             }
