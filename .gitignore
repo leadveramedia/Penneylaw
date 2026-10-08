@@ -49,3 +49,7 @@ images/logos/Frank Penney Logo pink 2026.pdf
 
 # Markdown copies for agents, generated on Netlify by scripts/build-markdown.js
 /md/
+
+# Local Claude Code / Playwright MCP tooling (config + session logs), not site files
+.mcp.json
+.playwright-mcp/
