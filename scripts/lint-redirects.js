@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // Static lint for netlify.toml redirects.
-// Catches the redirect-loop pattern caused by Netlify's pretty-URL aliasing:
+// Catches redirects whose target isn't a real page (in sitemap.xml or a static file) —
+// they land on a 404 or a soft 404 and throw away whatever the old URL had earned.
+// Also catches the redirect-loop pattern caused by Netlify's pretty-URL aliasing:
 //   [[redirects]] from = "/foo" to = "/foo/" force = true
 // With force=true, the rule matches BOTH /foo and /foo/ (aliasing), so /foo/
 // redirects to /foo/, which re-matches → infinite 301 chain.
@@ -10,6 +12,7 @@ const path = require('path');
 
 const REPO_ROOT = path.join(__dirname, '..');
 const NETLIFY_TOML = path.join(REPO_ROOT, 'netlify.toml');
+const SITEMAP = path.join(REPO_ROOT, 'sitemap.xml');
 
 function parseRedirects(content) {
     const lines = content.split('\n');
@@ -61,6 +64,21 @@ function normalizeSlash(p) {
     return p.replace(/\/+$/, '');
 }
 
+function knownUrls() {
+    if (!fs.existsSync(SITEMAP)) return new Set();
+    const xml = fs.readFileSync(SITEMAP, 'utf-8');
+    return new Set([...xml.matchAll(/<loc>https:\/\/penneylaw\.com([^<]*)<\/loc>/g)].map((m) => normalizeSlash(m[1]) || '/'));
+}
+
+function targetExists(to, known) {
+    if (/^https?:/.test(to) || /[*:]/.test(to)) return true; // external, splat or placeholder
+    const p = to.split(/[?#]/)[0];
+    if (known.has(normalizeSlash(p) || '/')) return true;
+    const rel = p.replace(/^\//, '');
+    return [rel + '.html', path.join(rel, 'index.html'), rel]
+        .some((f) => f && fs.existsSync(path.join(REPO_ROOT, f)) && fs.statSync(path.join(REPO_ROOT, f)).isFile());
+}
+
 function main() {
     if (!fs.existsSync(NETLIFY_TOML)) {
         console.error(`lint-redirects: ${NETLIFY_TOML} not found`);
@@ -73,9 +91,19 @@ function main() {
     const errors = [];
     const warnings = [];
     const seenFrom = new Map();
+    const known = knownUrls();
 
     for (const r of redirects) {
         if (!r.from || !r.to) continue;
+
+        const status = r.status || 301;
+        if (status >= 300 && status < 400 && !targetExists(r.to, known)) {
+            errors.push({
+                line: r.startLine,
+                rule: r,
+                message: `Target "${r.to}" is not in sitemap.xml and no file serves it, so this redirect lands on a 404 or soft 404. Point it at a live page.`,
+            });
+        }
 
         const fromN = normalizeSlash(r.from);
         const toN = normalizeSlash(r.to);
