@@ -503,7 +503,7 @@ export default async (request, context) => {
             image: imageUrl,
             url: postUrl,
             author: author && author.url
-                ? { '@type': 'Person', name: author.name, url: SITE + author.url, worksFor: { '@id': FIRM['@id'] } }
+                ? { '@type': 'Person', '@id': SITE + author.url + '#person', name: author.name, url: SITE + author.url, worksFor: { '@id': FIRM['@id'] } }
                 : FIRM,
             datePublished: story.first_published_at || story.created_at || null,
             dateModified: story.published_at || story.first_published_at || story.created_at || null,

@@ -19,7 +19,7 @@ const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'lp-source');
 const OUT = path.join(ROOT, 'lp');
 const CRITICAL_CSS = path.join(ROOT, 'lp-source/critical.css');
-const SITE_URL = 'https://www.penneylaw.com';
+const SITE_URL = 'https://penneylaw.com'; // non-www, the canonical host everywhere else
 
 // Six office locations — fed into LegalService.areaServed and emitted as 6 LocalBusiness blocks.
 // Sacramento ZIP and geo coords for non-Roseville offices are TODOs (see lp-improvement-plan).
@@ -60,11 +60,11 @@ function buildLegalService() {
         name: 'Frank Penney Injury Law',
         description: "Northern California's top-rated injury law firm with $1 Billion+ recovered for accident victims. No fee unless we win. Free consultation 24/7.",
         url: `${SITE_URL}/`,
-        logo: `${SITE_URL}/images/Logo-FrankPenny.png`,
-        image: `${SITE_URL}/images/Logo-FrankPenny.png`,
+        logo: `${SITE_URL}/images/logos/frank-penney-logo-pink-2026.png`,
+        image: `${SITE_URL}/images/logos/frank-penney-logo-pink-2026.png`,
         telephone: '+1-888-888-0566',
         priceRange: 'Free Consultation',
-        founder: { '@type': 'Person', name: 'Frank Penney' },
+        founder: { '@type': 'Person', '@id': `${SITE_URL}/frank-d-penney/#person`, name: 'Frank D. Penney' },
         foundingDate: '1995',
         slogan: 'Bank on Frank — No Fee Unless We Win',
         knowsLanguage: ['en', 'es'],
@@ -105,7 +105,7 @@ function buildLocalBusiness(office) {
 
     const block = {
         '@type': 'LocalBusiness',
-        '@id': `${SITE_URL}/#${office.id}`,
+        '@id': `${SITE_URL}/${office.id}#office`, // same id as the office's own city page
         name: `Frank Penney Injury Law — ${office.name}`,
         address,
         telephone: '+1-888-888-0566',
@@ -126,7 +126,7 @@ function buildLocalBusiness(office) {
 function buildService(config) {
     return {
         '@type': 'Service',
-        '@id': `${SITE_URL}/lp/${config.slug}.html#service`,
+        '@id': `${SITE_URL}/lp/${config.slug}#service`,
         serviceType: config.serviceType,
         name: config.serviceName,
         provider: { '@id': FIRM_ID },
@@ -146,7 +146,7 @@ function buildBreadcrumb(config) {
         '@type': 'BreadcrumbList',
         itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-            { '@type': 'ListItem', position: 2, name: config.breadcrumbName, item: `${SITE_URL}/lp/${config.slug}.html` }
+            { '@type': 'ListItem', position: 2, name: config.breadcrumbName, item: `${SITE_URL}/lp/${config.slug}` }
         ]
     };
 }
@@ -216,7 +216,8 @@ function buildTestimonialsHtml(testimonials) {
 
 function buildOne(template, config) {
     const lpPrefix = `lp-${config.slug}`;
-    const canonical = `${SITE_URL}/lp/${config.slug}.html`;
+    // Clean URL: /lp/x.html 301s to /lp/x, so the .html form was a redirecting canonical.
+    const canonical = `${SITE_URL}/lp/${config.slug}`;
     const schema = buildSchema(config);
     // Match the inline JSON-LD style: 4-space indent, leading newline.
     const schemaJson = '\n    ' + JSON.stringify(schema, null, 4).replace(/\n/g, '\n    ') + '\n    ';

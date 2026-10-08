@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
-    <link rel="stylesheet" href="/css/style.min.css?v=20261007c">
+    <link rel="stylesheet" href="/css/style.min.css?v=20261007d">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-2026-32.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/images/favicon/favicon-2026-512.png">
     <link rel="apple-touch-icon" sizes="512x512" href="/images/favicon/favicon-2026-512.png">
@@ -33,7 +33,7 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "LegalService",
+        "@type": "LegalService", "@id": "https://penneylaw.com/#firm",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "1508 Eureka Rd",
@@ -41,13 +41,6 @@
             "addressRegion": "CA",
             "postalCode": "95661",
             "addressCountry": "US"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "422",
-            "bestRating": "5",
-            "worstRating": "1"
         },
         "name": "Frank Penney Injury Law",
         "description": "Office and service-area locations for Frank Penney Injury Law across California. Free consultation. $1B+ recovered for injury victims.",
@@ -58,13 +51,13 @@
         "priceRange": "Free Consultation",
         "openingHours": "Mo-Su 00:00-23:59",
         "department": [
-            {"@type": "LegalService", "name": "Sacramento Office", "url": "https://penneylaw.com/sacramento", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "333 University Avenue, Suite 200", "addressLocality": "Sacramento", "addressRegion": "CA", "postalCode": "95825", "addressCountry": "US"}, "hasMap": "https://maps.app.goo.gl/hpfQD9uRYcKj9SJd6"},
-            {"@type": "LegalService", "name": "Roseville Office", "url": "https://penneylaw.com/roseville", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "1508 Eureka Rd", "addressLocality": "Roseville", "addressRegion": "CA", "postalCode": "95661", "addressCountry": "US"}, "hasMap": "https://share.google/OdklS74LpPOTcFPLI"},
-            {"@type": "LegalService", "name": "Stockton Office", "url": "https://penneylaw.com/stockton", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "5250 Claremont Avenue", "addressLocality": "Stockton", "addressRegion": "CA", "postalCode": "95207", "addressCountry": "US"}, "hasMap": "https://maps.app.goo.gl/XK5iLQGfAGom6tCLA"},
-            {"@type": "LegalService", "name": "Modesto Office", "url": "https://penneylaw.com/modesto", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "1111 J Street", "addressLocality": "Modesto", "addressRegion": "CA", "postalCode": "95354", "addressCountry": "US"}, "hasMap": "https://www.google.com/maps/search/?api=1&query=1111+J+Street+Modesto+CA+95354"},
-            {"@type": "LegalService", "name": "Chico Office", "url": "https://penneylaw.com/chico", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "1108 Sherman Ave", "addressLocality": "Chico", "addressRegion": "CA", "postalCode": "95926", "addressCountry": "US"}, "hasMap": "https://www.google.com/maps/search/?api=1&query=1108+Sherman+Ave+Chico+CA+95926"},
-            {"@type": "LegalService", "name": "Fairfield Office", "url": "https://penneylaw.com/fairfield", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "1652 West Texas Street, Suite 248", "addressLocality": "Fairfield", "addressRegion": "CA", "postalCode": "94533", "addressCountry": "US"}, "hasMap": "https://maps.app.goo.gl/anqPqAjWUVQQTDoE7"},
-            {"@type": "LegalService", "name": "Oakland Office", "url": "https://penneylaw.com/oakland", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "1300 Clay St, Suite 600", "addressLocality": "Oakland", "addressRegion": "CA", "postalCode": "94612", "addressCountry": "US"}, "hasMap": "https://www.google.com/maps/search/?api=1&query=1300+Clay+St+Suite+600+Oakland+CA+94612"}
+            {"@type": "LegalService", "@id": "https://penneylaw.com/sacramento#office", "name": "Sacramento Office", "url": "https://penneylaw.com/sacramento", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "333 University Avenue, Suite 200", "addressLocality": "Sacramento", "addressRegion": "CA", "postalCode": "95825", "addressCountry": "US"}, "hasMap": "https://maps.app.goo.gl/hpfQD9uRYcKj9SJd6"},
+            {"@type": "LegalService", "@id": "https://penneylaw.com/roseville#office", "name": "Roseville Office", "url": "https://penneylaw.com/roseville", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "1508 Eureka Rd", "addressLocality": "Roseville", "addressRegion": "CA", "postalCode": "95661", "addressCountry": "US"}, "hasMap": "https://share.google/OdklS74LpPOTcFPLI"},
+            {"@type": "LegalService", "@id": "https://penneylaw.com/stockton#office", "name": "Stockton Office", "url": "https://penneylaw.com/stockton", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "5250 Claremont Avenue", "addressLocality": "Stockton", "addressRegion": "CA", "postalCode": "95207", "addressCountry": "US"}, "hasMap": "https://maps.app.goo.gl/XK5iLQGfAGom6tCLA"},
+            {"@type": "LegalService", "@id": "https://penneylaw.com/modesto#office", "name": "Modesto Office", "url": "https://penneylaw.com/modesto", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "1111 J Street", "addressLocality": "Modesto", "addressRegion": "CA", "postalCode": "95354", "addressCountry": "US"}, "hasMap": "https://www.google.com/maps/search/?api=1&query=1111+J+Street+Modesto+CA+95354"},
+            {"@type": "LegalService", "@id": "https://penneylaw.com/chico#office", "name": "Chico Office", "url": "https://penneylaw.com/chico", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "1108 Sherman Ave", "addressLocality": "Chico", "addressRegion": "CA", "postalCode": "95926", "addressCountry": "US"}, "hasMap": "https://www.google.com/maps/search/?api=1&query=1108+Sherman+Ave+Chico+CA+95926"},
+            {"@type": "LegalService", "@id": "https://penneylaw.com/fairfield#office", "name": "Fairfield Office", "url": "https://penneylaw.com/fairfield", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "1652 West Texas Street, Suite 248", "addressLocality": "Fairfield", "addressRegion": "CA", "postalCode": "94533", "addressCountry": "US"}, "hasMap": "https://maps.app.goo.gl/anqPqAjWUVQQTDoE7"},
+            {"@type": "LegalService", "@id": "https://penneylaw.com/oakland#office", "name": "Oakland Office", "url": "https://penneylaw.com/oakland", "telephone": "+1-888-888-0566", "address": {"@type": "PostalAddress", "streetAddress": "1300 Clay St, Suite 600", "addressLocality": "Oakland", "addressRegion": "CA", "postalCode": "94612", "addressCountry": "US"}, "hasMap": "https://www.google.com/maps/search/?api=1&query=1300+Clay+St+Suite+600+Oakland+CA+94612"}
         ]
     }
     </script>
@@ -368,7 +361,7 @@
 <section class="section section-lg">
     <div class="container">
         <div class="text-center" style="max-width: 800px; margin: 0 auto;" data-reveal>
-            <p class="lead">Frank Penney Injury Law has grown to serve clients across California with 7 office locations and 4 statewide service areas. Whether you're in the Sacramento area, the Central Valley, the Bay Area, or Southern California, we're here to help.</p>
+            <p class="lead">Frank Penney Injury Law has grown to serve clients across California from 11 locations: 7 offices and 4 statewide service areas. Whether you're in the Sacramento area, the Central Valley, the Bay Area, or Southern California, we're here to help.</p>
         </div>
     </div>
 </section>

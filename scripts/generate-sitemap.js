@@ -9,6 +9,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 const fetch = require('node-fetch');
 
 const SITE_URL = 'https://penneylaw.com';
@@ -129,6 +130,33 @@ function getPageConfig(filename) {
     return { priority: '0.5', changefreq: 'monthly' };
 }
 
+// lastmod values already in the committed sitemap, for the fallback below.
+function previousLastmods() {
+    const out = {};
+    if (!fs.existsSync(OUTPUT_FILE)) return out;
+    const xml = fs.readFileSync(OUTPUT_FILE, 'utf8');
+    for (const m of xml.matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)) out[m[1]] = m[2];
+    return out;
+}
+const PREVIOUS_LASTMOD = previousLastmods();
+const TODAY = new Date().toISOString().split('T')[0];
+
+/**
+ * Date of the last commit touching a page. File mtimes were useless: a Netlify
+ * checkout stamps every file with the clone time, so all static URLs claimed a
+ * change on every deploy and Google learns to ignore lastmod. Falls back to the
+ * committed sitemap's value (no git / shallow history), then to today.
+ */
+function gitLastmod(relPath, loc) {
+    try {
+        const out = execFileSync('git', ['log', '-1', '--format=%cs', '--', relPath], {
+            cwd: ROOT_DIR, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
+        }).trim();
+        if (out) return out;
+    } catch (err) { /* no git available — fall through */ }
+    return PREVIOUS_LASTMOD[loc] || TODAY;
+}
+
 function getStaticPages() {
     const files = fs.readdirSync(ROOT_DIR);
     const pages = [];
@@ -147,7 +175,7 @@ function getStaticPages() {
             ? SITE_URL + '/'
             : SITE_URL + '/' + file.replace(/\.html$/, '');
 
-        const lastmod = stat.mtime.toISOString().split('T')[0];
+        const lastmod = gitLastmod(file, loc);
         const config = getPageConfig(file);
 
         pages.push({
@@ -171,10 +199,9 @@ function getStaticPages() {
             if (!fs.existsSync(fullPath)) continue;
             const fullUrl = SITE_URL + alt.loc;
             if (enLocs.has(fullUrl)) continue;
-            const stat = fs.statSync(fullPath);
             pages.push({
                 loc: fullUrl,
-                lastmod: stat.mtime.toISOString().split('T')[0],
+                lastmod: gitLastmod(path.relative(ROOT_DIR, fullPath), fullUrl),
                 changefreq: 'monthly',
                 priority: '0.8',
             });
@@ -292,7 +319,6 @@ async function main() {
 
     const staticPages = getStaticPages();
 
-    const today = new Date().toISOString().split('T')[0];
 
     // Note: bare /{city}/ URLs are intentionally excluded. Netlify pretty-URL handling
     // resolves them to the static /{city}.html landing page, so listing both forms in
@@ -306,14 +332,14 @@ async function main() {
     // to it — the same shape as the attorney bios below.
     const locationsPage = [{
         loc: `${SITE_URL}/locations/`,
-        lastmod: today,
+        lastmod: gitLastmod('locations/index.html', `${SITE_URL}/locations/`),
         changefreq: 'monthly',
         priority: '0.8',
     }];
 
     const attorneyPages = ATTORNEY_SLUGS.map((slug) => ({
         loc: `${SITE_URL}/${slug}/`,
-        lastmod: today,
+        lastmod: gitLastmod(`${slug}/index.html`, `${SITE_URL}/${slug}/`),
         changefreq: 'monthly',
         priority: '0.6',
     }));

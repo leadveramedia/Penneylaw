@@ -2609,6 +2609,18 @@ body.menu-open {
     margin: 0 auto;
 }
 
+/* Attorney-review byline (scripts/build-components.js); sits on the navy header/hero */
+.page-review {
+    margin: var(--spacing-md) 0 0;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.page-review a {
+    color: var(--white);
+    text-decoration: underline;
+}
+
 @media (max-width: 768px) {
     .page-header {
         padding: 30px 0 25px;

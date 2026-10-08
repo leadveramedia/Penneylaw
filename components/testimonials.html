@@ -2,14 +2,12 @@
 <!--
   Real, individually attributable Google reviews shown in a horizontal,
   scroll-snap carousel (3 visible at a time on desktop). Each .testimonial-text
-  block is a verbatim excerpt of the client's review and is kept IDENTICAL to
-  the matching Review JSON-LD on the homepage (index.html LegalService "review"
-  array, same order). If you edit a quote here, update the corresponding
-  reviewBody there so structured data matches visible text.
-  DO NOT add aggregateRating JSON-LD for the firm's own rating (Google policy
-  + CA Bar considerations). Carousel buttons are wired by initTestimonialsCarousel()
-  in main.js. Loaded by component-loader.js into any page containing
-  <div id="testimonials-placeholder"></div>.
+  block is a verbatim excerpt of the client's review.
+  DO NOT add Review or aggregateRating JSON-LD for the firm's own reviews: Google
+  doesn't show stars for a business reviewing itself, and markup that drifts from
+  the visible text risks a manual action (removed Oct 2026). Carousel buttons are
+  wired by initTestimonialsCarousel() in main.js. Written into each page containing
+  <div id="testimonials-placeholder"></div> by scripts/build-components.js.
 -->
 <section class="section bg-light testimonials" aria-labelledby="reviews-heading">
     <div class="container">
