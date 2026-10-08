@@ -149,12 +149,21 @@ function stripBlock(html) {
 
         // Sorted by title so the output is deterministic: publish-date order would
         // reshuffle the block on unrelated CMS edits and churn the committed diff.
-        const posts = (await fetchStoriesFromFolder(folder, {
-            mapStory: (s) => ({
-                slug: s.slug,
-                title: String((s.content && s.content.title) || s.name || s.slug).trim(),
-            }),
-        })).sort((a, b) => a.title.localeCompare(b.title));
+        let posts;
+        try {
+            posts = (await fetchStoriesFromFolder(folder, {
+                mapStory: (s) => ({
+                    slug: s.slug,
+                    title: String((s.content && s.content.title) || s.name || s.slug).trim(),
+                }),
+            })).sort((a, b) => a.title.localeCompare(b.title));
+        } catch (err) {
+            // Storyblok failed: leave the committed block alone rather than stripping
+            // every archive link from the deploy.
+            console.warn(`::warning::${file}: ${err.message} — keeping the existing archive block`);
+            skipped++;
+            continue;
+        }
 
         const html = fs.readFileSync(full, 'utf8');
 

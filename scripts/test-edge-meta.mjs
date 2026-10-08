@@ -10,7 +10,7 @@
  *     escaped description containing "$<" broke out of the attribute.
  */
 import assert from 'node:assert/strict';
-import { injectMeta, escapeAttr, extractTextSnippet, injectRelatedPosts } from '../netlify/edge-functions/blog-meta.js';
+import { injectMeta, escapeAttr, extractTextSnippet, injectRelatedPosts, statusForStoryblok } from '../netlify/edge-functions/blog-meta.js';
 
 const rich = (s) => ({ content: [{ content: [{ type: 'text', text: s }] }] });
 
@@ -116,5 +116,13 @@ assert.equal(extractTextSnippet(rich('x'.repeat(200))), 'x'.repeat(157) + '...')
     assert.equal(countOf(tricky, '>Damages under $&lt;25,000 &amp; "more"</h3>'), 1);
     assert.equal(countOf(tricky, 'aria-label="Read: Damages under $&lt;25,000 &amp; &quot;more&quot;"'), 1);
 }
+
+// A missing story is a real 404; any other Storyblok failure must be a 503, never a
+// 200 + noindex — that de-indexed live posts whenever Storyblok blipped mid-crawl.
+assert.equal(statusForStoryblok(200), 200);
+assert.equal(statusForStoryblok(404), 404);
+assert.equal(statusForStoryblok(429), 503);
+assert.equal(statusForStoryblok(500), 503);
+assert.equal(statusForStoryblok(401), 503);
 
 console.log('test-edge-meta: all assertions passed');

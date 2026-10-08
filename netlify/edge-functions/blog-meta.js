@@ -9,8 +9,9 @@
  * Responses carry a CDN cache header so the synchronous Storyblok fetch isn't
  * paid on every request (these pages measured 981ms TTFB uncached).
  *
- * On failure, sets a self-canonical and adds noindex so a broken render
- * isn't deduped to the homepage by Google.
+ * A story Storyblok doesn't have is a real 404. Any other failure (5xx, 429,
+ * network, bad JSON) is a 503 with Retry-After, so a Storyblok blip while
+ * Googlebot crawls reads as "come back later" instead of de-indexing live posts.
  *
  * Runs on Deno (Netlify Edge Functions runtime).
  */
@@ -52,9 +53,10 @@ const DEFAULT_OG_IMAGE = 'https://penneylaw.com/images/favicon/social-preview-20
 // lower it, or add an on-publish cache purge, if editors need faster turnaround.
 const BROWSER_CACHE = 'public, max-age=0, must-revalidate';
 const CDN_CACHE = 'public, s-maxage=3600, stale-while-revalidate=86400';
-// Failed renders are noindex'd; keep them out of cache long enough to shed load
-// during a Storyblok outage but short enough that recovery is near-immediate.
-const CDN_CACHE_FALLBACK = 'public, s-maxage=60';
+// Missing posts stay missing for a while; a short TTL so a just-published slug
+// that was requested early isn't stuck as a 404.
+const CDN_CACHE_NOT_FOUND = 'public, s-maxage=300';
+const RETRY_AFTER_SECONDS = '120';
 
 /**
  * Build the response with CDN caching.
@@ -170,6 +172,13 @@ export default async (request, context) => {
         return context.next();
     }
 
+    // One URL per post: /blog/slug/ → /blog/slug (the canonical form).
+    if (path.endsWith('/')) {
+        const target = new URL(url);
+        target.pathname = path.replace(/\/+$/, '');
+        return Response.redirect(target.toString(), 301);
+    }
+
     // The related-posts folder is the first path segment for every content type:
     // 'blog', 'accident-news', or the city name.
     const relatedFolder = slug.split('/')[0];
@@ -182,8 +191,13 @@ export default async (request, context) => {
             fetchRelated(relatedFolder, slug),
         ]);
 
-        if (!storyResponse.ok) {
-            return await fallbackResponse(context, url);
+        const outcome = statusForStoryblok(storyResponse.status);
+        if (outcome === 404) {
+            return await notFoundResponse(url);
+        }
+        if (outcome === 503) {
+            console.error(`Storyblok ${slug} returned ${storyResponse.status}`);
+            return await unavailableResponse(context);
         }
 
         const storyData = await storyResponse.json();
@@ -268,44 +282,41 @@ export default async (request, context) => {
 
     } catch (error) {
         console.error('Edge function error:', error);
-        return await fallbackResponse(context, url);
+        return await unavailableResponse(context);
     }
 };
 
-async function fallbackResponse(context, url) {
-    // EF couldn't render the page (Storyblok unavailable, story missing, etc.).
-    // Set self-canonical to the requested URL and noindex so Google doesn't
-    // dedupe the placeholder shell to the homepage.
-    const response = await context.next();
-    if (response.status >= 300 && response.status < 400) {
-        return response;
-    }
-    const html = await response.text();
-    // Force the canonical host to non-www (the site's primary domain) so a
-    // direct-to-www edge invocation can't leak a www self-canonical.
-    const selfCanonical = 'https://penneylaw.com' + url.pathname;
+/**
+ * Storyblok has no such story: serve the site's 404 page with a real 404 status
+ * (previously a 200 + noindex shell — a soft 404).
+ */
+async function notFoundResponse(url) {
+    const page = await fetch(new URL('/404.html', url));
+    const headers = new Headers({ 'Content-Type': 'text/html; charset=utf-8' });
+    headers.set('Cache-Control', BROWSER_CACHE);
+    headers.set('Netlify-CDN-Cache-Control', CDN_CACHE_NOT_FOUND);
+    return new Response(await page.text(), { status: 404, headers });
+}
 
-    let modifiedHtml = html;
-    // sub() matters here: url.pathname is request-controlled and keeps "$" and "&"
-    // literal, so a request for /blog/$&x would otherwise re-inject the matched tag.
-    modifiedHtml = sub(
-        modifiedHtml,
-        /<link rel="canonical" href="[^"]*">/,
-        `<link rel="canonical" href="${escapeAttr(selfCanonical)}">`
-    );
-    // Replace existing robots meta if present, otherwise add one before </head>
-    if (/<meta name="robots" content="[^"]*">/.test(modifiedHtml)) {
-        modifiedHtml = modifiedHtml.replace(
-            /<meta name="robots" content="[^"]*">/,
-            '<meta name="robots" content="noindex, follow">'
-        );
-    } else {
-        modifiedHtml = modifiedHtml.replace(
-            '</head>',
-            '    <meta name="robots" content="noindex, follow">\n</head>'
-        );
-    }
-    return cachedResponse(modifiedHtml, response, CDN_CACHE_FALLBACK);
+/**
+ * Storyblok failed (5xx, 429, network, bad JSON): 503 + Retry-After, never cached,
+ * never noindex. The shell still ships its own noindex, which a 503 doesn't expose.
+ */
+async function unavailableResponse(context) {
+    const response = await context.next();
+    const headers = new Headers(response.headers);
+    headers.set('Cache-Control', 'no-store');
+    headers.set('Netlify-CDN-Cache-Control', 'no-store');
+    headers.set('Retry-After', RETRY_AFTER_SECONDS);
+    return new Response(await response.text(), { status: 503, headers });
+}
+
+/**
+ * Exported for scripts/test-edge-meta.mjs: what a Storyblok story response maps to.
+ */
+export function statusForStoryblok(status) {
+    if (status === 404) return 404;
+    return status >= 200 && status < 300 ? 200 : 503;
 }
 
 // Exported for scripts/test-edge-meta.mjs. Netlify only uses the default export + config.
@@ -406,6 +417,11 @@ export function escapeAttr(str) {
 }
 
 export const config = {
+    // Required for Netlify to honour Netlify-CDN-Cache-Control on edge responses;
+    // without it every post paid the ~1s Storyblok round-trip on every request.
+    cache: "manual",
+    // The single declaration of these paths — netlify.toml no longer repeats them
+    // (a toml declaration would take precedence and drop `cache`).
     // Only intercept trailing-slash + slug paths. Bare /sacramento (no slash) is the static
     // sacramento.html landing page and must be left out — the edge function has no business
     // rewriting meta on a hand-authored location page.

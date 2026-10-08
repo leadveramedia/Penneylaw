@@ -205,6 +205,10 @@ function cmsDateLastmod(story) {
 /**
  * Page through a Storyblok folder and map each story to whatever the caller needs.
  *
+ * Throws on any Storyblok failure. It used to return [] — so one 429 mid-build
+ * silently shipped a sitemap (and archive blocks) with every CMS URL missing.
+ * Callers decide what "keep the last good version" means for them.
+ *
  * `mapStory` is optional and exists so scripts/build-archives.js can ask for slugs +
  * titles instead of sitemap entries, without duplicating the pagination and 429
  * back-off below. Omit it and you get the sitemap entry shape.
@@ -221,38 +225,32 @@ async function fetchStoriesFromFolder(prefix, opts) {
     let page = 1;
     const perPage = 100;
 
-    try {
-        while (true) {
-            const url = `${STORYBLOK_API}/stories?token=${STORYBLOK_TOKEN}&version=published` +
-                `&starts_with=${encodeURIComponent(prefix)}&is_startpage=false` +
-                `&per_page=${perPage}&page=${page}`;
-            let response = await fetch(url);
+    while (true) {
+        const url = `${STORYBLOK_API}/stories?token=${STORYBLOK_TOKEN}&version=published` +
+            `&starts_with=${encodeURIComponent(prefix)}&is_startpage=false` +
+            `&per_page=${perPage}&page=${page}`;
+        let response = await fetch(url);
 
-            // Storyblok's CDN has a short-burst rate limit; back off once on 429.
-            if (response.status === 429) {
-                await new Promise((resolve) => setTimeout(resolve, 2000));
-                response = await fetch(url);
-            }
-
-            if (!response.ok) {
-                console.warn(`Storyblok ${prefix} returned ${response.status} — skipping`);
-                return [];
-            }
-
-            const data = await response.json();
-            if (!data.stories || data.stories.length === 0) break;
-
-            for (const story of data.stories) {
-                posts.push(toEntry(story));
-            }
-
-            const total = parseInt(response.headers.get('Total'), 10) || 0;
-            if (page * perPage >= total) break;
-            page++;
+        // Storyblok's CDN has a short-burst rate limit; back off once on 429.
+        if (response.status === 429) {
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+            response = await fetch(url);
         }
-    } catch (err) {
-        console.warn(`Failed to fetch ${prefix} from Storyblok:`, err.message);
-        return [];
+
+        if (!response.ok) {
+            throw new Error(`Storyblok ${prefix} returned ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (!data.stories || data.stories.length === 0) break;
+
+        for (const story of data.stories) {
+            posts.push(toEntry(story));
+        }
+
+        const total = parseInt(response.headers.get('Total'), 10) || 0;
+        if (page * perPage >= total) break;
+        page++;
     }
 
     return posts;
@@ -321,6 +319,16 @@ async function main() {
     }));
 
     // Fetch serially to avoid tripping Storyblok's burst rate limit (429s).
+    // Any Storyblok failure keeps the committed sitemap.xml as-is: a sitemap missing
+    // all ~138 CMS URLs is far worse than one that's a deploy behind.
+    try {
+        await writeSitemap(staticPages, cityListings, locationsPage, attorneyPages);
+    } catch (err) {
+        console.warn(`::warning::Storyblok unavailable (${err.message}) — keeping the existing sitemap.xml unchanged.`);
+    }
+}
+
+async function writeSitemap(staticPages, cityListings, locationsPage, attorneyPages) {
     const blogPosts = await fetchStoriesFromFolder('blog/', {
         buildUrl: (s) => `${SITE_URL}/blog/${s.slug}`,
         getLastmod: blogLastmod,

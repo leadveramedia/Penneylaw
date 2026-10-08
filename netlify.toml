@@ -2796,48 +2796,8 @@
   status = 200
   force = false
 
-# Edge function for blog post meta tag injection
-[[edge_functions]]
-  function = "blog-meta"
-  path = "/blog/*"
-
-# Edge function for accident news post meta tag injection
-[[edge_functions]]
-  function = "blog-meta"
-  path = "/accident-news/*"
-
-# Edge functions for city article meta tag injection
-[[edge_functions]]
-  function = "blog-meta"
-  path = "/sacramento/*"
-
-[[edge_functions]]
-  function = "blog-meta"
-  path = "/roseville/*"
-
-[[edge_functions]]
-  function = "blog-meta"
-  path = "/stockton/*"
-
-[[edge_functions]]
-  function = "blog-meta"
-  path = "/modesto/*"
-
-[[edge_functions]]
-  function = "blog-meta"
-  path = "/oakland/*"
-
-[[edge_functions]]
-  function = "blog-meta"
-  path = "/redding/*"
-
-[[edge_functions]]
-  function = "blog-meta"
-  path = "/chico/*"
-
-[[edge_functions]]
-  function = "blog-meta"
-  path = "/fairfield/*"
+# Edge function paths for blog-meta live in its inline `config` (netlify/edge-functions/blog-meta.js),
+# which also sets cache: "manual". Don't redeclare them here — a toml declaration takes precedence.
 
 # Form notifications - Netlify will automatically detect forms with data-netlify="true"
 # Configure email notifications in Netlify Dashboard under Forms > Form Notifications
