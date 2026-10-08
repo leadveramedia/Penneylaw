@@ -4551,6 +4551,10 @@ body.modal-open {
     -webkit-overflow-scrolling: touch;
     /* top/side padding leaves room for card shadows; bottom for the scrollbar */
     padding: 6px 6px var(--spacing-sm);
+    /* Matches the side padding so the first card already sits on its snap point.
+       Without it the browser snap-scrolls 6px on load, Chrome counts that as a scroll,
+       and stops reporting LCP for the page (/ and /car-accidents showed NO_LCP). */
+    scroll-padding-inline: 6px;
     scrollbar-width: thin;
     scrollbar-color: var(--pastel-azure) transparent;
 }
