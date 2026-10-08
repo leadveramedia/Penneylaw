@@ -75,7 +75,7 @@ const LOCATION_FILES = new Set([
     'san-diego.html',
 ]);
 
-// Cities with Storyblok-backed content (mirrors CITY_NAMES in js/city.js)
+// Cities with Storyblok-backed content (mirrors CITY_FOLDERS in netlify/edge-functions/blog-meta.js)
 const CITY_SLUGS = [
     'sacramento', 'roseville', 'stockton', 'modesto',
     'oakland', 'redding', 'chico', 'fairfield',

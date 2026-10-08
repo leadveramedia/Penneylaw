@@ -27,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="/css/style.min.css?v=20261007c">
-    <link rel="stylesheet" href="/css/blog.min.css?v=20261007">
+    <link rel="stylesheet" href="/css/blog.min.css?v=20261007b">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-2026-32.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/images/favicon/favicon-2026-512.png">
     <link rel="apple-touch-icon" sizes="512x512" href="/images/favicon/favicon-2026-512.png">
@@ -44,7 +44,7 @@
 
 <main id="main-content" class="site-main">
 
-<!-- Breadcrumbs (JS populates city and post title) -->
+<!-- Breadcrumbs (the edge function fills in the city and post title) -->
 <nav class="breadcrumbs" aria-label="Breadcrumb">
     <div class="container">
         <ol class="breadcrumbs-list" id="city-post-breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -53,38 +53,26 @@
                 <meta itemprop="position" content="1">
             </li>
             <li class="breadcrumbs-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <a href="#" class="breadcrumbs-link" id="city-post-breadcrumb-city" itemprop="item"><span itemprop="name">Loading...</span></a>
+                <a href="#" class="breadcrumbs-link" id="city-post-breadcrumb-city" itemprop="item"><span itemprop="name">Article</span></a>
                 <meta itemprop="position" content="2">
             </li>
             <li class="breadcrumbs-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <span class="breadcrumbs-current" id="city-post-breadcrumb-title" itemprop="name">Loading...</span>
+                <span class="breadcrumbs-current" id="city-post-breadcrumb-title" itemprop="name">Article</span>
                 <meta itemprop="position" content="3">
             </li>
         </ol>
     </div>
 </nav>
 
-<!-- Post Content (populated by JS) -->
-<article id="city-post-content" class="blog-post" aria-live="polite">
-    <!-- SSR placeholder (edge function injects real H1 + excerpt on success; sr-only so users see the skeleton) -->
-    <div class="ssr-post-header sr-only">
-        <h1 class="ssr-post-title">Loading article…</h1>
-        <p class="ssr-post-excerpt"></p>
-    </div>
-    <!-- Loading skeleton -->
-    <div id="city-post-loading" class="container blog-post-layout">
-        <div class="blog-post-main">
-            <div class="skeleton skeleton-title"></div>
-            <div class="skeleton skeleton-meta"></div>
-            <div class="skeleton skeleton-image-lg"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text-short"></div>
-        </div>
+<!-- Post content: rendered server-side by netlify/edge-functions/blog-meta.js.
+     This placeholder only shows if the edge returns 503 (Storyblok unavailable). -->
+<article id="city-post-content" class="blog-post">
+    <div class="container blog-post-unavailable">
+        <p>This article is temporarily unavailable. Please refresh in a minute, or call <a href="tel:8888880566">(888) 888-0566</a>.</p>
     </div>
 </article>
 
-<!-- Related Posts Section (populated by JS) -->
+<!-- Related Posts Section (filled by the edge function) -->
 <section id="city-related-posts" class="section section-lg bg-light" hidden>
     <div class="container">
         <div class="section-header">
@@ -95,14 +83,6 @@
     </div>
 </section>
 
-<!-- Error State -->
-<div id="city-post-error" class="container" hidden>
-    <div class="blog-post-not-found">
-        <h2>Article Not Found</h2>
-        <p>The article you are looking for could not be found.</p>
-        <a href="/" class="btn btn-primary" id="city-post-error-back">Back to Articles</a>
-    </div>
-</div>
 
 <div id="cta-placeholder"></div>
 
@@ -111,6 +91,5 @@
 <div id="footer-placeholder"></div>
 
 <script src="/js/bundle.min.js?v=20261007c" defer></script>
-<script src="/js/city.min.js?v=20261007b" defer></script>
 </body>
 </html>

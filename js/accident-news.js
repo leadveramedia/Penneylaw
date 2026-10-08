@@ -17,7 +17,6 @@
     var STORYBLOK_API = 'https://api.storyblok.com/v2/cdn';
     var STORYBLOK_VERSION = window.location.search.indexOf('_storyblok') !== -1 ? 'draft' : 'published';
     var POSTS_PER_PAGE = 9;
-    var RELATED_POSTS_COUNT = 3;
     var CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
     // ==========================================
@@ -166,105 +165,9 @@
             });
     }
 
-    function fetchStory(fullSlug) {
-        var url = STORYBLOK_API + '/stories/' + fullSlug + '?token=' + STORYBLOK_TOKEN + '&version=' + STORYBLOK_VERSION;
-
-        var cacheKey = 'sb_story_' + fullSlug;
-        var cached = getCachedResponse(cacheKey);
-        if (cached) {
-            return Promise.resolve(cached);
-        }
-
-        return fetch(url)
-            .then(function (response) {
-                if (!response.ok) {
-                    throw new Error('Story not found: ' + response.status);
-                }
-                return response.json();
-            })
-            .then(function (data) {
-                setCachedResponse(cacheKey, data.story);
-                return data.story;
-            });
-    }
-
     // ==========================================
     // RICH TEXT RENDERER
     // ==========================================
-
-    function renderRichText(richTextObject) {
-        if (!richTextObject || !richTextObject.content) return '';
-        return richTextObject.content.map(renderNode).join('');
-    }
-
-    function renderNode(node) {
-        if (!node) return '';
-
-        switch (node.type) {
-            case 'paragraph':
-                var pContent = renderChildren(node);
-                if (!pContent) return '';
-                return '<p>' + pContent + '</p>';
-            case 'heading':
-                var level = node.attrs && node.attrs.level || 2;
-                return '<h' + level + '>' + renderChildren(node) + '</h' + level + '>';
-            case 'bullet_list':
-                return '<ul>' + renderChildren(node) + '</ul>';
-            case 'ordered_list':
-                return '<ol>' + renderChildren(node) + '</ol>';
-            case 'list_item':
-                return '<li>' + renderChildren(node) + '</li>';
-            case 'blockquote':
-                return '<blockquote>' + renderChildren(node) + '</blockquote>';
-            case 'code_block':
-                return '<pre><code>' + renderChildren(node) + '</code></pre>';
-            case 'horizontal_rule':
-                return '<hr>';
-            case 'image':
-                var src = node.attrs && node.attrs.src || '';
-                var alt = node.attrs && node.attrs.alt || '';
-                return '<figure class="blog-content-image"><img src="' + escapeHtml(src) + '" alt="' + escapeHtml(alt) + '" loading="lazy"><figcaption>' + escapeHtml(alt) + '</figcaption></figure>';
-            case 'text':
-                var text = escapeHtml(node.text || '');
-                if (node.marks) {
-                    node.marks.forEach(function (mark) {
-                        switch (mark.type) {
-                            case 'bold':
-                                text = '<strong>' + text + '</strong>';
-                                break;
-                            case 'italic':
-                                text = '<em>' + text + '</em>';
-                                break;
-                            case 'underline':
-                                text = '<u>' + text + '</u>';
-                                break;
-                            case 'strike':
-                                text = '<s>' + text + '</s>';
-                                break;
-                            case 'link':
-                                var href = mark.attrs && mark.attrs.href || '#';
-                                var target = mark.attrs && mark.attrs.target || '_self';
-                                var rel = target === '_blank' ? ' rel="noopener noreferrer"' : '';
-                                text = '<a href="' + escapeHtml(href) + '" target="' + target + '"' + rel + '>' + text + '</a>';
-                                break;
-                            case 'code':
-                                text = '<code>' + text + '</code>';
-                                break;
-                        }
-                    });
-                }
-                return text;
-            case 'hard_break':
-                return '<br>';
-            default:
-                return renderChildren(node);
-        }
-    }
-
-    function renderChildren(node) {
-        if (!node.content) return '';
-        return node.content.map(renderNode).join('');
-    }
 
     // ==========================================
     // CARD RENDERING
@@ -430,153 +333,15 @@
     }
 
     // ==========================================
-    // POST PAGE
-    // ==========================================
-
-    function renderNewsPost(story) {
-        var content = story.content;
-        var readTime = calculateReadTime(content.Body_Content);
-        var imageUrl = content.Featured_Image && content.Featured_Image.filename
-            ? content.Featured_Image.filename + '/m/1200x630'
-            : '';
-        var imageAlt = content.title || '';
-        var excerpt = getExcerpt(content);
-
-        // Update page title and canonical
-        document.title = content.title + ' | Frank Penney Injury Law';
-        var canonical = document.querySelector('link[rel="canonical"]');
-        if (canonical) canonical.href = 'https://penneylaw.com/accident-news/' + story.slug;
-
-        // Update meta description
-        var metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc && excerpt) metaDesc.setAttribute('content', excerpt);
-
-        // Update breadcrumb
-        var breadcrumbTitle = document.getElementById('breadcrumb-post-title');
-        if (breadcrumbTitle) breadcrumbTitle.textContent = content.title;
-
-        // Social sharing URLs
-        var postUrl = 'https://penneylaw.com/accident-news/' + story.slug;
-        var postTitle = encodeURIComponent(content.title);
-        var shareHtml = '<div class="blog-share">' +
-            '<span class="blog-share-label">Share this article:</span>' +
-            '<div class="blog-share-buttons">' +
-                '<a href="https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(postUrl) + '" target="_blank" rel="noopener noreferrer" class="blog-share-btn blog-share-facebook" aria-label="Share on Facebook">Facebook</a>' +
-                '<a href="https://twitter.com/intent/tweet?url=' + encodeURIComponent(postUrl) + '&text=' + postTitle + '" target="_blank" rel="noopener noreferrer" class="blog-share-btn blog-share-twitter" aria-label="Share on X (Twitter)">X</a>' +
-                '<a href="https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(postUrl) + '" target="_blank" rel="noopener noreferrer" class="blog-share-btn blog-share-linkedin" aria-label="Share on LinkedIn">LinkedIn</a>' +
-                '<a href="mailto:?subject=' + postTitle + '&body=' + encodeURIComponent(postUrl) + '" class="blog-share-btn blog-share-email" aria-label="Share via email">Email</a>' +
-            '</div>' +
-        '</div>';
-
-        var bodyHtml = renderRichText(content.Body_Content);
-
-        var postContainer = document.getElementById('accident-news-post-content');
-        var loadingEl = document.getElementById('accident-news-post-loading');
-        if (loadingEl) loadingEl.style.display = 'none';
-
-        var html = '<div class="container blog-post-layout">' +
-            '<div class="blog-post-main">' +
-                '<header class="blog-post-header">' +
-                    '<h1 class="blog-post-title">' + escapeHtml(content.title) + '</h1>' +
-                    '<div class="blog-post-meta">' +
-                        '<div class="blog-post-meta-details">' +
-                            '<time datetime="' + (content.Date || '') + '">' + formatDate(content.Date) + '</time>' +
-                            '<span class="blog-post-read-time">' + readTime + ' min read</span>' +
-                        '</div>' +
-                    '</div>' +
-                '</header>' +
-                (imageUrl ? '<figure class="blog-post-featured-image"><img src="' + escapeHtml(imageUrl) + '" alt="' + escapeHtml(imageAlt) + '" width="1200" height="630"></figure>' : '') +
-                '<div class="blog-post-body">' + bodyHtml + '</div>' +
-                shareHtml +
-            '</div>' +
-            '<aside class="blog-post-sidebar" aria-label="Article sidebar">' +
-                '<div class="blog-sidebar-cta">' +
-                    '<h3>Injured in an Accident?</h3>' +
-                    '<p>Get a free consultation from our experienced attorneys.</p>' +
-                    '<a href="/contact" class="btn btn-primary btn-full">Bank on Frank</a>' +
-                    '<a href="tel:8888880566" class="btn btn-outline btn-full">Call (888) 888-0566</a>' +
-                '</div>' +
-            '</aside>' +
-        '</div>';
-
-        postContainer.innerHTML = html;
-
-        // Inject NewsArticle JSON-LD
-        var jsonLd = {
-            '@context': 'https://schema.org',
-            '@type': 'NewsArticle',
-            'headline': content.title,
-            'description': excerpt,
-            'image': imageUrl || 'https://penneylaw.com/images/favicon/social-preview-2026-1200x630.png',
-            'publisher': {
-                '@type': 'Organization',
-                'name': 'Frank Penney Injury Law',
-                'logo': { '@type': 'ImageObject', 'url': 'https://penneylaw.com/images/logos/frank-penney-logo-pink-2026.webp' }
-            },
-            'datePublished': content.Date || '',
-            'mainEntityOfPage': { '@type': 'WebPage', '@id': postUrl }
-        };
-        var script = document.createElement('script');
-        script.type = 'application/ld+json';
-        script.textContent = JSON.stringify(jsonLd);
-        document.head.appendChild(script);
-    }
-
-    function loadRelatedPosts(story) {
-        fetchStories({ per_page: RELATED_POSTS_COUNT + 1, excluding_slugs: story.full_slug })
-            .then(function (result) {
-                var related = result.stories.filter(function (s) {
-                    return s.uuid !== story.uuid;
-                }).slice(0, RELATED_POSTS_COUNT);
-
-                if (related.length === 0) return;
-
-                var section = document.getElementById('accident-news-related-posts');
-                var grid = document.getElementById('accident-news-related-grid');
-                if (!section || !grid) return;
-
-                section.removeAttribute('hidden');
-                grid.innerHTML = related.map(renderNewsCard).join('');
-            })
-            .catch(function (err) {
-                console.warn('Failed to load related accident news:', err);
-            });
-    }
-
-    function initAccidentNewsPost() {
-        var path = window.location.pathname;
-        var slug = path.replace(/^\//, '').replace(/\/$/, '');
-
-        if (!slug || slug === 'accident-news' || slug === 'accident-news-post' || slug === 'accident-news-post.html') {
-            window.location.href = '/accident-news';
-            return;
-        }
-
-        fetchStory(slug)
-            .then(function (story) {
-                renderNewsPost(story);
-                loadRelatedPosts(story);
-            })
-            .catch(function (err) {
-                console.error('Failed to load accident news post:', err);
-                var loading = document.getElementById('accident-news-post-loading');
-                var error = document.getElementById('accident-news-post-error');
-                if (loading) loading.style.display = 'none';
-                if (error) error.removeAttribute('hidden');
-            });
-    }
-
-    // ==========================================
     // PAGE DETECTION & INIT
     // ==========================================
 
     function init() {
         var path = window.location.pathname;
 
+        // Post pages are rendered server-side by netlify/edge-functions/blog-meta.js.
         if (path.indexOf('/accident-news.html') !== -1 || path === '/accident-news' || path === '/accident-news/') {
             initAccidentNewsListing();
-        } else if (path.indexOf('/accident-news/') !== -1 || path.indexOf('/accident-news-post') !== -1) {
-            initAccidentNewsPost();
         }
     }
 

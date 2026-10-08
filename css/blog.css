@@ -284,6 +284,28 @@
     margin: 0 6px;
 }
 
+a.blog-author-name:hover {
+    text-decoration: underline;
+}
+
+.blog-post-review {
+    margin: var(--spacing-sm) 0 0;
+    font-family: var(--font-secondary);
+    font-size: 0.875rem;
+    color: var(--medium-gray);
+}
+
+.blog-post-review a {
+    color: var(--dark-azure);
+    text-decoration: underline;
+}
+
+/* Shown only when the edge function answers 503 (Storyblok unavailable). */
+.blog-post-unavailable {
+    padding: var(--spacing-3xl) 0;
+    text-align: center;
+}
+
 /* ========================================
    BLOG POST FEATURED IMAGE
    ======================================== */
@@ -506,7 +528,7 @@
     text-align: center;
 }
 
-.blog-sidebar-cta h3 {
+.blog-sidebar-cta h2 {
     font-family: var(--font-primary);
     font-weight: 600;
     color: var(--white);
@@ -610,21 +632,8 @@
     margin: 0 var(--spacing-lg) var(--spacing-lg);
 }
 
-.skeleton-title {
-    height: 36px;
-    margin-bottom: var(--spacing-md);
-}
 
-.skeleton-meta {
-    height: 20px;
-    width: 50%;
-    margin-bottom: var(--spacing-xl);
-}
 
-.skeleton-image-lg {
-    height: 400px;
-    margin-bottom: var(--spacing-xl);
-}
 
 @keyframes skeleton-shimmer {
     0% { background-position: -200% 0; }

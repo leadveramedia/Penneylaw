@@ -10,7 +10,10 @@
  *     escaped description containing "$<" broke out of the attribute.
  */
 import assert from 'node:assert/strict';
-import { injectMeta, escapeAttr, extractTextSnippet, injectRelatedPosts, statusForStoryblok } from '../netlify/edge-functions/blog-meta.js';
+import {
+    injectMeta, escapeAttr, extractTextSnippet, injectRelatedPosts, statusForStoryblok,
+    renderRichText, renderPostArticle, pickRelated, formatDate, injectPost, injectBreadcrumbs,
+} from '../netlify/edge-functions/blog-meta.js';
 
 const rich = (s) => ({ content: [{ content: [{ type: 'text', text: s }] }] });
 
@@ -114,7 +117,7 @@ assert.equal(extractTextSnippet(rich('x'.repeat(200))), 'x'.repeat(157) + '...')
     assert.equal(countOf(tricky, '<div id="blog-related-grid"'), 1, '$& re-injected the matched tag');
     // Text content escapes & < > only; the aria-label attribute also escapes the quotes.
     assert.equal(countOf(tricky, '>Damages under $&lt;25,000 &amp; "more"</h3>'), 1);
-    assert.equal(countOf(tricky, 'aria-label="Read: Damages under $&lt;25,000 &amp; &quot;more&quot;"'), 1);
+    assert.equal(countOf(tricky, 'aria-label='), 0, 'cards are named by their visible title, not an aria-label');
 }
 
 // A missing story is a real 404; any other Storyblok failure must be a 503, never a
@@ -124,5 +127,77 @@ assert.equal(statusForStoryblok(404), 404);
 assert.equal(statusForStoryblok(429), 503);
 assert.equal(statusForStoryblok(500), 503);
 assert.equal(statusForStoryblok(401), 503);
+
+// Post body rendering (moved from the browser). Quotes must not break out of
+// attributes, script URLs are neutralised, and body headings never duplicate the H1.
+{
+    const doc = { type: 'doc', content: [
+        { type: 'heading', attrs: { level: 1 }, content: [{ type: 'text', text: 'Intro' }] },
+        { type: 'paragraph', content: [{ type: 'text', text: 'click', marks: [{ type: 'link', attrs: { href: '/x" onmouseover="alert(1)', target: '_blank' } }] }] },
+        { type: 'paragraph', content: [{ type: 'text', text: 'bad', marks: [{ type: 'link', attrs: { href: 'javascript:alert(1)' } }] }] },
+        { type: 'image', attrs: { src: 'https://a.storyblok.com/i.png"x', alt: 'A "quoted" alt' } },
+        { type: 'paragraph', content: [] },
+    ] };
+    const html = renderRichText(doc);
+    assert.equal(countOf(html, '<h1'), 0, 'body h1 is clamped to h2');
+    assert.equal(countOf(html, '<h2>Intro</h2>'), 1);
+    assert.equal(countOf(html, 'onmouseover="'), 0, 'quote in href broke out of the attribute');
+    assert.equal(countOf(html, 'href="/x&quot; onmouseover=&quot;alert(1)" target="_blank" rel="noopener noreferrer"'), 1);
+    assert.equal(countOf(html, 'javascript:'), 0, 'javascript: URL survived');
+    assert.equal(countOf(html, 'src="https://a.storyblok.com/i.png&quot;x"'), 1);
+    assert.equal(countOf(html, '<p></p>'), 0, 'empty paragraphs are dropped');
+}
+
+// Dates come straight from the string — the edge's UTC clock must not shift them.
+assert.equal(formatDate('2026-02-02 00:00'), 'February 2, 2026');
+assert.equal(formatDate('2025-12-31T23:30:00.000Z'), 'December 31, 2025');
+assert.equal(formatDate(''), '');
+
+// Full article: visible H1, author linked to the bio, review byline, no author on news.
+{
+    const story = { full_slug: 'blog/x', name: 'X', first_published_at: '2026-01-05T10:00:00.000Z',
+        content: { title: 'A & B', author: ['Marissa Hauck'], categories: ['Car Accidents', ''], Body_Content: { type: 'doc', content: [] } } };
+    const blog = renderPostArticle('blog', story);
+    assert.equal(countOf(blog, '<h1 class="blog-post-title">A &amp; B</h1>'), 1);
+    assert.equal(countOf(blog, '<a href="/marissa-hauck/" class="blog-author-name">Marissa Hauck</a>'), 1);
+    assert.equal(countOf(blog, 'Legal review by <a href="/frank-d-penney/">Frank D. Penney</a>'), 1);
+    assert.equal(countOf(blog, '<time datetime="2026-01-05">January 5, 2026</time>'), 1);
+    assert.equal(countOf(blog, 'blog-post-category'), 1, 'blank categories are skipped');
+    const news = renderPostArticle('accident-news', { ...story, full_slug: 'accident-news/x' });
+    assert.equal(countOf(news, 'blog-post-author'), 0, 'news posts carry no author block');
+    assert.equal(countOf(news, 'Legal review by'), 1);
+    // Unknown author values fall back to Frank rather than printing a raw ID.
+    const unknown = renderPostArticle('blog', { ...story, content: { ...story.content, author: ['abc-123'] } });
+    assert.equal(countOf(unknown, '>Frank D. Penney</a><span class="blog-author-title">'), 1);
+    assert.equal(countOf(unknown, 'Legal review by'), 0, "no review line under Frank's own byline");
+}
+
+// Article + breadcrumb injection into the shells.
+{
+    const shell = '<nav><span class="breadcrumbs-current" id="city-post-breadcrumb-title" itemprop="name">Article</span>' +
+        '<a href="#" class="breadcrumbs-link" id="city-post-breadcrumb-city" itemprop="item"><span itemprop="name">Article</span></a></nav>' +
+        '<article id="city-post-content" class="blog-post"><p>placeholder</p></article>' +
+        '<h2 class="section-title" id="city-related-title">More Articles</h2>';
+    let out = injectPost(shell, 'city', '<h1>Real $& post</h1>');
+    out = injectBreadcrumbs(out, 'city', { full_slug: 'sacramento/x' }, 'Crash on I-80 <update>');
+    assert.equal(countOf(out, 'placeholder'), 0);
+    assert.equal(countOf(out, '<h1>Real $& post</h1>'), 1, 'replacement must be literal');
+    assert.equal(countOf(out, '>Crash on I-80 &lt;update&gt;</span>'), 1);
+    assert.equal(countOf(out, '<a href="/sacramento" class="breadcrumbs-link" id="city-post-breadcrumb-city" itemprop="item"><span itemprop="name">Sacramento</span></a>'), 1);
+    assert.equal(countOf(out, '>More Sacramento Articles</h2>'), 1);
+}
+
+// Related posts: same category first, and different posts get different picks
+// (it used to be "the 3 newest" for every post in a folder).
+{
+    const pool = ['a', 'b', 'c', 'd', 'e', 'f'].map((k) => ({ url: '/blog/' + k, title: k, categories: k === 'e' ? ['Dog Bites'] : [] }));
+    const one = pickRelated(pool, { seed: 'blog/post-one', categories: ['Dog Bites'] });
+    assert.equal(one.length, 3);
+    assert.equal(one[0].url, '/blog/e', 'same-category post comes first');
+    assert.deepEqual(pickRelated(pool, { seed: 'blog/post-one' }), pickRelated(pool, { seed: 'blog/post-one' }), 'stable per post');
+    const firsts = new Set(['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8'].map((seed) => pickRelated(pool, { seed })[0].url));
+    assert.ok(firsts.size > 1, 'every post got the same related links');
+    assert.deepEqual(pickRelated([], { seed: 'x' }), []);
+}
 
 console.log('test-edge-meta: all assertions passed');
