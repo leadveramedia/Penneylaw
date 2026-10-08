@@ -5,7 +5,8 @@ published 2026-07-30, containing all four container fixes.
 
 Re-run the audit any time with `npm run audit:gtm` — it parses the *public* compiled container,
 needs no credentials, and exits non-zero on unaccepted high-severity findings. It currently
-**passes**.
+**passes** (re-run 2026-10-07 against **v25**; its resource parser now skips braces inside
+strings, which Custom HTML tags had started to break).
 
 ## Tooling
 
@@ -83,6 +84,21 @@ GA4 posts there when Google Ads linking / Google signals is enabled.
 hosts, two CallRail hosts).
 
 ## Remaining
+
+0. **GA4 is not receiving a valid tag (found 2026-10-07, container v25).** The Google Tag
+   `tag4` uses `G-TWVJZPG4DG`, and `https://www.googletagmanager.com/gtag/js?id=G-TWVJZPG4DG`
+   returns **404** (the Ads tag `AW-17549887288` returns 200). Google answers 404 for a tag ID
+   with no live data stream, so GA4 is most likely recording nothing. GA4 also has no event
+   tags (`npm run audit:gtm`: `ga4-no-events`), so even a working tag would only send page
+   views. To fix, in this order:
+   1. GA4 → Admin → Data streams → Web: copy the stream's Measurement ID. If there is no web
+      stream for penneylaw.com, create one (or decide GA4 isn't wanted and delete `tag4`).
+   2. GTM → `tag4` (Google Tag): replace `G-TWVJZPG4DG` with that ID (or store it in a
+      Constant variable — the audit flags the hard-coded literal).
+   3. Optional: a GA4 Event tag for `form_conversion` (the trigger f4 created) so leads show up
+      in GA4; phone clicks can reuse the PRIMARY tel: trigger.
+   4. Preview, then publish. Verify: `curl -s -o /dev/null -w '%{http_code}'
+      'https://www.googletagmanager.com/gtag/js?id=<new id>'` → 200.
 
 1. **Accept Enhanced Conversions for Leads terms** in Google Ads → Goals → Conversions →
    Settings. No API can do this, and f3 is inert without it.

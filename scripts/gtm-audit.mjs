@@ -76,9 +76,16 @@ function extractResource(src) {
     if (at === -1) throw new Error('no "resource" block found — container format changed?');
     const start = src.indexOf('{', at);
     let depth = 0;
+    let inString = false;
     for (let i = start; i < src.length; i++) {
-        if (src[i] === '{') depth++;
-        else if (src[i] === '}' && --depth === 0) {
+        const c = src[i];
+        // Braces inside strings (Custom HTML tags carry JS) must not count.
+        if (inString) {
+            if (c === '\\') i++;
+            else if (c === '"') inString = false;
+        } else if (c === '"') inString = true;
+        else if (c === '{') depth++;
+        else if (c === '}' && --depth === 0) {
             return JSON.parse(src.slice(start, i + 1));
         }
     }
