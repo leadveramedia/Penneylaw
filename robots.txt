@@ -1,29 +1,16 @@
 # Robots.txt for Frank Penney Injury Law
 # https://penneylaw.com
+#
+# One group for every crawler. Named Googlebot/Bingbot groups used to sit below and
+# silently override every rule here (a crawler obeys only its most specific group).
+# /lp/ (paid landing pages) and /components/ are kept out of the index with noindex
+# instead of Disallow, so crawlers can actually see that signal.
 
 User-agent: *
+# Content Signals (contentsignals.org): search and AI answers may use the pages; model training may not.
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
-
-# Sitemap location
-Sitemap: https://penneylaw.com/sitemap.xml
-
-# Disallow internal/utility pages
-Disallow: /components/
 Disallow: /netlify-form-template.html
 Disallow: /style-guide.html
 
-# Disallow paid landing pages (noindex'd, but skip crawl budget)
-Disallow: /lp/
-
-# Allow all major search engines
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
+Sitemap: https://penneylaw.com/sitemap.xml

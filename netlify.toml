@@ -59,6 +59,13 @@
     Cache-Control = "public, max-age=3600"
 
 # Ensure robots.txt and sitemap.xml are served with correct content types
+# Component fragments are inlined into pages at build time (scripts/build-components.js)
+# and only fetched as a fallback; the bare fragments must never be indexed as pages.
+[[headers]]
+  for = "/components/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
 [[headers]]
   for = "/robots.txt"
   [headers.values]

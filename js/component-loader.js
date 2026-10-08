@@ -139,6 +139,13 @@
     function loadComponent(url, targetSelector, position) {
         position = position || 'replace';
 
+        // scripts/build-components.js writes header/footer/results/testimonials into the
+        // page at build time; a placeholder that already has content needs no fetch.
+        if (position === 'replace') {
+            var existing = document.querySelector(targetSelector);
+            if (existing && existing.firstElementChild) return Promise.resolve(null);
+        }
+
         return fetch(url)
             .then(function(response) {
                 if (!response.ok) {

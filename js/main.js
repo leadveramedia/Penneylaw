@@ -576,12 +576,13 @@
             'ru': 'RU'
         };
 
-        // Load saved language preference and translate if needed
-        const savedLang = localStorage.getItem('selectedLanguage') || 'en';
+        // A hand-translated page (/es/…, /ru/…) is already in its language: show that,
+        // and never machine-translate it on top.
+        const savedLang = PAGE_LANG !== 'en' ? PAGE_LANG : (localStorage.getItem('selectedLanguage') || 'en');
         currentLanguage = savedLang;
         updateLanguageUI(savedLang, langNames, currentLangSpan, mobileOptions);
 
-        if (savedLang !== 'en') {
+        if (savedLang !== 'en' && PAGE_LANG === 'en') {
             // Delay initial translation to allow page to load
             setTimeout(function() {
                 translatePage(savedLang);
@@ -620,24 +621,21 @@
             if (!selector.contains(e.relatedTarget)) closeMenu();
         });
 
-        // Desktop language selection
-        options.forEach(function (option) {
-            option.addEventListener('click', function (e) {
-                e.preventDefault();
-                const lang = this.getAttribute('data-lang');
-                handleLanguageChange(lang, langNames, currentLangSpan, mobileOptions);
-                selector.classList.remove('active');
-            });
-        });
-
-        // Mobile language selection
-        mobileOptions.forEach(function (option) {
-            option.addEventListener('click', function (e) {
-                e.preventDefault();
-                const lang = this.getAttribute('data-lang');
-                handleLanguageChange(lang, langNames, currentLangSpan, mobileOptions);
-            });
-        });
+        // Options that link to a hand-translated page (build-components.js fills the href
+        // from the page's hreflang tags) navigate there; "#" options translate in place.
+        function onSelect(e) {
+            const lang = this.getAttribute('data-lang');
+            const href = this.getAttribute('href');
+            if (href && href !== '#') {
+                localStorage.setItem('selectedLanguage', lang);
+                return;
+            }
+            e.preventDefault();
+            handleLanguageChange(lang, langNames, currentLangSpan, mobileOptions);
+            selector.classList.remove('active');
+        }
+        options.forEach(function (option) { option.addEventListener('click', onSelect); });
+        mobileOptions.forEach(function (option) { option.addEventListener('click', onSelect); });
     }
 
     /**
