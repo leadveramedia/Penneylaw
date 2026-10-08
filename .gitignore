@@ -46,3 +46,6 @@ deno.lock
 # Vector source art for the 2026 pink logo -- publish = "." would serve these publicly
 images/favicon/favicon_pink2026.pdf
 images/logos/Frank Penney Logo pink 2026.pdf
+
+# Markdown copies for agents, generated on Netlify by scripts/build-markdown.js
+/md/

@@ -59,6 +59,14 @@
     Cache-Control = "public, max-age=3600"
 
 # Ensure robots.txt and sitemap.xml are served with correct content types
+# Markdown copies for AI agents (scripts/build-markdown.js). noindex so they never
+# compete with the HTML pages they mirror.
+[[headers]]
+  for = "/md/*"
+  [headers.values]
+    Content-Type = "text/markdown; charset=utf-8"
+    X-Robots-Tag = "noindex"
+
 # Component fragments are inlined into pages at build time (scripts/build-components.js)
 # and only fetched as a fallback; the bare fragments must never be indexed as pages.
 [[headers]]
