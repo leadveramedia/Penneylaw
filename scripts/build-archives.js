@@ -22,6 +22,11 @@
  *
  * Idempotent: rewrites between the ARCHIVE markers when they exist, otherwise inserts
  * before #cta-placeholder. Running the build twice produces no diff.
+ *
+ * The blog and accident-news listings also get their first page of cards written into
+ * the grid (FIRSTPAGE markers). Those cards used to appear only after blog.js and a
+ * Storyblok round-trip, so /blog's LCP image (the first card) measured 7.5s on mobile.
+ * The browser now only fetches to build pagination, and re-renders on search/tag/page.
  */
 
 const fs = require('fs');
@@ -69,6 +74,84 @@ function buildTargets() {
         targets.push([`${slug}.html`, `${slug}/`, `/${slug}/`, `${name} article archive`, `${name} articles`]);
     }
     return targets;
+}
+
+// Listings whose page 1 is prerendered: file → [grid id, loading id, card renderer].
+// Same sort and page size as fetchStories() in js/blog.js and js/accident-news.js.
+const POSTS_PER_PAGE = 9;
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'];
+
+function plainText(node) {
+    if (!node) return '';
+    if (node.type === 'text') return node.text || '';
+    return (node.content || []).map(plainText).join(' ');
+}
+
+function cardDate(value) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(value || ''));
+    return m ? { iso: m[0], label: `${MONTHS[Number(m[2]) - 1]} ${Number(m[3])}, ${m[1]}` } : { iso: '', label: '' };
+}
+
+/**
+ * Mirrors renderBlogCard (js/blog.js) / renderNewsCard (js/accident-news.js) so the
+ * browser's own re-renders look identical. Change all three together.
+ */
+function renderCard(story, urlPrefix, isNews, eager) {
+    const c = story.content || {};
+    const words = plainText(c.Body_Content).split(/\s+/).filter(Boolean).length;
+    const readTime = Math.max(1, Math.ceil(words / 200));
+    const image = c.Featured_Image && c.Featured_Image.filename
+        ? c.Featured_Image.filename + '/m/600x400'
+        : '/images/favicon/social-preview-2026-1200x630.png';
+    const alt = (!isNews && c.featured_image_alt) || c.title || '';
+    let excerpt = c.excerpt || '';
+    if (isNews) {
+        const body = plainText(c.Body_Content);
+        excerpt = (c.Subheadline && c.Subheadline.trim()) || (body.substring(0, 160).trim() + (body.length > 160 ? '...' : ''));
+    }
+    const categories = isNews ? [] : (c.categories || []).filter((x) => x && x.trim());
+    const date = cardDate(c.Date);
+    // The first card is the page's LCP element: load it now, not lazily.
+    const loading = eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
+    return `<a href="${urlPrefix}${escapeHtml(story.slug)}" class="card blog-card" aria-label="${escapeHtml(c.title)}">` +
+        '<div class="card-image">' +
+            `<img src="${escapeHtml(image)}" alt="${escapeHtml(alt)}" width="600" height="400" ${loading}>` +
+        '</div>' +
+        '<div class="blog-card-body">' +
+            '<div class="blog-card-meta">' +
+                `<time datetime="${date.iso}">${date.label}</time>` +
+                `<span class="blog-card-read-time">${readTime} min read</span>` +
+            '</div>' +
+            (categories.length ? '<div class="blog-card-categories">' +
+                categories.map((x) => `<span class="blog-card-category">${escapeHtml(x)}</span>`).join('') + '</div>' : '') +
+            `<h3 class="blog-card-title">${escapeHtml(c.title)}</h3>` +
+            `<p class="blog-card-excerpt">${escapeHtml(excerpt)}</p>` +
+            '<span class="blog-card-read-more">Read Article</span>' +
+        '</div>' +
+    '</a>';
+}
+
+const FIRST_PAGE = {
+    'blog.html': { grid: 'blog-posts-grid', loading: 'blog-loading', news: false },
+    'accident-news.html': { grid: 'accident-news-posts-grid', loading: 'accident-news-loading', news: true },
+};
+
+function applyFirstPage(html, file, stories, urlPrefix) {
+    const cfg = FIRST_PAGE[file];
+    const sorted = stories.slice().sort((a, b) =>
+        String((b.content && b.content.Date) || '').localeCompare(String((a.content && a.content.Date) || '')));
+    const cards = sorted.slice(0, POSTS_PER_PAGE).map((st, i) => renderCard(st, urlPrefix, cfg.news, i === 0)).join('');
+    let out = html.replace(
+        new RegExp(`<div id="${cfg.grid}" class="grid grid-3 blog-grid" aria-live="polite"[^>]*>(?:<!-- FIRSTPAGE:START -->[\\s\\S]*?<!-- FIRSTPAGE:END -->)?</div>`),
+        () => `<div id="${cfg.grid}" class="grid grid-3 blog-grid" aria-live="polite" data-prerendered><!-- FIRSTPAGE:START -->${cards}<!-- FIRSTPAGE:END --></div>`
+    );
+    // Skeleton starts hidden; blog.js shows it again for searches and page changes.
+    out = out.replace(
+        new RegExp(`<div id="${cfg.loading}" class="grid grid-3 blog-grid" aria-live="polite"(?: style="display:none;")?>`),
+        `<div id="${cfg.loading}" class="grid grid-3 blog-grid" aria-live="polite" style="display:none;">`
+    );
+    return out;
 }
 
 function renderBlock(posts, urlPrefix, label, noun) {
@@ -149,14 +232,9 @@ function stripBlock(html) {
 
         // Sorted by title so the output is deterministic: publish-date order would
         // reshuffle the block on unrelated CMS edits and churn the committed diff.
-        let posts;
+        let stories;
         try {
-            posts = (await fetchStoriesFromFolder(folder, {
-                mapStory: (s) => ({
-                    slug: s.slug,
-                    title: String((s.content && s.content.title) || s.name || s.slug).trim(),
-                }),
-            })).sort((a, b) => a.title.localeCompare(b.title));
+            stories = await fetchStoriesFromFolder(folder, { mapStory: (s) => s });
         } catch (err) {
             // Storyblok failed: leave the committed block alone rather than stripping
             // every archive link from the deploy.
@@ -164,8 +242,17 @@ function stripBlock(html) {
             skipped++;
             continue;
         }
+        const posts = stories.map((s) => ({
+            slug: s.slug,
+            title: String((s.content && s.content.title) || s.name || s.slug).trim(),
+        })).sort((a, b) => a.title.localeCompare(b.title));
 
-        const html = fs.readFileSync(full, 'utf8');
+        let html = fs.readFileSync(full, 'utf8');
+        if (FIRST_PAGE[file] && stories.length) {
+            const withCards = applyFirstPage(html, file, stories, urlPrefix);
+            if (withCards !== html) fs.writeFileSync(full, withCards);
+            html = withCards;
+        }
 
         if (posts.length === 0) {
             // No posts: make sure a stale block from a previous build doesn't linger.

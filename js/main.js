@@ -26,6 +26,30 @@
         }
     });
 
+    // Third-party embeds ([data-lazy-script]) load as they near the viewport instead of
+    // blocking first paint. The script is created inside its placeholder because vendors
+    // insert their iframe next to document.currentScript, which keeps it in the reserved space.
+    document.addEventListener('DOMContentLoaded', function () {
+        const holders = document.querySelectorAll('[data-lazy-script]');
+        if (!holders.length) return;
+        function load(el) {
+            const script = document.createElement('script');
+            script.src = el.getAttribute('data-lazy-script');
+            Array.prototype.forEach.call(el.attributes, function (a) {
+                if (a.name.indexOf('data-') === 0 && a.name !== 'data-lazy-script') script.setAttribute(a.name, a.value);
+            });
+            el.removeAttribute('data-lazy-script');
+            el.appendChild(script);
+        }
+        if (!('IntersectionObserver' in window)) { holders.forEach(load); return; }
+        const io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) { io.unobserve(e.target); load(e.target); }
+            });
+        }, { rootMargin: '200px 0px' });
+        holders.forEach(function (el) { io.observe(el); });
+    });
+
     // Awards strip pause/play (WCAG 2.2.2). Delegated, so it also works on the LPs,
     // which load main.js without component-loader.
     document.addEventListener('click', function (e) {

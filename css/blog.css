@@ -59,6 +59,11 @@
 }
 
 /* Active Tag Display */
+/* display:flex below would otherwise override the hidden attribute */
+.blog-active-tag[hidden] {
+    display: none;
+}
+
 .blog-active-tag {
     display: flex;
     align-items: center;

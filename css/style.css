@@ -27,6 +27,17 @@
    CSS VARIABLES - BRAND COLORS
    Reference: Brand Bible 2026, Page 6
 ======================================== */
+/* Arial metric-matched to Montserrat, so text doesn't reflow when the web font swaps in
+   (desktop home CLS was 0.052 from this). Values from Montserrat's/Arial's font metrics. */
+@font-face {
+    font-family: 'Montserrat Fallback';
+    src: local('Arial');
+    size-adjust: 113.39%;
+    ascent-override: 85.79%;
+    descent-override: 22.25%;
+    line-gap-override: 0%;
+}
+
 :root {
     /* Primary Brand Colors - MUST match Brand Bible exactly */
     --charcoal: #2C2C2C;       /* 30% - Body text, footer, sophistication */
@@ -49,7 +60,7 @@
     --warning: #F59E0B;
 
     /* Typography - Brand Bible Page 7 */
-    --font-primary: 'Montserrat', sans-serif;   /* Headlines, display, buttons */
+    --font-primary: 'Montserrat', 'Montserrat Fallback', sans-serif;   /* Headlines, display, buttons */
     --font-secondary: Arial, Helvetica, sans-serif;  /* Body copy, paragraphs */
 
     /* Spacing */
@@ -704,6 +715,24 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: all var(--transition-fast);
+}
+
+/* Closed panels are display:none so their loading="lazy" preview images aren't
+   fetched until a menu opens — visibility:hidden still downloaded ~1 MB per page. */
+.nav-dropdown:not(:hover):not(:focus-within) .dropdown-menu,
+.nav-dropdown.is-dismissed .dropdown-menu {
+    display: none;
+}
+
+/* Keep the fade-in now that the panel appears from display:none (an animation restarts
+   each time the panel is displayed; @starting-style would too, but clean-css drops it). */
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown:focus-within .dropdown-menu {
+    animation: dropdown-fade-in var(--transition-fast);
+}
+
+@keyframes dropdown-fade-in {
+    from { opacity: 0; }
 }
 
 .nav-dropdown:hover .dropdown-menu,
@@ -2581,16 +2610,6 @@ body.menu-open {
     position: relative;
 }
 
-.page-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('../images/pattern.svg') repeat;
-    opacity: 0.05;
-}
 
 .page-header-content {
     position: relative;

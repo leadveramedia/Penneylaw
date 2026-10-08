@@ -329,6 +329,14 @@
 
     function initAccidentNewsListing() {
         initSearch();
+        // build-archives.js writes page 1 into the HTML; then only the page count is needed.
+        var grid = document.getElementById('accident-news-posts-grid');
+        if (grid && grid.hasAttribute('data-prerendered')) {
+            fetchStories({ page: 1, per_page: POSTS_PER_PAGE })
+                .then(function (result) { renderPagination(result.total, result.perPage, 1); })
+                .catch(function () { /* pagination is optional; the cards are already there */ });
+            return;
+        }
         loadNewsPosts();
     }
 
