@@ -20,9 +20,19 @@
             initAttorneyDropdown();
             initLocationDropdown();
             initPracticeAreaDropdown();
+            initNavDropdowns();
             initMobileDropdown();
             initTestimonialsCarousel();
         }
+    });
+
+    // Awards strip pause/play (WCAG 2.2.2). Delegated, so it also works on the LPs,
+    // which load main.js without component-loader.
+    document.addEventListener('click', function (e) {
+        const btn = e.target.closest('.awards-pause');
+        if (!btn) return;
+        const paused = btn.getAttribute('aria-pressed') !== 'true';
+        btn.setAttribute('aria-pressed', String(paused));
     });
 
     // Expose functions globally for component-loader.js
@@ -34,6 +44,7 @@
     window.initAttorneyDropdown = initAttorneyDropdown;
     window.initLocationDropdown = initLocationDropdown;
     window.initPracticeAreaDropdown = initPracticeAreaDropdown;
+    window.initNavDropdowns = initNavDropdowns;
     window.initMobileDropdown = initMobileDropdown;
     window.initLanguageSelector = initLanguageSelector;
     window.initTestimonialsCarousel = initTestimonialsCarousel;
@@ -298,13 +309,15 @@
             defaultImage.classList.add('active');
         }
 
+        function showPreview() {
+            const value = this.getAttribute('data-' + config.attr);
+            previewImages.forEach(function (img) { img.classList.remove('active'); });
+            const target = document.querySelector('.' + config.previewClass + '[data-' + config.attr + '="' + value + '"]');
+            if (target) target.classList.add('active');
+        }
         dropdownItems.forEach(function (item) {
-            item.addEventListener('mouseenter', function () {
-                const value = this.getAttribute('data-' + config.attr);
-                previewImages.forEach(function (img) { img.classList.remove('active'); });
-                const target = document.querySelector('.' + config.previewClass + '[data-' + config.attr + '="' + value + '"]');
-                if (target) target.classList.add('active');
-            });
+            item.addEventListener('mouseenter', showPreview);
+            item.addEventListener('focus', showPreview);
         });
 
         const dropdown = document.querySelector('.' + config.dropdownClass);
@@ -326,6 +339,36 @@
 
     function initPracticeAreaDropdown() {
         initPreviewDropdown({ attr: 'practice', previewClass: 'practice-preview', dropdownClass: 'practice-area-dropdown', defaultValue: 'car-accidents' });
+    }
+
+    /**
+     * Desktop nav dropdowns open on :hover and :focus-within (CSS). This keeps
+     * aria-expanded honest and lets Esc close an open panel.
+     */
+    function initNavDropdowns() {
+        document.querySelectorAll('.nav-dropdown').forEach(function (li) {
+            const trigger = li.querySelector('.dropdown-trigger');
+            if (!trigger || li.dataset.navInit) return;
+            li.dataset.navInit = '1';
+
+            function sync() {
+                // focusout fires before :focus-within updates — read state next tick.
+                setTimeout(function () {
+                    const engaged = li.matches(':hover') || li.matches(':focus-within');
+                    if (!engaged) li.classList.remove('is-dismissed');
+                    trigger.setAttribute('aria-expanded', String(engaged && !li.classList.contains('is-dismissed')));
+                }, 0);
+            }
+            ['mouseenter', 'mouseleave', 'focusin', 'focusout'].forEach(function (type) {
+                li.addEventListener(type, sync);
+            });
+            li.addEventListener('keydown', function (e) {
+                if (e.key !== 'Escape') return;
+                li.classList.add('is-dismissed');
+                trigger.setAttribute('aria-expanded', 'false');
+                trigger.focus();
+            });
+        });
     }
 
     /**
@@ -363,6 +406,7 @@
     const TRANSLATION_CACHE_VERSION = '2.0'; // Increment when selectors change significantly
 
     let currentLanguage = 'en';
+    const PAGE_LANG = document.documentElement.lang || 'en';
     let originalTexts = new Map(); // Store original English text
     let translationCache = {}; // Cache translations to reduce API calls
     let isTranslating = false;
@@ -554,15 +598,26 @@
             }
         });
 
-        // Close on outside click
-        document.addEventListener('click', function (e) {
-            if (!e.target.closest('.language-selector')) {
-                selector.classList.remove('active');
-                toggle.setAttribute('aria-expanded', 'false');
-                if (menu) {
-                    menu.setAttribute('aria-hidden', 'true');
-                }
+        function closeMenu() {
+            selector.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+            if (menu) {
+                menu.setAttribute('aria-hidden', 'true');
             }
+        }
+
+        // Close on outside click, on Esc, and when focus leaves the selector
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.language-selector')) closeMenu();
+        });
+        selector.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && selector.classList.contains('active')) {
+                closeMenu();
+                toggle.focus();
+            }
+        });
+        selector.addEventListener('focusout', function (e) {
+            if (!selector.contains(e.relatedTarget)) closeMenu();
         });
 
         // Desktop language selection
@@ -760,6 +815,9 @@
      * Translate the entire page
      */
     async function translatePage(targetLang) {
+        // Screen readers pick their voice from <html lang>; keep it matching the text.
+        document.documentElement.lang = targetLang === 'en' ? PAGE_LANG : targetLang;
+
         if (targetLang === 'en') {
             // Restore original English text
             originalTexts.forEach(function(originalData, element) {

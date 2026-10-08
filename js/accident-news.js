@@ -279,7 +279,7 @@
             : '/images/favicon/social-preview-2026-1200x630.png';
         var imageAlt = content.title || '';
 
-        return '<a href="/accident-news/' + escapeHtml(story.slug) + '" class="card blog-card" aria-label="Read: ' + escapeHtml(content.title) + '">' +
+        return '<a href="/accident-news/' + escapeHtml(story.slug) + '" class="card blog-card" aria-label="' + escapeHtml(content.title) + '">' +
             '<div class="card-image">' +
                 '<img src="' + escapeHtml(imageUrl) + '" alt="' + escapeHtml(imageAlt) + '" width="600" height="400" loading="lazy">' +
             '</div>' +

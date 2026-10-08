@@ -286,7 +286,7 @@
             return '<span class="blog-card-category">' + escapeHtml(cat) + '</span>';
         }).join('');
 
-        return '<a href="/blog/' + escapeHtml(story.slug) + '" class="card blog-card" aria-label="Read: ' + escapeHtml(content.title) + '">' +
+        return '<a href="/blog/' + escapeHtml(story.slug) + '" class="card blog-card" aria-label="' + escapeHtml(content.title) + '">' +
             '<div class="card-image">' +
                 '<img src="' + escapeHtml(imageUrl) + '" alt="' + escapeHtml(imageAlt) + '" width="600" height="400" loading="lazy">' +
             '</div>' +

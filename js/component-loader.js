@@ -220,6 +220,14 @@
             }
         }
 
+        // A page that blanks the CTA title (e.g. /contact, which already is the form)
+        // gets no CTA section, rather than an empty <h2> and orphaned buttons.
+        if (ctaTitle && !config.ctaTitle) {
+            var section = ctaTitle.closest('.cta-section');
+            if (section) section.hidden = true;
+            return;
+        }
+
         // Set title and description
         if (ctaTitle) ctaTitle.textContent = config.ctaTitle;
         if (ctaDescription) ctaDescription.textContent = config.ctaDescription;
@@ -453,6 +461,7 @@
         if (typeof window.initAttorneyDropdown === 'function') window.initAttorneyDropdown();
         if (typeof window.initLocationDropdown === 'function') window.initLocationDropdown();
         if (typeof window.initPracticeAreaDropdown === 'function') window.initPracticeAreaDropdown();
+        if (typeof window.initNavDropdowns === 'function') window.initNavDropdowns();
         if (typeof window.initMobileDropdown === 'function') window.initMobileDropdown();
         if (typeof window.initScrollReveal === 'function') window.initScrollReveal();
         if (typeof window.initSmoothScroll === 'function') window.initSmoothScroll();

@@ -32,8 +32,8 @@
     <!-- Load fonts with display=swap for faster text rendering -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
-    <link rel="preload" href="css/style.min.css?v=20261007" as="style">
-    <link rel="stylesheet" href="css/style.min.css?v=20261007">
+    <link rel="preload" href="css/style.min.css?v=20261007c" as="style">
+    <link rel="stylesheet" href="css/style.min.css?v=20261007c">
     <!-- Critical CSS for hero section to prevent CLS and optimize LCP -->
     <style>
         :root { --font-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
@@ -371,6 +371,10 @@
 
 <!-- Awards Section -->
 <section class="awards-section">
+    <button type="button" class="awards-pause" aria-pressed="false" aria-label="Pause awards animation">
+        <svg class="icon-pause" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="2" y="1" width="3" height="10"/><rect x="7" y="1" width="3" height="10"/></svg>
+        <svg class="icon-play" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 1l8 5-8 5z"/></svg>
+    </button>
     <div class="awards-scroll-wrapper">
         <div class="awards-scroll">
             <!-- Set 1 -->
@@ -381,26 +385,26 @@
             <div class="award-item"><picture><source srcset="images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
             <div class="award-item"><picture><source srcset="images/backgrounds/bbb.webp" type="image/webp"><img src="images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
             <!-- Set 2 -->
-            <div class="award-item"><picture><source srcset="images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><img src="images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><img src="images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><picture><source srcset="images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="images/backgrounds/bbb.webp" type="image/webp"><img src="images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><img src="images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
+            <div class="award-item" aria-hidden="true"><img src="images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="images/backgrounds/bbb.webp" type="image/webp"><img src="images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
             <!-- Set 3 -->
-            <div class="award-item"><picture><source srcset="images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><img src="images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><img src="images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><picture><source srcset="images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="images/backgrounds/bbb.webp" type="image/webp"><img src="images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><img src="images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
+            <div class="award-item" aria-hidden="true"><img src="images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="images/backgrounds/bbb.webp" type="image/webp"><img src="images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
             <!-- Set 4 -->
-            <div class="award-item"><picture><source srcset="images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><img src="images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><img src="images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><picture><source srcset="images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="images/backgrounds/bbb.webp" type="image/webp"><img src="images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><img src="images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
+            <div class="award-item" aria-hidden="true"><img src="images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="images/backgrounds/bbb.webp" type="image/webp"><img src="images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
         </div>
     </div>
 </section>
@@ -680,13 +684,13 @@
                     <button type="button" class="office-map-facade"
                             data-map-src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+1508+Eureka+Rd+Roseville+CA+95661&output=embed"
                             data-map-title="Map of the Frank Penney Injury Law Roseville office"
-                            aria-label="Map of the Frank Penney Injury Law Roseville office — load the interactive map">
+                            aria-label="Load interactive map: Frank Penney Injury Law Roseville office">
                                 <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
                                 <span>Load interactive map</span>
                             </button>
                     <a href="https://share.google/OdklS74LpPOTcFPLI"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
-                       aria-label="Open the Roseville office in Google Maps (opens in new tab)">Open in Maps</a>
+                       aria-label="Open in Maps: Roseville office (opens in new tab)">Open in Maps</a>
                 </div>
                 <div style="padding: 1.25rem;">
                     <p class="location-card-address">1508 Eureka Rd<br>Roseville, CA 95661</p>
@@ -705,13 +709,13 @@
                     <button type="button" class="office-map-facade"
                             data-map-src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+1652+West+Texas+Street+Suite+248+Fairfield+CA+94533&output=embed"
                             data-map-title="Map of the Frank Penney Injury Law Fairfield office"
-                            aria-label="Map of the Frank Penney Injury Law Fairfield office — load the interactive map">
+                            aria-label="Load interactive map: Frank Penney Injury Law Fairfield office">
                                 <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
                                 <span>Load interactive map</span>
                             </button>
                     <a href="https://maps.app.goo.gl/anqPqAjWUVQQTDoE7"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
-                       aria-label="Open the Fairfield office in Google Maps (opens in new tab)">Open in Maps</a>
+                       aria-label="Open in Maps: Fairfield office (opens in new tab)">Open in Maps</a>
                 </div>
                 <div style="padding: 1.25rem;">
                     <p class="location-card-address">1652 West Texas Street, Suite 248<br>Fairfield, CA 94533</p>
@@ -730,14 +734,14 @@
                     <button type="button" class="office-map-facade"
                             data-map-src="https://maps.google.com/maps?q=1111+J+Street+Modesto+CA+95354&output=embed"
                             data-map-title="Map of the Frank Penney Injury Law Modesto office"
-                            aria-label="Map of the Frank Penney Injury Law Modesto office — load the interactive map">
+                            aria-label="Load interactive map: Frank Penney Injury Law Modesto office">
                                 <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
                                 <span>Load interactive map</span>
                             </button>
                     <!-- TODO: replace with GMB share link -->
                     <a href="https://www.google.com/maps/search/?api=1&query=1111+J+Street+Modesto+CA+95354"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
-                       aria-label="Open the Modesto office in Google Maps (opens in new tab)">Open in Maps</a>
+                       aria-label="Open in Maps: Modesto office (opens in new tab)">Open in Maps</a>
                 </div>
                 <div style="padding: 1.25rem;">
                     <p class="location-card-address">1111 J Street<br>Modesto, CA 95354</p>
@@ -756,14 +760,14 @@
                     <button type="button" class="office-map-facade"
                             data-map-src="https://maps.google.com/maps?q=1108+Sherman+Ave+Chico+CA+95926&output=embed"
                             data-map-title="Map of the Frank Penney Injury Law Chico office"
-                            aria-label="Map of the Frank Penney Injury Law Chico office — load the interactive map">
+                            aria-label="Load interactive map: Frank Penney Injury Law Chico office">
                                 <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
                                 <span>Load interactive map</span>
                             </button>
                     <!-- TODO: replace with GMB share link -->
                     <a href="https://www.google.com/maps/search/?api=1&query=1108+Sherman+Ave+Chico+CA+95926"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
-                       aria-label="Open the Chico office in Google Maps (opens in new tab)">Open in Maps</a>
+                       aria-label="Open in Maps: Chico office (opens in new tab)">Open in Maps</a>
                 </div>
                 <div style="padding: 1.25rem;">
                     <p class="location-card-address">1108 Sherman Ave<br>Chico, CA 95926</p>
@@ -782,13 +786,13 @@
                     <button type="button" class="office-map-facade"
                             data-map-src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+333+University+Avenue+Suite+200+Sacramento+CA+95825&output=embed"
                             data-map-title="Map of the Frank Penney Injury Law Sacramento office"
-                            aria-label="Map of the Frank Penney Injury Law Sacramento office — load the interactive map">
+                            aria-label="Load interactive map: Frank Penney Injury Law Sacramento office">
                                 <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
                                 <span>Load interactive map</span>
                             </button>
                     <a href="https://maps.app.goo.gl/hpfQD9uRYcKj9SJd6"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
-                       aria-label="Open the Sacramento office in Google Maps (opens in new tab)">Open in Maps</a>
+                       aria-label="Open in Maps: Sacramento office (opens in new tab)">Open in Maps</a>
                 </div>
                 <div style="padding: 1.25rem;">
                     <p class="location-card-address">333 University Avenue, Suite 200<br>Sacramento, CA 95825</p>
@@ -807,13 +811,13 @@
                     <button type="button" class="office-map-facade"
                             data-map-src="https://maps.google.com/maps?q=Frank+Penney+Injury+Law+5250+Claremont+Avenue+Stockton+CA+95207&output=embed"
                             data-map-title="Map of the Frank Penney Injury Law Stockton office"
-                            aria-label="Map of the Frank Penney Injury Law Stockton office — load the interactive map">
+                            aria-label="Load interactive map: Frank Penney Injury Law Stockton office">
                                 <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
                                 <span>Load interactive map</span>
                             </button>
                     <a href="https://maps.app.goo.gl/XK5iLQGfAGom6tCLA"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
-                       aria-label="Open the Stockton office in Google Maps (opens in new tab)">Open in Maps</a>
+                       aria-label="Open in Maps: Stockton office (opens in new tab)">Open in Maps</a>
                 </div>
                 <div style="padding: 1.25rem;">
                     <p class="location-card-address">5250 Claremont Avenue<br>Stockton, CA 95207</p>
@@ -832,14 +836,14 @@
                     <button type="button" class="office-map-facade"
                             data-map-src="https://maps.google.com/maps?q=1300+Clay+St+Suite+600+Oakland+CA+94612&output=embed"
                             data-map-title="Map of the Frank Penney Injury Law Oakland office"
-                            aria-label="Map of the Frank Penney Injury Law Oakland office — load the interactive map">
+                            aria-label="Load interactive map: Frank Penney Injury Law Oakland office">
                                 <svg aria-hidden="true" focusable="false"><use href="/images/icons.svg#icon-location"></use></svg>
                                 <span>Load interactive map</span>
                             </button>
                     <!-- TODO: replace with GMB share link -->
                     <a href="https://www.google.com/maps/search/?api=1&query=1300+Clay+St+Suite+600+Oakland+CA+94612"
                        target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm map-open-btn"
-                       aria-label="Open the Oakland office in Google Maps (opens in new tab)">Open in Maps</a>
+                       aria-label="Open in Maps: Oakland office (opens in new tab)">Open in Maps</a>
                 </div>
                 <div style="padding: 1.25rem;">
                     <p class="location-card-address">1300 Clay St, Suite 600<br>Oakland, CA 94612</p>
@@ -950,6 +954,6 @@
 }
 </style>
 
-<script src="js/bundle.min.js?v=20261007b" defer></script>
+<script src="js/bundle.min.js?v=20261007c" defer></script>
 </body>
 </html>

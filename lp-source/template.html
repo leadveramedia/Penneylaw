@@ -405,7 +405,7 @@
         .form-error {
             display: block;
             font-size: 0.75rem;
-            color: #ff6b6b;
+            color: #FFB4B4; /* 7.35:1 on the navy panel; #ff6b6b fell under 4.5:1 over the photo */
             margin-top: 0.25rem;
             min-height: 1rem;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
@@ -1398,13 +1398,16 @@
             padding: 0;
             list-style: none;
         }
-        .lp-footer-legal a {
+        .lp-footer-legal a,
+        .lp-footer-legal .link-button {
             color: rgba(255, 255, 255, 0.85);
             font-size: 0.75rem;
             text-decoration: underline;
         }
         .lp-footer-legal a:hover,
-        .lp-footer-legal a:focus-visible {
+        .lp-footer-legal a:focus-visible,
+        .lp-footer-legal .link-button:hover,
+        .lp-footer-legal .link-button:focus-visible {
             color: var(--lp-white);
         }
 
@@ -1591,6 +1594,7 @@
     </style>
 </head>
 <body>
+<a class="skip-link sr-only" href="#main-content">Skip to content</a>
 
 <!-- Mobile Sticky Click-to-Call Bar -->
 <div class="mobile-cta-bar" id="mobile-cta-bar">
@@ -1691,7 +1695,7 @@
     </div>
 </header>
 
-<main>
+<main id="main-content">
 <!-- Hero Section -->
 <section class="lp-hero">
     <div class="lp-hero-inner">
@@ -1838,6 +1842,10 @@
 
 <!-- Awards Section -->
 <section class="awards-section">
+    <button type="button" class="awards-pause" aria-pressed="false" aria-label="Pause awards animation">
+        <svg class="icon-pause" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="2" y="1" width="3" height="10"/><rect x="7" y="1" width="3" height="10"/></svg>
+        <svg class="icon-play" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 1l8 5-8 5z"/></svg>
+    </button>
     <div class="awards-scroll-wrapper">
         <div class="awards-scroll">
             <!-- Set 1 -->
@@ -1848,26 +1856,26 @@
             <div class="award-item"><picture><source srcset="../images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="../images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
             <div class="award-item"><picture><source srcset="../images/backgrounds/bbb.webp" type="image/webp"><img src="../images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
             <!-- Set 2 -->
-            <div class="award-item"><picture><source srcset="../images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="../images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="../images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="../images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><img src="../images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><img src="../images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><picture><source srcset="../images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="../images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="../images/backgrounds/bbb.webp" type="image/webp"><img src="../images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="../images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="../images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><img src="../images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
+            <div class="award-item" aria-hidden="true"><img src="../images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="../images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/bbb.webp" type="image/webp"><img src="../images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
             <!-- Set 3 -->
-            <div class="award-item"><picture><source srcset="../images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="../images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="../images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="../images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><img src="../images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><img src="../images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><picture><source srcset="../images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="../images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="../images/backgrounds/bbb.webp" type="image/webp"><img src="../images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="../images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="../images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><img src="../images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
+            <div class="award-item" aria-hidden="true"><img src="../images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="../images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/bbb.webp" type="image/webp"><img src="../images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
             <!-- Set 4 -->
-            <div class="award-item"><picture><source srcset="../images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="../images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="../images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="../images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><img src="../images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><img src="../images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><picture><source srcset="../images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="../images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="../images/backgrounds/bbb.webp" type="image/webp"><img src="../images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="../images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="../images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><img src="../images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
+            <div class="award-item" aria-hidden="true"><img src="../images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="../images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
+            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/bbb.webp" type="image/webp"><img src="../images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
         </div>
     </div>
 </section>
@@ -2022,7 +2030,7 @@
         </div>
         <ul class="lp-footer-legal">
             <li><a href="/privacy-policy">Privacy Policy</a></li>
-            <li><a href="#" data-consent-optout>Do Not Sell or Share My Personal Information</a></li>
+            <li><button type="button" class="link-button" data-consent-optout>Do Not Sell or Share My Personal Information</button></li>
             <li><a href="/disclaimer">Disclaimer</a></li>
         </ul>
         <p class="lp-footer-disclaimer">The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation. This information is not intended to create, and receipt or viewing does not constitute, an attorney-client relationship. Past results do not guarantee or predict a similar outcome with respect to any future matter.</p>
@@ -2030,7 +2038,7 @@
     </div>
 </footer>
 
-<script src="../js/main.min.js?v=20261007" defer></script>
+<script src="../js/main.min.js?v=20261007b" defer></script>
 <script src="../js/consent.min.js?v=20261007" defer></script>
 <script>
 (function() {

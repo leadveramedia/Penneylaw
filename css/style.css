@@ -33,18 +33,19 @@
     --dark-azure: #033563;     /* 40% PRIMARY - Headlines, nav, links, trust */
     --pastel-azure: #A2DCF5;   /* 20% - Backgrounds, approachability */
     --gold: #FFD700;           /* 20% - Stats, achievements, results (use on dark backgrounds) */
-    --gold-accessible: #B8960C; /* Darker gold for light backgrounds - WCAG AA 4.56:1 on white */
+    --gold-accessible: #7A6600; /* Darker gold for light backgrounds - 5.6:1 on white, 5.1:1 on --light-gray */
     --hot-pink: #E00D93;       /* 10% ACCENT - CTAs, taglines ONLY */
+    --hot-pink-accessible: #C70B83; /* Pink text on --light-gray (5.06:1); --hot-pink is 4.14:1 there */
 
     /* Extended Palette */
     --white: #FFFFFF;
     --light-gray: #F5F5F5;
-    --medium-gray: #6B7280;
+    --medium-gray: #646A75; /* 4.99:1 on --light-gray, 5.44:1 on white (#6B7280 failed on light-gray) */
     --dark-gray: #374151;
 
     /* Functional Colors */
     --success: #10B981;
-    --error: #EF4444;
+    --error: #DC2626; /* 4.83:1 on white — #EF4444 was 3.76:1 */
     --warning: #F59E0B;
 
     /* Typography - Brand Bible Page 7 */
@@ -98,6 +99,8 @@
 html {
     font-size: 16px;
     scroll-behavior: smooth;
+    /* Keep anchor targets and focused fields clear of the fixed header (158px; 97px on phones). */
+    scroll-padding-top: 170px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -124,6 +127,14 @@ a {
     color: var(--dark-azure);
     text-decoration: none;
     transition: color var(--transition-fast);
+}
+
+/* Links inside running text need a non-colour cue (WCAG 1.4.1). Unclassed links
+   in list items are content lists; styled component links carry a class. */
+main p a:not(.btn),
+main li a:not([class]),
+.form-disclaimer a {
+    text-decoration: underline;
 }
 
 a:hover {
@@ -679,7 +690,8 @@ body {
     transition: transform var(--transition-fast);
 }
 
-.nav-dropdown:hover .dropdown-arrow {
+.nav-dropdown:hover .dropdown-arrow,
+.nav-dropdown:focus-within .dropdown-arrow {
     transform: rotate(180deg);
 }
 
@@ -694,9 +706,17 @@ body {
     transition: all var(--transition-fast);
 }
 
-.nav-dropdown:hover .dropdown-menu {
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown:focus-within .dropdown-menu {
     opacity: 1;
     visibility: visible;
+}
+
+/* Esc closes a dropdown even while focus (or the pointer) is still inside it;
+   main.js clears this once focus and pointer have both left. */
+.nav-dropdown.is-dismissed .dropdown-menu {
+    opacity: 0;
+    visibility: hidden;
 }
 
 /* Dropdown panels now extend .dropdown-panel-base utility class */
@@ -1010,6 +1030,12 @@ body.menu-open {
     height: 2px;
     background: var(--dark-azure);
     transition: all var(--transition-fast);
+}
+
+@media (max-width: 767px) {
+    html {
+        scroll-padding-top: 110px;
+    }
 }
 
 @media (max-width: 1279px) {
@@ -1700,7 +1726,7 @@ body.menu-open {
     font-size: 1rem;
     color: var(--charcoal);
     background: var(--white);
-    border: 2px solid #e5e7eb;
+    border: 2px solid var(--medium-gray); /* #e5e7eb was 1.24:1 */
     border-radius: var(--radius-md);
     /* Not `all`: visibility is inherited, so `all` animated the modal's open and
        left fields un-focusable for 0.3s after it appeared. */
@@ -2229,9 +2255,37 @@ body.menu-open {
     }
 }
 
-/* Pause animation on hover */
-.awards-scroll-wrapper:hover .awards-scroll {
+/* Pause animation on hover, or via the pause button (WCAG 2.2.2) */
+.awards-scroll-wrapper:hover .awards-scroll,
+.awards-pause[aria-pressed="true"] + .awards-scroll-wrapper .awards-scroll {
     animation-play-state: paused;
+}
+
+.awards-section {
+    position: relative;
+}
+
+.awards-pause {
+    position: absolute;
+    right: 8px;
+    bottom: 6px;
+    z-index: 1;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: var(--dark-azure);
+    background: var(--white);
+    border: 1px solid var(--medium-gray);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.awards-pause[aria-pressed="true"] .icon-pause,
+.awards-pause[aria-pressed="false"] .icon-play {
+    display: none;
 }
 
 @media (max-width: 768px) {
@@ -2457,12 +2511,25 @@ body.menu-open {
     gap: var(--spacing-lg);
 }
 
-.footer-legal-links a {
+/* Actions that read as links (consent controls) but are buttons to assistive tech */
+.link-button {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    cursor: pointer;
+}
+
+.footer-legal-links a,
+.footer-legal-links .link-button {
     font-size: 0.875rem;
     color: rgba(255, 255, 255, 0.5);
 }
 
-.footer-legal-links a:hover {
+.footer-legal-links a:hover,
+.footer-legal-links .link-button:hover {
     color: var(--white);
 }
 
@@ -2632,6 +2699,7 @@ body.menu-open {
     color: var(--white);
 }
 
+.contact-info h2,
 .contact-info h3 {
     color: var(--white);
     margin-bottom: var(--spacing-lg);
@@ -2828,6 +2896,13 @@ body.menu-open {
 }
 
 .skip-link:focus {
+    /* Skip links also carry .sr-only; undo its clipping or it stays invisible on focus. */
+    clip: auto;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    margin: 0;
+    white-space: normal;
     top: 1rem;
     outline: 3px solid var(--gold);
     outline-offset: 2px;
@@ -2862,11 +2937,17 @@ button:focus-visible,
 }
 
 .btn-primary:focus-visible {
-    outline-color: var(--white);
-    box-shadow:
-        var(--shadow-lg),
-        0 0 0 3px var(--hot-pink),
-        0 0 0 6px var(--white);
+    /* Two-tone ring: navy reads on light backgrounds, the white gap on dark ones.
+       The old pink ring vanished against the pink button on white. */
+    outline: 3px solid var(--dark-azure);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px var(--white);
+}
+
+/* Pink focus ring is 2.74:1 on the navy mobile menu */
+.mobile-nav a:focus-visible,
+.mobile-nav button:focus-visible {
+    outline-color: var(--gold);
 }
 
 .btn-secondary:focus-visible {
@@ -2933,6 +3014,10 @@ a.location-card-link:focus-visible {
 
     .awards-scroll {
         animation: none !important;
+    }
+
+    .awards-pause {
+        display: none;
     }
 
     .hero-form-wrapper .btn-primary {

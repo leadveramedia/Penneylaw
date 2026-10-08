@@ -37,6 +37,11 @@
         const forms = document.querySelectorAll('.contact-form');
 
         forms.forEach(function (form) {
+            // Error spans ship with placeholder text and are wired to their fields via
+            // aria-describedby, so screen readers announced "Please enter…" before any
+            // error. Keep them empty until showFieldError() fills them.
+            form.querySelectorAll('.form-error').forEach(function (el) { el.textContent = ''; });
+
             // Real-time validation on blur
             const inputs = form.querySelectorAll('input, select, textarea');
             inputs.forEach(function (input) {
@@ -232,6 +237,7 @@
 
         const errorEl = formGroup.querySelector('.form-error');
         if (errorEl) {
+            errorEl.textContent = '';
             errorEl.style.display = 'none';
         }
     }
