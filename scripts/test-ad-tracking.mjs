@@ -62,10 +62,11 @@ function visit({ search = '', pathname = '/', localStore, now, forms = [], cooki
     const local = localStore || makeStore();
     const session = makeStore();
     const dataLayer = [];
+    const docListeners = [];
     const doc = {
         readyState: 'complete',
         body: { nodeType: 1 },
-        addEventListener() {},
+        addEventListener(type, fn) { docListeners.push([type, fn]); },
         createElement: () => ({ setAttribute() {} }),
         querySelectorAll: (sel) => (sel.includes('form') ? forms : []),
         referrer: '',
@@ -90,7 +91,7 @@ function visit({ search = '', pathname = '/', localStore, now, forms = [], cooki
         FixedDate, URLSearchParams,
     );
 
-    return { local, session, dataLayer };
+    return { local, session, dataLayer, docListeners };
 }
 
 /** Run fn with console.warn muted — for cases that deliberately exercise the catch path. */
@@ -378,6 +379,40 @@ for (const opts of [{ cookie: 'x=1; penney_consent=%7B%22s%22%3A%22denied%22%7D'
     const conv = dataLayer.find((d) => d.event === 'form_conversion');
     assert.equal(conv.conversion_event_id, 'evt-9', 'GTM OpenAI lead tag would get no event_id');
     assert.equal(session.getItem('conversion_event_id'), null, 'id not consumed');
+}
+
+// 22. CallRail can only capture a form the site will accept: an incomplete form, a short
+//     phone or a filled honeypot must leave every field marked data-cr-no-capture.
+{
+    const { docListeners } = visit({ now: T0 });
+    const gate = docListeners.find(([type]) => type === 'click')[1];
+    const field = (name, value) => ({
+        name, value, marks: new Set(),
+        toggleAttribute(a, on) { if (on) this.marks.add(a); else this.marks.delete(a); },
+    });
+    const fields = [field('name', 'Jane Doe'), field('phone', '(916) 555-0100'), field('bot-field', '')];
+    let valid = false;
+    const form = {
+        checkValidity: () => valid,
+        querySelector: (sel) => fields.find((f) => sel.includes(`"${f.name}"`)) || null,
+        querySelectorAll: () => fields,
+    };
+    const click = () => gate({ type: 'click', target: { closest: () => form } });
+    const hidden = () => fields.every((f) => f.marks.has('data-cr-no-capture'));
+    const shown = () => fields.every((f) => !f.marks.has('data-cr-no-capture'));
+
+    click();
+    assert.ok(hidden(), 'invalid form left capturable by CallRail');
+    valid = true;
+    click();
+    assert.ok(shown(), 'valid form hidden from CallRail');
+    fields[1].value = '555-0100';
+    click();
+    assert.ok(hidden(), '7-digit phone left capturable');
+    fields[1].value = '(916) 555-0100';
+    fields[2].value = 'spam';
+    click();
+    assert.ok(hidden(), 'honeypot-filled form left capturable');
 }
 
 console.log('test-ad-tracking: all assertions passed');

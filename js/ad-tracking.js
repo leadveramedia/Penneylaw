@@ -485,6 +485,34 @@
     }
 
     /**
+     * Keep CallRail from capturing a form the site is about to reject.
+     *
+     * external_forms.js captures on the submit button's click, on Enter and on submit, and
+     * sends whatever the form holds without checking validity. The hidden attribution fields
+     * alone make that non-empty. So a blocked attempt (a name and nothing else) never reaches
+     * Netlify but still arrives as a CallRail form lead, and so does a bot that fills the
+     * honeypot, which Netlify drops as spam. Verified live 2026-10-23.
+     *
+     * CallRail skips any field marked data-cr-no-capture and sends nothing when every field
+     * is skipped, so every field carries it until the form would really go through: valid,
+     * a 10-11 digit phone (js/form-validation.js isValidPhone; checkValidity() can't see
+     * that) and an empty honeypot. A document capture listener runs before CallRail's
+     * listeners on the form and button, whenever those were attached.
+     */
+    function gateCallRailCapture(e) {
+        if (e.type === 'keyup' && e.key !== 'Enter') return;
+        var form = e.target && e.target.closest && e.target.closest('form');
+        if (!form) return;
+        var phone = form.querySelector('input[name="phone"]');
+        var digits = phone ? phone.value.replace(/\D/g, '').length : 10;
+        var honeypot = form.querySelector('[name="bot-field"]');
+        var ok = form.checkValidity() && digits >= 10 && digits <= 11 && !(honeypot && honeypot.value);
+        form.querySelectorAll('input, select, textarea').forEach(function(el) {
+            el.toggleAttribute('data-cr-no-capture', !ok);
+        });
+    }
+
+    /**
      * Initialize form submission tracking
      */
     function initializeFormTracking() {
@@ -512,6 +540,9 @@
         // conversion data stash) regardless of traffic source — organic
         // leads also need to feed Enhanced Conversions for Leads.
         initializeFormTracking();
+        ['click', 'keyup', 'submit'].forEach(function(type) {
+            document.addEventListener(type, gateCallRailCapture, true);
+        });
 
         // Step 3: Get stored tracking data (might be from previous page)
         var trackingData = getTrackingData();
