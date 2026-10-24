@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360">
+  <!-- Seamless hero texture for roblox-child-exploitation-lawsuit.html: rows of a message log,
+       some lines redacted. Every shape stays inside the tile edge so tiles meet without seams. -->
+  <g fill="none" stroke="#A2DCF5" stroke-width="1.5" opacity=".04">
+    <rect x="16" y="16" width="150" height="34" rx="10"/>
+    <rect x="194" y="62" width="150" height="34" rx="10"/>
+    <rect x="16" y="108" width="170" height="44" rx="10"/>
+    <rect x="214" y="164" width="130" height="34" rx="10"/>
+    <rect x="16" y="210" width="140" height="34" rx="10"/>
+    <rect x="184" y="256" width="160" height="44" rx="10"/>
+    <rect x="16" y="312" width="120" height="32" rx="10"/>
+  </g>
+  <g fill="#A2DCF5" opacity=".035">
+    <rect x="28" y="28" width="110" height="10" rx="2"/>
+    <rect x="206" y="74" width="96" height="10" rx="2"/>
+    <rect x="28" y="119" width="140" height="8" rx="2"/>
+    <rect x="28" y="133" width="90" height="8" rx="2"/>
+    <rect x="226" y="176" width="90" height="10" rx="2"/>
+    <rect x="28" y="222" width="104" height="10" rx="2"/>
+    <rect x="196" y="267" width="128" height="8" rx="2"/>
+    <rect x="196" y="281" width="80" height="8" rx="2"/>
+    <rect x="28" y="323" width="84" height="10" rx="2"/>
+  </g>
+</svg>

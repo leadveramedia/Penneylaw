@@ -22,13 +22,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="css/style.min.css?v=20261014a">
+    <link rel="preload" as="image" type="image/svg+xml" href="/images/mass-tort/social-media-texture.svg">
+    <link rel="preload" as="image" type="image/svg+xml" href="/images/mass-tort/social-media-exhibit.svg" media="(min-width: 1025px)">
     <style>
-        /* Page-scoped. This hero carries no background image, so the LCP element is text —
-           neutralize the image-era min-height and overlay rather than reproduce them. */
-        .hero.hero-no-image { min-height: 0; padding-top: 140px; padding-bottom: 3rem; }
-        .hero.hero-no-image::before { background: none; }
-        .hero.hero-no-image::after { display: none; }
-        .hero.hero-no-image h1 { font-size: clamp(1.9rem, 1.1rem + 3.2vw, 3.25rem); }
+        /* Page-scoped. Not the photo + gradient overlay other heroes use: this hero runs as tall as
+           the intake form, so a single photo would be cropped to a sliver. Instead a near-invisible
+           texture of blank feed cards, plus (desktop only) an annotated feed under the headline that
+           names the design features the litigation is about, like an exhibit. Sober on purpose:
+           nothing that makes the platforms look fun. The headline column aligns to the top so it
+           sits beside the form, not below the fold. */
+        .hero.hero-compact {
+            min-height: 0; padding-top: 140px; padding-bottom: 3rem;
+            background: var(--dark-azure) url(/images/mass-tort/social-media-texture.svg) 0 0 / 360px repeat;
+        }
+        .hero.hero-compact::before { background: none; }
+        .hero.hero-compact::after { display: none; }
+        .hero.hero-compact .hero-wrapper { align-items: start; }
+        /* The annotated feed fills the space beside the form. Percentage padding is relative to the
+           column's width, so 86.7% reserves exactly the art's 600:520 height at any column width. */
+        @media (min-width: 1025px) {
+            .hero.hero-compact .hero-content {
+                padding-bottom: calc(86.7% + 3rem);
+                background: url(/images/mass-tort/social-media-exhibit.svg) left bottom / 100% auto no-repeat;
+            }
+        }
+        /* The "Who is completing this form?" select sizes itself to its longest option (~396px),
+           and a grid item won't shrink below its content, so on phones the whole hero column
+           overflowed the screen by ~12px. */
+        .hero.hero-compact .hero-wrapper > * { min-width: 0; }
+        .hero.hero-compact h1 { font-size: clamp(1.9rem, 1.1rem + 3.2vw, 3.25rem); }
         .answer-capsule {
             font-size: 1.0625rem; line-height: 1.6; color: var(--white);
             border-left: 4px solid var(--gold); padding-left: 1.25rem; margin: 0 0 1.75rem 0;
@@ -56,10 +78,18 @@
         .record-tile p { margin: 0; font-size: 0.9375rem; color: var(--charcoal); }
 
         /* Venue diagram */
-        .venue-figure { margin: 0; display: grid; grid-template-columns: minmax(0, 200px) 1fr; gap: 2rem; align-items: center; }
-        .venue-figure svg { width: 100%; height: auto; }
+        .venue-figure { margin: 0; display: grid; grid-template-columns: minmax(0, 240px) 1fr; gap: 2rem; align-items: center; }
+        .venue-figure svg { width: 100%; height: auto; max-width: 260px; margin: 0 auto; display: block; }
         .venue-figure figcaption { font-size: 0.875rem; color: var(--dark-gray); }
         @media (max-width: 576px) { .venue-figure { grid-template-columns: 1fr; } }
+
+        /* Spot illustrations: decorative (aria-hidden), the text beside them carries the meaning */
+        .spot-figure { max-width: 360px; margin: 0 auto 1.5rem; }
+        .spot-figure svg { width: 100%; height: auto; display: block; }
+        .spot-figure-wide { max-width: 640px; margin-bottom: 2.5rem; }
+        .spot-figure-after { margin: 1.5rem auto 0; }
+        /* A spot figure makes its column much taller; centring would push the other column down. */
+        .grid-centered:has(.spot-figure) { align-items: start; }
 
         /* Flow diagram */
         .flow-figure { margin: 2rem 0 0 0; }
@@ -84,15 +114,15 @@
            viewport. Tighten so a visitor can see the first fields without scrolling — remembering
            the consent banner eats the bottom ~74px on every first visit. */
         @media (max-width: 768px) {
-            .hero.hero-no-image { padding-top: 64px; padding-bottom: 2rem; }
+            .hero.hero-compact { padding-top: 64px; padding-bottom: 2rem; background-size: 300px; }
             .hero-form-wrapper { padding: 1.25rem; }
             .hero-form-title { font-size: 1.25rem; margin-bottom: 0.35rem; }
             .hero-form-subtitle { font-size: 0.8125rem; line-height: 1.4; margin-bottom: 0.85rem; }
-            .hero.hero-no-image .hero-wrapper { gap: 1.5rem; }
-            .hero.hero-no-image h1 { margin-bottom: 0.75rem; }
+            .hero.hero-compact .hero-wrapper { gap: 1.5rem; }
+            .hero.hero-compact h1 { margin-bottom: 0.75rem; }
             .answer-capsule { font-size: 0.9375rem; line-height: 1.55; padding-left: 1rem; margin-bottom: 1rem; }
             .trust-line { font-size: 0.875rem; margin-bottom: 1rem; }
-            .hero.hero-no-image .hero-buttons { margin-bottom: 0; }
+            .hero.hero-compact .hero-buttons { margin-bottom: 0; }
         }
 
         .form-notice { font-size: 0.75rem; line-height: 1.5; color: var(--dark-gray); margin: 0.75rem 0 0 0; }
@@ -493,7 +523,7 @@
 </nav>
 
 <!-- Hero + intake form -->
-<section class="hero hero-no-image">
+<section class="hero hero-compact">
     <div class="container">
         <div class="hero-wrapper">
             <div class="hero-content">
@@ -718,6 +748,20 @@
                 </ul>
             </div>
             <div data-reveal="">
+                <div class="spot-figure">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" aria-hidden="true" focusable="false">
+                        <text x="56" y="22" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#033563">DAILY SCREEN TIME</text>
+                        <g fill="#D5E2EE"><rect x="64" y="101" width="24" height="79" rx="2"/><rect x="105" y="84" width="24" height="96" rx="2"/><rect x="145" y="94" width="24" height="86" rx="2"/><rect x="186" y="63" width="24" height="117" rx="2"/><rect x="226" y="75" width="24" height="105" rx="2"/><rect x="267" y="49" width="24" height="131" rx="2"/><rect x="308" y="59" width="24" height="121" rx="2"/></g>
+                        <g fill="#033563"><rect x="64" y="101" width="24" height="9" rx="2"/><rect x="105" y="84" width="24" height="26" rx="2"/><rect x="145" y="94" width="24" height="16" rx="2"/><rect x="186" y="63" width="24" height="47" rx="2"/><rect x="226" y="75" width="24" height="35" rx="2"/><rect x="267" y="49" width="24" height="61" rx="2"/><rect x="308" y="59" width="24" height="51" rx="2"/></g>
+                        <path d="M56 40v140h284" fill="none" stroke="#033563" stroke-width="1.5"/>
+                        <path d="M56 110h284" fill="none" stroke="#374151" stroke-width="1.5" stroke-dasharray="5 5"/>
+                        <g font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#374151">
+                            <text x="50" y="114" text-anchor="end">3 hrs</text>
+                            <text x="50" y="184" text-anchor="end">0</text>
+                            <g text-anchor="middle"><text x="76" y="198">M</text><text x="117" y="198">T</text><text x="157" y="198">W</text><text x="198" y="198">T</text><text x="238" y="198">F</text><text x="279" y="198">S</text><text x="320" y="198">S</text></g>
+                        </g>
+                    </svg>
+                </div>
                 <div class="callout">
                     <h3>The records do not have to mention social media</h3>
                     <p>
@@ -819,17 +863,18 @@
         </div>
 
         <figure class="venue-figure" style="margin-top: 2.5rem;" data-reveal="">
-            <svg viewBox="0 0 170 360" role="img" aria-labelledby="venue-a-title venue-a-desc">
+            <!-- Outline: US Census boundary (us-atlas 3.0.1) in California Albers, simplified. -->
+            <svg viewBox="0 0 220 253" role="img" aria-labelledby="venue-a-title venue-a-desc">
                 <title id="venue-a-title">Where the social media cases are heard in California</title>
-                <desc id="venue-a-desc">Schematic map of California marking two venues: the Northern District of California in the San Francisco Bay Area, which hears federal MDL 3047, and Los Angeles County Superior Court in Southern California, which hears JCCP 5255.</desc>
-                <path d="M20 10 L108 10 L108 120 L150 300 L150 318 L120 340 L95 345 L88 318 L70 290 L55 255 L60 230 L40 190 L42 160 L25 120 L30 80 Z"
-                      fill="#EAF6FD" stroke="#033563" stroke-width="2.5" stroke-linejoin="round"/>
-                <circle cx="44" cy="158" r="7" fill="#033563"/>
-                <text x="58" y="153" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700" fill="#033563">N.D. Cal.</text>
-                <text x="58" y="166" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#374151">MDL 3047</text>
-                <circle cx="74" cy="296" r="7" fill="#B8960C"/>
-                <text x="30" y="316" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700" fill="#033563">Los Angeles</text>
-                <text x="30" y="329" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#374151">JCCP 5255</text>
+                <desc id="venue-a-desc">Map of California marking two venues: the Northern District of California in the San Francisco Bay Area, which hears federal MDL 3047, and Los Angeles County Superior Court in Southern California, which hears JCCP 5255.</desc>
+                <path d="M11.6 6 L91.1 7.9 L91.1 83.8 L202.5 182.3 L202.6 185.5 L206.3 189.4 L208.4 195.7 L213 198.2 L214 200.4 L207.9 205.2 L208 206.7 L206.1 209.3 L207.2 215.1 L206.7 215.4 L206.9 218.8 L204.2 222.5 L202.8 222.8 L203.5 223.9 L202.9 225.3 L204.1 226.2 L203.6 230.7 L204.8 232.2 L207.8 232 L209.1 234.9 L208 239 L204.3 239.5 L203.9 240.2 L152.7 247 L151.7 243.6 L150 243.7 L149.1 239.9 L149.8 238.5 L147.9 232.3 L144 227 L131.4 217.3 L129.6 216.5 L129.5 217.5 L127.9 218 L124.6 217.1 L125 214.6 L123.1 210.7 L121.8 209.6 L117.5 209.8 L116.3 210.6 L109.4 208.2 L107.6 207.1 L106.3 204 L100.4 200.3 L93.8 200.5 L88.1 198.8 L81.2 199.4 L80.2 197.3 L78.1 196.7 L78.4 189 L77.2 187.8 L78 182.3 L76.6 181 L75.4 181.3 L73.4 180.1 L72.6 179.1 L73.3 176.2 L72.4 174 L70.4 173.6 L67.1 169.2 L65.3 168.6 L63.8 165.4 L61.1 162.7 L60.3 159.8 L58.9 159.1 L56 154.8 L52.8 152.3 L51.8 145.4 L51 145.1 L51.7 143.5 L53 144.3 L54.2 142.4 L54.9 139.3 L53.4 136 L51.9 134.8 L48.5 135.3 L42.6 129.1 L42.8 124.9 L41.9 121.8 L40.6 120.7 L40.8 114.1 L42.9 113.4 L43.8 115.9 L43.2 116.1 L43.7 119 L50 122.6 L48.7 121.3 L47.6 117 L46 114.8 L44.4 114.1 L45.1 112.5 L44.7 111.1 L43.6 111 L42.6 109.5 L46 107.6 L45.3 106 L43.4 105 L41.5 105.7 L41.2 107.8 L42.3 108.9 L41.1 110.4 L42.4 111.6 L41.1 111.3 L41.6 112.8 L40.5 113.1 L38.1 110.9 L37.1 111.2 L33.6 107.7 L31 108.2 L32.4 104.4 L31.6 102.4 L32.1 101.9 L31 100.4 L30.2 100.6 L29.1 96.8 L25.2 93.7 L17.5 83.5 L18.5 81 L16.2 73.1 L17.5 68.2 L16.2 61.2 L11.9 56 L11.4 54.1 L6.7 49.9 L6.8 47 L6 45.3 L11 35.3 L12.4 30.7 L11.6 29.8 L11.6 27.7 L13.8 20.3 L12.2 12.6 L10.5 11.4 Z"
+                      fill="#EAF6FD" stroke="#033563" stroke-width="2" stroke-linejoin="round"/>
+                <circle cx="42.7" cy="114.2" r="6" fill="#033563"/>
+                <text x="56" y="111" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="700" fill="#033563">N.D. Cal.</text>
+                <text x="56" y="124" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#374151">MDL 3047</text>
+                <circle cx="128" cy="209.1" r="6" fill="#B8960C"/>
+                <text x="120" y="230" text-anchor="end" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="700" fill="#033563">Los Angeles</text>
+                <text x="120" y="243" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#374151">JCCP 5255</text>
             </svg>
             <figcaption>
                 <h3 style="color: var(--dark-azure); margin-top: 0;">Both proceedings are in California</h3>
@@ -875,6 +920,37 @@
             None of this is required to speak with us, and you should not delay a call to collect it. But
             these are the records that end up mattering, and they get harder to retrieve over time.
         </p>
+        <div class="spot-figure spot-figure-wide" data-reveal="">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 170" aria-hidden="true" focusable="false">
+                <g stroke="#033563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M40 54a6 6 0 0 1 6-6h42l10 12h96a6 6 0 0 1 6 6v86a6 6 0 0 1-6 6H46a6 6 0 0 1-6-6Z" fill="#EEF3F8"/>
+                    <rect x="62" y="30" width="110" height="80" rx="4" fill="#fff" transform="rotate(-7 117 70)"/>
+                    <rect x="70" y="36" width="110" height="80" rx="4" fill="#fff" transform="rotate(4 125 76)"/>
+                    <path d="M86 52h70M86 64h56M86 76h64" transform="rotate(4 125 76)"/>
+                    <path d="M40 88h160v64a6 6 0 0 1-6 6H46a6 6 0 0 1-6-6Z" fill="#D5E2EE"/>
+                    <rect x="278" y="12" width="84" height="146" rx="14" fill="#fff"/>
+                    <path d="M308 24h24M308 148h24M292 128h56"/>
+                    <path d="M410 92h204"/>
+                    <circle cx="436" cy="92" r="9" fill="#fff"/>
+                    <circle cx="512" cy="92" r="9" fill="#fff"/>
+                </g>
+                <g fill="#033563">
+                    <rect x="296" y="96" width="9" height="30" rx="2"/>
+                    <rect x="310" y="78" width="9" height="48" rx="2"/>
+                    <rect x="324" y="60" width="9" height="66" rx="2"/>
+                    <rect x="338" y="70" width="9" height="56" rx="2"/>
+                </g>
+                    <circle cx="588" cy="92" r="10" fill="#033563" stroke="#033563" stroke-width="2.5"/>
+                <g fill="none" stroke="#033563" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 8">
+                    <path d="M214 96h52M374 96h28"/>
+                </g>
+                <g font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#374151" text-anchor="middle">
+                    <text x="436" y="122">Started</text>
+                    <text x="512" y="122">Intensified</text>
+                    <text x="588" y="122">Noticed</text>
+                </g>
+            </svg>
+        </div>
         <div class="records-grid" data-reveal="">
             <div class="record-tile">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><use href="/images/icons.svg#icon-document"></use></svg>
@@ -940,6 +1016,32 @@
                     <p style="margin-bottom: 0;">
                         A legal claim can wait. Please handle that first.
                     </p>
+                </div>
+                <div class="spot-figure spot-figure-after">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 210" aria-hidden="true" focusable="false">
+                        <g stroke="#033563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="30" y="24" width="190" height="170" rx="12" fill="#fff"/>
+                            <path d="M30 36a12 12 0 0 1 12-12h166a12 12 0 0 1 12 12v24H30Z" fill="#033563"/>
+                            <path d="M74 14v20M176 14v20"/>
+                            <circle cx="290" cy="96" r="44" fill="#EEF3F8"/>
+                            <path d="M290 58v6M328 96h-6M290 134v-6M252 96h6"/>
+                        </g>
+                        <g fill="#EEF3F8">
+                            <rect x="46" y="74" width="26" height="22" rx="3"/><rect x="82" y="74" width="26" height="22" rx="3"/><rect x="118" y="74" width="26" height="22" rx="3"/><rect x="154" y="74" width="26" height="22" rx="3"/><rect x="190" y="74" width="16" height="22" rx="3"/>
+                            <rect x="46" y="156" width="26" height="22" rx="3"/><rect x="82" y="156" width="26" height="22" rx="3"/><rect x="118" y="156" width="26" height="22" rx="3"/><rect x="154" y="156" width="26" height="22" rx="3"/><rect x="190" y="156" width="16" height="22" rx="3"/>
+                        </g>
+                        <rect x="58" y="117" width="136" height="14" rx="7" fill="#D5E2EE"/>
+                        <circle cx="60" cy="124" r="15" fill="#fff" stroke="#033563" stroke-width="2.5"/>
+                        <circle cx="192" cy="124" r="15" fill="#033563" stroke="#033563" stroke-width="2.5"/>
+                        <g font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="700" text-anchor="middle">
+                            <text x="60" y="128" fill="#033563">18</text>
+                            <text x="192" y="128" fill="#fff">~20</text>
+                        </g>
+                        <g fill="#033563">
+                            <rect x="276" y="78" width="10" height="36" rx="3"/>
+                            <rect x="294" y="78" width="10" height="36" rx="3"/>
+                        </g>
+                    </svg>
                 </div>
             </div>
         </div>
