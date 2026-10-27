@@ -58,7 +58,7 @@ function buildLegalService() {
         '@type': 'LegalService',
         '@id': FIRM_ID,
         name: 'Frank Penney Injury Law',
-        description: "Northern California's top-rated injury law firm with $1 Billion+ recovered for accident victims. No fee unless we win. Free consultation 24/7.",
+        description: "Northern California's top-rated injury law firm with $1 Billion+ recovered for accident victims. No fees or costs unless we win. Free consultation 24/7.",
         url: `${SITE_URL}/`,
         logo: `${SITE_URL}/images/logos/frank-penney-logo-pink-2026.png`,
         image: `${SITE_URL}/images/logos/frank-penney-logo-pink-2026.png`,
@@ -66,7 +66,7 @@ function buildLegalService() {
         priceRange: 'Free Consultation',
         founder: { '@type': 'Person', '@id': `${SITE_URL}/frank-d-penney/#person`, name: 'Frank D. Penney' },
         foundingDate: '1995',
-        slogan: 'Bank on Frank — No Fee Unless We Win',
+        slogan: 'Bank on Frank — No Fees or Costs Unless We Win',
         knowsLanguage: ['en', 'es'],
         areaServed: [
             { '@type': 'State', name: 'California' },
@@ -136,7 +136,7 @@ function buildService(config) {
             '@type': 'Offer',
             price: '0',
             priceCurrency: 'USD',
-            description: 'Free case consultation. No fee unless we win.'
+            description: 'Free case consultation. No fees or costs unless we win.'
         }
     };
 }
@@ -162,24 +162,15 @@ function buildFaqPage(config) {
     };
 }
 
-function buildReviews(config) {
-    return config.testimonials.map(t => ({
-        '@type': 'Review',
-        itemReviewed: { '@id': FIRM_ID },
-        author: { '@type': 'Person', name: t.author },
-        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-        reviewBody: t.text
-    }));
-}
-
+// No Review markup for the testimonials: reviews a business marks up about itself are
+// self-serving, and Google ignores them (removed from the main site in 09ffb5a).
 function buildSchema(config) {
     const graph = [
         buildLegalService(),
         ...OFFICES.map(buildLocalBusiness),
         buildService(config),
         buildBreadcrumb(config),
-        buildFaqPage(config),
-        ...buildReviews(config)
+        buildFaqPage(config)
     ];
     return {
         '@context': 'https://schema.org',

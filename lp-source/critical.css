@@ -576,14 +576,6 @@ html {
         0 10px 20px rgba(0, 0, 0, 0.2),
         0 0 20px rgba(255, 255, 255, 0.3);
 }
-.btn-gold {
-    background: var(--gold);
-    color: var(--charcoal);
-}
-.btn-gold:hover {
-    background: #e6c200;
-    transform: translateY(-2px);
-}
 .btn-full {
     width: 100%;
 }
@@ -651,15 +643,6 @@ html {
     border-top: 1px solid var(--light-gray);
     border-bottom: 1px solid var(--light-gray);
 }
-.awards-scroll-wrapper {
-    width: 100%;
-    overflow: hidden;
-}
-.awards-scroll {
-    display: flex;
-    animation: scrollAwards 30s linear infinite;
-    width: fit-content;
-}
 .award-item {
     flex-shrink: 0;
     display: flex;
@@ -682,41 +665,8 @@ html {
     transform: scale(1.05);
 }
 
-@keyframes scrollAwards {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-180px * 6));
-    }
-}
-.awards-scroll-wrapper:hover .awards-scroll,
-.awards-pause[aria-pressed="true"] + .awards-scroll-wrapper .awards-scroll {
-    animation-play-state: paused;
-}
 .awards-section {
     position: relative;
-}
-.awards-pause {
-    position: absolute;
-    right: 8px;
-    bottom: 6px;
-    z-index: 1;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    color: var(--dark-azure);
-    background: var(--white);
-    border: 1px solid var(--medium-gray);
-    border-radius: 50%;
-    cursor: pointer;
-}
-.awards-pause[aria-pressed="true"] .icon-pause,
-.awards-pause[aria-pressed="false"] .icon-play {
-    display: none;
 }
 @media (max-width: 768px) {
 .award-item {
@@ -728,14 +678,7 @@ html {
         max-width: 120px;
     }
 
-    @keyframes scrollAwards {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(calc(-140px * 6));
-        }
-    }
+    
 }
 
 .link-button {
@@ -842,12 +785,6 @@ button:focus-visible,
         opacity: 1;
         transform: none;
         transition: none;
-    }
-.awards-scroll {
-        animation: none !important;
-    }
-.awards-pause {
-        display: none;
     }
 }
 body.translating {

@@ -645,14 +645,6 @@ html {
         0 10px 20px rgba(0, 0, 0, 0.2),
         0 0 20px rgba(255, 255, 255, 0.3);
 }
-.btn-gold {
-    background: var(--gold);
-    color: var(--charcoal);
-}
-.btn-gold:hover {
-    background: #e6c200;
-    transform: translateY(-2px);
-}
 .btn-full {
     width: 100%;
 }
@@ -720,15 +712,6 @@ html {
     border-top: 1px solid var(--light-gray);
     border-bottom: 1px solid var(--light-gray);
 }
-.awards-scroll-wrapper {
-    width: 100%;
-    overflow: hidden;
-}
-.awards-scroll {
-    display: flex;
-    animation: scrollAwards 30s linear infinite;
-    width: fit-content;
-}
 .award-item {
     flex-shrink: 0;
     display: flex;
@@ -751,41 +734,8 @@ html {
     transform: scale(1.05);
 }
 
-@keyframes scrollAwards {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-180px * 6));
-    }
-}
-.awards-scroll-wrapper:hover .awards-scroll,
-.awards-pause[aria-pressed="true"] + .awards-scroll-wrapper .awards-scroll {
-    animation-play-state: paused;
-}
 .awards-section {
     position: relative;
-}
-.awards-pause {
-    position: absolute;
-    right: 8px;
-    bottom: 6px;
-    z-index: 1;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    color: var(--dark-azure);
-    background: var(--white);
-    border: 1px solid var(--medium-gray);
-    border-radius: 50%;
-    cursor: pointer;
-}
-.awards-pause[aria-pressed="true"] .icon-pause,
-.awards-pause[aria-pressed="false"] .icon-play {
-    display: none;
 }
 @media (max-width: 768px) {
 .award-item {
@@ -797,14 +747,7 @@ html {
         max-width: 120px;
     }
 
-    @keyframes scrollAwards {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(calc(-140px * 6));
-        }
-    }
+    
 }
 
 .link-button {
@@ -911,12 +854,6 @@ button:focus-visible,
         opacity: 1;
         transform: none;
         transition: none;
-    }
-.awards-scroll {
-        animation: none !important;
-    }
-.awards-pause {
-        display: none;
     }
 }
 body.translating {
@@ -1147,7 +1084,6 @@ h1,
 }</style>
     <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-2026-32.png">
 
-    <!-- TODO before publish: confirm Sacramento ZIP code; add geo coords for Sacramento/Fairfield/Stockton/Modesto/Chico; add AggregateRating block once Google Business Profile review count is sourced. -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -1156,7 +1092,7 @@ h1,
                 "@type": "LegalService",
                 "@id": "https://penneylaw.com/#firm",
                 "name": "Frank Penney Injury Law",
-                "description": "Northern California's top-rated injury law firm with $1 Billion+ recovered for accident victims. No fee unless we win. Free consultation 24/7.",
+                "description": "Northern California's top-rated injury law firm with $1 Billion+ recovered for accident victims. No fees or costs unless we win. Free consultation 24/7.",
                 "url": "https://penneylaw.com/",
                 "logo": "https://penneylaw.com/images/logos/frank-penney-logo-pink-2026.png",
                 "image": "https://penneylaw.com/images/logos/frank-penney-logo-pink-2026.png",
@@ -1168,7 +1104,7 @@ h1,
                     "name": "Frank D. Penney"
                 },
                 "foundingDate": "1995",
-                "slogan": "Bank on Frank — No Fee Unless We Win",
+                "slogan": "Bank on Frank — No Fees or Costs Unless We Win",
                 "knowsLanguage": [
                     "en",
                     "es"
@@ -1419,7 +1355,7 @@ h1,
                     "@type": "Offer",
                     "price": "0",
                     "priceCurrency": "USD",
-                    "description": "Free case consultation. No fee unless we win."
+                    "description": "Free case consultation. No fees or costs unless we win."
                 }
             },
             {
@@ -1523,54 +1459,6 @@ h1,
                         }
                     }
                 ]
-            },
-            {
-                "@type": "Review",
-                "itemReviewed": {
-                    "@id": "https://penneylaw.com/#firm"
-                },
-                "author": {
-                    "@type": "Person",
-                    "name": "Jennifer M."
-                },
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": "5",
-                    "bestRating": "5"
-                },
-                "reviewBody": "The settlement was more than I could have received on my own and the fact that I could hand it all over to him to resolve was without a doubt worth it! It was the best decision I ever made throughout this process."
-            },
-            {
-                "@type": "Review",
-                "itemReviewed": {
-                    "@id": "https://penneylaw.com/#firm"
-                },
-                "author": {
-                    "@type": "Person",
-                    "name": "Robert S."
-                },
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": "5",
-                    "bestRating": "5"
-                },
-                "reviewBody": "At a time when I was most vulnerable, I received support and understanding. Frank Penney Injury Lawyers provide excellent customer service. I cannot recommend them enough to my friends and family!"
-            },
-            {
-                "@type": "Review",
-                "itemReviewed": {
-                    "@id": "https://penneylaw.com/#firm"
-                },
-                "author": {
-                    "@type": "Person",
-                    "name": "Maria L."
-                },
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": "5",
-                    "bestRating": "5"
-                },
-                "reviewBody": "I would highly recommend this firm for those that do not know anything about the procedures that take place after a car injury. They were responsive, accommodating, and I had a good feeling about the firm from the start."
             }
         ]
     }
@@ -1582,13 +1470,15 @@ h1,
             --lp-gold: #FFD700;
             --lp-gold-accessible: #8B7500;
             --lp-pink: #E00D93;
+            --lp-pink-hover: #c70b7f;
+            --lp-pastel: #A2DCF5;
             --lp-white: #ffffff;
             --lp-light: #f8f9fa;
-            /* Height of the mobile sticky call bar. The bar's own height and
-               every offset that has to clear it derive from this one value —
-               they previously disagreed (bar grew past a hardcoded 42px offset)
-               and the header clipped into the logo row. Do not hardcode 44px. */
-            --lp-bar-h: 44px;
+            /* Height of the mobile bottom action bar (Call / Text), excluding the
+               iPhone home-indicator inset. The bar's own height and the body
+               padding that keeps the footer clear of it derive from this one
+               value. Do not hardcode it. */
+            --lp-bar-h: 64px;
         }
 
         * { box-sizing: border-box; }
@@ -1674,8 +1564,8 @@ h1,
             bottom: 6px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--lp-gold);
-            color: var(--lp-dark);
+            background: var(--lp-dark);
+            color: var(--lp-white);
             padding: 0.25rem 0.4375rem;
             border-radius: 3px;
             font-family: var(--font-primary);
@@ -1703,15 +1593,31 @@ h1,
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.4);
         }
         .lp-hero-headline span {
-            color: var(--lp-gold);
+            color: var(--lp-pastel);
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.4);
         }
         .lp-hero-subheadline {
             font-size: clamp(1.25rem, 2.5vw, 1.75rem);
             font-weight: 600;
-            color: var(--lp-gold);
+            color: var(--lp-white);
             margin: 0 0 0.5rem;
             text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        .lp-hero-rating {
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--lp-white);
+            margin: 0 0 0.75rem;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+        .lp-hero-rating span {
+            color: var(--lp-gold);
+        }
+        .lp-hero-rating small {
+            font-size: 0.75em;
+            font-weight: 400;
+            opacity: 0.8;
         }
         .lp-hero-tagline {
             font-family: var(--font-primary);
@@ -1725,7 +1631,7 @@ h1,
         }
         .lp-hero-trust {
             background: rgba(3, 53, 99, 0.7);
-            border-left: 4px solid var(--lp-gold);
+            border-left: 4px solid var(--lp-pastel);
             padding: 1.25rem 1.5rem;
             margin-bottom: 2rem;
             backdrop-filter: blur(4px);
@@ -1752,8 +1658,8 @@ h1,
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            background: var(--lp-gold);
-            color: var(--lp-dark);
+            background: var(--lp-pink);
+            color: var(--lp-white);
             padding: 1rem 2rem;
             border-radius: 4px;
             font-family: var(--font-primary);
@@ -1761,12 +1667,12 @@ h1,
             font-weight: 700;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 4px 15px rgba(224, 13, 147, 0.35);
         }
         .lp-hero-phone-cta:hover {
-            background: var(--lp-white);
+            background: var(--lp-pink-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 6px 20px rgba(224, 13, 147, 0.45);
         }
         .lp-hero-phone-cta svg {
             width: 24px;
@@ -1795,7 +1701,7 @@ h1,
         .lp-hero-callout svg {
             width: 20px;
             height: 20px;
-            fill: var(--lp-gold);
+            fill: var(--lp-pastel);
             flex-shrink: 0;
         }
 
@@ -1819,6 +1725,18 @@ h1,
             text-transform: uppercase;
             letter-spacing: 0.02em;
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+        }
+        .lp-form-promise {
+            font-family: var(--font-primary);
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: var(--lp-white);
+            margin: 0.5rem 0 0;
+        }
+        .lp-form-spanish {
+            font-size: 0.8125rem;
+            color: #cfe0ee;
+            margin: 0.25rem 0 0;
         }
         .lp-form-tagline {
             font-family: var(--font-primary);
@@ -1865,7 +1783,7 @@ h1,
         .lp-form .form-input:focus,
         .lp-form .form-textarea:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 0 3px rgba(162, 220, 245, 0.6);
         }
         .lp-form .form-row {
             display: grid;
@@ -1875,8 +1793,8 @@ h1,
         .lp-form .btn-submit {
             width: 100%;
             padding: 1.25rem;
-            background: var(--lp-gold);
-            color: var(--lp-dark);
+            background: var(--lp-pink);
+            color: var(--lp-white);
             border: none;
             border-radius: 0;
             font-family: var(--font-primary);
@@ -1888,7 +1806,7 @@ h1,
             transition: all 0.3s ease;
         }
         .lp-form .btn-submit:hover {
-            background: #e6c200;
+            background: var(--lp-pink-hover);
             transform: translateY(-1px);
         }
         .lp-form-disclaimer {
@@ -1976,7 +1894,7 @@ h1,
         }
         .lp-results-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
         }
         .lp-result-card {
@@ -1991,7 +1909,7 @@ h1,
         .lp-result-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-            border-bottom-color: var(--lp-gold);
+            border-bottom-color: var(--lp-dark);
         }
         .lp-result-amount {
             font-family: var(--font-primary);
@@ -2004,6 +1922,15 @@ h1,
             font-size: 0.875rem;
             color: #2C2C2C;
             line-height: 1.4;
+        }
+        .lp-results-disclaimer,
+        .lp-testimonials-disclaimer {
+            max-width: 760px;
+            margin: 1.5rem auto 0;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            color: #555;
+            text-align: center;
         }
 
         /* Why Choose Us */
@@ -2029,7 +1956,7 @@ h1,
             color: var(--lp-white);
         }
         .lp-why .lp-section-label {
-            background: var(--lp-gold);
+            background: var(--lp-pastel);
             color: var(--lp-dark);
         }
         .lp-why .lp-section-title {
@@ -2055,7 +1982,7 @@ h1,
         .lp-why-icon {
             width: 48px;
             height: 48px;
-            background: rgba(255, 215, 0, 0.2);
+            background: rgba(162, 220, 245, 0.15);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -2065,7 +1992,7 @@ h1,
         .lp-why-icon svg {
             width: 24px;
             height: 24px;
-            fill: var(--lp-gold);
+            fill: var(--lp-pastel);
         }
         .lp-why-feature h3 {
             font-size: 1rem;
@@ -2108,7 +2035,7 @@ h1,
             left: 1.5rem;
             font-size: 4rem;
             font-family: Georgia, serif;
-            color: var(--lp-gold);
+            color: var(--lp-pastel);
             opacity: 0.3;
             line-height: 1;
         }
@@ -2175,7 +2102,7 @@ h1,
             transition: all 0.3s ease;
         }
         .lp-cta-phone:hover {
-            background: var(--lp-gold);
+            background: var(--lp-pink);
             color: var(--lp-dark);
             transform: translateY(-2px);
         }
@@ -2271,7 +2198,7 @@ h1,
                 margin: 0 auto;
             }
             .lp-results-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
             .lp-testimonials-grid {
                 grid-template-columns: 1fr;
@@ -2609,6 +2536,15 @@ h1,
             }
         }
 
+        .lp-awards-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem 1.5rem;
+            padding: 0 1rem;
+        }
+
         /* Awards section mobile adjustments */
         @media (max-width: 768px) {
             .awards-section {
@@ -2630,14 +2566,13 @@ h1,
 
         /* ===== UNIFIED HERO — SMALL SCREENS ===== */
         @media (max-width: 768px) {
-            /* header-top is redundant on mobile: the sticky CTA bar already
-               carries the phone number and the trust signals. */
+            /* header-top is redundant on mobile: the bottom action bar carries
+               the call and text buttons, and the hero carries the trust signals. */
             .header-top {
                 display: none;
             }
             .lp-hero {
-                /* body already carries padding-top:var(--lp-bar-h), so this only
-                   has to clear the 44px fixed header. */
+                /* Clears the 44px fixed header. */
                 padding: 48px 0 1.5rem;
                 min-height: auto;
             }
@@ -2701,6 +2636,10 @@ h1,
                 line-height: 1.35;
                 margin-bottom: 0.25rem;
             }
+            .lp-hero-rating {
+                font-size: 0.8125rem;
+                margin-bottom: 0.25rem;
+            }
             .lp-hero-tagline {
                 font-size: 1.125rem;
                 margin-bottom: 0;
@@ -2720,6 +2659,14 @@ h1,
             }
             .lp-hero-form .lp-form-title {
                 font-size: 1.0625rem;
+            }
+            .lp-form-promise {
+                font-size: 0.8125rem;
+                margin-top: 0.25rem;
+            }
+            .lp-form-spanish {
+                font-size: 0.75rem;
+                margin-top: 0.125rem;
             }
             .lp-hero-form .form-group {
                 margin-bottom: 0.5rem;
@@ -2765,7 +2712,9 @@ h1,
         }
 
 
-        /* Mobile Sticky Click-to-Call Bar */
+        /* Mobile bottom action bar: Call and Text, in thumb reach. It used to be a
+           44px strip at the top of the screen; at the bottom it's where a thumb
+           already is, and the form moves up by the 44px it gave back. */
         .mobile-cta-bar {
             display: none;
         }
@@ -2773,64 +2722,67 @@ h1,
             .mobile-cta-bar {
                 display: flex;
                 position: fixed;
-                top: 0;
                 left: 0;
                 right: 0;
+                /* --consent-h is the consent banner's height while it shows (set by
+                   the inline script), so the bar sits above it rather than under it.
+                   Moved with transform, not `bottom`: a transform isn't a layout
+                   shift, and animating `bottom` added ~0.01 to CLS. */
+                bottom: 0;
+                transform: translateY(calc(-1 * var(--consent-h, 0px)));
+                transition: transform 0.2s ease;
                 z-index: 10000;
-                /* Fixed height: the bar cannot grow no matter what the content
-                   does, so the offsets below can never fall out of sync. */
-                height: var(--lp-bar-h);
+                gap: 8px;
+                height: calc(var(--lp-bar-h) + env(safe-area-inset-bottom));
+                padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
                 background: var(--lp-dark);
-                padding: 0 12px;
-                align-items: center;
-                justify-content: space-between;
-                flex-wrap: nowrap;
-                overflow: hidden;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
             }
-            .mobile-cta-phone {
+            .mobile-cta-btn {
+                flex: 1;
+                display: inline-flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                border-radius: 6px;
+                font-family: var(--font-primary);
+                font-size: 1rem;
+                font-weight: 800;
+                line-height: 1.1;
+                text-decoration: none;
+                white-space: nowrap;
+            }
+            .mobile-cta-btn span {
                 display: inline-flex;
                 align-items: center;
                 gap: 6px;
-                /* Never shrink, never wrap — the phone number is the point of
-                   this bar. The trust text yields instead (see below). */
-                flex: 0 0 auto;
-                white-space: nowrap;
-                min-height: 44px;
-                color: var(--lp-gold);
-                font-family: var(--font-primary);
-                font-size: 0.9375rem;
-                font-weight: 700;
-                text-decoration: none;
             }
-            .mobile-cta-phone svg {
-                width: 18px;
-                height: 18px;
-                fill: var(--lp-gold);
-                flex-shrink: 0;
-            }
-            .mobile-cta-trust {
-                display: flex;
-                gap: 0.75rem;
-                /* Yields before the phone number does */
-                min-width: 0;
-                overflow: hidden;
-                font-family: var(--font-primary);
+            .mobile-cta-btn small {
                 font-size: 0.625rem;
                 font-weight: 700;
-                color: var(--lp-white);
+                letter-spacing: 0.04em;
                 text-transform: uppercase;
-                letter-spacing: 0.03em;
+                opacity: 0.85;
             }
-            .mobile-cta-trust span {
-                white-space: nowrap;
+            .mobile-cta-btn svg {
+                width: 18px;
+                height: 18px;
+                fill: currentColor;
+                flex-shrink: 0;
             }
-            /* Both offsets derive from the bar height — see --lp-bar-h */
+            /* Calls are the strongest lead, so Call gets the wider, filled button. */
+            .mobile-cta-call {
+                flex: 1.5;
+                background: var(--lp-pink);
+                color: var(--lp-white);
+            }
+            .mobile-cta-text {
+                border: 2px solid var(--lp-white);
+                color: var(--lp-white);
+            }
+            /* Keeps the footer's last lines clear of the bar. */
             body {
-                padding-top: var(--lp-bar-h);
-            }
-            .site-header {
-                top: var(--lp-bar-h);
+                padding-bottom: calc(var(--lp-bar-h) + env(safe-area-inset-bottom));
             }
 
             /* Mobile header collapses to the logo alone. The nav links, the
@@ -2860,13 +2812,6 @@ h1,
                 height: 36px;
             }
         }
-        /* Narrow phones: drop the second trust item rather than let it
-           truncate mid-word. The phone number still never wraps. */
-        @media (max-width: 374px) {
-            .mobile-cta-trust span:last-child {
-                display: none;
-            }
-        }
 
         /* CCPA notice at collection (Civ. Code § 1798.100(a); 11 CCR § 7012).
            Sits below the submit button so it is present at the point of
@@ -2881,7 +2826,7 @@ h1,
             margin: 0.75rem 0 0;
         }
         .lp-form-notice a {
-            color: var(--lp-gold);
+            color: var(--lp-pastel);
             text-decoration: underline;
         }
         .lp-form-notice a:hover,
@@ -3085,7 +3030,7 @@ h1,
             text-align: center;
         }
         .lp-hh-strip strong {
-            color: var(--lp-gold);
+            color: var(--lp-pastel);
             font-size: 1.125rem;
             display: block;
             margin-bottom: 4px;
@@ -3099,16 +3044,18 @@ h1,
 <body>
 <a class="skip-link sr-only" href="#main-content">Skip to content</a>
 
-<!-- Mobile Sticky Click-to-Call Bar -->
+<!-- Mobile bottom action bar: Call and Text. Texts go to the main line, which is
+     answered 24/7 (same message as components/text-chat.html). CallRail swaps the
+     tel: number for attribution; it does not swap sms: links. -->
 <div class="mobile-cta-bar" id="mobile-cta-bar">
-    <a href="tel:8888880566" class="mobile-cta-phone">
-        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-        (888) 888-0566
+    <a href="tel:8888880566" class="mobile-cta-btn mobile-cta-call">
+        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>Call Now</span>
+        <small>Live answer 24/7</small>
     </a>
-    <div class="mobile-cta-trust">
-        <span>Available 24/7</span>
-        <span>No Fee Unless You Win</span>
-    </div>
+    <a href="sms:+18888880566?&amp;body=Hi%20Frank%20Penney%20Injury%20Law%2C%20I%20have%20a%20question%20about%20a%20possible%20injury%20case." class="mobile-cta-btn mobile-cta-text">
+        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>Text Us</span>
+        <small>Replies 24/7</small>
+    </a>
 </div>
 
 <!-- Header -->
@@ -3122,7 +3069,7 @@ h1,
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 6px;" aria-hidden="true">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                         </svg>
-                        No Fee Unless We Win | Free Case Review
+                        No Fees or Costs Unless We Win | Free Case Review
                     </span>
                 </div>
                 <div class="header-top-right">
@@ -3186,7 +3133,7 @@ h1,
                 <li><a href="#lp-hero-form">Contact</a></li>
             </ul>
             <div class="mobile-nav-cta">
-                <a href="tel:8888880566" class="btn btn-gold btn-full">
+                <a href="tel:8888880566" class="btn btn-primary btn-full">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;" aria-hidden="true">
                         <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                     </svg>
@@ -3206,6 +3153,8 @@ h1,
             <div class="lp-hero-lede-text">
                 <h1 class="lp-hero-headline">California <span>Rental Truck Accident Lawyer</span></h1>
                 <p class="lp-hero-subheadline">Hit by a Moving Truck or Rental Vehicle? Get a Free Case Review.</p>
+                <!-- Firm-wide figure; update it here when the Google count moves on. -->
+                <p class="lp-hero-rating"><span aria-hidden="true">★</span> 4.9 · 436 Google reviews <small>(Oct 2026)</small></p>
                 <p class="lp-hero-tagline">BANK ON FRANK!</p>
             </div>
             <!-- The firm's brand is built on Frank personally and the tagline names
@@ -3213,8 +3162,8 @@ h1,
                  sits next to the whole text block rather than a single line, so it
                  fits inside height the lede already occupies. -->
             <div class="lp-hero-portrait">
-                <img src="../images/attorneys/frank-penney.webp" alt="Frank Penney, founding attorney" width="240" height="360" fetchpriority="high">
-                <span class="lp-hero-portrait-badge">No Fee Unless We Win!</span>
+                <img src="../images/attorneys/frank-penney.webp" alt="Frank Penney, founding attorney" width="240" height="360">
+                <span class="lp-hero-portrait-badge">No Fees or Costs Unless We Win</span>
             </div>
         </div>
 
@@ -3236,7 +3185,7 @@ h1,
                 </div>
                 <div class="lp-hero-callout">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                    <span>No Fee Unless You Win</span>
+                    <span>No Fees or Costs Unless We Win</span>
                 </div>
                 <div class="lp-hero-callout">
                     <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2v8H3v7h8v-3h2v3h8v-7h-2zM9 5h2v2H9V5zm0 4h2v2H9V9zm0 4h2v2H9v-2zm-4 0h2v2H5v-2zm0-4h2v2H5V9zm10 8h-2v-3H9v3H7V6h10v11h-2zm0-12h-2v2h2V5zm0 4h-2v2h2V9zm0 4h-2v2h2v-2z"/></svg>
@@ -3248,6 +3197,10 @@ h1,
         <div class="lp-hero-form" id="lp-hero-form">
             <div class="lp-form-header">
                 <h2 class="lp-form-title">Get a Free Case Review</h2>
+                <p class="lp-form-promise">We call you back within 5 minutes, 24/7.</p>
+                <!-- Rule 7.1 Comment [5]: a claim of service in another language must name,
+                     in that language, the title of the person who speaks it. -->
+                <p class="lp-form-spanish" lang="es">Se habla español: personal de admisión bilingüe, 24/7.</p>
             </div>
 
             <form class="lp-form" id="hero-form" name="lp-rental-truck-accident" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
@@ -3301,7 +3254,7 @@ h1,
                 </div>
 
                 <button type="submit" class="btn-submit">
-                    <span class="btn-text">Get a Free Case Review</span>
+                    <span class="btn-text">Get My Free Case Review</span>
                     <span class="btn-loading" style="display: none;">Sending...</span>
                 </button>
 
@@ -3332,54 +3285,23 @@ h1,
                 <div class="lp-result-type">Truck Accident</div>
             </div>
             <div class="lp-result-card">
-                <div class="lp-result-amount">$3.4M</div>
-                <div class="lp-result-type">Big Rig Collision</div>
-            </div>
-            <div class="lp-result-card">
                 <div class="lp-result-amount">$1.2M</div>
                 <div class="lp-result-type">Pedestrian Accident</div>
             </div>
         </div>
+        <p class="lp-results-disclaimer">Any case results shown represent individual experiences and outcomes. These results are not a guarantee or prediction of the outcome of your case. Individual results may vary based on the unique circumstances of each case.</p>
     </div>
 </section>
 
-<!-- Awards Section -->
-<section class="awards-section">
-    <button type="button" class="awards-pause" aria-pressed="false" aria-label="Pause awards animation">
-        <svg class="icon-pause" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="2" y="1" width="3" height="10"/><rect x="7" y="1" width="3" height="10"/></svg>
-        <svg class="icon-play" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 1l8 5-8 5z"/></svg>
-    </button>
-    <div class="awards-scroll-wrapper">
-        <div class="awards-scroll">
-            <!-- Set 1 -->
-            <div class="award-item"><picture><source srcset="../images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="../images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="../images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="../images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><img src="../images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><img src="../images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
-            <div class="award-item"><picture><source srcset="../images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="../images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
-            <div class="award-item"><picture><source srcset="../images/backgrounds/bbb.webp" type="image/webp"><img src="../images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
-            <!-- Set 2 -->
-            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="../images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
-            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="../images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
-            <div class="award-item" aria-hidden="true"><img src="../images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
-            <div class="award-item" aria-hidden="true"><img src="../images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
-            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="../images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
-            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/bbb.webp" type="image/webp"><img src="../images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
-            <!-- Set 3 -->
-            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="../images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
-            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="../images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
-            <div class="award-item" aria-hidden="true"><img src="../images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
-            <div class="award-item" aria-hidden="true"><img src="../images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
-            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="../images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
-            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/bbb.webp" type="image/webp"><img src="../images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
-            <!-- Set 4 -->
-            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/4-8-Rating.webp" type="image/webp"><img src="../images/backgrounds/4-8-Rating.png" alt="4.8 Star Rating" width="210" height="76" loading="lazy"></picture></div>
-            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="../images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
-            <div class="award-item" aria-hidden="true"><img src="../images/backgrounds/PenneyAward1.webp" alt="National Trial Lawyers" width="130" height="120" loading="lazy"></div>
-            <div class="award-item" aria-hidden="true"><img src="../images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
-            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="../images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
-            <div class="award-item" aria-hidden="true"><picture><source srcset="../images/backgrounds/bbb.webp" type="image/webp"><img src="../images/backgrounds/bbb-1920w.png" alt="BBB Accredited Business" width="120" height="79" loading="lazy"></picture></div>
-        </div>
+<!-- Awards Section: a static row. BBB (paid accreditation) and National Trial Lawyers
+     (membership dues) were removed under B&P §6157.2(a)(6) as amended by SB 37 (2026),
+     and the "4.8 Star Rating" image gave way to the live review count in the hero.
+     Three badges fit on one row, so the six-item scrolling carousel is gone too. -->
+<section class="awards-section lp-awards">
+    <div class="lp-awards-row">
+        <div class="award-item"><picture><source srcset="../images/backgrounds/Best-of-the-Bar-Sacramento.webp" type="image/webp"><img src="../images/backgrounds/Best-of-the-Bar-Sacramento.png" alt="Best of the Bar Sacramento" width="170" height="79" loading="lazy"></picture></div>
+        <div class="award-item"><img src="../images/backgrounds/PenneyAward2.webp" alt="Avvo 10.0 Superb Rating" width="130" height="120" loading="lazy"></div>
+        <div class="award-item"><picture><source srcset="../images/backgrounds/sacramento-superlawyers.webp" type="image/webp"><img src="../images/backgrounds/sacramento-superlawyers.png" alt="Super Lawyers Top 25 Sacramento" width="80" height="79" loading="lazy"></picture></div>
     </div>
 </section>
 
@@ -3393,7 +3315,7 @@ h1,
 <section class="lp-why" id="lp-why">
     <div class="lp-why-inner">
         <div class="lp-why-image">
-            <img src="../images/attorneys/frankpenney-team-2026-10.webp" alt="Frank Penney Injury Law Team" width="800" height="533">
+            <img src="../images/attorneys/frankpenney-team-2026-10.webp" alt="Frank Penney Injury Law Team" width="800" height="533" loading="lazy" decoding="async">
         </div>
         <div class="lp-why-content">
             <span class="lp-section-label">Why Choose Us</span>
@@ -3406,8 +3328,8 @@ h1,
                         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                     </div>
                     <div>
-                        <h3>No Fee Unless We Win</h3>
-                        <p>You pay nothing upfront</p>
+                        <h3>No Fees or Costs Unless We Win</h3>
+                        <p>You pay nothing upfront, and nothing if we lose</p>
                     </div>
                 </div>
                 <div class="lp-why-feature">
@@ -3467,6 +3389,7 @@ h1,
                 <p class="lp-testimonial-case">5-Star Google Review</p>
             </div>
         </div>
+        <p class="lp-testimonials-disclaimer">Client reviews reflect individual experiences. Results depend on the facts of each case.</p>
     </div>
 </section>
 
@@ -3474,9 +3397,9 @@ h1,
 <section class="lp-cta-band">
     <div class="lp-cta-band-inner">
         <h2 class="lp-cta-band-title">Talk to Frank's Team Today</h2>
-        <p>Every case review is free, and you pay nothing unless we win. Someone is available 24/7.</p>
+        <p>Every case review is free, and you owe no fees or costs unless we win. A real person answers 24/7.</p>
         <div class="lp-cta-band-actions">
-            <a href="tel:8888880566" class="btn btn-gold btn-full">
+            <a href="tel:8888880566" class="btn btn-primary btn-full">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                 </svg>
@@ -3562,7 +3485,7 @@ h1,
         <h2 class="lp-cta-band-title">Still Have Questions?</h2>
         <p>Frank Penney has recovered over $1 billion for accident victims across Northern California. Ask us anything &mdash; the consultation is free and available 24/7.</p>
         <div class="lp-cta-band-actions">
-            <a href="tel:8888880566" class="btn btn-gold btn-full">
+            <a href="tel:8888880566" class="btn btn-primary btn-full">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                 </svg>
@@ -3585,7 +3508,7 @@ h1,
             </picture>
             <div class="lp-footer-phone">
                 <a href="tel:8888880566">(888) 888-0566</a>
-                <span class="lp-footer-trust">Available 24/7 &nbsp;|&nbsp; No Fee Unless We Win</span>
+                <span class="lp-footer-trust">Available 24/7 &nbsp;|&nbsp; No Fees or Costs Unless We Win</span>
             </div>
         </div>
         <ul class="lp-footer-legal">
@@ -3613,17 +3536,11 @@ h1,
             if (target) {
                 e.preventDefault();
                 // main.js's initSmoothScroll binds this same selector and runs
-                // after us, and it is unaware of the mobile sticky bar — its
-                // scrollTo would win and land the target under the header.
+                // after us; its scrollTo would win and land the target under the
+                // header.
                 e.stopImmediatePropagation();
                 var header = document.getElementById('site-header');
                 var headerHeight = header ? header.offsetHeight : 120;
-                // The sticky call bar sits above the header and also occludes
-                // content, so it counts toward the offset when it's displayed.
-                var bar = document.getElementById('mobile-cta-bar');
-                if (bar && window.getComputedStyle(bar).display !== 'none') {
-                    headerHeight += bar.offsetHeight;
-                }
                 var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
                 var motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 window.scrollTo({ top: targetPosition, behavior: motionOk ? 'smooth' : 'auto' });
@@ -3651,8 +3568,7 @@ h1,
         name: 'Please enter your name',
         email: 'Please enter a valid email address',
         phone: 'Please enter a valid phone number',
-        messageRequired: 'Please tell us how we can help',
-        messageMin: 'Please provide more details about your case'
+        messageRequired: 'Please tell us how we can help'
     };
 
     // Phone formatting
@@ -3736,11 +3652,6 @@ h1,
         } else if (input.name === 'name') {
             if (!patterns.name.test(value)) {
                 showError(input, errorMessages.name);
-                return false;
-            }
-        } else if (input.name === 'message') {
-            if (value.length < 10) {
-                showError(input, errorMessages.messageMin);
                 return false;
             }
         }
@@ -3830,10 +3741,26 @@ h1,
             // Form is valid - let Netlify handle the submission
             return true;
         });
+
+        window.addEventListener('pageshow', function(e) {
+            if (!e.persisted || !submitBtn) return;
+            submitBtn.disabled = false;
+            if (btnText) btnText.style.display = '';
+            if (btnLoading) btnLoading.style.display = 'none';
+        });
     }
 
     // Initialize all forms
     initFormValidation(document.getElementById('hero-form'));
+
+    // The bottom action bar sits above the consent banner while it shows: consent.js
+    // appends the banner to <body> and removes it once answered.
+    if (document.getElementById('mobile-cta-bar') && window.MutationObserver) {
+        new MutationObserver(function() {
+            var banner = document.querySelector('.consent-banner');
+            document.documentElement.style.setProperty('--consent-h', banner ? banner.offsetHeight + 'px' : '0px');
+        }).observe(document.body, { childList: true });
+    }
 
 })();
 </script>
