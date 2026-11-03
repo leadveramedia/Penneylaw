@@ -18,6 +18,15 @@
 [functions."lead-form-worker"]
   schedule = "* * * * *"
 
+# Retries website form submissions CaseBank didn't take the first time
+# (netlify/functions/submission-created.js parks them in the `casebank` Blobs store).
+[functions."casebank-retry"]
+  schedule = "* * * * *"
+
+# Forwards real leads that Netlify's spam filter flagged (netlify/functions/spam-rescue.js).
+[functions."spam-rescue"]
+  schedule = "*/5 * * * *"
+
 # 404 handling - Netlify automatically serves 404.html for missing pages
 # No catch-all redirect needed for static HTML sites
 

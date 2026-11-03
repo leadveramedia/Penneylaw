@@ -256,8 +256,10 @@
     function isValidPhone(phone) {
         // Remove all non-digits
         const digits = phone.replace(/\D/g, '');
-        // Valid if 10 or 11 digits (with country code)
-        return digits.length >= 10 && digits.length <= 11;
+        // Valid if 10 or 11 digits (with country code), and not in the 555 exchange: it holds no
+        // real subscriber numbers (555-0100..0199 are reserved for fiction), so it's test or bot
+        // data. A form-testing crawler submitting "(650) 555-0199" reached CallRail as a lead.
+        return digits.length >= 10 && digits.length <= 11 && digits.slice(-7, -4) !== '555';
     }
 
     /**

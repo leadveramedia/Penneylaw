@@ -42,6 +42,7 @@ function makeForm({ valid = true, values = {}, attrs = {} } = {}) {
         id: 'contact-form',
         hasAttribute: (a) => Object.prototype.hasOwnProperty.call(attrs, a),
         getAttribute: (a) => (Object.prototype.hasOwnProperty.call(attrs, a) ? attrs[a] : null),
+        setAttribute: (a, v) => { attrs[a] = v; },
         checkValidity: () => valid,
         addEventListener(evt, fn) { if (evt === 'submit') submitHandlers.push(fn); },
         querySelector(sel) {
@@ -381,38 +382,28 @@ for (const opts of [{ cookie: 'x=1; penney_consent=%7B%22s%22%3A%22denied%22%7D'
     assert.equal(session.getItem('conversion_event_id'), null, 'id not consumed');
 }
 
-// 22. CallRail can only capture a form the site will accept: an incomplete form, a short
-//     phone or a filled honeypot must leave every field marked data-cr-no-capture.
+// 22. CallRail never captures a form in the browser (leads reach it from the server once Netlify
+//     accepts them): every form, and every field of a submitted form, carries data-cr-no-capture,
+//     valid or not.
 {
-    const { docListeners } = visit({ now: T0 });
-    const gate = docListeners.find(([type]) => type === 'click')[1];
-    const field = (name, value) => ({
-        name, value, marks: new Set(),
-        toggleAttribute(a, on) { if (on) this.marks.add(a); else this.marks.delete(a); },
-    });
-    const fields = [field('name', 'Jane Doe'), field('phone', '(916) 555-0100'), field('bot-field', '')];
-    let valid = false;
-    const form = {
-        checkValidity: () => valid,
-        querySelector: (sel) => fields.find((f) => sel.includes(`"${f.name}"`)) || null,
-        querySelectorAll: () => fields,
-    };
-    const click = () => gate({ type: 'click', target: { closest: () => form } });
-    const hidden = () => fields.every((f) => f.marks.has('data-cr-no-capture'));
-    const shown = () => fields.every((f) => !f.marks.has('data-cr-no-capture'));
+    const form = makeForm({ valid: true, values: leadValues() });
+    const { docListeners } = visit({ pathname: '/contact', now: T0, forms: [form] });
+    assert.equal(form.getAttribute('data-cr-no-capture'), '', 'form not opted out of CallRail capture');
 
-    click();
-    assert.ok(hidden(), 'invalid form left capturable by CallRail');
-    valid = true;
-    click();
-    assert.ok(shown(), 'valid form hidden from CallRail');
-    fields[1].value = '555-0100';
-    click();
-    assert.ok(hidden(), '7-digit phone left capturable');
-    fields[1].value = '(916) 555-0100';
-    fields[2].value = 'spam';
-    click();
-    assert.ok(hidden(), 'honeypot-filled form left capturable');
+    const block = docListeners.find(([type]) => type === 'click')[1];
+    const field = () => ({ marks: new Set(), setAttribute(a) { this.marks.add(a); } });
+    const fields = [field(), field(), field()];
+    const late = { setAttribute() {}, querySelectorAll: () => fields }; // e.g. the contact modal
+    block({ type: 'click', target: { closest: () => late } });
+    assert.ok(fields.every((f) => f.marks.has('data-cr-no-capture')), 'fields left capturable by CallRail');
+}
+
+// 23. A valid submit copies CallRail's session id into callrail_session for the server-side lead.
+{
+    const form = makeForm({ valid: true, values: { ...leadValues(), callrail_session: '' } });
+    visit({ pathname: '/contact', now: T0, forms: [form], cookie: 'a=1; calltrk_session_id=98bbc49e-658b; b=2' });
+    form.submit();
+    assert.equal(form.fields.callrail_session.value, '98bbc49e-658b');
 }
 
 console.log('test-ad-tracking: all assertions passed');

@@ -1835,6 +1835,7 @@
                 <input type="hidden" name="first_utm_medium" value="">
                 <input type="hidden" name="first_landing_page" value="">
                 <input type="hidden" name="first_touch_ts" value="">
+                <input type="hidden" name="callrail_session" value="">
                 <p style="display: none;"><label>Don't fill this out: <input name="bot-field"></label></p>
 
                 <div class="form-group">
@@ -2196,7 +2197,9 @@
             }
         } else if (type === 'tel') {
             var digits = value.replace(/\D/g, '').replace(/^1/, '');
-            if (digits.length > 0 && digits.length !== 10) {
+            // Same rule as js/form-validation.js isValidPhone: the 555 exchange holds no real
+            // numbers (555-01xx is reserved for fiction), so it's test or bot data.
+            if (digits.length > 0 && (digits.length !== 10 || digits.slice(3, 6) === '555')) {
                 showError(input, errorMessages.phone);
                 return false;
             }
@@ -2362,7 +2365,7 @@
 </script>
 
 <!-- Ad Tracking for Paid Campaigns (GTM events, phone tracking) -->
-<script src="../js/ad-tracking.min.js?v=20261023a" defer></script>
+<script src="../js/ad-tracking.min.js?v=20261102a" defer></script>
 
 </body>
 </html>

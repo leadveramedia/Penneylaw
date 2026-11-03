@@ -1,0 +1,66 @@
+/**
+ * Regression check for netlify/lib/callrail.js and spam-rescue.js's lead test.
+ * Run: node scripts/test-callrail.mjs
+ *
+ * CallRail gets website form leads only from the server now, so these are the paths that decide
+ * what it receives: the API body, the fallback when the API rejects a session id, and which
+ * spam-folder submissions count as real people.
+ */
+import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+process.env.CALLRAIL_API_KEY = 'key';
+process.env.CALLRAIL_ACCOUNT_ID = 'ACC1';
+process.env.CALLRAIL_COMPANY_ID = 'COM1';
+const callrail = require('../netlify/lib/callrail.js');
+const { looksLikeAPerson } = require('../netlify/functions/spam-rescue.js');
+
+const submission = (data, extra = {}) => ({ id: 's1', form_name: 'contact', data, ...extra });
+
+// 1. API body: labelled fields, plumbing dropped, session id passed through, URLs on our site.
+{
+    const { form_submission: b } = callrail.bodyOf(submission({
+        name: 'Jane Doe', phone: '(916) 287-0100', message: 'Rear-ended on I-80',
+        subject: 'New Lead: Jane Doe', 'bot-field': '', ip: '1.2.3.4', callrail_session: 'abc-123',
+        referrer: 'https://penneylaw.com/contact', landing_page: '/?utm_source=google', utm_source: 'google',
+    }, {
+        ordered_human_fields: [
+            { title: 'Full Name', name: 'name', value: 'Jane Doe' },
+            { title: 'Phone Number', name: 'phone', value: '(916) 287-0100' },
+            { title: 'Subject', name: 'subject', value: 'New Lead: Jane Doe' },
+            { title: 'Callrail Session', name: 'callrail_session', value: 'abc-123' },
+        ],
+    }));
+    assert.equal(b.company_id, 'COM1');
+    assert.equal(b.session_id, 'abc-123');
+    assert.deepEqual(b.form_data, { 'Full Name': 'Jane Doe', 'Phone Number': '(916) 287-0100' });
+    assert.equal(b.form_url, 'https://penneylaw.com/contact');
+    assert.equal(b.landing_page_url, 'https://penneylaw.com/?utm_source=google');
+    assert.equal(b.referring_url, '');
+}
+
+// 2. If CallRail rejects the session id, the lead is sent again without it.
+{
+    const calls = [];
+    globalThis.fetch = async (url, opts) => {
+        calls.push(JSON.parse(opts.body).form_submission);
+        return { status: calls.length === 1 ? 422 : 201 };
+    };
+    const status = await callrail.send(callrail.bodyOf(submission({ name: 'Jane', callrail_session: 'bad' })));
+    assert.equal(status, 201);
+    assert.equal(calls.length, 2);
+    assert.equal(calls[0].session_id, 'bad');
+    assert.ok(!('session_id' in calls[1]), 'retry still carried the rejected session id');
+}
+
+// 3. Spam rescue: a real lead Netlify flagged passes; the crawler and link spam don't.
+{
+    assert.ok(looksLikeAPerson(submission({ name: 'Darrell C', phone: '(279) 782-3009', message: 'I was hit at a light and my back still hurts' })));
+    assert.ok(!looksLikeAPerson(submission({ name: 'Alex Morgan', phone: '(650) 555-0199', message: 'test' })), 'fictional 555 number rescued');
+    assert.ok(!looksLikeAPerson(submission({ name: 'SEO Pro', phone: '(916) 287-0100', message: 'Rank #1: https://spam.example' })), 'link spam rescued');
+    assert.ok(!looksLikeAPerson(submission({ name: 'X', phone: '12345', message: 'hi' })), 'short phone rescued');
+    assert.ok(!looksLikeAPerson(submission({ name: '', phone: '(916) 287-0100', message: 'hi' })), 'nameless rescued');
+}
+
+console.log('test-callrail: all assertions passed');

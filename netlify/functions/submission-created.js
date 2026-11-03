@@ -1,8 +1,13 @@
 /**
  * Netlify event-triggered function: Netlify runs `submission-created` on every VERIFIED
- * (non-spam) Netlify Forms submission. The file name is what registers it.
+ * (non-spam) Netlify Forms submission. The file name is what registers it. It does two things:
  *
- * Sends website leads to the OpenAI (ChatGPT ads) Conversions API as `lead_created`, so a lead
+ * 1. Sends every submission to CaseBank, where intake works new inquiries, and to CallRail
+ *    (netlify/lib/forward-lead.js). CallRail gets form leads only from here and from
+ *    spam-rescue.js, never from the visitor's browser, so nothing Netlify rejected reaches it.
+ *    Google Ads lead forms are skipped: CaseBank gets those straight from Google.
+ *
+ * 2. Sends website leads to the OpenAI (ChatGPT ads) Conversions API as `lead_created`, so a lead
  * still counts when the browser pixel is blocked. OpenAI dedupes it against the pixel's lead
  * event (GTM "OpenAI Pixel - Lead", fix f8) by the shared conversion_event_id.
  *
@@ -19,6 +24,7 @@
  */
 
 const { createHash } = require('crypto');
+const { forwardLead } = require('../lib/forward-lead');
 
 const ENDPOINT = 'https://bzr.openai.com/v1/events';
 
@@ -65,6 +71,8 @@ exports.handler = async (event) => {
         payload = JSON.parse(event.body || '{}').payload || {};
     } catch (e) { /* not a form event — nothing to send */ }
     const d = payload.data || {};
+
+    await forwardLead(event, payload);
 
     if (!d.conversion_event_id || !pid || !key) {
         return { statusCode: 200, body: '' };

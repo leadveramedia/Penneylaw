@@ -166,8 +166,13 @@ assert.strictEqual(typeof validateForm, 'function', 'validateForm was not export
     const ok = makeForm();
     addField(ok, makeEl('input', { type: 'text', name: 'name', required: '', value: 'Jane Doe' }));
     addField(ok, makeEl('input', { type: 'email', name: 'email', required: '', value: 'jane@example.com' }));
-    addField(ok, makeEl('input', { type: 'tel', name: 'phone', required: '', value: '(916) 555-0123' }));
+    addField(ok, makeEl('input', { type: 'tel', name: 'phone', required: '', value: '(916) 287-0123' }));
     assert.strictEqual(validateForm(ok), true, 'valid text/email/phone should pass');
+
+    // The 555 exchange holds no real numbers; a form-testing crawler used (650) 555-0199.
+    const fake = makeForm();
+    addField(fake, makeEl('input', { type: 'tel', name: 'phone', required: '', value: '(650) 555-0199' }));
+    assert.strictEqual(validateForm(fake), false, 'a 555 number should fail');
 
     const badEmail = makeForm();
     addField(badEmail, makeEl('input', { type: 'email', name: 'email', required: '', value: 'not-an-email' }));

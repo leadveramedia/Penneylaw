@@ -12,8 +12,9 @@
  * - Stashes Enhanced Conversions data and a one-shot conversion token for thank-you.html
  *
  * NOTE: CallRail is the attribution system of record for calls and forms (it loads via GTM
- * on every page with its own session cookie). The fields here are a human-readable source
- * trail in the lead email and a backup — not the primary attribution path.
+ * on every page with its own session cookie). Form leads reach it from the server, not the
+ * browser (see blockCallRailCapture). The fields here are a human-readable source trail in
+ * the lead email and a backup — not the primary attribution path.
  *
  * @version 2.0.0
  */
@@ -423,6 +424,7 @@
         }
 
         stampConversionEventId(form);
+        stampCallRailSession(form);
 
         // Stash user-provided data for Enhanced Conversions on thank-you.html
         var leadsUserData = extractLeadsUserData(form);
@@ -442,74 +444,33 @@
         } catch (e) {
             console.warn('[Ad Tracking] Could not set conversion token:', e);
         }
-
-        setTimeout(flushCallRailCapture, 0);
     }
 
     /**
-     * Send CallRail's form capture before the native POST navigates away.
+     * CallRail gets form leads from the server only (netlify/lib/forward-lead.js), once Netlify has
+     * accepted them. Its in-browser capture (external_forms.js, loaded via GTM) sent whatever a
+     * browser submitted, before Netlify's honeypot and spam filter saw it: a form-testing crawler
+     * that stopped the page before the post completed still arrived in CallRail as leads (Nov 2026),
+     * and so did submissions Netlify then filed as spam.
      *
-     * CallRail's external_forms.js (loaded via GTM) does not preventDefault or use
-     * keepalive: on submit it writes the parsed form to localStorage `calltrk_form_data`
-     * and schedules a plain XHR behind a 1s debounce. Our forms POST natively, so the
-     * page unloads first and that XHR never fires. CallRail then relies on re-sending
-     * from localStorage when the NEXT page loads swap.js — which loses the lead whenever
-     * the visitor leaves the thank-you page early or the script is blocked there.
-     * Verified headlessly 2026-08-28: 0/5 captures fired on the form page itself.
-     *
-     * Runs on a 0ms timer so CallRail's own synchronous submit listener has written the
-     * final payload; a form POST's navigation doesn't start until handlers finish, and
-     * `keepalive` lets the request outlive the unload. Nothing here parses form data —
-     * we forward CallRail's own stash to CallRail's own endpoint (same company/access key
-     * as the GTM tag). The stash is cleared synchronously once the request is issued:
-     * the response arrives after unload, so a .then() never runs, and leaving the stash
-     * made CallRail's thank-you retry double-submit every lead (verified live, two
-     * `success:true` responses). A keepalive request is delivered by the browser even
-     * after unload, so the only loss case is a network failure — which would have failed
-     * the Netlify POST too.
+     * CallRail skips a form marked data-cr-no-capture when it attaches, and any field so marked when
+     * it reads a form. Forms are marked at init; fields again from a document capture listener, which
+     * runs before CallRail's own click, Enter and submit listeners even when CallRail attached first
+     * (cached scripts) or the form arrived later (the contact modal).
      */
-    var CALLRAIL_CAPTURE_URL = 'https://app.callrail.com/companies/957398046/becf11a93c25bc6ff502/12/form_capture.json';
-    function flushCallRailCapture() {
-        var raw;
-        try { raw = localStorage.getItem('calltrk_form_data'); } catch (e) { return; }
-        if (!raw || typeof fetch !== 'function') return;
-        try {
-            fetch(CALLRAIL_CAPTURE_URL, {
-                method: 'POST',
-                body: raw,
-                keepalive: true,
-                headers: { 'Content-Type': 'text/plain', 'Accept': 'application/json' }
-            }).catch(function() { /* nothing to do post-unload */ });
-            localStorage.removeItem('calltrk_form_data');
-        } catch (e) { /* fetch threw synchronously — leave the stash for CallRail's retry */ }
-    }
-
-    /**
-     * Keep CallRail from capturing a form the site is about to reject.
-     *
-     * external_forms.js captures on the submit button's click, on Enter and on submit, and
-     * sends whatever the form holds without checking validity. The hidden attribution fields
-     * alone make that non-empty. So a blocked attempt (a name and nothing else) never reaches
-     * Netlify but still arrives as a CallRail form lead, and so does a bot that fills the
-     * honeypot, which Netlify drops as spam. Verified live 2026-10-23.
-     *
-     * CallRail skips any field marked data-cr-no-capture and sends nothing when every field
-     * is skipped, so every field carries it until the form would really go through: valid,
-     * a 10-11 digit phone (js/form-validation.js isValidPhone; checkValidity() can't see
-     * that) and an empty honeypot. A document capture listener runs before CallRail's
-     * listeners on the form and button, whenever those were attached.
-     */
-    function gateCallRailCapture(e) {
-        if (e.type === 'keyup' && e.key !== 'Enter') return;
-        var form = e.target && e.target.closest && e.target.closest('form');
+    function blockCallRailCapture(form) {
         if (!form) return;
-        var phone = form.querySelector('input[name="phone"]');
-        var digits = phone ? phone.value.replace(/\D/g, '').length : 10;
-        var honeypot = form.querySelector('[name="bot-field"]');
-        var ok = form.checkValidity() && digits >= 10 && digits <= 11 && !(honeypot && honeypot.value);
+        form.setAttribute('data-cr-no-capture', '');
         form.querySelectorAll('input, select, textarea').forEach(function(el) {
-            el.toggleAttribute('data-cr-no-capture', !ok);
+            el.setAttribute('data-cr-no-capture', '');
         });
+    }
+
+    // CallRail's visitor session id, so the server-side lead keeps the visit's source and keywords.
+    function stampCallRailSession(form) {
+        var field = form.querySelector('input[name="callrail_session"]');
+        var m = document.cookie.match(/(?:^|;\s*)calltrk_session_id=([^;]+)/);
+        if (field && m) field.value = decodeURIComponent(m[1]);
     }
 
     /**
@@ -520,6 +481,7 @@
 
         forms.forEach(function(form) {
             form.addEventListener('submit', trackFormSubmit);
+            blockCallRailCapture(form);
         });
     }
 
@@ -541,7 +503,10 @@
         // leads also need to feed Enhanced Conversions for Leads.
         initializeFormTracking();
         ['click', 'keyup', 'submit'].forEach(function(type) {
-            document.addEventListener(type, gateCallRailCapture, true);
+            document.addEventListener(type, function(e) {
+                if (type === 'keyup' && e.key !== 'Enter') return;
+                blockCallRailCapture(e.target && e.target.closest && e.target.closest('form'));
+            }, true);
         });
 
         // Step 3: Get stored tracking data (might be from previous page)
