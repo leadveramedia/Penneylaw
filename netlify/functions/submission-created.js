@@ -3,8 +3,8 @@
  * (non-spam) Netlify Forms submission. The file name is what registers it. It does two things:
  *
  * 1. Sends every submission to CaseBank, where intake works new inquiries, and to CallRail
- *    (netlify/lib/forward-lead.js). CallRail gets form leads only from here and from
- *    spam-rescue.js, never from the visitor's browser, so nothing Netlify rejected reaches it.
+ *    (netlify/lib/forward-lead.js). CallRail gets form leads only from here, never from the
+ *    visitor's browser, so nothing Netlify rejected reaches it.
  *    Google Ads lead forms are skipped: CaseBank gets those straight from Google.
  *
  * 2. Sends website leads to the OpenAI (ChatGPT ads) Conversions API as `lead_created`, so a lead

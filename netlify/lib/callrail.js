@@ -1,6 +1,6 @@
 /**
- * Website form leads to CallRail, sent from the server once Netlify has accepted them (or the spam
- * rescue has vouched for them). CallRail's own in-browser form capture is switched off on our forms
+ * Website form leads to CallRail, sent from the server once Netlify has accepted them.
+ * CallRail's own in-browser form capture is switched off on our forms
  * (js/ad-tracking.js): it sent whatever a browser submitted before Netlify's honeypot or spam filter
  * saw it, so a form-testing crawler that never completed the post still landed in CallRail as leads.
  *

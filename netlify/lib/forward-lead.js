@@ -1,10 +1,11 @@
 /**
  * A website lead to the systems intake works from: CaseBank and CallRail. Called by
- * submission-created.js for every submission Netlify accepts, and by spam-rescue.js for real leads
- * Netlify's spam filter flagged. Never throws: Netlify keeps its own copy either way.
+ * submission-created.js for every submission Netlify accepts. Never throws: Netlify keeps (and
+ * emails) its own copy either way.
  *
- * Google Ads lead forms are skipped: CaseBank gets those straight from Google, and they were never
- * CallRail form leads.
+ * Skipped: Google Ads lead forms (CaseBank gets those straight from Google; they were never CallRail
+ * form leads), and anything without a real US phone number. A bot can post to Netlify without
+ * running the page's scripts, and some get past Netlify's spam filter.
  */
 const { getStore, connectLambda } = require('@netlify/blobs');
 const casebank = require('./casebank');
@@ -37,10 +38,21 @@ async function toCallRail(payload) {
     (ok ? console.info : console.error)(JSON.stringify({ event: ok ? 'callrail.sent' : 'callrail.failed', form: payload.form_name, status }));
 }
 
+// A real US number: 10 digits (11 with the leading 1), area code and exchange not starting with 0
+// or 1, and not the fictional 555 exchange. Same rule as js/form-validation.js isValidPhone.
+function isUsPhone(phone) {
+    const m = /^1?([2-9]\d{2})([2-9]\d{2})\d{4}$/.exec(String(phone || '').replace(/\D/g, ''));
+    return Boolean(m) && m[2] !== '555';
+}
+
 async function forwardLead(event, payload) {
     if (!payload.id || payload.form_name === 'google-ads-lead') return;
+    if (!isUsPhone((payload.data || {}).phone)) {
+        console.warn(JSON.stringify({ event: 'lead.skipped_not_us_phone', form: payload.form_name }));
+        return;
+    }
     await toCaseBank(event, payload);
     await toCallRail(payload);
 }
 
-module.exports = { forwardLead };
+module.exports = { forwardLead, isUsPhone };

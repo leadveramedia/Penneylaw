@@ -254,12 +254,12 @@
      * Validate phone format
      */
     function isValidPhone(phone) {
-        // Remove all non-digits
-        const digits = phone.replace(/\D/g, '');
-        // Valid if 10 or 11 digits (with country code), and not in the 555 exchange: it holds no
-        // real subscriber numbers (555-0100..0199 are reserved for fiction), so it's test or bot
-        // data. A form-testing crawler submitting "(650) 555-0199" reached CallRail as a lead.
-        return digits.length >= 10 && digits.length <= 11 && digits.slice(-7, -4) !== '555';
+        // A real US number: 10 digits (11 with the leading 1), area code and exchange not starting
+        // with 0 or 1, and not the 555 exchange, which holds no real numbers (555-01xx is reserved
+        // for fiction). Bots submitted "(650) 555-0199" and "+7 999 000 0000" (11 digits, Russia).
+        // Same rule as netlify/lib/forward-lead.js isUsPhone, which re-checks on the server.
+        const m = /^1?([2-9]\d{2})([2-9]\d{2})\d{4}$/.exec(phone.replace(/\D/g, ''));
+        return Boolean(m) && m[2] !== '555';
     }
 
     /**

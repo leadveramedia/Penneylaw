@@ -174,6 +174,11 @@ assert.strictEqual(typeof validateForm, 'function', 'validateForm was not export
     addField(fake, makeEl('input', { type: 'tel', name: 'phone', required: '', value: '(650) 555-0199' }));
     assert.strictEqual(validateForm(fake), false, 'a 555 number should fail');
 
+    // A bot submitted "+79990000000" (11 digits, Russia's +7): only US numbers are valid.
+    const foreign = makeForm();
+    addField(foreign, makeEl('input', { type: 'tel', name: 'phone', required: '', value: '+79990000000' }));
+    assert.strictEqual(validateForm(foreign), false, 'a non-US number should fail');
+
     const badEmail = makeForm();
     addField(badEmail, makeEl('input', { type: 'email', name: 'email', required: '', value: 'not-an-email' }));
     assert.strictEqual(validateForm(badEmail), false, 'malformed email should still fail');

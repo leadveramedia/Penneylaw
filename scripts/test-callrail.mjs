@@ -1,10 +1,10 @@
 /**
- * Regression check for netlify/lib/callrail.js and spam-rescue.js's lead test.
+ * Regression check for netlify/lib/callrail.js and the forwarding gate in netlify/lib/forward-lead.js.
  * Run: node scripts/test-callrail.mjs
  *
  * CallRail gets website form leads only from the server now, so these are the paths that decide
- * what it receives: the API body, the fallback when the API rejects a session id, and which
- * spam-folder submissions count as real people.
+ * what it receives: the API body, the fallback when the API rejects a session id, and the
+ * real-US-phone gate on everything forwarded.
  */
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -14,7 +14,7 @@ process.env.CALLRAIL_API_KEY = 'key';
 process.env.CALLRAIL_ACCOUNT_ID = 'ACC1';
 process.env.CALLRAIL_COMPANY_ID = 'COM1';
 const callrail = require('../netlify/lib/callrail.js');
-const { looksLikeAPerson } = require('../netlify/functions/spam-rescue.js');
+const { forwardLead, isUsPhone } = require('../netlify/lib/forward-lead.js');
 
 const submission = (data, extra = {}) => ({ id: 's1', form_name: 'contact', data, ...extra });
 
@@ -54,13 +54,18 @@ const submission = (data, extra = {}) => ({ id: 's1', form_name: 'contact', data
     assert.ok(!('session_id' in calls[1]), 'retry still carried the rejected session id');
 }
 
-// 3. Spam rescue: a real lead Netlify flagged passes; the crawler and link spam don't.
+// 3. Only a real US phone number is forwarded: the +7 bot and the 555 crawler never reach CallRail.
 {
-    assert.ok(looksLikeAPerson(submission({ name: 'Darrell C', phone: '(279) 782-3009', message: 'I was hit at a light and my back still hurts' })));
-    assert.ok(!looksLikeAPerson(submission({ name: 'Alex Morgan', phone: '(650) 555-0199', message: 'test' })), 'fictional 555 number rescued');
-    assert.ok(!looksLikeAPerson(submission({ name: 'SEO Pro', phone: '(916) 287-0100', message: 'Rank #1: https://spam.example' })), 'link spam rescued');
-    assert.ok(!looksLikeAPerson(submission({ name: 'X', phone: '12345', message: 'hi' })), 'short phone rescued');
-    assert.ok(!looksLikeAPerson(submission({ name: '', phone: '(916) 287-0100', message: 'hi' })), 'nameless rescued');
+    const sent = [];
+    globalThis.fetch = async (url, opts) => { sent.push(JSON.parse(opts.body).form_submission.form_data); return { status: 201 }; };
+    const lead = (phone) => submission({ name: 'Jane Doe', phone, message: 'hi' });
+    await forwardLead({}, lead('+79990000000'));
+    await forwardLead({}, lead('(650) 555-0199'));
+    await forwardLead({}, lead('(116) 287-0100'));
+    assert.equal(sent.length, 0, 'a non-US or fictional number reached CallRail');
+    await forwardLead({}, lead('+1 (916) 287-0100'));
+    assert.equal(sent.length, 1, 'a real US number was not forwarded');
+    assert.ok(isUsPhone('916-287-0100') && !isUsPhone('79990000000') && !isUsPhone(''));
 }
 
 console.log('test-callrail: all assertions passed');
