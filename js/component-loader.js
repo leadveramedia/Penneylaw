@@ -93,6 +93,11 @@
         if (attorneyMatch) {
             return attorneyMatch[1];
         }
+        // Careers pages are directory indexes too (/careers/, /careers/{job}/); without this
+        // they'd read as 'index' and light up Home in the nav.
+        if (/^\/careers\//.test(path)) {
+            return 'careers';
+        }
         // Language-prefixed pages: /es/foo.html -> es/foo, /ru/foo.html -> ru/foo
         var langMatch = path.match(/^\/(es|ru)\/([^/]+)\.html$/);
         if (langMatch) {

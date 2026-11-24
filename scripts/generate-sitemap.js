@@ -337,6 +337,19 @@ async function main() {
         priority: '0.8',
     }];
 
+    // careers/ and each careers/{slug}/ (scripts/build-careers.js) are directory-index
+    // pages too. Job URLs come from careers/jobs.json, so a closed job leaves the sitemap
+    // in the same build that deletes its page.
+    const jobs = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, 'careers/jobs.json'), 'utf8'));
+    for (const rel of ['careers/', ...jobs.map((j) => `careers/${j.slug}/`)]) {
+        locationsPage.push({
+            loc: `${SITE_URL}/${rel}`,
+            lastmod: gitLastmod(`${rel}index.html`, `${SITE_URL}/${rel}`),
+            changefreq: 'weekly',
+            priority: '0.5',
+        });
+    }
+
     const attorneyPages = ATTORNEY_SLUGS.map((slug) => ({
         loc: `${SITE_URL}/${slug}/`,
         lastmod: gitLastmod(`${slug}/index.html`, `${SITE_URL}/${slug}/`),
@@ -393,7 +406,7 @@ async function writeSitemap(staticPages, cityListings, locationsPage, attorneyPa
 
     console.log(
         `Generated sitemap.xml with ${allEntries.length} URLs ` +
-        `(${staticPages.length} static pages + ${locationsPage.length} locations index + ` +
+        `(${staticPages.length} static pages + ${locationsPage.length} locations/careers pages + ` +
         `${attorneyPages.length} attorney pages + ` +
         `${blogPosts.length} blog + ${newsPosts.length} accident-news + ${cityPosts.length} city posts)`
     );

@@ -1,0 +1,120 @@
+[
+    {
+        "slug": "associate-attorney",
+        "title": "Personal Injury Associate Attorney",
+        "office": "roseville",
+        "remote": true,
+        "employmentType": "FULL_TIME",
+        "datePosted": "2026-11-23",
+        "salary": { "min": 150000, "max": 175000, "unit": "YEAR", "note": "depending on experience, plus bonus" },
+        "summary": "Remote personal injury litigation attorney, 2+ years’ experience. Work directly with Frank Penney and try cases. $150,000–$175,000 plus bonus and benefits.",
+        "intro": [
+            "We’re looking for someone to bank on. We’re growing, and we’re adding a new Litigation Attorney seat. This is not a job where you’re one of 80 associates working a quota. We have six attorneys. You’ll work directly with our founder, try cases, and see the results of your work."
+        ],
+        "sections": [
+            {
+                "heading": "Responsibilities",
+                "items": [
+                    "Run a personal injury litigation caseload from filing through trial: auto, truck, motorcycle, pedestrian, premises liability, wrongful death, and TBI cases",
+                    "Draft pleadings, discovery, and motions",
+                    "Take and defend depositions, including experts",
+                    "Handle hearings, mediations, and settlement negotiations",
+                    "Try cases alongside Frank and our trial team",
+                    "Work with your dedicated paralegal to keep every case moving"
+                ]
+            },
+            {
+                "heading": "Why this role is different",
+                "layout": "cards",
+                "items": [
+                    "**Learn from Frank Penney.** Frank was named the 2023 Consumer Attorney of the Year by Consumer Attorneys of California. The award recognized his $10.5M federal wrongful death verdict, which led to safety improvements in national parks across the country. He also serves as a Pro Tem Judge and Judicial Arbitrator in Placer County. You’ll work alongside him on case strategy and in trial.",
+                    "**You’ll go to trial.** We prepare cases to be tried, and we try them. You’ll get courtroom experience that many 2–5 year attorneys never get.",
+                    "**Small team, real access.** No layers of partners between you and the decisions. Your ideas get heard, and your wins get noticed.",
+                    "**Built to last.** We have 30+ years of history, 11 locations across California, and a 10.0 Avvo rating. We’ve been named Super Lawyers Top 25 Sacramento and won Best of the Bar. This is a stable platform, not a startup gamble.",
+                    "**We mean the mission.** We treat clients like family. That’s in our client reviews, and it’s how we give back. When we donated $12,000 to the Sacramento Children’s Home, we closed the office so the whole team could be there."
+                ]
+            },
+            {
+                "heading": "Qualifications",
+                "items": [
+                    "An active California State Bar license in good standing",
+                    "2+ years of personal injury litigation experience"
+                ]
+            },
+            {
+                "heading": "Required Skills",
+                "items": [
+                    "A fighter’s mindset: you push for full value, not the first offer",
+                    "Strong writing, negotiation, and case management skills",
+                    "The discipline to thrive working remotely, and willingness to travel for court"
+                ]
+            },
+            {
+                "heading": "Pay range and compensation package",
+                "layout": "tiles",
+                "items": [
+                    "**Base salary:** $150,000–$175,000, depending on experience, plus bonus",
+                    "**Fully remote:** live anywhere, and the firm pays your travel to court appearances",
+                    "**Your own paralegal:** a dedicated paralegal on your cases",
+                    "**Benefits:** health, dental, and vision insurance",
+                    "**Retirement:** 401(k)",
+                    "**Time off:** paid time off and paid holidays",
+                    "**Professional costs:** bar dues paid by the firm"
+                ]
+            }
+        ],
+        "closing": "Ready to fight for maximum results?"
+    },
+    {
+        "slug": "receptionist",
+        "title": "Law Firm Receptionist",
+        "office": "roseville",
+        "remote": false,
+        "employmentType": "FULL_TIME",
+        "datePosted": "2026-11-23",
+        "salary": { "min": 20, "max": 24, "unit": "HOUR", "note": "depending on experience and bilingual ability" },
+        "summary": "Full-time receptionist at our Roseville law office. Be the first voice injured clients hear. Conversational Spanish required. $20–$24/hour plus benefits.",
+        "intro": [
+            "Be the first voice our clients hear. When someone calls Frank Penney Injury Lawyers, they’ve usually just had one of the worst days of their life: a car crash, a serious injury, a family in crisis. The person who answers sets the tone for everything that follows. We’re looking for that person. Since 1995, our firm has recovered more than $1 billion for injured Californians. We treat every client like family, and it starts at the front desk of our Roseville office."
+        ],
+        "sections": [
+            {
+                "heading": "Responsibilities",
+                "items": [
+                    "**Phones:** answer incoming calls with warmth and professionalism, and route them to the right attorney or team member",
+                    "**New-client intake:** gather basic information from potential new clients and get them to our intake team quickly",
+                    "**Visitors:** greet clients and visitors and make our office feel welcoming",
+                    "**Calendars:** schedule appointments and help keep attorney calendars organized",
+                    "**Mail and deliveries:** handle incoming and outgoing mail, deliveries, and courier pickups",
+                    "**Front office:** keep the reception area clean, professional, and running smoothly"
+                ]
+            },
+            {
+                "heading": "Required Skills",
+                "layout": "cards",
+                "items": [
+                    "**Reliability:** you’re here, on time, every day. This matters more to us than anything else on this list. Our clients and team count on the front desk being covered.",
+                    "**Calm under pressure:** you can handle upset callers with patience and compassion",
+                    "**Communication:** clear and friendly, both on the phone and in person",
+                    "**Organization:** you can juggle phones, visitors, and tasks without dropping anything",
+                    "**Computer skills:** comfortable with email, calendars, and basic office software"
+                ]
+            },
+            {
+                "heading": "Qualifications",
+                "items": [
+                    "**Conversational Spanish (required):** many of our clients speak Spanish, so being able to welcome them in their language makes a real difference"
+                ]
+            },
+            {
+                "heading": "Pay range and compensation package",
+                "layout": "tiles",
+                "items": [
+                    "**Pay:** $20–$24 per hour, depending on experience and bilingual ability",
+                    "**Schedule:** Monday through Friday, 8:30 a.m. to 5:00 p.m., fully on-site at our Roseville office",
+                    "**Benefits:** health, dental, and vision insurance"
+                ]
+            }
+        ]
+    }
+]
